@@ -1,0 +1,51 @@
+{
+  "pages": [
+    {
+      "name": "page1",
+      "elements": [
+        {
+          "type": "text",
+          "name": "age",
+          "title": { "default": "Please enter your age (in digits) on 2016-08-01", "fr": "(FR)Please enter your age (in digits) on 2016-08-01" },
+          "isRequired": true
+        },
+        {
+          "type": "boolean",
+          "name": "is_nz_citizen",
+          "title": { "default": "Are you a citizen of New Zealand?", "fr": "(FR)Are you a citizen of New Zealand?" },
+          "isRequired": true
+        },
+        {
+          "type": "boolean",
+          "name": "social_security__is_ordinarily_resident_in_new_zealand",
+          "title": { "default": "Have you resided in New Zealand primarily for the last 2 years?", "fr": "(FR)Have you resided in New Zealand primarily for the last 2 years?" },
+          "isRequired": true
+        },
+        {
+          "type": "boolean",
+          "name": "social_security__has_accomodation_costs",
+          "title": { "default": "Do you have accommodation costs?", "fr": "(FR)Do you have accommodation costs?" },
+          "isRequired": true
+        },
+        {
+          "type": "boolean",
+          "name": "eligible_for_social_housing",
+          "title": { "default": "Are you eligible for Social Housing?", "fr": "(FR)Are you eligible for social housing?" },
+          "isRequired": true
+        },
+        {
+          "type": "boolean",
+          "name": "accommodation_supplement__below_income_threshold",
+          "title": { "default": "Are you below the income threshold?", "fr": "(FR)Are you below the income threshold?"},
+          "isRequired": true
+        },
+        {
+          "type": "boolean",
+          "name": "accommodation_supplement__below_cash_threshold",
+          "title": { "default": "Are you below the cash threshold?", "fr": "(FR)Are you below the cash threshold?" },
+          "isRequired": true
+        }
+      ]
+    }
+  ]
+}
