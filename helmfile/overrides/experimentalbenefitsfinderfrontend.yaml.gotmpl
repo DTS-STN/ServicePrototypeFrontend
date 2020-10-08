@@ -1,0 +1,33 @@
+image:
+  repository: mtscontainers.azurecr.io/experimentalbenefitsfinderfrontend
+  tag: "{{ requiredEnv "DOCKER_TAG" }}" 
+  pullPolicy: Always
+
+extraEnv:
+  - name: CMS_API
+    value: www.cmsapi.com
+  - name: RULES_API
+    value: www.rulesapi.com
+
+ingress:
+      enabled: true
+      hosts:
+      {{- if or (eq .Environment.Name "prod-blue") (eq .Environment.Name "prod-green") }}
+          - experimentalbenefitsfinderfrontend.{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN" }}
+          - experimentalbenefitsfinderfrontend.{{ requiredEnv "BASE_DOMAIN" }}
+      {{ else }}
+          - experimentalbenefitsfinderfrontend.{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN_DEV" }}
+          - experimentalbenefitsfinderfrontend.{{ requiredEnv "BASE_DOMAIN_DEV" }}
+      {{ end }} 
+      annotations: {}
+      # kubernetes.io/ingress.class: traefik
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 512Mi
+livenessDelay: 60
+readinessDelay: 60
+livenessPath: /
+readinessPath: /
+port: 80
