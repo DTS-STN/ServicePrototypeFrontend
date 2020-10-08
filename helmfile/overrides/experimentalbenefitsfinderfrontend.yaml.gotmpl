@@ -12,10 +12,13 @@ extraEnv:
 ingress:
       enabled: true
       hosts:
-      {{ if or (eq .Environment.Name "prod-blue") (eq .Environment.Name "prod-green") }}
-        - experimentalbenefitsfinderfrontend.{{ requiredEnv "BASE_DOMAIN" }}
-      {{ end }}      
-        - experimentalbenefitsfinderfrontend-{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN" }}
+      {{- if or (eq .Environment.Name "prod-blue") (eq .Environment.Name "prod-green") }}
+          - experimentalbenefitsfinderfrontend.{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN" }}
+          - experimentalbenefitsfinderfrontend.{{ requiredEnv "BASE_DOMAIN" }}
+      {{ else }}
+          - experimentalbenefitsfinderfrontend.{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN_DEV" }}
+          - experimentalbenefitsfinderfrontend.{{ requiredEnv "BASE_DOMAIN_DEV" }}
+      {{ end }} 
       annotations: {}
       # kubernetes.io/ingress.class: traefik
 
