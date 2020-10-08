@@ -16,8 +16,8 @@ ingress:
           - experimentalbenefitsfinderfrontend.{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN" }}
           - experimentalbenefitsfinderfrontend.{{ requiredEnv "BASE_DOMAIN" }}
       {{ else }}
-          - experimentalbenefitsfinderfrontend.{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN_DEV" }}
-          - experimentalbenefitsfinderfrontend.{{ requiredEnv "BASE_DOMAIN_DEV" }}
+          - experimentalbenefitsfinderfrontend-{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN_DEV" }}
+          - experimentalbenefitsfinderfrontend-{{ requiredEnv "BASE_DOMAIN_DEV" }}
       {{ end }} 
       annotations: {}
       # kubernetes.io/ingress.class: traefik
