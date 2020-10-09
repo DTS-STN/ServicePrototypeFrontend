@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
  */
 export function ActionButton(props){
     return (
-        <button className="flex justify-center content-center h-auto w-auto p-1 rounded-md shadow-lg bg-black text-white text-sm hover:bg-gray-600 hover:text-black"
+        <button className="flex justify-center content-center h-auto w-auto p-1 rounded-md shadow-lg bg-gray-700 text-white text-sm hover:bg-black hover:bg-black"
             onClick={props.onClick} onMouseEnter={props.onHover} onMouseLeave={props.onMouseLeave}
         >
             {props.text}

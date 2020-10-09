@@ -7,7 +7,12 @@ module.exports = {
         'public/**/*.html',
     ],
     theme: {
-        extend: {},
+        extend: {
+            width: {
+                "72": "20rem",
+                "80": "24rem"
+            }
+        },
     },
     variants: {},
     plugins: [],
