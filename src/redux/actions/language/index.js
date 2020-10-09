@@ -1,7 +1,7 @@
-import {CHANGE_LANGUAGE} from "./actionTypes";
+import { CHANGE_LANGUAGE } from "./actionTypes";
 
 export const ACTION_TYPES = {
-    CHANGE_LANGUAGE
-}
+  CHANGE_LANGUAGE,
+};
 
-export {LANGUAGES, changeLanguageCreator} from "./changeLanguageAction"
+export { LANGUAGES, changeLanguageCreator } from "./changeLanguageAction";

@@ -1,3 +1,3 @@
 export const en = {
-    reactWelcome: "Welcome To React"
-}
+  reactWelcome: "Welcome To React",
+};

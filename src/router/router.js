@@ -1,16 +1,15 @@
 import React from "react";
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import {Home} from "../pages/home"
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Home } from "../pages/home";
 
 function Routes() {
-    return (
-        <Router>
-            <Switch>
-                <Route path="/" component={Home}/>
-            </Switch>
-        </Router>
-    )
+  return (
+    <Router>
+      <Switch>
+        <Route path="/" component={Home} />
+      </Switch>
+    </Router>
+  );
 }
 
-export default Routes
+export default Routes;
