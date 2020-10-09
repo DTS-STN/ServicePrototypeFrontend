@@ -1,1 +1,1 @@
-export {rootReducer} from "./rootReducer"
+export { rootReducer } from "./rootReducer";

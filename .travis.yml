@@ -1,0 +1,18 @@
+language: node_js
+
+node_js:
+  "lts/*"
+
+cache: npm
+
+script:
+  - npm run test
+  - npm run build-storybook
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $DEPLOY_TOKEN
+  local_dir: storybook-static
+  on:
+    branch: main
