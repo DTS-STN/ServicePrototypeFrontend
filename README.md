@@ -1,8 +1,6 @@
-# Openfisca Scenarios Form 
+# Experimental Benefits Finder Front End
 
-A simple form for experimenting with the Openfisca Web API hosted by [DTS-STN](https://openfiscacanada-main.dev.dts-stn.com/). This Openfisca API is using the New Zealand country package. 
-
-You can explore parameters, variables, entities and scenarios at http://www.rules.nz.
+React front-end application for the experimental benfits finder. 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -69,6 +67,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ad
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-### `yarn build` fails to minify
+### `npm build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
