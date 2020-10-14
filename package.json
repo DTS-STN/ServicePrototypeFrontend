@@ -47,7 +47,10 @@
     "storybook": "npm-run-all build:tailwind --parallel watch:tailwind storybook:start",
     "build:storybook": "build-storybook -s public",
     "build-storybook": "npm run build:tailwind && npm run build:storybook",
-    "lint": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\""
+    "lint": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\"",
+    "cypress:test": "NODE_ENV=production cypress run",
+    "cypress:open": "node ./node_modules/.bin/cypress open",
+    "lint:test": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "eslintConfig": {
     "extends": "react-app"

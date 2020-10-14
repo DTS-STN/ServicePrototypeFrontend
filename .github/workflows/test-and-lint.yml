@@ -1,4 +1,4 @@
-name: Lint and Test
+name: Test
 on: pull_request
 
 jobs:
@@ -10,15 +10,25 @@ jobs:
         with:
           persist-credentials: false
 
+
       - name: Install 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
         run: npm install
 
-      - name: Run unit tests
+      - name: linting 📝
+        run: npm run lint:test
+        env:
+          CI: true
+
+      - name: Run unit tests 🧪
         run: npm run test
         env:
           CI: true
 
-      - name: npm lint json
-        run: npm run lint
+      - name: Run Cypress end-to-end 🧪
+        uses: cypress-io/github-action@v1
         env:
+          NODE_ENV: production
           CI: true
+        with:
+          install: false
+          start: npm run start
