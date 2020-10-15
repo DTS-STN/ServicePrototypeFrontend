@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+/**
+ * This component displays the discription on the home page
+ */
 export function PageDescription(props) {
-  return <div>{props.children}</div>;
+  return <p>{props.children}</p>;
 }
 
 PageDescription.propTypes = {
