@@ -6,7 +6,7 @@ export default {
   component: BenefitCardBox,
   decorators: [
     (Story) => (
-      <div className="flex w-full p-6">
+      <div className="flex w-full justify-center p-6">
         <Story />
       </div>
     ),
