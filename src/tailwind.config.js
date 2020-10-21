@@ -8,9 +8,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontSize: {
-        counter: "175px",
-      },
       width: {
         72: "20rem",
         80: "24rem",

@@ -2,13 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 
 /**
- * The counter component that keeps track of the total number of benefits that claimant is eligible
+ * The counter component that keeps track of the total number of benefits
  */
 export function BenefitsCounter(props) {
   return (
     <div className="text-center m-auto">
-      <div className="text-6xl -mb-6">{props.counter}</div>
-      <p className="text-sm">{props.text}</p>
+      <div className="-mb-8" style={{ fontSize: "100px" }}>
+        {props.counter}
+      </div>
+      <p className="text-base">{props.text}</p>
     </div>
   );
 }
@@ -19,7 +21,7 @@ BenefitsCounter.propTypes = {
    */
   counter: PropTypes.number,
   /**
-   *
+   * text under the number of benefits
    */
   text: PropTypes.string,
 };
