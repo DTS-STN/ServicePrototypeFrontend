@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./tailwind.output.css";
+import "./icomoon/style.css";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import Routes from "./router";
