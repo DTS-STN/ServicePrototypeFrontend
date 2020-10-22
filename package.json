@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "chokidar-cli": "^2.1.0",
+    "cypress-react-selector": "^2.2.0",
     "husky": "^4.3.0",
     "i18next": "^19.8.2",
     "lint-staged": "^10.4.0",

@@ -6,10 +6,11 @@ import { Title } from "../components/atoms/Title";
 
 export function Home() {
   const { t } = useTranslation();
+
   return (
     <div className="font-sans">
       <div className="m-auto pl-8">
-        <Title>{t("homePageTitle")}</Title>
+        <Title id={"home-page-title"}>{t("homePageTitle")}</Title>
       </div>
       <div className="text-2xl m-auto p-6 leading-none">
         <PageDescription>{t("pageDescription")}</PageDescription>

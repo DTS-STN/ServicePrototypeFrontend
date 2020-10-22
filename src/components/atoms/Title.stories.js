@@ -12,4 +12,5 @@ export const Primary = Template.bind({});
 
 Primary.args = {
   children: "Title Text",
+  id: "home-page-title",
 };
