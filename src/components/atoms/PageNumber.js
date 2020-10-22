@@ -8,7 +8,7 @@ import { PropTypes } from "prop-types";
 export function PageNumber(props) {
   return (
     <span
-      className={`p-auto h-2 w-2 ${
+      className={`p-auto h-2 w-4 ${
         props.isSelected ? "text-black" : "text-gray-500"
       }`}
       role="button"
