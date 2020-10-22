@@ -2,7 +2,7 @@ import React from "react";
 import { Alink } from "./Alink";
 
 export default {
-  title: "Components/Atoms/Alink/Alink",
+  title: "Components/Atoms/Alink",
   component: Alink,
 };
 

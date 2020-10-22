@@ -9,7 +9,9 @@ export function ActionButton(props) {
     <button
       className={`flex justify-center content-center h-auto w-auto p-1 ${
         props.rounded ? "rounded-full py-2 px-4" : "rounded-md"
-      } shadow-lg bg-gray-700 text-white text-sm hover:bg-black hover:bg-black`}
+      } shadow-lg bg-gray-700 text-white text-sm hover:bg-black hover:bg-black ${
+        props.customClass ? props.customClass : ""
+      }`}
       onClick={props.onClick}
       onMouseEnter={props.onHover}
       onMouseLeave={props.onMouseLeave}
@@ -44,4 +46,8 @@ ActionButton.propTypes = {
    * Callback for when a user's mouse leaves the button
    */
   onMouseLeave: PropTypes.func,
+  /**
+   * Optional overrides the default css
+   */
+  customClass: PropTypes.string,
 };
