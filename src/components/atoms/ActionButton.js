@@ -50,6 +50,11 @@ ActionButton.propTypes = {
   type: PropTypes.string,
 
   /**
+   * Inverted color styling on the buttons as an default option
+   */
+  invert: PropTypes.bool,
+
+  /**
    * Display benefits count
    */
   count: PropTypes.number,
