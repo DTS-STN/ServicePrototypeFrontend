@@ -11,7 +11,6 @@ const Template = (args) => <PrevNextBar {...args} />;
 export const Example1 = Template.bind({});
 
 Example1.args = {
-  // children: "Link Example, it could be for example = Previous",
   hrefPrev: "/previous.html",
   hrefSkip: "/skip.html",
   id: "NavBar",
