@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { BenefitCard } from "../molecules/BenefitCard";
+import { LoadingCard } from "../molecules/LoadingCard";
 import { GridNavBar } from "../molecules/GridNavBar";
 
 /**
@@ -38,6 +39,77 @@ export function BenefitGrid(props) {
 
   // calculate the number of
   const numberOfElementsPerPage = 3 * props.numberOfRows;
+
+  // the top index for the slice
+  const topIndex = numberOfElementsPerPage * currentPage - 1;
+  const bottomIndex = topIndex - numberOfElementsPerPage - 1;
+
+  // elements have not loaded yet if this is the case
+  const benefitsCards = [];
+  if (bottomIndex > props.benefits.length - 1) {
+    const loadingCards = [];
+    for (let i = 0; i < numberOfElementsPerPage; i++) {
+      loadingCards.push(
+        <LoadingCard
+          key={`loading-card-${i}`}
+          isDark={props.isNonEligibleGrid === true}
+        />
+      );
+    }
+    return (
+      <div className="w-full flex flex-col">
+        <div className="w-full flex flex-wrap">{loadingCards}</div>
+        <GridNavBar
+          currentPage={currentPage}
+          numberOfPages={props.numberOfPages}
+          nextPageButtonAriaLabel={props.nextPageButtonAriaLabel}
+          previousPageButtonAriaLabel={props.previousPageButtonAriaLabel}
+          onPageNext={pageNavigationHandler}
+          onPagePrev={pageNavigationHandler}
+          onPageClick={pageNavigationHandler}
+        />
+      </div>
+    );
+  } else {
+    for (
+      let i = bottomIndex;
+      i <
+      (topIndex > props.benefits.length - 1
+        ? props.benefits.length
+        : topIndex + 1);
+      i++
+    ) {
+      const benefitData = props.benefits[i];
+      benefitsCards.push(
+        <BenefitCard
+          key={benefitData.benefitId}
+          benefitId={benefitData.benefitId}
+          benefitTitle={benefitData.benefitTitle}
+          benefitTag={benefitData.benefitTag}
+          benefitDescription={benefitData.benefitDescription}
+          isSelected={benefitData.isSelected}
+          isEligible={benefitData.isEligible}
+          moreInfoButtonText={props.benefitMoreInfoButtonText}
+          checkBoxAriaLabelBy={benefitData.checkBoxAriaLabelBy}
+        />
+      );
+    }
+  }
+
+  return (
+    <div className="w-full flex flex-col">
+      <div className="w-full flex flex-wrap">{benefitsCards}</div>
+      <GridNavBar
+        currentPage={currentPage}
+        numberOfPages={props.numberOfPages}
+        nextPageButtonAriaLabel={props.nextPageButtonAriaLabel}
+        previousPageButtonAriaLabel={props.previousPageButtonAriaLabel}
+        onPageNext={pageNavigationHandler}
+        onPagePrev={pageNavigationHandler}
+        onPageClick={pageNavigationHandler}
+      />
+    </div>
+  );
 }
 
 BenefitGrid.propTypes = {
@@ -60,6 +132,11 @@ BenefitGrid.propTypes = {
    * text for the more info button on each card
    */
   benefitMoreInfoButtonText: PropTypes.string.isRequired,
+
+  /**
+   * boolean flag to specify that the grid only contains non-eligible benefits
+   */
+  isNonEligibleGrid: PropTypes.bool,
   /**
    * aria label for the next page button
    */
