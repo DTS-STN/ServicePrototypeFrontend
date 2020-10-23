@@ -13,6 +13,7 @@ export function BenefitGrid(props) {
 
   // page navigation handler
   const pageNavigationHandler = (operation) => {
+    console.log(operation);
     if (operation === "previous" && currentPage > 1) {
       // if the call back exists call it and pass the new page number
       if (props.onPagePrev) {
@@ -20,7 +21,7 @@ export function BenefitGrid(props) {
       }
       // set the new state
       setCurrentPage(currentPage - 1);
-    } else if (currentPage < props.numberOfPages) {
+    } else if (operation === "next" && currentPage < props.numberOfPages) {
       if (props.onPageNext) {
         props.onPageNext(currentPage + 1);
       }
@@ -42,7 +43,7 @@ export function BenefitGrid(props) {
 
   // the top index for the slice
   const topIndex = numberOfElementsPerPage * currentPage - 1;
-  const bottomIndex = topIndex - numberOfElementsPerPage - 1;
+  const bottomIndex = topIndex - (numberOfElementsPerPage - 1);
 
   // elements have not loaded yet if this is the case
   const benefitsCards = [];
@@ -57,8 +58,8 @@ export function BenefitGrid(props) {
       );
     }
     return (
-      <div className="w-full flex flex-col">
-        <div className="w-full flex flex-wrap">{loadingCards}</div>
+      <div className="w-full flex flex-col items-center md:items-start">
+        <div className="flex flex-wrap w-full mb-5">{loadingCards}</div>
         <GridNavBar
           currentPage={currentPage}
           numberOfPages={props.numberOfPages}
@@ -90,6 +91,8 @@ export function BenefitGrid(props) {
           isSelected={benefitData.isSelected}
           isEligible={benefitData.isEligible}
           moreInfoButtonText={props.benefitMoreInfoButtonText}
+          onMoreInfoClick={props.onMoreInfoClick}
+          onBenefitSelect={props.onBenefitSelect}
           checkBoxAriaLabelBy={benefitData.checkBoxAriaLabelBy}
         />
       );
@@ -97,8 +100,8 @@ export function BenefitGrid(props) {
   }
 
   return (
-    <div className="w-full flex flex-col">
-      <div className="w-full flex flex-wrap">{benefitsCards}</div>
+    <div className="w-full flex flex-col items-center md:items-start">
+      <div className="w-full flex flex-wrap mb-5">{benefitsCards}</div>
       <GridNavBar
         currentPage={currentPage}
         numberOfPages={props.numberOfPages}

@@ -9,7 +9,7 @@ import { BenefitCardBox } from "../atoms/BenefitCardBox";
 
 export function LoadingCard(props) {
   return (
-    <BenefitCardBox dark={props.isDark === true}>
+    <BenefitCardBox dark={props.isDark === true} dataTestId="loading-card">
       <div className="flex justify-between items-center w-full animate-pulse">
         <div className="flex flex-col justify-start w-full">
           <div
@@ -30,7 +30,7 @@ export function LoadingCard(props) {
         data-testid="placeholder-description"
         className={`m-auto animate-pulse ${
           props.isDark ? "bg-black" : "bg-gray-500"
-        } rounded w-full h-24`}
+        } rounded min-w-full h-24`}
       />
     </BenefitCardBox>
   );
