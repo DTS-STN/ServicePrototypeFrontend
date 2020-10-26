@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
  */
 
 export function Title(props) {
-  return <h1 id={props.id}>{props.children}</h1>;
+  return <h1 data-cy={props.dataCy}>{props.children}</h1>;
 }
 
 Title.propTypes = {
@@ -14,5 +14,9 @@ Title.propTypes = {
    * Text area that displays the title for the page
    */
   children: PropTypes.string.isRequired,
-  id: PropTypes.string,
+  /**
+   * This is for adding an id for testing in cypress
+   */
+
+  dataCy: PropTypes.string,
 };

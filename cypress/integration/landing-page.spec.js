@@ -22,7 +22,7 @@ describe('Items shown on the Landing page', () => {
 
      it('should have a Title component ', () => {  
       cy.react('Title').should('have.length', '1')
-      cy.get('#home-page-title').should('contain.text', 'Welcome to the Benefits Finder')
+      cy.get('[data-cy=home-page-title]').should('contain.text', 'Welcome to the Benefits Finder')
     
    })
 
