@@ -13,7 +13,6 @@ export function BenefitGrid(props) {
 
   // page navigation handler
   const pageNavigationHandler = (operation) => {
-    console.log(operation);
     if (operation === "previous" && currentPage > 1) {
       // if the call back exists call it and pass the new page number
       if (props.onPagePrev) {
