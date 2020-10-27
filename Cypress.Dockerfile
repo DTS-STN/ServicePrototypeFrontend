@@ -17,5 +17,3 @@ COPY cypress.json .
 
 
 
-# ENTRYPOINT npm run cypress 
-

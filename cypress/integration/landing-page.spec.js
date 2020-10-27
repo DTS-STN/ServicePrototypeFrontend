@@ -4,7 +4,6 @@
 describe('Items shown on the Landing page', () => {
     beforeEach(() => {
       cy.visit('/')
-      cy.waitForReact()
      
     })
 
@@ -21,13 +20,13 @@ describe('Items shown on the Landing page', () => {
      })
 
      it('should have a Title component ', () => {  
-      cy.react('Title').should('have.length', '1')
       cy.get('[data-cy=home-page-title]').should('contain.text', 'Welcome to the Benefits Finder')
     
    })
 
    it('should have a Page description component ', () => {  
-    cy.react('PageDescription').should('have.length', '1')
+    cy.get('[data-cy=home-page-description]').should('be.visible') 
+
   
  })
 

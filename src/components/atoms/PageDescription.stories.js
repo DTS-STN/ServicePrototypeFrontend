@@ -12,4 +12,5 @@ export const Primary = Template.bind({});
 
 Primary.args = {
   children: "some description",
+  dataCy: "home-page-description",
 };

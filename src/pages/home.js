@@ -13,7 +13,9 @@ export function Home() {
         <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title>
       </div>
       <div className="text-2xl m-auto p-6 leading-none">
-        <PageDescription>{t("pageDescription")}</PageDescription>
+        <PageDescription dataCy={"home-page-description"}>
+          {t("pageDescription")}
+        </PageDescription>
       </div>
       <div className="max-w-md mx-auto flex p-6 bg-gray-100 mt-10 rounded-lg shadow-xl">
         <div className="ml-6 pt-1">
