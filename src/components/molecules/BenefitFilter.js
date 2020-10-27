@@ -11,28 +11,34 @@ export function BenefitFilter(props) {
   return (
     <div>
       <p className="text-gray-700 leading-none font-bold">{props.text}</p>
-      <div className="flex w-9/12">
-        <ActionButton
-          type="filter"
-          text={props.eligible}
-          count={props.eligibleCount}
-          invert={true}
-          onClick={handleClick}
-        />
-        <ActionButton
-          type="filter"
-          text={props.help}
-          count={props.helpCount}
-          invert={true}
-          onClick={handleClick}
-        />
-        <ActionButton
-          type="filter"
-          text={props.others}
-          count={props.othersCount}
-          invert={true}
-          onClick={handleClick}
-        />
+      <div className="w-full md:flex">
+        <span>
+          <ActionButton
+            type="filter"
+            text={props.eligible}
+            count={props.eligibleCount}
+            invert={true}
+            onClick={handleClick}
+          />
+        </span>
+        <span className="md:ml-2">
+          <ActionButton
+            type="filter"
+            text={props.help}
+            count={props.helpCount}
+            invert={true}
+            onClick={handleClick}
+          />
+        </span>
+        <span className="md:ml-2">
+          <ActionButton
+            type="filter"
+            text={props.others}
+            count={props.othersCount}
+            invert={true}
+            onClick={handleClick}
+          />
+        </span>
       </div>
     </div>
   );
