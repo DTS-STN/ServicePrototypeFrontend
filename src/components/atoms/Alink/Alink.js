@@ -11,6 +11,7 @@ export function Alink(props) {
       className={`text-black underline ${customClass}`}
       href={href}
       id={id}
+      data-cy={id}
       {...rest}
     >
       {children}

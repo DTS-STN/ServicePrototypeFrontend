@@ -26,6 +26,7 @@ export function Combo(props) {
           className={`text-black ${customLabelClass ? customLabelClass : ""} `}
           id={id + "-label"}
           htmlFor={id + "-select"}
+          data-cy={id + "-label"}
           // {...rest}
         >
           {required ? <span className="text-red-700 font-bold">* </span> : ""}
@@ -39,6 +40,7 @@ export function Combo(props) {
         <select
           className={`w-full ${customSelClass}`}
           id={id + "-select"}
+          data-cy={id + "-label"}
           name={id + "-Select"}
           onChange={onChange}
         >

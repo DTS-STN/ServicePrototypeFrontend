@@ -12,6 +12,7 @@ export function ActionButton(props) {
       } shadow-lg bg-gray-700 text-white text-sm hover:bg-black hover:bg-black ${
         props.customClass ? props.customClass : ""
       }`}
+      data-cy={props.id}
       onClick={props.onClick}
       onMouseEnter={props.onHover}
       onMouseLeave={props.onMouseLeave}
@@ -50,4 +51,8 @@ ActionButton.propTypes = {
    * Optional overrides the default css
    */
   customClass: PropTypes.string,
+  /**
+   * Control Id to help testng
+   */
+  id: PropTypes.string,
 };
