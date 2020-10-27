@@ -6,6 +6,8 @@ import { ActionButton } from "../atoms/ActionButton";
  * This component displays three navigation buttons which filters out the result of benefits
  */
 export function BenefitFilter(props) {
+  const handleClick = () => props.filter();
+
   return (
     <div>
       <p className="text-gray-700 leading-none font-bold">{props.text}</p>
@@ -15,18 +17,21 @@ export function BenefitFilter(props) {
           text={props.eligible}
           count={props.eligibleCount}
           invert={true}
+          onClick={handleClick}
         />
         <ActionButton
           type="filter"
           text={props.help}
           count={props.helpCount}
           invert={true}
+          onClick={handleClick}
         />
         <ActionButton
           type="filter"
           text={props.others}
           count={props.othersCount}
           invert={true}
+          onClick={handleClick}
         />
       </div>
     </div>
