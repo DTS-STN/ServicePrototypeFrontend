@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ActionButton } from "../atoms/ActionButton";
+import { FilteredBenefitsCounter } from "../atoms/FilteredBenefitsCounter";
 
 /**
  * This component displays three navigation buttons which filters out the result of benefits
@@ -16,28 +17,31 @@ export function BenefitFilter(props) {
           <ActionButton
             type="filter"
             text={props.eligible}
-            count={props.eligibleCount}
             invert={true}
             onClick={handleClick}
-          />
+          >
+            <FilteredBenefitsCounter count={props.eligibleCount} />
+          </ActionButton>
         </span>
         <span className="md:ml-2">
           <ActionButton
             type="filter"
             text={props.help}
-            count={props.helpCount}
             invert={true}
             onClick={handleClick}
-          />
+          >
+            <FilteredBenefitsCounter count={props.helpCount} />
+          </ActionButton>
         </span>
         <span className="md:ml-2">
           <ActionButton
             type="filter"
             text={props.others}
-            count={props.othersCount}
             invert={true}
             onClick={handleClick}
-          />
+          >
+            <FilteredBenefitsCounter count={props.othersCount} />
+          </ActionButton>
         </span>
       </div>
     </div>

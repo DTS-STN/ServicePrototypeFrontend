@@ -5,18 +5,6 @@ import PropTypes from "prop-types";
  * Button component which is used to trigger actions on the page
  */
 export function ActionButton(props) {
-  /**
-   * This function checks if the button is a filter button
-   */
-  const isFilterButton = (type, count) => {
-    if (type === "filter")
-      return (
-        <div className="ml-4 rounded-full h-6 w-6 flex item-center justify-center bg-gray-300 text-gray-700">
-          {count}
-        </div>
-      );
-  };
-
   return (
     <button
       className={`flex justify-center content-center h-auto w-auto p-1 ${
@@ -32,7 +20,7 @@ export function ActionButton(props) {
     >
       <div className="flex">
         {props.text}
-        {isFilterButton(props.type, props.count)}
+        {props.children}
       </div>
     </button>
   );
