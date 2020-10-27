@@ -14,9 +14,9 @@ Title.propTypes = {
    * Text area that displays the title for the page
    */
   children: PropTypes.string.isRequired,
+
   /**
    * This is for adding an id for testing in cypress
    */
-
   dataCy: PropTypes.string,
 };
