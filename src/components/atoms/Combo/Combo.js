@@ -23,7 +23,9 @@ export function Combo(props) {
     >
       <div>
         <label
-          className={`text-black ${customLabelClass ? customLabelClass : ""} `}
+          className={`text-black font-semibold ${
+            customLabelClass ? customLabelClass : ""
+          } `}
           id={id + "-label"}
           htmlFor={id + "-select"}
           data-cy={id + "-label"}
@@ -38,7 +40,7 @@ export function Combo(props) {
           )}
         </label>
         <select
-          className={`w-full ${customSelClass}`}
+          className={`w-full rounded  ${customSelClass}`}
           id={id + "-select"}
           data-cy={id + "-label"}
           name={id + "-Select"}
