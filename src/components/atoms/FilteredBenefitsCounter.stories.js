@@ -11,5 +11,5 @@ const Template = (args) => <FilteredBenefitsCounter {...args} />;
 export const Primary = Template.bind({});
 
 Primary.args = {
-  count: 0,
+  count: 10,
 };

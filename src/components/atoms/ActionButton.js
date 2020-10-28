@@ -11,7 +11,7 @@ export function ActionButton(props) {
         props.rounded ? "rounded-full py-2 px-4" : "rounded-md"
       } shadow-lg ${
         props.invert
-          ? "w-full md:w-auto bg-gray-100 text-gray-700 border border-gray-400 px-4 hover:bg-gray-700 hover:text-white focus:outline-none"
+          ? "w-full md:w-auto bg-gray-100 text-gray-700 border border-gray-400 px-4 hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700 focus:text-white"
           : "bg-gray-700 text-white hover:bg-black"
       } text-sm`}
       onClick={props.onClick}

@@ -10,11 +10,14 @@ it("renders BenefitFilter in its primary state", () => {
   const eligible = screen.getByText("Eligible benefits");
   const help = screen.getByText("Potential help");
   const others = screen.getByText("Others");
+  const eligibleCount = screen.getByText("15");
+  const helpCount = screen.getByText("8");
+  const othersCount = screen.getByText("30");
   expect(text).toBeTruthy();
   expect(eligible).toBeTruthy();
   expect(help).toBeTruthy();
   expect(others).toBeTruthy();
-  expect(Primary.args.eligibleCount).toBeTruthy();
-  expect(Primary.args.helpCount).toBeTruthy();
-  expect(Primary.args.othersCount).toBeTruthy();
+  expect(eligibleCount).toBeTruthy();
+  expect(helpCount).toBeTruthy();
+  expect(othersCount).toBeTruthy();
 });

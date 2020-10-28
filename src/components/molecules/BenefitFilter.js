@@ -15,7 +15,6 @@ export function BenefitFilter(props) {
       <div className="w-full md:flex">
         <span>
           <ActionButton
-            type="filter"
             text={props.eligible}
             invert={true}
             onClick={handleClick}
@@ -24,22 +23,12 @@ export function BenefitFilter(props) {
           </ActionButton>
         </span>
         <span className="md:ml-2">
-          <ActionButton
-            type="filter"
-            text={props.help}
-            invert={true}
-            onClick={handleClick}
-          >
+          <ActionButton text={props.help} invert={true} onClick={handleClick}>
             <FilteredBenefitsCounter count={props.helpCount} />
           </ActionButton>
         </span>
         <span className="md:ml-2">
-          <ActionButton
-            type="filter"
-            text={props.others}
-            invert={true}
-            onClick={handleClick}
-          >
+          <ActionButton text={props.others} invert={true} onClick={handleClick}>
             <FilteredBenefitsCounter count={props.othersCount} />
           </ActionButton>
         </span>
@@ -83,4 +72,9 @@ BenefitFilter.propTypes = {
    * Display the number of results of other option that may applies
    */
   othersCount: PropTypes.number,
+
+  /**
+   * Handler when filter options clicked
+   */
+  filter: PropTypes.func,
 };
