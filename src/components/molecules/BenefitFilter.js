@@ -16,19 +16,27 @@ export function BenefitFilter(props) {
         <span>
           <ActionButton
             text={props.eligible}
-            invert={true}
+            invert={props.isSelectedEligible === false}
             onClick={handleClick}
           >
             <FilteredBenefitsCounter count={props.eligibleCount} />
           </ActionButton>
         </span>
         <span className="md:ml-2">
-          <ActionButton text={props.help} invert={true} onClick={handleClick}>
+          <ActionButton
+            text={props.help}
+            invert={props.isSelectedHelp === false}
+            onClick={handleClick}
+          >
             <FilteredBenefitsCounter count={props.helpCount} />
           </ActionButton>
         </span>
         <span className="md:ml-2">
-          <ActionButton text={props.others} invert={true} onClick={handleClick}>
+          <ActionButton
+            text={props.others}
+            invert={props.isSelectedOthers === false}
+            onClick={handleClick}
+          >
             <FilteredBenefitsCounter count={props.othersCount} />
           </ActionButton>
         </span>
