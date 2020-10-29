@@ -7,7 +7,7 @@ import { FilteredBenefitsCounter } from "../atoms/FilteredBenefitsCounter";
  * This component displays three navigation buttons which filters out the result of benefits
  */
 export function BenefitFilter(props) {
-  const handleClick = () => props.filter();
+  const handleClick = (event) => props.onFilter(event.currentTarget.id);
 
   return (
     <div>
@@ -15,6 +15,7 @@ export function BenefitFilter(props) {
       <div className="w-full md:flex">
         <span>
           <ActionButton
+            id="eligible"
             text={props.eligible}
             invert={props.isSelectedEligible === false}
             onClick={handleClick}
@@ -24,6 +25,7 @@ export function BenefitFilter(props) {
         </span>
         <span className="md:ml-2">
           <ActionButton
+            id="help"
             text={props.help}
             invert={props.isSelectedHelp === false}
             onClick={handleClick}
@@ -33,6 +35,7 @@ export function BenefitFilter(props) {
         </span>
         <span className="md:ml-2">
           <ActionButton
+            id="others"
             text={props.others}
             invert={props.isSelectedOthers === false}
             onClick={handleClick}
@@ -84,5 +87,5 @@ BenefitFilter.propTypes = {
   /**
    * Handler when filter options clicked
    */
-  filter: PropTypes.func,
+  onFilter: PropTypes.func,
 };
