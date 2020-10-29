@@ -7,22 +7,20 @@ import PropTypes from "prop-types";
 export function ActionButton(props) {
   return (
     <button
-      className={`w-full md:w-auto flex justify-center content-center h-auto w-auto p-1 ${
+      className={`flex justify-center content-center h-auto w-auto p-1 ${
         props.rounded ? "rounded-full py-2 px-4" : "rounded-md"
       } shadow-lg ${
         props.invert
           ? "bg-gray-100 text-gray-700 border border-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700 focus:text-white"
           : "bg-gray-700 text-white hover:bg-black"
-      } text-sm px-4`}
+      } text-sm px-4 ${props.className}`}
       onClick={props.onClick}
       onMouseEnter={props.onHover}
       onMouseLeave={props.onMouseLeave}
       id={props.id}
     >
-      <div className="flex">
-        {props.text}
-        {props.children}
-      </div>
+      {props.text}
+      {props.children}
     </button>
   );
 }
@@ -36,7 +34,7 @@ ActionButton.propTypes = {
   /**
    * Identify which button being clicked
    */
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
 
   /**
    * Inverted color styling on the buttons as an default option
@@ -62,4 +60,18 @@ ActionButton.propTypes = {
    * Callback for when a user's mouse leaves the button
    */
   onMouseLeave: PropTypes.func,
+
+  /**
+   * css overrides for button
+   */
+  className: PropTypes.string,
+
+  /**
+   * any other elements you want to add to the button
+   */
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
 };

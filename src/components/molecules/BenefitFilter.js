@@ -10,39 +10,36 @@ export function BenefitFilter(props) {
   const handleClick = (event) => props.onFilter(event.currentTarget.id);
 
   return (
-    <div>
+    <div className="w-full">
       <p className="text-gray-700 leading-none font-bold">{props.text}</p>
-      <div className="w-full md:flex">
-        <span>
-          <ActionButton
-            id="eligible"
-            text={props.eligibleText}
-            invert={props.isSelectedEligible === false}
-            onClick={handleClick}
-          >
-            <FilteredBenefitsCounter count={props.eligibleCount} />
-          </ActionButton>
-        </span>
-        <span className="md:ml-2">
-          <ActionButton
-            id="help"
-            text={props.helpText}
-            invert={props.isSelectedHelp === false}
-            onClick={handleClick}
-          >
-            <FilteredBenefitsCounter count={props.helpCount} />
-          </ActionButton>
-        </span>
-        <span className="md:ml-2">
-          <ActionButton
-            id="others"
-            text={props.othersText}
-            invert={props.isSelectedOthers === false}
-            onClick={handleClick}
-          >
-            <FilteredBenefitsCounter count={props.othersCount} />
-          </ActionButton>
-        </span>
+      <div className="w-full flex flex-col md:flex-row p-2">
+        <ActionButton
+          id="eligible"
+          text={props.eligibleText}
+          invert={props.isSelectedEligible === false}
+          onClick={handleClick}
+          className={"ml-0"}
+        >
+          <FilteredBenefitsCounter count={props.eligibleCount} />
+        </ActionButton>
+        <ActionButton
+          id="help"
+          text={props.helpText}
+          invert={props.isSelectedHelp === false}
+          onClick={handleClick}
+          className={"ml-0 md:ml-2"}
+        >
+          <FilteredBenefitsCounter count={props.helpCount} />
+        </ActionButton>
+        <ActionButton
+          id="others"
+          text={props.othersText}
+          invert={props.isSelectedOthers === false}
+          onClick={handleClick}
+          className={"ml-0 md:ml-2"}
+        >
+          <FilteredBenefitsCounter count={props.othersCount} />
+        </ActionButton>
       </div>
     </div>
   );
