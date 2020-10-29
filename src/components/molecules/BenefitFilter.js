@@ -16,7 +16,7 @@ export function BenefitFilter(props) {
         <span>
           <ActionButton
             id="eligible"
-            text={props.eligible}
+            text={props.eligibleText}
             invert={props.isSelectedEligible === false}
             onClick={handleClick}
           >
@@ -26,7 +26,7 @@ export function BenefitFilter(props) {
         <span className="md:ml-2">
           <ActionButton
             id="help"
-            text={props.help}
+            text={props.helpText}
             invert={props.isSelectedHelp === false}
             onClick={handleClick}
           >
@@ -36,7 +36,7 @@ export function BenefitFilter(props) {
         <span className="md:ml-2">
           <ActionButton
             id="others"
-            text={props.others}
+            text={props.othersText}
             invert={props.isSelectedOthers === false}
             onClick={handleClick}
           >
@@ -57,7 +57,7 @@ BenefitFilter.propTypes = {
   /**
    * Button text that displays Eligible benefits
    */
-  eligible: PropTypes.string,
+  eligibleText: PropTypes.string,
 
   /**
    * Displays the number of results of eligible benefits
@@ -67,7 +67,7 @@ BenefitFilter.propTypes = {
   /**
    * Button text that displays Potential help
    */
-  help: PropTypes.string,
+  helpText: PropTypes.string,
 
   /**
    * Displays the number of results of potential help
@@ -77,7 +77,7 @@ BenefitFilter.propTypes = {
   /**
    * Other filter options that may be applied
    */
-  others: PropTypes.string,
+  othersText: PropTypes.string,
 
   /**
    * Display the number of results of other option that may applies

@@ -15,9 +15,9 @@ export const Others = Template.bind({});
 
 Primary.args = {
   text: "Filter by",
-  eligible: "Eligible benefits",
-  help: "Potential help",
-  others: "Others",
+  eligibleText: "Eligible benefits",
+  helpText: "Potential help",
+  othersText: "Others",
   isSelectedEligible: false,
   isSelectedHelp: false,
   isSelectedOthers: false,
@@ -28,9 +28,9 @@ Primary.args = {
 
 Eligible.args = {
   text: "Filter by",
-  eligible: "Eligible benefits",
-  help: "Potential help",
-  others: "Others",
+  eligibleText: "Eligible benefits",
+  helpText: "Potential help",
+  othersText: "Others",
   isSelectedEligible: true,
   isSelectedHelp: false,
   isSelectedOthers: false,
@@ -41,9 +41,9 @@ Eligible.args = {
 
 PotentialHelp.args = {
   text: "Filter by",
-  eligible: "Eligible benefits",
-  help: "Potential help",
-  others: "Others",
+  eligibleText: "Eligible benefits",
+  helpText: "Potential help",
+  othersText: "Others",
   isSelectedEligible: false,
   isSelectedHelp: true,
   isSelectedOthers: false,
@@ -54,9 +54,9 @@ PotentialHelp.args = {
 
 Others.args = {
   text: "Filter by",
-  eligible: "Eligible benefits",
-  help: "Potential help",
-  others: "Others",
+  eligibleText: "Eligible benefits",
+  helpText: "Potential help",
+  othersText: "Others",
   isSelectedEligible: false,
   isSelectedHelp: false,
   isSelectedOthers: true,
