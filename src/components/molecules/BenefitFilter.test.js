@@ -15,38 +15,46 @@ it("renders BenefitFilter in its primary state", () => {
   const eligible = screen.getByText("Eligible benefits");
   const help = screen.getByText("Potential help");
   const others = screen.getByText("Others");
-  const eligibleCount = screen.getByText("15");
-  const helpCount = screen.getByText("8");
-  const othersCount = screen.getByText("30");
   expect(text).toBeTruthy();
   expect(eligible).toBeTruthy();
   expect(help).toBeTruthy();
   expect(others).toBeTruthy();
-  expect(eligibleCount).toBeTruthy();
-  expect(helpCount).toBeTruthy();
-  expect(othersCount).toBeTruthy();
-  expect(Primary.args.isSelectedEligible).toBe(false);
-  expect(Primary.args.isSelectedHelp).toBe(false);
-  expect(Primary.args.isSelectedOthers).toBe(false);
+
+  let buttons = screen.getAllByRole("button");
+  let buttonEligible = buttons[0];
+  let buttonHelp = buttons[1];
+  let buttonOthers = buttons[2];
+  expect(buttonEligible.getAttribute("id")).toBe("eligible");
+  expect(buttonHelp.getAttribute("id")).toBe("help");
+  expect(buttonOthers.getAttribute("id")).toBe("others");
 });
 
 it("renders BenefitFilter in its Eligible state", () => {
   render(<Eligible {...Eligible.args} />);
-  expect(Eligible.args.isSelectedEligible).toBe(true);
-  expect(Eligible.args.isSelectedHelp).toBe(false);
-  expect(Eligible.args.isSelectedOthers).toBe(false);
+  const textElement = screen.getByText(`${PotentialHelp.args.eligibleCount}`);
+  expect(textElement.classList).toContain("rounded-full");
+
+  let buttons = screen.getAllByRole("button");
+  let buttonEligible = buttons[0];
+  expect(buttonEligible.classList).toContain("bg-gray-700");
 });
 
 it("renders BenefitFilter in its Potential Help state", () => {
   render(<PotentialHelp {...PotentialHelp.args} />);
-  expect(PotentialHelp.args.isSelectedEligible).toBe(false);
-  expect(PotentialHelp.args.isSelectedHelp).toBe(true);
-  expect(PotentialHelp.args.isSelectedOthers).toBe(false);
+  const textElement = screen.getByText(`${PotentialHelp.args.helpCount}`);
+  expect(textElement.classList).toContain("rounded-full");
+
+  let buttons = screen.getAllByRole("button");
+  let buttonHelp = buttons[1];
+  expect(buttonHelp.classList).toContain("bg-gray-700");
 });
 
 it("renders BenefitFilter in its Others state", () => {
   render(<Others {...Others.args} />);
-  expect(Others.args.isSelectedEligible).toBe(false);
-  expect(Others.args.isSelectedHelp).toBe(false);
-  expect(Others.args.isSelectedOthers).toBe(true);
+  const textElement = screen.getByText(`${PotentialHelp.args.othersCount}`);
+  expect(textElement.classList).toContain("rounded-full");
+
+  let buttons = screen.getAllByRole("button");
+  let buttonOthers = buttons[2];
+  expect(buttonOthers.classList).toContain("bg-gray-700");
 });
