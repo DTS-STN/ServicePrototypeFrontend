@@ -18,7 +18,10 @@ export function BenefitCard(props) {
     props.onMoreInfoClick(props.benefitId);
   }
   return (
-    <BenefitCardBox dark={props.isEligible === false}>
+    <BenefitCardBox
+      dark={props.isEligible === false}
+      dataTestId={props.benefitId}
+    >
       <div className="flex justify-between items-center w-full">
         <div className="flex flex-col justify-start">
           <h3 className="text-l">{props.benefitTitle}</h3>
