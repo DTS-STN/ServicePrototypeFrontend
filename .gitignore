@@ -8,6 +8,7 @@ node_modules
 
 # testing
 /coverage
+cypress/reports
 cypress/screenshots
 
 # production
@@ -24,5 +25,7 @@ cypress/screenshots
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+debug.log
 
 **/.idea

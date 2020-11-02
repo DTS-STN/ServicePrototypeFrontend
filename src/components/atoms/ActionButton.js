@@ -9,15 +9,18 @@ export function ActionButton(props) {
     <button
       className={`flex justify-center content-center h-auto w-auto p-1 ${
         props.rounded ? "rounded-full py-2 px-4" : "rounded-md"
-      } shadow-lg bg-gray-700 text-white text-sm hover:bg-black hover:bg-black ${
-        props.customClass ? props.customClass : ""
-      }`}
-      data-cy={props.id}
+      } shadow-lg ${
+        props.invert
+          ? "bg-gray-100 text-gray-700 border border-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700 focus:text-white"
+          : "bg-gray-700 text-white hover:bg-black"
+      } text-sm px-4 ${props.className}`}
       onClick={props.onClick}
       onMouseEnter={props.onHover}
       onMouseLeave={props.onMouseLeave}
+      id={props.id}
     >
       {props.text}
+      {props.children}
     </button>
   );
 }
@@ -27,6 +30,16 @@ ActionButton.propTypes = {
    * The text that the button will display
    */
   text: PropTypes.string.isRequired,
+
+  /**
+   * Identify which button being clicked
+   */
+  id: PropTypes.string,
+
+  /**
+   * Inverted color styling on the buttons as an default option
+   */
+  invert: PropTypes.bool,
 
   /**
    * Boolean flag that specifies the button should be rounded
@@ -47,12 +60,18 @@ ActionButton.propTypes = {
    * Callback for when a user's mouse leaves the button
    */
   onMouseLeave: PropTypes.func,
+
   /**
-   * Optional overrides the default css
+   * css overrides for button
    */
-  customClass: PropTypes.string,
+  className: PropTypes.string,
+
   /**
-   * Control Id to help testng
+   * any other elements you want to add to the button
    */
-  id: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
 };
