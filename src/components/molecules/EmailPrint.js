@@ -8,14 +8,14 @@ import { EmailPrintButton } from "../atoms/EmailPrintButton";
 export function EmailPrint(props) {
   const handleClick = (event) => props.onClick(event.currentTarget.id);
   return (
-    <div className="flex">
+    <div className="md:flex">
       <EmailPrintButton
         id="email"
         icon="icon-envelop"
         text={props.emailText}
         onClick={handleClick}
       />
-      <div className="m-6" />
+      <div className="md:m-6" />
       <EmailPrintButton
         id="print"
         icon="icon-printer"
