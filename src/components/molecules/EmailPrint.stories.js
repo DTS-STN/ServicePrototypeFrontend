@@ -12,5 +12,5 @@ export const Primary = Template.bind({});
 
 Primary.args = {
   emailText: "Email",
-  printText: "print",
+  printText: "Print",
 };
