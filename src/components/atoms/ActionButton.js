@@ -18,6 +18,7 @@ export function ActionButton(props) {
       onMouseEnter={props.onHover}
       onMouseLeave={props.onMouseLeave}
       id={props.id}
+      data-cy={props.id}
     >
       {props.text}
       {props.children}
