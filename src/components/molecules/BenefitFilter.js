@@ -18,7 +18,7 @@ export function BenefitFilter(props) {
           text={props.eligibleText}
           invert={props.isSelectedEligible === false}
           onClick={handleClick}
-          className={"ml-0"}
+          className={"ml-0 bg-gray-700 text-white hover:bg-black"}
         >
           <FilteredBenefitsCounter count={props.eligibleCount} />
         </ActionButton>
@@ -27,7 +27,7 @@ export function BenefitFilter(props) {
           text={props.helpText}
           invert={props.isSelectedHelp === false}
           onClick={handleClick}
-          className={"ml-0 md:ml-2"}
+          className={"ml-0 md:ml-2 bg-gray-700 text-white hover:bg-black"}
         >
           <FilteredBenefitsCounter count={props.helpCount} />
         </ActionButton>
@@ -36,7 +36,7 @@ export function BenefitFilter(props) {
           text={props.othersText}
           invert={props.isSelectedOthers === false}
           onClick={handleClick}
-          className={"ml-0 md:ml-2"}
+          className={"ml-0 md:ml-2 bg-gray-700 text-white hover:bg-black"}
         >
           <FilteredBenefitsCounter count={props.othersCount} />
         </ActionButton>
