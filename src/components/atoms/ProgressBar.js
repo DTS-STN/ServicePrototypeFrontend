@@ -13,7 +13,11 @@ export function ProgressBar(props) {
       id={id}
       className={`flex border-solid border border-gray-900 ${customClass} ? customClass : '' `}
     >
-      <div className="bg-black block" style={{ width: percentage + "%" }}>
+      <div
+        data-testid={id}
+        className="bg-black block"
+        style={{ width: percentage + "%" }}
+      >
         {" "}
         &nbsp;{" "}
       </div>

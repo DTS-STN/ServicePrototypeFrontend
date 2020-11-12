@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import { ActionButton } from "../atoms/ActionButton";
 
 /**
- * plain link component
+ * Previous, Skip (fulll size only), Next link/buttons
  */
 export function PrevNextBar(props) {
   const {
@@ -30,7 +30,7 @@ export function PrevNextBar(props) {
           <Link
             className={`text-black underline ${customClass ? customClass : ""}`}
             to={hrefPrev}
-            data-cy={id + "-Prev"}
+            data-testid={id + "-Prev"}
           >
             {prevText}
           </Link>
@@ -41,7 +41,7 @@ export function PrevNextBar(props) {
           <Link
             className={`text-black underline ${customClass ? customClass : ""}`}
             to={hrefSkip}
-            data-cy={id + "-Skip"}
+            data-testid={id + "-Skip"}
           >
             {skipText}
           </Link>
@@ -49,7 +49,7 @@ export function PrevNextBar(props) {
 
         <div className="px-4">
           <ActionButton
-            id={id + "-Next"}
+            data-testid={id + "-Next"}
             text={nextText}
             onClick={handleNextButton}
             className="rounded-b-none rounded-t-none px-8"

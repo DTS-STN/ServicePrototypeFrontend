@@ -2,16 +2,19 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import { Example1 } from "./PrevNextBar.stories";
+import { Primary } from "./PrevNextBar.stories";
 
 it("renders a previous / skip / next Bar", () => {
-  render(<Example1 {...Example1.args} />);
+  render(<Primary {...Primary.args} />);
 
-  const prevLink = document.getElementById("NavBar-Prev");
-  const skipLink = document.getElementById("NavBar-Skip");
+  const links = screen.getAllByRole("link");
+
+  // the line below does not work as expected.
+  // const skipLink = screen.getAllByRole("link", {id: "NavBar-Skip"});
+
   const nextButton = screen.getByRole("button");
 
-  expect(prevLink).toBeTruthy();
-  expect(skipLink).toBeTruthy();
-  expect(nextButton).toBeTruthy();
+  expect(links[0]).toHaveTextContent("Prev");
+  expect(links[1]).toHaveTextContent("Skip");
+  expect(nextButton).toHaveTextContent("Next");
 });

@@ -8,9 +8,9 @@ export default {
 
 const Template = (args) => <PrevNextBar {...args} />;
 
-export const Example1 = Template.bind({});
+export const Primary = Template.bind({});
 
-Example1.args = {
+Primary.args = {
   hrefPrev: "/previous.html",
   prevText: "Prev",
   hrefSkip: "/skip.html",
