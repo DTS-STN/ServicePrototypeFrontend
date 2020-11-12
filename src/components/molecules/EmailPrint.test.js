@@ -13,6 +13,6 @@ it("renders EmailPrint in its primary state", () => {
 
   const iconEmail = screen.getByTestId("envelopIcon");
   const iconPrint = screen.getByTestId("printerIcon");
-  expect(iconEmail.classList).toContain("shadow-none");
-  expect(iconPrint.classList).toContain("shadow-none");
+  expect(iconEmail.classList).toContain("icon-envelop");
+  expect(iconPrint.classList).toContain("icon-printer");
 });

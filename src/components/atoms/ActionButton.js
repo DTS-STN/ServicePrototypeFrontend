@@ -18,9 +18,10 @@ export function ActionButton(props) {
       onMouseEnter={props.onHover}
       onMouseLeave={props.onMouseLeave}
       id={props.id}
-      data-testid={props.dataTestId}
     >
-      {props.icon ? <span className={props.icon} /> : undefined}
+      {props.icon ? (
+        <span className={props.icon} data-testid={props.dataTestId} />
+      ) : undefined}
       {props.text}
       {props.children}
     </button>
