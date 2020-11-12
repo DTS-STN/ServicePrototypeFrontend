@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { EmailPrintButton } from "../atoms/EmailPrintButton";
+import { ActionButton } from "../atoms/ActionButton";
 
 /**
  * This component layout the email and print buttons
@@ -8,18 +8,22 @@ import { EmailPrintButton } from "../atoms/EmailPrintButton";
 export function EmailPrint(props) {
   const handleClick = (event) => props.onClick(event.currentTarget.id);
   return (
-    <div className="flex">
-      <EmailPrintButton
+    <div className="flex text-gray-700">
+      <ActionButton
+        className={"shadow-none hover:text-black"}
         id="email"
-        icon="icon-envelop"
+        icon="icon-envelop p-1"
         text={props.emailText}
         onClick={handleClick}
+        dataTestId="envelopIcon"
       />
-      <EmailPrintButton
+      <ActionButton
+        className={"shadow-none hover:text-black"}
         id="print"
-        icon="icon-printer"
+        icon="icon-printer p-1"
         text={props.printText}
         onClick={handleClick}
+        dataTestId="printerIcon"
       />
     </div>
   );

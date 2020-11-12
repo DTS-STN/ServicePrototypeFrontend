@@ -18,7 +18,9 @@ export function ActionButton(props) {
       onMouseEnter={props.onHover}
       onMouseLeave={props.onMouseLeave}
       id={props.id}
+      data-testid={props.dataTestId}
     >
+      {props.icon ? <span className={props.icon} /> : undefined}
       {props.text}
       {props.children}
     </button>
@@ -74,4 +76,8 @@ ActionButton.propTypes = {
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
   ]),
+  /**
+   * Test id for unit test
+   */
+  dataTestId: PropTypes.string,
 };

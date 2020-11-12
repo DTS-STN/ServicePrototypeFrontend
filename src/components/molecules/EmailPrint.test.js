@@ -11,8 +11,8 @@ it("renders EmailPrint in its primary state", () => {
   expect(emailText).toBeTruthy();
   expect(printText).toBeTruthy();
 
-  const iconEmail = document.getElementsByTagName("span")[0];
-  const iconPrint = document.getElementsByTagName("span")[1];
-  expect(iconEmail.classList).toContain("icon-envelop");
-  expect(iconPrint.classList).toContain("icon-printer");
+  const iconEmail = screen.getByTestId("envelopIcon");
+  const iconPrint = screen.getByTestId("printerIcon");
+  expect(iconEmail.classList).toContain("shadow-none");
+  expect(iconPrint.classList).toContain("shadow-none");
 });
