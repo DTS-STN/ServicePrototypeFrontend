@@ -17,14 +17,16 @@ module.exports = {
         80: "24rem",
       },
       colors: {
-        "bg-gray-light": "#EFEFEF",
-        "bg-gray-md": "#CFCFCF",
+        // Background colors
+        "gray-light": "#EFEFEF",
+        "gray-md": "#CFCFCF",
         "bg-gray-dk": "#26374A",
+        // Text Colors
         "text-gray-dk": "#333333",
-        "text-blue-link": "#2b4380",
-        "text-sel-link": "#20535d2",
-        "text-vist-link": "#7834bc",
-        "text-red-err": "#d3080c",
+        "blue-link": "#2b4380",
+        "sel-link": "#20535d2",
+        "vist-link": "#7834bc",
+        "red-err": "#d3080c",
       },
     },
   },
