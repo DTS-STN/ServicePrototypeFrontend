@@ -11,14 +11,14 @@ export function BenefitFilter(props) {
 
   return (
     <div className="w-full">
-      <p className="text-gray-700 leading-none font-bold">{props.text}</p>
+      <p className="text-text-gray-dk leading-none font-bold">{props.text}</p>
       <div className="w-full flex flex-col md:flex-row p-2">
         <ActionButton
           id="eligible"
           text={props.eligibleText}
           invert={props.isSelectedEligible === false}
           onClick={handleClick}
-          className={"ml-0 bg-gray-700 text-white hover:bg-black"}
+          className={"ml-0 bg-bg-gray-dk text-white hover:bg-black"}
         >
           <FilteredBenefitsCounter count={props.eligibleCount} />
         </ActionButton>
@@ -27,7 +27,7 @@ export function BenefitFilter(props) {
           text={props.helpText}
           invert={props.isSelectedHelp === false}
           onClick={handleClick}
-          className={"ml-0 md:ml-2 bg-gray-700 text-white hover:bg-black"}
+          className={"ml-0 md:ml-2 bg-bg-gray-dk text-white hover:bg-black"}
         >
           <FilteredBenefitsCounter count={props.helpCount} />
         </ActionButton>
@@ -36,7 +36,7 @@ export function BenefitFilter(props) {
           text={props.othersText}
           invert={props.isSelectedOthers === false}
           onClick={handleClick}
-          className={"ml-0 md:ml-2 bg-gray-700 text-white hover:bg-black"}
+          className={"ml-0 md:ml-2 bg-bg-gray-dk text-white hover:bg-black"}
         >
           <FilteredBenefitsCounter count={props.othersCount} />
         </ActionButton>
