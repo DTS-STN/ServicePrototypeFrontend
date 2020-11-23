@@ -36,7 +36,7 @@ it("renders BenefitFilter in its Eligible state", () => {
 
   let buttons = screen.getAllByRole("button");
   let buttonEligible = buttons[0];
-  expect(buttonEligible.classList).toContain("bg-gray-700");
+  expect(buttonEligible.classList).toContain("bg-bg-gray-dk");
 });
 
 it("renders BenefitFilter in its Potential Help state", () => {
@@ -46,7 +46,7 @@ it("renders BenefitFilter in its Potential Help state", () => {
 
   let buttons = screen.getAllByRole("button");
   let buttonHelp = buttons[1];
-  expect(buttonHelp.classList).toContain("bg-gray-700");
+  expect(buttonHelp.classList).toContain("bg-bg-gray-dk");
 });
 
 it("renders BenefitFilter in its Others state", () => {
@@ -56,5 +56,5 @@ it("renders BenefitFilter in its Others state", () => {
 
   let buttons = screen.getAllByRole("button");
   let buttonOthers = buttons[2];
-  expect(buttonOthers.classList).toContain("bg-gray-700");
+  expect(buttonOthers.classList).toContain("bg-bg-gray-dk");
 });
