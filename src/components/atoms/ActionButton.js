@@ -11,15 +11,18 @@ export function ActionButton(props) {
         props.rounded ? "rounded-full py-2 px-4" : "rounded-md"
       } shadow-lg ${
         props.invert
-          ? "bg-gray-100 text-gray-700 border border-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700 focus:text-white"
-          : "bg-gray-700 text-white hover:bg-black"
-      } text-sm px-4 ${props.className}`}
+          ? "bg-gray-light text-text-gray-dk border border-gray-md hover:bg-bg-gray-dk hover:text-white focus:bg-bg-gray-dk focus:text-white"
+          : props.className
+      } text-sm px-4 focus:outline-none`}
       onClick={props.onClick}
       onMouseEnter={props.onHover}
       onMouseLeave={props.onMouseLeave}
       id={props.id}
       data-cy={props.id}
     >
+      {props.icon ? (
+        <span className={props.icon} data-testid={props.dataTestId} />
+      ) : undefined}
       {props.text}
       {props.children}
     </button>
@@ -75,4 +78,8 @@ ActionButton.propTypes = {
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
   ]),
+  /**
+   * Test id for unit test
+   */
+  dataTestId: PropTypes.string,
 };

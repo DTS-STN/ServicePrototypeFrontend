@@ -18,5 +18,5 @@ it("renders ActionButton in its rounded state", () => {
 it("renders ActionButton in its withCounter state", () => {
   render(<WithCounter {...WithCounter.args} />);
   expect(screen.getByRole("button")).toHaveTextContent(WithCounter.args.text);
-  expect(screen.getByRole("button").classList).toContain("bg-gray-100");
+  expect(screen.getByRole("button").classList).toContain("bg-gray-light");
 });

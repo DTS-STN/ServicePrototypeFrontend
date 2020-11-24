@@ -39,6 +39,7 @@ export function BenefitCard(props) {
       <ActionButton
         text={props.moreInfoButtonText}
         rounded={true}
+        className={"bg-bg-gray-dk text-white hover:bg-black"}
         onClick={handleClick}
       />
     </BenefitCardBox>
