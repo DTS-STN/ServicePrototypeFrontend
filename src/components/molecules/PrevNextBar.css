@@ -1,0 +1,7 @@
+/* no choice since tailwind is not working  */
+
+@media only screen and (max-width: 600px) {
+  .skipLink {
+    display: none;
+  }
+}
