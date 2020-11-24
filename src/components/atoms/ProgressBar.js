@@ -2,25 +2,23 @@ import React from "react";
 import PropTypes from "prop-types";
 
 /**
- * progressBar () component,  meant to display a percentage of the progress
+ * progress bar component,  meant to display a percentage of the progress
  */
 export function ProgressBar(props) {
   const { customClass, percentage, id } = props;
-  // const perc = 582 * (percentage / 100);
 
   return (
     <div
       id={id}
-      className={`flex border-solid border border-gray-900 ${customClass} ? customClass : '' `}
+      className={`flex border-solid border border-gray-900 ${
+        customClass ? customClass : ""
+      }`}
     >
-      <div
+      <span
         data-testid={id}
         className="bg-black block"
-        style={{ width: percentage + "%" }}
-      >
-        {" "}
-        &nbsp;{" "}
-      </div>
+        style={{ width: percentage + "%", height: "1.2em" }}
+      />
     </div>
   );
 }

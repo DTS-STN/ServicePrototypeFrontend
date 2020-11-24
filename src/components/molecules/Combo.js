@@ -18,41 +18,41 @@ export function Combo(props) {
   } = props;
 
   return (
-    <div
-      className={`p-4 w-full flex justify-center content-center ${customDivClass} ? customClass : '' `}
+    <form
+      className={`p-4 w-full flex flex-col justify-center content-center ${
+        customDivClass ? customDivClass : ""
+      }`}
     >
-      <div>
-        <label
-          className={`text-black font-semibold ${
-            customLabelClass ? customLabelClass : ""
-          } `}
-          id={id + "-label"}
-          htmlFor={id + "-select"}
-          data-cy={id + "-label"}
-          // {...rest}
-        >
-          {required ? <span className="text-red-700 font-bold">* </span> : ""}
-          {labelText}
-          {required ? (
-            <span className="text-red-800 font-bold"> {textRequired} </span>
-          ) : (
-            ""
-          )}
-        </label>
-        <select
-          className={`w-full rounded  ${customSelClass}`}
-          data-testid={id + "-select"}
-          name={id + "-Select"}
-          onChange={onChange}
-        >
-          {options.map(({ id, name }) => (
-            <option key={id} value={name}>
-              {name}
-            </option>
-          ))}
-        </select>
-      </div>
-    </div>
+      <label
+        className={`text-black font-semibold ${
+          customLabelClass ? customLabelClass : ""
+        } `}
+        id={id + "-label"}
+        htmlFor={id + "-select"}
+        data-cy={id + "-label"}
+      >
+        {required ? <span className="text-red-700 font-bold">* </span> : ""}
+        {labelText}
+        {required ? (
+          <span className="text-red-800 font-bold"> {textRequired} </span>
+        ) : (
+          ""
+        )}
+      </label>
+      <select
+        id={id + "-select"}
+        className={`w-full rounded  ${customSelClass}`}
+        data-testid={id + "-select"}
+        name={id + "-select"}
+        onChange={onChange}
+      >
+        {options.map(({ id, name, disabled }) => (
+          <option key={id} value={name} disabled={disabled}>
+            {name}
+          </option>
+        ))}
+      </select>
+    </form>
   );
 }
 

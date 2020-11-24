@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { ActionButton } from "../atoms/ActionButton";
 
 /**
- * plain link component
+ * apply for selected benefits section
  */
 export function BenefitApply(props) {
   const {
@@ -15,28 +15,25 @@ export function BenefitApply(props) {
     onMoreInfoClick,
   } = props;
 
-  // event handler for more information button
-  function handleClick() {
-    onMoreInfoClick();
-  }
-
   return (
     <div
       id={id}
-      className="pb-6 px-6 bg-bg-gray-dk bg-gray-dk w-2/5 on inline-block element"
+      className="pb-6 px-6 bg-bg-gray-dk bg-gray-dk w-full on inline-block element"
     >
-      <p data-testid={id + "-number"} className="text-white font-semibold">
-        {number} {textBenefitSelected}
-        <br />
-        <span className="text-white text-xs font-semibold">
-          {textSelectUpTo}
-        </span>
-      </p>
+      <article
+        data-testid={id + "-number"}
+        className="text-white font-semibold"
+      >
+        <p>
+          {number} {textBenefitSelected}
+        </p>
+        <p className="text-white text-xs font-semibold">{textSelectUpTo}</p>
+      </article>
 
       <ActionButton
         id={id + "-MoreInfo"}
         text={textMoreInfo}
-        onClick={handleClick}
+        onClick={onMoreInfoClick}
         rounded={true}
         invert={true}
         className={"font-semibold"}
