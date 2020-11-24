@@ -9,10 +9,10 @@ export function Home() {
 
   return (
     <div className="font-sans">
-      <div className="m-auto pl-8">
+      <div className="m-auto">
         <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title>
       </div>
-      <div className="text-2xl m-auto p-6 leading-none">
+      <div className="text-2xl m-auto py-6 leading-none">
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>

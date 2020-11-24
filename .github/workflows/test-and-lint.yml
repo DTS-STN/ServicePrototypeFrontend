@@ -25,7 +25,7 @@ jobs:
           CI: true
 
       - name: Run Cypress end-to-end 🧪
-        uses: cypress-io/github-action@v1
+        uses: cypress-io/github-action@v2
         env:
           NODE_ENV: production
           CI: true

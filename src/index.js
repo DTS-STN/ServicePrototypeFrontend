@@ -181,10 +181,6 @@ function generateLanguageToggle() {
       }
       htmlElement.setAttribute("lang", "en");
       reloadTemplate();
-
-      // once the template reloads we will need to mount the button back into the banner
-      let wbBanner = document.getElementById("wb-bnr");
-      wbBanner.appendChild(e.currentTarget);
     } else {
       store.dispatch(changeLanguageCreator(LANGUAGES.FR));
       if (e.target instanceof HTMLElement) {
@@ -192,14 +188,14 @@ function generateLanguageToggle() {
       }
       htmlElement.setAttribute("lang", "fr");
       reloadTemplate();
-
-      let wbBanner = document.getElementById("wb-bnr");
-      wbBanner.appendChild(e.currentTarget);
     }
+    // once the template reloads we will need to mount the button back into the banner
+    let wbBanner = document.getElementById("wb-bnr").firstChild;
+    wbBanner.appendChild(e.currentTarget);
 
     // reload the cdts template
   });
-  let wbBanner = document.getElementById("wb-bnr");
+  let wbBanner = document.getElementById("wb-bnr").firstChild;
 
   wbBanner.appendChild(languageButton);
 }
