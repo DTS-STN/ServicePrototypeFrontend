@@ -15,7 +15,7 @@ describe('Items shown on the Landing page', () => {
     })
     
     it('should go to the landing page and show header image and links ', () => {   
-        cy.get('#wb-bnr > .row > .btn').should('be.visible', 'Français')
+        cy.get('#wb-bnr > .btn').should('be.visible', 'Français')
   
      })
 
