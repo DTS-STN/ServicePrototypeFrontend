@@ -1,0 +1,4 @@
+export const RESOURCE_TYPES = {
+  BENEFIT: "BENEFIT",
+  BENEFITS: "BENEFITS",
+};
