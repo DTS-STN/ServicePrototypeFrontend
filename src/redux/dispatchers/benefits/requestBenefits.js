@@ -6,7 +6,7 @@ import {
   NETWORK_REQUEST_TYPES,
   NETWORK_FAILED_REASONS,
 } from "../../actions";
-import { RESOURCE_TYPES } from "./resourceTypes";
+import { RESOURCE_TYPES } from "../resourceTypes";
 import { STRAPI_URL } from "../../../variables";
 
 async function fetchBenefits(dispatch, start, limit, sort) {
@@ -58,7 +58,7 @@ async function fetchBenefits(dispatch, start, limit, sort) {
       )
     );
   }
-  // data recieved and response is okay
+  // data received and response is okay
   let data;
 
   // get json if possible otherwise just get text
@@ -106,6 +106,15 @@ async function fetchBenefits(dispatch, start, limit, sort) {
   }
 }
 
+/**
+ * dispatch function which gets a list of benefits from the strapi api.
+ * see strapi documentation on parameters
+ * https://strapi.io/documentation/v3.x/content-api/parameters.html
+ * @param start - the start index
+ * @param limit - the limit of how much to return
+ * @param sort - how to sort benefits
+ * @returns {function(*=): Promise<void>}
+ */
 export function getBenefits(start, limit, sort) {
   return (dispatch) => fetchBenefits(dispatch, start, limit, sort);
 }

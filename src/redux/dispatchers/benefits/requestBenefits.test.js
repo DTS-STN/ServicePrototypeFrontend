@@ -8,7 +8,7 @@ import {
   networkReceivedActionCreator,
   networkRequestActionCreator,
 } from "../../actions";
-import { RESOURCE_TYPES } from "./resourceTypes";
+import { RESOURCE_TYPES } from "../resourceTypes";
 import thunk from "redux-thunk";
 import { STRAPI_URL } from "../../../variables";
 import { getBenefits } from "./requestBenefits";
