@@ -1,4 +1,4 @@
-import { NETWORK_REQUEST } from "./actionType";
+import { ACTION_TYPES } from "../../actionTypes";
 
 /**
  * generic action for when a network request is sent in the form of an http call
@@ -15,7 +15,7 @@ export function networkRequestActionCreator(
   requestBody = {}
 ) {
   return {
-    type: NETWORK_REQUEST,
+    type: ACTION_TYPES.NETWORK_REQUEST,
     resourceType: resourceType,
     requestType: requestType,
     requestParameters: {

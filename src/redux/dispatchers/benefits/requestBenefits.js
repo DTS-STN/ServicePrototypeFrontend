@@ -5,7 +5,7 @@ import {
   networkRequestFailedActionCreator,
   NETWORK_REQUEST_TYPES,
   NETWORK_FAILED_REASONS,
-} from "../../actions/generics/network";
+} from "../../actions";
 import { RESOURCE_TYPES } from "./resourceTypes";
 import { STRAPI_URL } from "../../../variables";
 
@@ -55,6 +55,52 @@ async function fetchBenefits(dispatch, start, limit, sort) {
         NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.NO_NETWORK,
         e
+      )
+    );
+  }
+  // data recieved and response is okay
+  let data;
+
+  // get json if possible otherwise just get text
+  if (response.headers.get("Content-Type") === "application/json") {
+    data = await response.json();
+  } else {
+    data = await response.text();
+  }
+
+  if (response.ok) {
+    dispatch(
+      networkReceivedActionCreator(
+        RESOURCE_TYPES.BENEFITS,
+        NETWORK_REQUEST_TYPES.GET,
+        data
+      )
+    );
+  } else if (response.status === 400) {
+    dispatch(
+      networkRequestFailedActionCreator(
+        RESOURCE_TYPES.BENEFITS,
+        NETWORK_REQUEST_TYPES.GET,
+        NETWORK_FAILED_REASONS.BAD_REQUEST,
+        typeof data === "string" ? { message: data } : data
+      )
+    );
+  } else if (response.status === 404) {
+    dispatch(
+      networkRequestFailedActionCreator(
+        RESOURCE_TYPES.BENEFITS,
+        NETWORK_REQUEST_TYPES.GET,
+        NETWORK_FAILED_REASONS.NOT_FOUND,
+        typeof data === "string" ? { message: data } : data
+      )
+    );
+  } else {
+    dispatch(
+      networkRequestFailedActionCreator(
+        RESOURCE_TYPES.BENEFITS,
+        NETWORK_REQUEST_TYPES.GET,
+        NETWORK_FAILED_REASONS.INTERNAL_SERVER_ERROR,
+        typeof data === "string" ? { message: data } : data
       )
     );
   }

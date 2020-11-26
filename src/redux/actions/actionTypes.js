@@ -1,0 +1,31 @@
+export const ACTION_TYPES = {
+  // network action types
+  NETWORK_REQUEST: "NETWORK_REQUEST",
+  NETWORK_RECEIVED: "NETWORK_RECEIVED",
+  NETWORK_REQUEST_FAILED: "NETWORK_REQUEST_FAILED",
+
+  // i18n action types
+  CHANGE_LANGUAGE: "CHANGE_LANGUAGE",
+};
+
+// network action constants
+export const NETWORK_REQUEST_TYPES = {
+  GET: "GET",
+  POST: "POST",
+  PUT: "PUT",
+  DELETE: "DELETE",
+};
+
+export const NETWORK_FAILED_REASONS = {
+  INTERNAL_SERVER_ERROR: "INTERNAL_SERVER_ERROR",
+  BAD_REQUEST: "BAD_REQUEST",
+  NOT_FOUND: "NOT_FOUND",
+  NOT_AUTHORIZED: "NOT_AUTHORIZED",
+  NO_NETWORK: "NO_NETWORK",
+};
+
+// i18n action constants
+export const LANGUAGES = {
+  EN: "EN",
+  FR: "FR",
+};

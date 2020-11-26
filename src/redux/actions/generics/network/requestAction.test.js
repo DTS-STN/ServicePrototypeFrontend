@@ -1,4 +1,4 @@
-import { NETWORK_REQUEST } from "./actionType";
+import { ACTION_TYPES } from "../../actionTypes";
 import { networkRequestActionCreator } from "./requestAction";
 
 let dateSpy;
@@ -23,7 +23,7 @@ it("creates proper action object", () => {
   );
 
   expect(actionReturned).toEqual({
-    type: NETWORK_REQUEST,
+    type: ACTION_TYPES.NETWORK_REQUEST,
     resourceType: "SOME_TYPE",
     requestType: "SOME_REQUEST",
     requestParameters: { some: "key" },

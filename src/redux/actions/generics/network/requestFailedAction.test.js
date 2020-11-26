@@ -1,4 +1,4 @@
-import { NETWORK_REQUEST_FAILED } from "./actionType";
+import { ACTION_TYPES } from "../../actionTypes";
 import { networkRequestFailedActionCreator } from "./requestFailedAction";
 
 let dateSpy;
@@ -23,7 +23,7 @@ it("creates proper action object", () => {
   );
 
   expect(actionReturned).toEqual({
-    type: NETWORK_REQUEST_FAILED,
+    type: ACTION_TYPES.NETWORK_REQUEST_FAILED,
     resourceType: "SOME_TYPE",
     requestType: "SOME_REQUEST",
     networkRequestFailedReason: "SOME_REASON",

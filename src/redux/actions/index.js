@@ -1,7 +1,7 @@
-import { ACTION_TYPES as LANGUAGE_ACTION_TYPES } from "./language";
-
-export const ACTION_TYPES = {
-  ...LANGUAGE_ACTION_TYPES,
-};
-
-export { LANGUAGES, changeLanguageCreator } from "./language";
+export { changeLanguageCreator } from "./language";
+export {
+  networkRequestActionCreator,
+  networkReceivedActionCreator,
+  networkRequestFailedActionCreator,
+} from "./generics/network";
+export * from "./actionTypes";

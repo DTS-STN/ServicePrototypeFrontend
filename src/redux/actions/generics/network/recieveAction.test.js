@@ -1,4 +1,4 @@
-import { NETWORK_RECEIVED } from "./actionType";
+import { ACTION_TYPES } from "../../actionTypes";
 import { networkReceivedActionCreator } from "./receiveAction";
 
 let dateSpy;
@@ -22,7 +22,7 @@ it("creates proper action object", () => {
   );
 
   expect(actionReturned).toEqual({
-    type: NETWORK_RECEIVED,
+    type: ACTION_TYPES.NETWORK_RECEIVED,
     resourceType: "SOME_TYPE",
     requestType: "SOME_REQUEST",
     body: {

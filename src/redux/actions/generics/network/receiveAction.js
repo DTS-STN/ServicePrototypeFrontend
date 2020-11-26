@@ -1,4 +1,4 @@
-import { NETWORK_RECEIVED } from "./actionType";
+import { ACTION_TYPES } from "../../actionTypes";
 
 /**
  * generic action creator for when a response to an http call is received by the app
@@ -13,7 +13,7 @@ export function networkReceivedActionCreator(
   body = {}
 ) {
   return {
-    type: NETWORK_RECEIVED,
+    type: ACTION_TYPES.NETWORK_RECEIVED,
     resourceType: resourceType,
     requestType: requestType,
     body: { ...body },

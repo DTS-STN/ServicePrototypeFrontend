@@ -1,4 +1,4 @@
-import { NETWORK_REQUEST_FAILED } from "./actionType";
+import { ACTION_TYPES } from "../../actionTypes";
 
 export function networkRequestFailedActionCreator(
   resourceType,
@@ -7,7 +7,7 @@ export function networkRequestFailedActionCreator(
   responseBody = {}
 ) {
   return {
-    type: NETWORK_REQUEST_FAILED,
+    type: ACTION_TYPES.NETWORK_REQUEST_FAILED,
     resourceType: resourceType,
     requestType: requestType,
     networkRequestFailedReason: networkRequestFailedReason,
