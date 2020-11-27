@@ -1,4 +1,4 @@
-import { ACTION_TYPES } from "../../actionTypes";
+import { ACTION_TYPES } from "../actionTypes";
 
 /**
  * generic action creator for when a response to an http call is received by the app

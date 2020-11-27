@@ -21,7 +21,7 @@ async function fetchBenefitsCount(dispatch) {
 
     response = await fetch(STRAPI_URL + "/benefits/count");
   } catch (e) {
-    dispatch(
+    return dispatch(
       networkRequestFailedActionCreator(
         RESOURCE_TYPES.BENEFITS_COUNT,
         NETWORK_REQUEST_TYPES.GET,
@@ -32,10 +32,15 @@ async function fetchBenefitsCount(dispatch) {
   }
 
   // data received and response is good
-  const data = await response.text();
+  let data;
+  try {
+    data = await response.json();
+  } catch (e) {
+    data = await response.text();
+  }
 
   if (response.ok) {
-    dispatch(
+    return dispatch(
       networkReceivedActionCreator(
         RESOURCE_TYPES.BENEFITS_COUNT,
         NETWORK_REQUEST_TYPES.GET,
@@ -44,16 +49,23 @@ async function fetchBenefitsCount(dispatch) {
         }
       )
     );
-  } else if (response.status === 400) {
-    dispatch(
+  } else {
+    return dispatch(
       networkRequestFailedActionCreator(
         RESOURCE_TYPES.BENEFITS_COUNT,
-        NETWORK_REQUEST_TYPES.GET
+        NETWORK_REQUEST_TYPES.GET,
+        NETWORK_FAILED_REASONS[response.status] ||
+          NETWORK_FAILED_REASONS.INTERNAL_SERVER_ERROR,
+        typeof data === "string" ? { message: data } : data
       )
     );
   }
 }
 
+/**
+ * dispatcher to fetch benefits count from strapi
+ * @returns {function(*=): Promise<*>}
+ */
 export function getBenefitsCount() {
   return (dispatch) => fetchBenefitsCount(dispatch);
 }

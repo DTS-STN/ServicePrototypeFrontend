@@ -49,7 +49,7 @@ async function fetchBenefits(dispatch, start, limit, sort) {
 
     response = await fetch(STRAPI_URL + url);
   } catch (e) {
-    dispatch(
+    return dispatch(
       networkRequestFailedActionCreator(
         RESOURCE_TYPES.BENEFITS,
         NETWORK_REQUEST_TYPES.GET,
@@ -69,37 +69,20 @@ async function fetchBenefits(dispatch, start, limit, sort) {
   }
 
   if (response.ok) {
-    dispatch(
+    return dispatch(
       networkReceivedActionCreator(
         RESOURCE_TYPES.BENEFITS,
         NETWORK_REQUEST_TYPES.GET,
         data
       )
     );
-  } else if (response.status === 400) {
-    dispatch(
-      networkRequestFailedActionCreator(
-        RESOURCE_TYPES.BENEFITS,
-        NETWORK_REQUEST_TYPES.GET,
-        NETWORK_FAILED_REASONS.BAD_REQUEST,
-        typeof data === "string" ? { message: data } : data
-      )
-    );
-  } else if (response.status === 404) {
-    dispatch(
-      networkRequestFailedActionCreator(
-        RESOURCE_TYPES.BENEFITS,
-        NETWORK_REQUEST_TYPES.GET,
-        NETWORK_FAILED_REASONS.NOT_FOUND,
-        typeof data === "string" ? { message: data } : data
-      )
-    );
   } else {
-    dispatch(
+    return dispatch(
       networkRequestFailedActionCreator(
         RESOURCE_TYPES.BENEFITS,
         NETWORK_REQUEST_TYPES.GET,
-        NETWORK_FAILED_REASONS.INTERNAL_SERVER_ERROR,
+        NETWORK_FAILED_REASONS[response.status] ||
+          NETWORK_FAILED_REASONS.INTERNAL_SERVER_ERROR,
         typeof data === "string" ? { message: data } : data
       )
     );

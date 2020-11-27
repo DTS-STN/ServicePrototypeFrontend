@@ -6,6 +6,10 @@ export const ACTION_TYPES = {
 
   // i18n action types
   CHANGE_LANGUAGE: "CHANGE_LANGUAGE",
+
+  // benefits action types
+  SELECT_BENEFIT: "SELECT_BENEFIT",
+  DESELECT_BENEFIT: "DESELECT_BENEFIT",
 };
 
 // network action constants
@@ -22,6 +26,10 @@ export const NETWORK_FAILED_REASONS = {
   NOT_FOUND: "NOT_FOUND",
   NOT_AUTHORIZED: "NOT_AUTHORIZED",
   NO_NETWORK: "NO_NETWORK",
+  400: "BAD_REQUEST",
+  404: "NOT_FOUND",
+  401: "NOT_AUTHORIZED",
+  500: "INTERNAL_SERVER_ERROR",
 };
 
 // i18n action constants

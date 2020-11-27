@@ -1,5 +1,5 @@
-import { ACTION_TYPES } from "../../actionTypes";
-import { networkRequestActionCreator } from "./requestAction";
+import { ACTION_TYPES } from "../actionTypes";
+import { networkReceivedActionCreator } from "./receiveAction";
 
 let dateSpy;
 beforeEach(() => {
@@ -15,19 +15,19 @@ it("creates proper action object", () => {
     return 81217838127;
   });
 
-  const actionReturned = networkRequestActionCreator(
+  const actionReturned = networkReceivedActionCreator(
     "SOME_TYPE",
     "SOME_REQUEST",
-    { some: "key" },
-    { someOther: "value" }
+    { some: "key" }
   );
 
   expect(actionReturned).toEqual({
-    type: ACTION_TYPES.NETWORK_REQUEST,
+    type: ACTION_TYPES.NETWORK_RECEIVED,
     resourceType: "SOME_TYPE",
     requestType: "SOME_REQUEST",
-    requestParameters: { some: "key" },
-    requestBody: { someOther: "value" },
+    body: {
+      some: "key",
+    },
     timestamp: 81217838127,
   });
 });

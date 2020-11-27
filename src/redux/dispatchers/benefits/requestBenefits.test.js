@@ -236,6 +236,32 @@ describe("requestBenefits", () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+  it("handles fetch throwing an error due to no network", async () => {
+    let errorObj = new Error("no network");
+    fetchMock.getOnce(STRAPI_URL + "/benefits", {
+      throws: errorObj,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const store = mockStore({});
+
+    await store.dispatch(getBenefits());
+
+    expect(store.getActions()).toEqual([
+      networkRequestActionCreator(
+        RESOURCE_TYPES.BENEFITS,
+        NETWORK_REQUEST_TYPES.GET
+      ),
+      networkRequestFailedActionCreator(
+        RESOURCE_TYPES.BENEFITS,
+        NETWORK_REQUEST_TYPES.GET,
+        NETWORK_FAILED_REASONS.NO_NETWORK,
+        errorObj
+      ),
+    ]);
+  });
   it("handles parameters", async () => {
     fetchMock.getOnce(
       STRAPI_URL + "/benefits?_start=1&_limit=10&_sort=created_at:asc",

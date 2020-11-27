@@ -1,4 +1,4 @@
-import { ACTION_TYPES } from "../../actionTypes";
+import { ACTION_TYPES } from "../actionTypes";
 
 /**
  * generic action for when a network request is sent in the form of an http call
