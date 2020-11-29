@@ -16,7 +16,7 @@ export function networkReceivedActionCreator(
     type: ACTION_TYPES.NETWORK_RECEIVED,
     resourceType: resourceType,
     requestType: requestType,
-    body: { ...body },
+    body: body,
     timestamp: Date.now(),
   };
 }
