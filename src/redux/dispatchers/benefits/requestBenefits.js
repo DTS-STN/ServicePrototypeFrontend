@@ -62,9 +62,9 @@ async function fetchBenefits(dispatch, start, limit, sort) {
   let data;
 
   // get json if possible otherwise just get text
-  if (response.headers.get("Content-Type") === "application/json") {
+  try {
     data = await response.json();
-  } else {
+  } catch (e) {
     data = await response.text();
   }
 

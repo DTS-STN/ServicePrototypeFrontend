@@ -49,4 +49,5 @@ export const benefitsCount = function (
     default:
       return state;
   }
+  return state;
 };

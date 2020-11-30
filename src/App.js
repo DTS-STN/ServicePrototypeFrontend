@@ -3,6 +3,7 @@ import "./tailwind.output.css";
 import "./icomoon/style.css";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { languageSelector } from "./redux/selectors";
 import Routes from "./router";
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
   let { i18n } = useTranslation();
 
   // state subscription to language
-  const language = useSelector((state) => state.language);
+  const language = useSelector(languageSelector);
 
   // effect to handle language switching based on redux state
   useEffect(() => {
