@@ -5,9 +5,9 @@ import headerLogo from "../../assets/images/sig-blk-en.svg";
 
 export function Header(props) {
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col mt-2 mb-2">
       <div className="w-full flex justify-center">
-        <div className="w-full md:w-2/3 flex justify-between items-center md:items-start mb-2">
+        <div className="w-full md:w-2/3 ml-2 md:ml-0 mr-2 md:mr-0 flex justify-between items-center md:items-start mb-2">
           <img
             className={"w-40 md:w-64"}
             src={headerLogo}
@@ -23,7 +23,7 @@ export function Header(props) {
       <div className="w-full flex justify-center items-center h-10 bg-header-blue">
         <div className="w-full md:w-2/3 flex justify-between items-center">
           <h1
-            className="font-medium text-white ml-2 md:m-0"
+            className="font-medium text-white ml-2 md:m-0 text-3xl"
             style={{
               fontFamily: '"Noto Sans",sans-serif',
             }}

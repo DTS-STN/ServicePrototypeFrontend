@@ -7,7 +7,7 @@ import footerImage from "../../assets/images/wmms-blk.svg";
  */
 export function FooterBox(props) {
   return (
-    <footer className="w-full">
+    <footer className="w-full mt-2">
       <div className="w-full h-40 flex flex-col md:flex-row justify-center items-center bg-footer-blue bg-footer-parliament-image bg-no-repeat bg-right-bottom text-white">
         {props.children}
       </div>

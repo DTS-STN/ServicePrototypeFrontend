@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
 
 // component imports
+import { Page } from "../components/organisms/Page";
 import { PageDescription } from "../components/atoms/PageDescription";
 import { Title } from "../components/atoms/Title";
 import { BenefitGrid } from "../components/organisms/BenefitGrid";
@@ -72,23 +73,21 @@ export function Home() {
   }, [triedFetchedBenefits, isFetchingBenefits, fetchBenefitsFailed]);
 
   return (
-    <div className="font-sans">
-      <div className="m-auto">
+    <Page>
+      <div className="font-sans">
         <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title>
-      </div>
-      <div className="text-2xl m-auto py-6 leading-none">
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>
+        <BenefitGrid
+          benefitMoreInfoButtonText={t("benefitsMoreInformation")}
+          nextPageButtonAriaLabel={t("benefitsNextPage")}
+          previousPageButtonAriaLabel={t("benefitsPreviousPage")}
+          numberOfPages={benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 3)}
+          numberOfRows={1}
+          benefits={benefitsData}
+        />
       </div>
-      <BenefitGrid
-        benefitMoreInfoButtonText={t("benefitsMoreInformation")}
-        nextPageButtonAriaLabel={t("benefitsNextPage")}
-        previousPageButtonAriaLabel={t("benefitsPreviousPage")}
-        numberOfPages={benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 3)}
-        numberOfRows={1}
-        benefits={benefitsData}
-      />
-    </div>
+    </Page>
   );
 }
