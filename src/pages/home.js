@@ -13,6 +13,10 @@ import { Page } from "../components/organisms/Page";
 import { PageDescription } from "../components/atoms/PageDescription";
 import { Title } from "../components/atoms/Title";
 import { BenefitGrid } from "../components/organisms/BenefitGrid";
+import {
+  deselectBenefitActionCreator,
+  selectBenefitActionCreator,
+} from "../redux/actions/benefits";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
@@ -72,6 +76,13 @@ export function Home() {
     }
   }, [triedFetchedBenefits, isFetchingBenefits, fetchBenefitsFailed]);
 
+  // handler for when benefit is selected
+  const onBenefitSelect = (benefitId, selected) => {
+    selected
+      ? dispatch(selectBenefitActionCreator(benefitId))
+      : dispatch(deselectBenefitActionCreator(benefitId));
+  };
+
   return (
     <Page>
       <main className="font-sans">
@@ -89,6 +100,7 @@ export function Home() {
               benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 3)
             }
             numberOfRows={1}
+            onBenefitSelect={onBenefitSelect}
             benefits={benefitsData}
           />
         </section>
