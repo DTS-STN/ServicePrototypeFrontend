@@ -32,11 +32,15 @@ async function fetchBenefitsCount(dispatch) {
   }
 
   // data received and response is good
+  let textData;
   let data;
+
+  // get json if possible otherwise just get text
   try {
-    data = await response.json();
+    textData = await response.text();
+    data = JSON.parse(textData);
   } catch (e) {
-    data = await response.text();
+    data = textData || "";
   }
 
   if (response.ok) {
