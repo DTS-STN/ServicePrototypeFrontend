@@ -72,7 +72,7 @@ export function GridNavBar(props) {
 
   // there are less than or equal to 5 pages
   else if (numberOfPages <= 5) {
-    for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < numberOfPages + 1; i++) {
       pageElements.push(
         <PageNumber
           key={`page-${i}`}

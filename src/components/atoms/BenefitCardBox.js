@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 export function BenefitCardBox(props) {
   return (
     <div
-      className={`flex flex-col w-full md:w-64 lg:w-1/4 rounded-lg shadow pt-5 pb-5 pl-6 pr-6 m-1${
+      className={`flex flex-col flex-grow w-full md:w-64 lg:w-1/4 rounded-lg shadow pt-5 pb-5 pl-6 pr-6 m-1${
         props.dark ? " bg-gray-300" : ""
       }`}
       style={{ height: "300px" }}

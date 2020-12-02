@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "chokidar-cli": "^2.1.0",
+    "cross-fetch": "^3.0.6",
     "husky": "^4.3.0",
     "i18next": "^19.8.2",
     "lint-staged": "^10.4.0",
@@ -24,6 +25,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
     "tailwindcss": "^1.9.5"
   },
   "lint-staged": {
@@ -73,11 +75,13 @@
     "@storybook/node-logger": "^6.0.26",
     "@storybook/preset-create-react-app": "^3.1.4",
     "@storybook/react": "^6.0.26",
-    "@testing-library/react": "^9.5.0",
     "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.1.2",
     "babel-loader": "^8.1.0",
     "cypress": "^5.3.0",
-    "react-is": "^16.13.1"
+    "fetch-mock": "^9.11.0",
+    "react-is": "^16.13.1",
+    "redux-mock-store": "^1.5.4"
   }
 }

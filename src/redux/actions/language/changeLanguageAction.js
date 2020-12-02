@@ -1,13 +1,8 @@
-import { CHANGE_LANGUAGE } from "./actionTypes";
-
-export const LANGUAGES = {
-  EN: "EN",
-  FR: "FR",
-};
+import { ACTION_TYPES } from "../actionTypes";
 
 export const changeLanguageCreator = function (lang) {
   return {
-    type: CHANGE_LANGUAGE,
+    type: ACTION_TYPES.CHANGE_LANGUAGE,
     lang,
   };
 };

@@ -1,7 +1,16 @@
-import { ACTION_TYPES as LANGUAGE_ACTION_TYPES } from "./language";
+// i18n actions
+export { changeLanguageCreator } from "./language";
 
-export const ACTION_TYPES = {
-  ...LANGUAGE_ACTION_TYPES,
-};
+// network actions
+export {
+  networkRequestActionCreator,
+  networkReceivedActionCreator,
+  networkRequestFailedActionCreator,
+} from "./network";
 
-export { LANGUAGES, changeLanguageCreator } from "./language";
+// benefit actions
+export {
+  selectBenefitActionCreator,
+  deselectBenefitActionCreator,
+} from "./benefits";
+export * from "./actionTypes";
