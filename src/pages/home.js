@@ -97,9 +97,9 @@ export function Home() {
             nextPageButtonAriaLabel={t("benefitsNextPage")}
             previousPageButtonAriaLabel={t("benefitsPreviousPage")}
             numberOfPages={
-              benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 3)
+              benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 6)
             }
-            numberOfRows={1}
+            numberOfRows={2}
             onBenefitSelect={onBenefitSelect}
             benefits={benefitsData}
           />
