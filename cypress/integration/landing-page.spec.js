@@ -26,5 +26,16 @@ describe("Items shown on the Landing page", () => {
 
   it("should have a Page description component ", () => {
     cy.get("[data-cy=home-page-description]").should("be.visible");
+    
+  });
+  it("should have an Header for eligible benfits", () => {
+    cy.get('[data-cy=eligibleBenefitsHeader]').should("be.visible", "Benefits that apply to you");
+  });
+
+  it("should have benefits grid and placeholders", () => {
+    cy.get('[data-cy=home-page-benefit-grid]').should("be.visible");
+    cy.get('[data-testid=placeholder-title]').should("be.visible");
+    cy.get('[data-testid=placeholder-tag]').should("be.visible");
+    cy.get('[data-testid=placeholder-description]').should("be.visible");
   });
 });
