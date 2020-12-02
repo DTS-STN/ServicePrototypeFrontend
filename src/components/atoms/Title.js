@@ -6,7 +6,14 @@ import PropTypes from "prop-types";
  */
 
 export function Title(props) {
-  return <h1 data-cy={props.dataCy}>{props.children}</h1>;
+  return (
+    <h1
+      className="w-full text-3xl border-b mt-2 mb-2 border-h1-underline-color"
+      data-cy={props.dataCy}
+    >
+      {props.children}
+    </h1>
+  );
 }
 
 Title.propTypes = {

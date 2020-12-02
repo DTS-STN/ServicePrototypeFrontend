@@ -7,6 +7,7 @@ export const fr = {
   benefitsMoreInformation: "Plus d'information",
   benefitsNextPage: "page suivante des avantages",
   benefitsPreviousPage: "page des avantages précédente",
+  eligibleBenefitsHeader: "Avantages qui s'appliquent à vous",
 
   //links
   departmentAndAgenciesLink: "https://www.canada.ca/fr/gouvernement/min.html",

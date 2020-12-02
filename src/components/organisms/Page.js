@@ -30,11 +30,11 @@ export function Page(props) {
         language={language === "fr" ? "English" : "Français"}
         siteTitle={t("siteTitle")}
       />
-      <div className="w-full md:w-2/3 m-0  md:mr-auto md:ml-auto p-2 md:p-0 flex justify-center items-center">
+      <div className="w-full md:w-2/3 m-0 md:mr-auto md:ml-auto p-4 md:p-0 flex justify-center items-center">
         {props.children}
       </div>
-      // TODO: align footer end
-      <div className="w-full place-self-end">
+
+      <div className="w-full flex flex-col flex-grow justify-end">
         <Footer
           contactLink={t("contactLink")}
           contactText={t("contactText")}

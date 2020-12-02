@@ -5,7 +5,11 @@ import PropTypes from "prop-types";
  * This component displays the discription on the home page
  */
 export function PageDescription(props) {
-  return <p data-cy={props.dataCy}>{props.children}</p>;
+  return (
+    <p className="mt-4 mb-4" data-cy={props.dataCy}>
+      {props.children}
+    </p>
+  );
 }
 
 PageDescription.propTypes = {

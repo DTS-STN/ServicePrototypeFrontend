@@ -40,7 +40,7 @@ export const benefitsData = function (
           data.forEach((value) => {
             if (!newBenefitsMap[value.id]) {
               newBenefitsMap[value.id] = {
-                isEligible: false,
+                isEligible: true,
                 isSelected: false,
               };
             }

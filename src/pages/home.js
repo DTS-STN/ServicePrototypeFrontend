@@ -74,20 +74,25 @@ export function Home() {
 
   return (
     <Page>
-      <div className="font-sans">
+      <main className="font-sans">
         <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title>
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>
-        <BenefitGrid
-          benefitMoreInfoButtonText={t("benefitsMoreInformation")}
-          nextPageButtonAriaLabel={t("benefitsNextPage")}
-          previousPageButtonAriaLabel={t("benefitsPreviousPage")}
-          numberOfPages={benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 3)}
-          numberOfRows={1}
-          benefits={benefitsData}
-        />
-      </div>
+        <section className="border-t border-b pt-2 pb-2">
+          <h2 className="text-3xl mb-2">{t("eligibleBenefitsHeader")}</h2>
+          <BenefitGrid
+            benefitMoreInfoButtonText={t("benefitsMoreInformation")}
+            nextPageButtonAriaLabel={t("benefitsNextPage")}
+            previousPageButtonAriaLabel={t("benefitsPreviousPage")}
+            numberOfPages={
+              benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 3)
+            }
+            numberOfRows={1}
+            benefits={benefitsData}
+          />
+        </section>
+      </main>
     </Page>
   );
 }

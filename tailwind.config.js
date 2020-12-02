@@ -24,6 +24,7 @@ module.exports = {
         "header-blue": "#38414d",
         "footer-blue": "#26374a",
         "footer-white": "#f8f8f8",
+        "h1-underline-color": "#af3c43",
         "canada-ca-link-colour": "#284162",
         // Text Colors
         "text-gray-dk": "#333333",
