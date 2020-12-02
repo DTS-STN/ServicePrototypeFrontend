@@ -15,6 +15,7 @@ export function Header(props) {
           />
           <ActionButton
             invert
+            id={"language-button"}
             text={props.language}
             onClick={props.onLanguageClick}
           />
