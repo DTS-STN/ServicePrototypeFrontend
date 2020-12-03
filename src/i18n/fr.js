@@ -15,10 +15,10 @@ export const fr = {
 
   publicServiceAndMilitaryLink:
     "https://www.canada.ca/fr/gouvernement/fonctionpublique.html",
-  publicServiceAndMilitaryText: "Ministères et organismes",
+  publicServiceAndMilitaryText: "Service public et militaire",
 
   newsLink: "https://www.canada.ca/fr/nouvelles.html",
-  newsText: "Ministères et organismes",
+  newsText: "Nouvelles",
 
   treatiesLawsAndRegulationLink:
     "https://www.canada.ca/fr/gouvernement/systeme/lois.html",

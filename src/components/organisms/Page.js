@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { useTranslation } from "react-i18next";
@@ -74,3 +75,14 @@ export function Page(props) {
     </div>
   );
 }
+
+Page.propTypes = {
+  /**
+   * content that will go into the page
+   */
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
+};
