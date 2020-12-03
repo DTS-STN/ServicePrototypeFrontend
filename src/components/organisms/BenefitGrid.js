@@ -57,7 +57,10 @@ export function BenefitGrid(props) {
       );
     }
     return (
-      <div className="w-full flex flex-col items-center md:items-start">
+      <div
+        className="w-full flex flex-col items-center md:items-start"
+        data-cy={props.dataCy}
+      >
         <div className="flex flex-wrap w-full mb-5">{loadingCards}</div>
         <GridNavBar
           currentPage={currentPage}
@@ -99,7 +102,10 @@ export function BenefitGrid(props) {
   }
 
   return (
-    <div className="w-full flex flex-col items-center md:items-start">
+    <div
+      className="w-full flex flex-col items-center md:items-start"
+      data-cy={props.dataCy}
+    >
       <div className="w-full flex flex-wrap mb-5">{benefitsCards}</div>
       <GridNavBar
         currentPage={currentPage}
@@ -175,4 +181,8 @@ BenefitGrid.propTypes = {
    * optional call back for when a page is clicked
    */
   onPageSelect: PropTypes.func,
+  /**
+   * This is for adding an id for testing in cypress
+   */
+  dataCy: PropTypes.string,
 };
