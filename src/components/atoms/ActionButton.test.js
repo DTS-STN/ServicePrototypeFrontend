@@ -28,9 +28,8 @@ it("renders ActionButton in its withCounter state", () => {
 
 it("renders StartAgainButton in its icon state", () => {
   render(<StartAgain {...StartAgain.args} />);
-  const buttonText = screen.getByText(StartAgain.args.text);
   expect(screen.getByText(StartAgain.args.text)).toBeTruthy();
-
-  const iconLoop = document.getElementsByTagName("span")[0];
-  expect(document.getElementsByTagName("span")[0].classList).toContain("icon-loop2");
+  expect(document.getElementsByTagName("span")[0].classList).toContain(
+    "icon-loop2"
+  );
 });
