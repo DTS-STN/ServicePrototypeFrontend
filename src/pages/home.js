@@ -90,9 +90,13 @@ export function Home() {
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>
-        <section className="border-t border-b pt-2 pb-2">
+        <section
+          className="border-t border-b pt-2 pb-2"
+          data-cy="eligibleBenefitsHeader"
+        >
           <h2 className="text-3xl mb-2">{t("eligibleBenefitsHeader")}</h2>
           <BenefitGrid
+            dataCy={"home-page-benefit-grid"}
             benefitMoreInfoButtonText={t("benefitsMoreInformation")}
             nextPageButtonAriaLabel={t("benefitsNextPage")}
             previousPageButtonAriaLabel={t("benefitsPreviousPage")}
