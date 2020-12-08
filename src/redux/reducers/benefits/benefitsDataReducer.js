@@ -1,6 +1,5 @@
 import { ACTION_TYPES } from "../../actions";
 import { RESOURCE_TYPES } from "../../dispatchers";
-import { benefits } from "./index";
 
 export const benefitsData = function (
   state = {

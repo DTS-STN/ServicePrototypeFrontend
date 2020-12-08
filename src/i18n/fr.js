@@ -49,4 +49,11 @@ export const fr = {
 
   //site title
   siteTitle: "Recherche des avantages",
+
+  //error page
+  somethingWentWrong: "Un problème est survenu :(",
+
+  //404
+  notFound: "(404) Page non trouvée.",
+  pageDoesntExist: "La page suivante n'existe pas",
 };

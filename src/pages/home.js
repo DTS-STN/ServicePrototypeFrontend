@@ -7,16 +7,17 @@ import { useTranslation } from "react-i18next";
 import { benefitsDataSelector } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
+import {
+  deselectBenefitActionCreator,
+  selectBenefitActionCreator,
+} from "../redux/actions/benefits";
 
 // component imports
 import { Page } from "../components/organisms/Page";
 import { PageDescription } from "../components/atoms/PageDescription";
 import { Title } from "../components/atoms/Title";
 import { BenefitGrid } from "../components/organisms/BenefitGrid";
-import {
-  deselectBenefitActionCreator,
-  selectBenefitActionCreator,
-} from "../redux/actions/benefits";
+import { ErrorPage } from "../components/organisms/ErrorPage";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
@@ -37,11 +38,11 @@ export function Home() {
   const fetchBenefitsCountFailed = useSelector(
     (state) => state.benefits.benefitsCount.fetchFailed
   );
-  const fetchBenefitsFailedReason = useSelector(
-    (state) => state.benefits.benefitsData.fetchFailedReason
+  const fetchBenefitsFailedObj = useSelector(
+    (state) => state.benefits.benefitsData.fetchFailedObj
   );
-  const fetchBenefitsCountFailedReason = useSelector(
-    (state) => state.benefits.benefitsCount.fetchFailedReason
+  const fetchBenefitsCountFailedObj = useSelector(
+    (state) => state.benefits.benefitsCount.fetchFailedObj
   );
   const benefitsCount = useSelector(
     (state) => state.benefits.benefitsCount.count
@@ -67,6 +68,7 @@ export function Home() {
     triedFetchedBenefitsCount,
     isFetchingBenefitsCount,
     fetchBenefitsCountFailed,
+    dispatch,
   ]);
 
   useEffect(() => {
@@ -74,7 +76,7 @@ export function Home() {
       dispatch(getBenefits(undefined, undefined, "created_at:asc"));
       setTriedFetchedBenefits(true);
     }
-  }, [triedFetchedBenefits, isFetchingBenefits, fetchBenefitsFailed]);
+  }, [triedFetchedBenefits, isFetchingBenefits, fetchBenefitsFailed, dispatch]);
 
   // handler for when benefit is selected
   const onBenefitSelect = (benefitId, selected) => {
@@ -83,6 +85,18 @@ export function Home() {
       : dispatch(deselectBenefitActionCreator(benefitId));
   };
 
+  if (fetchBenefitsFailed || fetchBenefitsCountFailed) {
+    return (
+      <ErrorPage
+        errorTitle={t("somethingWentWrong")}
+        error={
+          fetchBenefitsFailed
+            ? fetchBenefitsFailedObj
+            : fetchBenefitsCountFailedObj
+        }
+      />
+    );
+  }
   return (
     <Page>
       <main className="font-sans">
