@@ -8,7 +8,11 @@ export function ActionButton(props) {
   return (
     <button
       className={`flex justify-center content-center h-auto w-auto p-1 ${
-        props.rounded ? "rounded-full py-2 px-4" : "rounded-md"
+        props.rounded
+          ? "rounded-full py-2 px-4"
+          : props.notRound
+          ? "rounded-sm"
+          : "rounded-md"
       } shadow-lg ${
         props.invert
           ? "bg-gray-light text-text-gray-dk border border-gray-md hover:bg-bg-gray-dk hover:text-white focus:bg-bg-gray-dk focus:text-white"
@@ -30,6 +34,14 @@ export function ActionButton(props) {
 }
 
 ActionButton.propTypes = {
+  /**
+   * This will add the smallest rd css to the button
+   */
+  notRound: PropTypes.bool,
+  /**
+   * This will add a img inside the button when needed
+   */
+  icon: PropTypes.string,
   /**
    * The text that the button will display
    */
