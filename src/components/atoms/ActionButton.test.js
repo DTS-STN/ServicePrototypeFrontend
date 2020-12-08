@@ -32,5 +32,5 @@ it("renders StartAgainButton in its icon state", () => {
   expect(screen.getByText(StartAgain.args.text)).toBeTruthy();
 
   const iconLoop = document.getElementsByTagName("span")[0];
-  expect(iconLoop.classList).toContain("icon-loop2");
+  expect(document.getElementsByTagName("span")[0].classList).toContain("icon-loop2");
 });
