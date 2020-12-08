@@ -26,6 +26,7 @@ module.exports = {
         "footer-white": "#f8f8f8",
         "h1-underline-color": "#af3c43",
         "canada-ca-link-colour": "#284162",
+        "bg-button-gray": "#4E4E4E",
         // Text Colors
         "text-gray-dk": "#333333",
         "blue-link": "#2b4380",
