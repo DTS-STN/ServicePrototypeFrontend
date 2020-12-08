@@ -31,7 +31,7 @@ WithCounter.args = {
 
 StartAgain.args = {
   notRound: true,
-  className: "bg-bg-button-gray text-white",
+  className: "bg-bg-gray-dk text-white",
   icon: "icon-loop2 my-1 mr-4",
   text: "Start again and clear answers",
 };
