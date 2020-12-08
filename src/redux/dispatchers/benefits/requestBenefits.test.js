@@ -258,7 +258,9 @@ describe("requestBenefits", () => {
         RESOURCE_TYPES.BENEFITS,
         NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.NO_NETWORK,
-        errorObj
+        {
+          message: "Could not connect to CMS to retrieve benefits",
+        }
       ),
     ]);
   });
