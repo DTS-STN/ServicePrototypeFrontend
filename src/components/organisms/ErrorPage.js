@@ -10,7 +10,10 @@ export function ErrorPage(props) {
     <Page>
       <main className="w-full h-full flex flex-col justify-center items-center font-sans">
         <h2 className="text-3xl md:text-6xl">{props.errorTitle}</h2>
-        <pre className="w-full h-auto bg-gray-500 rounded-lg border border-red-400 whitespace-pre-wrap">
+        <pre
+          className="w-full h-auto bg-gray-500 rounded-lg border border-red-400 whitespace-pre-wrap"
+          data-testid="error-message"
+        >
           {typeof props.error === "object"
             ? JSON.stringify(props.error, null, 2)
             : props.error}

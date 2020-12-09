@@ -43,8 +43,6 @@ Primary.args = {
   errorTitle: "Some Error",
   error: {
     error: "error",
-    with: "with",
-    keys: "keys",
   },
 };
 
