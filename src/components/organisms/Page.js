@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { useTranslation } from "react-i18next";
@@ -30,7 +31,7 @@ export function Page(props) {
         language={language === "fr" ? "English" : "Français"}
         siteTitle={t("siteTitle")}
       />
-      <div className="w-full md:w-2/3 m-0 md:mr-auto md:ml-auto p-4 md:p-0 flex justify-center items-center">
+      <div className="w-full h-full md:w-2/3 m-0 md:mr-auto md:ml-auto p-4 md:p-0 flex justify-center">
         {props.children}
       </div>
 
@@ -74,3 +75,14 @@ export function Page(props) {
     </div>
   );
 }
+
+Page.propTypes = {
+  /**
+   * content that will go into the page
+   */
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
+};

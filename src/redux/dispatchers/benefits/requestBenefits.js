@@ -49,12 +49,15 @@ async function fetchBenefits(dispatch, start, limit, sort) {
 
     response = await fetch(STRAPI_URL + url);
   } catch (e) {
+    console.log(e);
     return dispatch(
       networkRequestFailedActionCreator(
         RESOURCE_TYPES.BENEFITS,
         NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.NO_NETWORK,
-        e
+        {
+          message: "Could not connect to CMS to retrieve benefits",
+        }
       )
     );
   }

@@ -15,10 +15,10 @@ export const fr = {
 
   publicServiceAndMilitaryLink:
     "https://www.canada.ca/fr/gouvernement/fonctionpublique.html",
-  publicServiceAndMilitaryText: "Ministères et organismes",
+  publicServiceAndMilitaryText: "Service public et militaire",
 
   newsLink: "https://www.canada.ca/fr/nouvelles.html",
-  newsText: "Ministères et organismes",
+  newsText: "Nouvelles",
 
   treatiesLawsAndRegulationLink:
     "https://www.canada.ca/fr/gouvernement/systeme/lois.html",
@@ -49,4 +49,11 @@ export const fr = {
 
   //site title
   siteTitle: "Recherche des avantages",
+
+  //error page
+  somethingWentWrong: "Un problème est survenu :(",
+
+  //404
+  notFound: "(404) Page non trouvée.",
+  pageDoesntExist: "La page suivante n'existe pas",
 };

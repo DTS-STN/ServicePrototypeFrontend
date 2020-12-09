@@ -78,7 +78,9 @@ describe("requestBenefitsCount", () => {
         RESOURCE_TYPES.BENEFITS_COUNT,
         NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.NO_NETWORK,
-        errorObj
+        {
+          message: "Could not connect to CMS to retrieve benefits count",
+        }
       ),
     ]);
   });
