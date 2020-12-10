@@ -31,7 +31,7 @@ export function Page(props) {
         language={language === "fr" ? "English" : "Français"}
         siteTitle={t("siteTitle")}
       />
-      <div className="w-full h-full md:w-2/3 m-0 md:mr-auto md:ml-auto p-4 md:p-0 flex justify-center">
+      <div className="w-full md:w-2/3 m-0 md:mr-auto md:ml-auto p-4 md:p-0">
         {props.children}
       </div>
 
