@@ -20,7 +20,10 @@ export const benefitsData = function (
 ) {
   switch (action.type) {
     case ACTION_TYPES.NETWORK_REQUEST:
-      if (action.resourceType === RESOURCE_TYPES.BENEFITS) {
+      if (
+        action.resourceType === RESOURCE_TYPES.BENEFITS ||
+        action.resourceType === RESOURCE_TYPES.BENEFIT
+      ) {
         return {
           ...state,
           isFetching: true,
@@ -31,8 +34,14 @@ export const benefitsData = function (
       }
       break;
     case ACTION_TYPES.NETWORK_RECEIVED:
-      if (action.resourceType === RESOURCE_TYPES.BENEFITS) {
-        const data = action.body;
+      if (
+        action.resourceType === RESOURCE_TYPES.BENEFITS ||
+        action.resourceType === RESOURCE_TYPES.BENEFIT
+      ) {
+        let data = action.body;
+        if (action.resourceType === RESOURCE_TYPES.BENEFIT) {
+          data = [data];
+        }
         if (Array.isArray(data) && data.length > 0) {
           let newBenefitsMap = { ...state.benefitsMap };
           let newBenefitsKeyToIdMap = { ...state.benefitsKeyToIdMap };
@@ -63,7 +72,10 @@ export const benefitsData = function (
       }
       break;
     case ACTION_TYPES.NETWORK_REQUEST_FAILED:
-      if (action.resourceType === RESOURCE_TYPES.BENEFITS) {
+      if (
+        action.resourceType === RESOURCE_TYPES.BENEFITS ||
+        action.resourceType === RESOURCE_TYPES.BENEFIT
+      ) {
         return {
           ...state,
           isFetching: false,
