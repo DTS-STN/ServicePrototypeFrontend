@@ -27,7 +27,7 @@ environments:
 releases:
 # servicecanadaprototypefrontend
   - name: servicecanadaprototypefrontend-{{ .Environment.Name }}
-    chart: servicecanadaprototypefrontend/servicecanadaprototypefrontend
+    chart: ../helm/charts/servicecanadaprototypefrontend
     version: 0.0.1
     values:
       - overrides/servicecanadaprototypefrontend.yaml.gotmpl
