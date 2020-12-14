@@ -28,8 +28,9 @@ async function fetchBenefit(dispatch, id) {
       networkRequestFailedActionCreator(
         RESOURCE_TYPES.BENEFIT,
         NETWORK_REQUEST_TYPES.GET,
+        NETWORK_FAILED_REASONS.NO_NETWORK,
         {
-          id: id,
+          message: "Could not connect to CMS to retrieve benefit",
         }
       )
     );
