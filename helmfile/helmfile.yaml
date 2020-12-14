@@ -3,7 +3,7 @@ repositories:
       url: https://helm.dts-stn.com
     # helm-git powered repository: You can treat any Git repository as a charts repository
     - name: experimentalbenefitsfinderfrontend
-      url: git+https://{{ requiredEnv "GITHUB_USER" }}:{{ requiredEnv "GITHUB_TOKEN" }}@github.com/DTS-STN/experimentalbenefitsfinderfrontend@helm/charts?ref=main
+      url: git+https://{{ requiredEnv "GITHUB_USER" }}:{{ requiredEnv "GITHUB_TOKEN" }}@github.com/DTS-STN/serviceprototypefrontend@helm/charts?ref=main
 {{- if or (eq .Environment.Name "prod-blue") (eq .Environment.Name "prod-green") }}    
 context: EsDCDTSRG-K8S
 {{ else }}
@@ -25,17 +25,17 @@ environments:
     prod-green: 
 
 releases:
-# experimentalbenefitsfinderfrontend
-  - name: experimentalbenefitsfinderfrontend-{{ .Environment.Name }}
-    chart: experimentalbenefitsfinderfrontend/experimentalbenefitsfinderfrontend
+# servicecanadaprototypefrontend
+  - name: servicecanadaprototypefrontend-{{ .Environment.Name }}
+    chart: servicecanadaprototypefrontend/servicecanadaprototypefrontend
     version: 0.0.1
     values:
-      - overrides/experimentalbenefitsfinderfrontend.yaml.gotmpl
+      - overrides/servicecanadaprototypefrontend.yaml.gotmpl
     labels:
         category: dts
-        app: experimentalbenefitsfinderfrontend
+        app: servicecanadaprototypefrontend
         tier: server
-    namespace: experimentalbenefitsfinderfrontend-{{ .Environment.Name }}
+    namespace: servicecanadaprototypefrontend-{{ .Environment.Name }}
     installed: true
     wait: false
     force: false

@@ -1,5 +1,5 @@
 image:
-  repository: mtscontainers.azurecr.io/experimentalbenefitsfinderfrontend
+  repository: mtscontainers.azurecr.io/servicecanadaprototypefrontend
   tag: "{{ requiredEnv "DOCKER_TAG" }}" 
   pullPolicy: Always
 
@@ -13,11 +13,11 @@ ingress:
       enabled: true
       hosts:
       {{- if or (eq .Environment.Name "prod-blue") (eq .Environment.Name "prod-green") }}
-          - experimentalbenefitsfinderfrontend.{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN" }}
-          - experimentalbenefitsfinderfrontend.{{ requiredEnv "BASE_DOMAIN" }}
+          - servicecanadaprototypefrontend.{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN" }}
+          - servicecanadaprototypefrontend.{{ requiredEnv "BASE_DOMAIN" }}
       {{ else }}
-          - experimentalbenefitsfinderfrontend-{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN_DEV" }}
-          - experimentalbenefitsfinderfrontend-{{ requiredEnv "BASE_DOMAIN_DEV" }}
+          - servicecanadaprototypefrontend-{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN_DEV" }}
+          - servicecanadaprototypefrontend-{{ requiredEnv "BASE_DOMAIN_DEV" }}
       {{ end }} 
       annotations: {}
       # kubernetes.io/ingress.class: traefik
