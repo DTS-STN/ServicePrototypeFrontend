@@ -20,9 +20,6 @@ describe("requestBenefits", () => {
   let dateTimeSpy;
   beforeEach(() => {
     mockStore = configureMockStore(middlewares);
-  });
-  beforeEach(() => {
-    mockStore = configureMockStore(middlewares);
     dateTimeSpy = jest.spyOn(Date, "now");
     dateTimeSpy.mockImplementation((...args) => {
       return 1590801641073;

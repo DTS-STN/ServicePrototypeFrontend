@@ -12,6 +12,10 @@ import {
   selectBenefitActionCreator,
 } from "../redux/actions/benefits";
 
+//react router
+
+import { useHistory } from "react-router-dom";
+
 // component imports
 import { Page } from "../components/organisms/Page";
 import { PageDescription } from "../components/atoms/PageDescription";
@@ -49,10 +53,16 @@ export function Home() {
   );
   const benefitsData = useSelector(benefitsDataSelector);
 
+  const benefitKeyToId = useSelector(
+    (state) => state.benefits.benefitsData.benefitsKeyToIdMap
+  );
+
   const { t } = useTranslation();
 
   //redux dispatch
   const dispatch = useDispatch();
+
+  const history = useHistory();
 
   // effect to initially fetch count when component mounts
   useEffect(() => {
@@ -83,6 +93,10 @@ export function Home() {
     selected
       ? dispatch(selectBenefitActionCreator(benefitId))
       : dispatch(deselectBenefitActionCreator(benefitId));
+  };
+
+  const onBenefitMoreInfo = (benefitKey) => {
+    history.push(`/benefit/${benefitKeyToId[benefitKey]}`);
   };
 
   if (fetchBenefitsFailed || fetchBenefitsCountFailed) {
@@ -119,6 +133,7 @@ export function Home() {
             }
             numberOfRows={2}
             onBenefitSelect={onBenefitSelect}
+            onMoreInfoClick={onBenefitMoreInfo}
             benefits={benefitsData}
           />
         </section>

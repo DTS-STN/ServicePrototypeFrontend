@@ -1,2 +1,2 @@
 export { languageSelector } from "./language";
-export { benefitsDataSelector } from "./benefits";
+export { benefitsDataSelector, benefitSelectorFactory } from "./benefits";
