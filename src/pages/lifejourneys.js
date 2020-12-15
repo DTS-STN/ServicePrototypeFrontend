@@ -90,6 +90,7 @@ export function LifeJourneyPage() {
     triedFetchLifeJourney,
     isFetchingLifeJourney,
     fetchLifeJourneyFailed,
+    id,
     dispatch,
   ]);
 
