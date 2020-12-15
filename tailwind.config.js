@@ -20,6 +20,8 @@ module.exports = {
         // Background colors
         "gray-light": "#EFEFEF",
         "gray-md": "#CFCFCF",
+        "lifejourney-gray": "#F5F5F5",
+        "lifejourney-gray-hover": "#DAD8D8",
         "bg-gray-dk": "#26374A",
         "header-blue": "#38414d",
         "footer-blue": "#26374a",

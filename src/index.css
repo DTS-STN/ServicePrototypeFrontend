@@ -12,6 +12,27 @@ code {
     monospace;
 }
 
+
+.truncate-4-lines {
+  max-height: 7.2em;
+  line-height: 1.8em;
+  display: block;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  white-space: normal;
+}
+
+.truncate-3-lines-sm {
+  max-height: 3.6em;
+  line-height: 1.2em;
+  display: block;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  white-space: normal;
+}
+
 .loader {
   border-top-color: #3498db;
   -webkit-animation: spinner 1.5s linear infinite;

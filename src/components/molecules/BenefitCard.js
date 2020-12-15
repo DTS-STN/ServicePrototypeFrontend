@@ -35,7 +35,9 @@ export function BenefitCard(props) {
           />
         )}
       </div>
-      <p className="m-auto">{props.benefitDescription}</p>
+      <p className="m-auto truncate-4-lines w-full">
+        {props.benefitDescription}
+      </p>
       <ActionButton
         text={props.moreInfoButtonText}
         rounded={true}
