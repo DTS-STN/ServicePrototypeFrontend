@@ -1,4 +1,5 @@
 # Experimental Benefits Finder Front End
+[![Build Status](https://teamcity.dts-stn.com/app/rest/builds/buildType:(id:Dev_ServiceCanadaPrototypeFrontend_Build)/statusIcon)](https://teamcity.dts-stn.com/viewType.html?buildTypeId=Dev_ServiceCanadaPrototypeFrontend_Build&guest=1)
 
 React front-end application for the experimental benfits finder. 
 
