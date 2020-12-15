@@ -1,13 +1,11 @@
 export const fr = {
-  // home page
-  reactWelcome: "Bienvenue à react",
   pageDescription:
     "Répondez aux questions ci-dessous pour obtenir une liste personnalisée des avantages auxquels vous pourriez être admissible. Les avantages des gouvernements fédéral, provinciaux ou territoriaux, et ne recueille ni ne suit vos renseignements. Plus vous répondrez à de questions, plus votre résultat sera personnalisé.",
-  homePageTitle: "Bienvenue dans l'outil de recherche des avantages",
+  homePageTitle: "Bienvenue dans Service Canada",
   benefitsMoreInformation: "Plus d'information",
   benefitsNextPage: "page suivante des avantages",
   benefitsPreviousPage: "page des avantages précédente",
-  eligibleBenefitsHeader: "Avantages qui s'appliquent à vous",
+  chooseYourTopic: "Choisissez votre sujet",
 
   //links
   departmentAndAgenciesLink: "https://www.canada.ca/fr/gouvernement/min.html",
@@ -48,7 +46,7 @@ export const fr = {
   headerCanadaCaAltText: "Symbol of the Government of Canada",
 
   //site title
-  siteTitle: "Recherche des avantages",
+  siteTitle: "Service Canada",
 
   //error page
   somethingWentWrong: "Un problème est survenu :(",

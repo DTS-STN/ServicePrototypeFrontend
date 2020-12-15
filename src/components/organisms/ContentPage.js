@@ -37,6 +37,7 @@ export function ContentPage(props) {
   return (
     <Page>
       <main className="font-sans">
+        {props.beforeContent}
         <ReactMarkdownWithHTML
           plugins={[gfm]}
           renderers={renders}
@@ -44,6 +45,7 @@ export function ContentPage(props) {
         >
           {props.content}
         </ReactMarkdownWithHTML>
+        {props.afterContent}
       </main>
     </Page>
   );
@@ -51,7 +53,25 @@ export function ContentPage(props) {
 
 ContentPage.propTypes = {
   /**
+   * items before any actual content
+   */
+  beforeContent: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
+
+  /**
    * content in the form of markdown passed as a string
    */
   content: PropTypes.string.isRequired,
+
+  /**
+   * items after any content
+   */
+  afterContent: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
 };

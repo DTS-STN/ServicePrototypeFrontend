@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { benefitSelectorFactory } from "../redux/selectors/benefits";
 import { NETWORK_FAILED_REASONS } from "../redux/actions";
-import { useTranslation } from "react-i18next";
 
 //component imports
 import { ContentPage } from "../components/organisms/ContentPage";
@@ -46,9 +45,6 @@ export function BenefitPage() {
   //redux dispatch
   const dispatch = useDispatch();
 
-  // i18n
-  const { t } = useTranslation();
-
   useEffect(() => {
     if (!triedFetch && !isFetchingBenefits && !fetchBenefitsFailed) {
       dispatch(getBenefit(id));
@@ -60,6 +56,12 @@ export function BenefitPage() {
     if (fetchBenefitsFailedReason === NETWORK_FAILED_REASONS.NOT_FOUND) {
       return <NotFoundPage />;
     }
+    return (
+      <ErrorPage
+        errorTitle={fetchBenefitsFailedReason}
+        error={fetchBenefitsFailedObj}
+      />
+    );
   } else if (!benefitData) {
     return (
       <Page>

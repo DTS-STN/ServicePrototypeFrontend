@@ -1,2 +1,4 @@
-export { benefitsDataSelector } from "./benefitsDataSelectors";
-export { benefitSelectorFactory } from "./benefitsDataSelectors";
+export {
+  benefitsDataSelector,
+  benefitSelectorFactory,
+} from "./benefitsDataSelectors";

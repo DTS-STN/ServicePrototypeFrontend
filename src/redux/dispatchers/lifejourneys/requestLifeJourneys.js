@@ -1,26 +1,27 @@
 import "cross-fetch/polyfill";
 import {
-  networkRequestActionCreator,
   networkReceivedActionCreator,
+  networkRequestActionCreator,
   networkRequestFailedActionCreator,
-  NETWORK_REQUEST_TYPES,
   NETWORK_FAILED_REASONS,
+  NETWORK_REQUEST_TYPES,
 } from "../../actions";
 import { RESOURCE_TYPES } from "../resourceTypes";
 import { STRAPI_URL } from "../../../variables";
 
-async function fetchBenefits(dispatch, start, limit, sort) {
+async function fetchLifeJourneys(dispatch, start, limit, sort) {
   let response;
   try {
     dispatch(
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.LIFE_JOURNEYS,
         NETWORK_REQUEST_TYPES.GET,
         { start, limit, sort }
       )
     );
 
-    let url = "/benefits";
+    let url = "/life-journeys";
+    // TODO: seperate out into utility function, repeated pattern
     let paramBefore = false;
     if (Number.isInteger(start) && start >= 0) {
       url += `?_start=${start}`;
@@ -46,20 +47,21 @@ async function fetchBenefits(dispatch, start, limit, sort) {
       }
       url += `_sort=${sort}`;
     }
-
     response = await fetch(STRAPI_URL + url);
   } catch (e) {
     return dispatch(
       networkRequestFailedActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.LIFE_JOURNEYS,
         NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.NO_NETWORK,
         {
-          message: "Could not connect to CMS to retrieve benefits",
+          message: "Could not connect to CMS to retrieve life journeys",
         }
       )
     );
   }
+
+  // TODO: seperate out into function, repeated pattern
   // data received and response is okay
   let textData;
   let data;
@@ -75,7 +77,7 @@ async function fetchBenefits(dispatch, start, limit, sort) {
   if (response.ok) {
     return dispatch(
       networkReceivedActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.LIFE_JOURNEYS,
         NETWORK_REQUEST_TYPES.GET,
         data
       )
@@ -83,7 +85,7 @@ async function fetchBenefits(dispatch, start, limit, sort) {
   } else {
     return dispatch(
       networkRequestFailedActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.LIFE_JOURNEYS,
         NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS[response.status] ||
           NETWORK_FAILED_REASONS.INTERNAL_SERVER_ERROR,
@@ -94,14 +96,14 @@ async function fetchBenefits(dispatch, start, limit, sort) {
 }
 
 /**
- * dispatch function which gets a list of benefits from the strapi api.
+ * dispatch function which gets a list of life journeys from the strapi api
  * see strapi documentation on parameters
  * https://strapi.io/documentation/v3.x/content-api/parameters.html
  * @param start - the start index
  * @param limit - the limit of how much to return
- * @param sort - how to sort benefits
+ * @param sort - how to sort life journeys
  * @returns {function(*=): Promise<void>}
  */
-export function getBenefits(start, limit, sort) {
-  return (dispatch) => fetchBenefits(dispatch, start, limit, sort);
+export function getLifeJourneys(start, limit, sort) {
+  return (dispatch) => fetchLifeJourneys(dispatch, start, limit, sort);
 }

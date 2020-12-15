@@ -55,6 +55,9 @@ export const benefitsData = function (
             newBenefitsMap[value.id] = {
               ...newBenefitsMap[value.id],
               ...value,
+              life_journeys: value["life_journeys"].map((value) => {
+                return value.id;
+              }),
             };
             newBenefitsKeyToIdMap[value.benefit_key] = value.id;
           });

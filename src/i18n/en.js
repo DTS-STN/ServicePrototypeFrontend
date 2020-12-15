@@ -2,11 +2,11 @@ export const en = {
   // home page
   pageDescription:
     "Answer the questions below to get a customized list of benefits for which you may be eligible. The benefits from federal, provincial or territorial governments, and does not collect or track your information. The more questions you answer, the more customized your result will be.",
-  homePageTitle: "Welcome to the Benefits Finder",
+  homePageTitle: "Welcome to Service Canada",
   benefitsMoreInformation: "More Information",
   benefitsNextPage: "next benefits page",
   benefitsPreviousPage: "previous benefits page",
-  eligibleBenefitsHeader: "Benefits that apply to you",
+  chooseYourTopic: "Choose Your Topic",
 
   //links
   departmentAndAgenciesLink: "https://www.canada.ca/en/government/dept.html",
@@ -47,7 +47,7 @@ export const en = {
   headerCanadaCaAltText: "Symbol of the Government of Canada",
 
   //site title
-  siteTitle: "Benefits Finder",
+  siteTitle: "Service Canada",
 
   //error page
   somethingWentWrong: "Something went wrong :(",

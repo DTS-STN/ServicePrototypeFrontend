@@ -15,7 +15,7 @@ export function LifeJourneyCard(props) {
       data-testid={props.lifeJourneyId + "-lifejourney"}
     >
       <div className="flex-grow p-2">
-        <h3 className="text-xl">{props.lifeJourneyTitle}</h3>
+        <h3>{props.lifeJourneyTitle}</h3>
         <p className="m-1 text-xs truncate-3-lines-sm">
           {props.lifeJourneyDescription}
         </p>
