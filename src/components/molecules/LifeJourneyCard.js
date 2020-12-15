@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 export function LifeJourneyCard(props) {
   return (
     <div
-      className="flex w-64 h-24 bg-lifejourney-gray hover:bg-lifejourney-gray-hover rounded-md"
+      className="flex w-64 h-24 m-2 bg-lifejourney-gray hover:bg-lifejourney-gray-hover rounded-md"
       role="button"
       onClick={() => {
         props.onLifeJourneyClick(props.lifeJourneyId);
