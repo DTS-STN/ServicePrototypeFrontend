@@ -1,6 +1,8 @@
 import React, { createElement } from "react";
 import { Page } from "./Page";
 import ReactMarkdownWithHTML from "react-markdown/with-html";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import PropTypes from "prop-types";
 import gfm from "remark-gfm";
 
@@ -26,6 +28,36 @@ const renders = {
       `h${props.level}`,
       getCoreProps(props),
       props.children
+    );
+  },
+
+  list: (props) => {
+    const attrs = getCoreProps(props);
+    if (
+      props.start !== null &&
+      props.start !== 1 &&
+      props.start !== undefined
+    ) {
+      attrs.start = props.start.toString();
+    }
+
+    return props.ordered ? (
+      <ol {...attrs} className="list-decimal m-6">
+        {props.children}
+      </ol>
+    ) : (
+      <ul {...attrs} className="list-disc m-6">
+        {props.children}
+      </ul>
+    );
+  },
+  code: ({ language, value }) => {
+    return (
+      <SyntaxHighlighter
+        style={atomDark}
+        language={language}
+        children={value}
+      />
     );
   },
 };
