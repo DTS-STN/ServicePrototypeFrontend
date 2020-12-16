@@ -17,6 +17,7 @@ import { Page } from "../components/organisms/Page";
 import { Title } from "../components/atoms/Title";
 import { LifeJourneyGrid } from "../components/organisms/LifeJourneyGrid";
 import { ErrorPage } from "../components/organisms/ErrorPage";
+import { SearchBar } from "../components/molecules/SearchBar";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
@@ -137,6 +138,11 @@ export function Home() {
     <Page>
       <main className="font-sans">
         <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title>
+        <SearchBar
+          text={t("searchBarText")}
+          buttonText={t("searchButtonText")}
+          placeholder={t("textFieldPlaceholder")}
+        />
         <h2 className="text-3xl mb-2">{t("chooseYourTopic")}</h2>
         <LifeJourneyGrid
           lifeJourneys={lifeJourneyData || []}

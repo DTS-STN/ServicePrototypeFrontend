@@ -7,6 +7,9 @@ export const en = {
   benefitsNextPage: "next benefits page",
   benefitsPreviousPage: "previous benefits page",
   chooseYourTopic: "Choose Your Topic",
+  searchBarText: "How can we help you?",
+  searchButtonText: "Search all",
+  textFieldPlaceholder: "Search...",
 
   //links
   departmentAndAgenciesLink: "https://www.canada.ca/en/government/dept.html",

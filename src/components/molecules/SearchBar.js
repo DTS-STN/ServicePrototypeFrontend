@@ -4,18 +4,18 @@ import { ActionButton } from "../atoms/ActionButton";
 
 export function SearchBar(props) {
   return (
-    <div className="flex w-full h-10 items-center bg-gray-300 px-4">
+    <div className="md:flex items-center bg-gray-md p-2 px-4">
       <p className="text-lg">{props.text}</p>
-      <div className="flex ml-6">
+      <div className="md:ml-8 w-auto flex">
         <input
           type="text"
-          placeholder="Search..."
-          className="rounded-l-full text-center"
+          placeholder={props.placeholder}
+          className="md:w-62 lg:w-72 rounded-l-full text-center focus:outline-none"
         />
         <ActionButton
           text={props.buttonText}
           halfRound={true}
-          className="shadow-none bg-gray-200"
+          className="shadow-none bg-gray-light"
         />
       </div>
     </div>
