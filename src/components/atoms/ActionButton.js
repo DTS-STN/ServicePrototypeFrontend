@@ -10,6 +10,8 @@ export function ActionButton(props) {
       className={`flex justify-center content-center h-auto w-auto p-1 ${
         props.rounded
           ? "rounded-full py-2 px-4"
+          : props.halfRound
+          ? "rounded-r-full"
           : props.notRound
           ? "rounded-sm"
           : "rounded-md"

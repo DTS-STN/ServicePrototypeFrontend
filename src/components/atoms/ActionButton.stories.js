@@ -11,6 +11,7 @@ const Template = (args) => <ActionButton {...args} />;
 
 export const Primary = Template.bind({});
 export const Rounded = Template.bind({});
+export const SearchButton = Template.bind({});
 export const WithCounter = Template.bind({});
 export const StartAgain = Template.bind({});
 
@@ -34,4 +35,9 @@ StartAgain.args = {
   className: "bg-bg-gray-dk text-white",
   icon: "icon-loop2 my-1 mr-4",
   text: "Start again and clear answers",
+};
+
+SearchButton.args = {
+  halfRound: true,
+  text: "Search all",
 };
