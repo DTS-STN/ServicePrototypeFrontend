@@ -2,7 +2,7 @@ import React, { createElement } from "react";
 import { Page } from "./Page";
 import ReactMarkdownWithHTML from "react-markdown/with-html";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import PropTypes from "prop-types";
 import gfm from "remark-gfm";
 
@@ -53,7 +53,11 @@ const renders = {
   },
   code: ({ language, value }) => {
     return (
-      <SyntaxHighlighter style={dark} language={language} children={value} />
+      <SyntaxHighlighter
+        style={atomDark}
+        language={language}
+        children={value}
+      />
     );
   },
 };
