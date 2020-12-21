@@ -31,6 +31,9 @@ export function ActionButton(props) {
       ) : undefined}
       {props.text}
       {props.children}
+      {props.icon2 ? (
+        <span className={props.icon2} data-testid={props.dataTestId} />
+      ) : undefined}
     </button>
   );
 }

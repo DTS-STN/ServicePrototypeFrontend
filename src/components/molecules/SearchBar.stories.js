@@ -13,4 +13,6 @@ export const Primary = Template.bind({});
 Primary.args = {
   text: "How can we help you?",
   buttonText: "Search all",
+  placeholder: "Search...",
+  icon: "icon-search",
 };
