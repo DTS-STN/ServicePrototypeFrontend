@@ -1,8 +1,13 @@
-# Experimental Benefits Finder Front End
+# Service Canada Prototype Frontend
+[![Build Status](https://teamcity.dts-stn.com/app/rest/builds/buildType:(id:Dev_ServiceCanadaPrototypeFrontend_Build)/statusIcon)](https://teamcity.dts-stn.com/viewType.html?buildTypeId=Dev_ServiceCanadaPrototypeFrontend_Build&guest=1)
+[![StoryBooks](https://raw.githubusercontent.com/storybookjs/brand/master/badge/badge-storybook.svg)](https://dts-stn.github.io/ServicePrototypeFrontend)
+[![tailwind version](https://img.shields.io/badge/tailwind-1.9.0-9cf)](https://v1.tailwindcss.com/docs)
+[![link](https://img.shields.io/badge/link-%F0%9F%94%97-brightgreen)](https://servicecanadaprototypefrontend-main.dev.dts-stn.com/)
 
-React front-end application for the experimental benfits finder. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project contains the source code for the React front end as part of the UXAP BDM prototyping project at ESDC. 
+
+This project was bootstrapped using a tool called [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -31,42 +36,35 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject` DO NOT RUN THIS
+### `npm run storybook`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Launches the storybook tool that is used for component documentation.<br />
+Open [http://localhost:6006](http://localhost:6006) to view it in the browser.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The page will reload if you make edits.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### `npm run lint`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Runs the prettier linter to lint all js, jsx, ts, tsx, json and markdown files within the src folder.
+
+
+### `npm run cypress:open`
+
+Opens the UI for the end to end testing tool Cypress. A menu should appear displaying the regression suites that can be run.
+
+### `npm run cypress:test`
+
+Runs the cypress end to end testing tool for all regressions in the console.
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You can learn more about the create-react-app tool here [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+To learn Storybooks component documentation see here [Storybooks documentation](
+https://storybook.js.org/docs/react/get-started/introduction
+)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+To learn about Cypress end to end testing see here [Cypress Documentation](https://docs.cypress.io/guides/overview/why-cypress.html)
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
