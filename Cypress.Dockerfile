@@ -1,4 +1,4 @@
-FROM cypress/included:3.4.0 
+FROM cypress/included:6.2.0 
 
 ADD ./ /web 
 WORKDIR /web 
