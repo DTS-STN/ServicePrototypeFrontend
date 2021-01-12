@@ -30,14 +30,14 @@ export const fr = {
     "https://www.canada.ca/fr/gouvernement/systeme/comment-gouvernement-fonctionne.html",
   howGovernmentWorksText: "Comment le gouvernement fonctionne",
 
-  contentLink: "https://www.canada.ca/en/contact.html",
-  contactText: "Contact information",
+  contentLink: "https://www.canada.ca/fr/contact.html",
+  contactText: "Coordonnées",
 
-  termsAndConditionsLink: "https://www.canada.ca/en/transparency/terms.html",
-  termsAndConditionsText: "Terms and conditions",
+  termsAndConditionsLink: "https://canada.ca/fr/transparence/avis.html",
+  termsAndConditionsText: "Avis",
 
-  privacyLink: "https://www.canada.ca/en/transparency/privacy.html",
-  privacyText: "Privacy",
+  privacyLink: "https://canada.ca/fr/transparence/confidentialite.html",
+  privacyText: "Politique de confidentialité",
 
   //footer logo alt text
   footerCanadaCaAltText: "Symbol of the Government of Canada",
