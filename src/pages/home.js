@@ -16,7 +16,7 @@ import { useHistory } from "react-router-dom";
 import { Page } from "../components/organisms/Page";
 import { Title } from "../components/atoms/Title";
 import { LifeJourneyGrid } from "../components/organisms/LifeJourneyGrid";
-import { ErrorPage } from "../components/organisms/ErrorPage";
+// import { ErrorPage } from "../components/organisms/ErrorPage";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
@@ -39,12 +39,16 @@ export function Home() {
   const fetchBenefitsCountFailed = useSelector(
     (state) => state.benefits.benefitsCount.fetchFailed
   );
-  const fetchBenefitsFailedObj = useSelector(
-    (state) => state.benefits.benefitsData.fetchFailedObj
-  );
-  const fetchBenefitsCountFailedObj = useSelector(
-    (state) => state.benefits.benefitsCount.fetchFailedObj
-  );
+
+  //  TODO  un comment the code below after changing the strapi address to
+  //         https://benefit-service-dev.dev.dts-stn.com/benefits
+
+  // const fetchBenefitsFailedObj = useSelector(
+  //   (state) => state.benefits.benefitsData.fetchFailedObj
+  // );
+  // const fetchBenefitsCountFailedObj = useSelector(
+  //   (state) => state.benefits.benefitsCount.fetchFailedObj
+  // );
 
   const isFetchingLifeJourneys = useSelector(
     (state) => state.lifejourneys.lifeJourneysData.isFetching
@@ -54,9 +58,9 @@ export function Home() {
     (state) => state.lifejourneys.lifeJourneysData.fetchFailed
   );
 
-  const fetchLifeJourneysFailedObj = useSelector(
-    (state) => state.lifejourneys.lifeJourneysData.fetchFailedObj
-  );
+  // const fetchLifeJourneysFailedObj = useSelector(
+  //   (state) => state.lifejourneys.lifeJourneysData.fetchFailedObj
+  // );
 
   const lifeJourneyData = useSelector(lifeJourneysDataSelector);
   const lifeJourneyKeyToId = useSelector(
@@ -110,24 +114,24 @@ export function Home() {
     }
   }, [triedFetchedBenefits, isFetchingBenefits, fetchBenefitsFailed, dispatch]);
 
-  if (
-    fetchBenefitsFailed ||
-    fetchBenefitsCountFailed ||
-    fetchLifeJourneysFailed
-  ) {
-    return (
-      <ErrorPage
-        errorTitle={t("somethingWentWrong")}
-        error={
-          fetchBenefitsFailed
-            ? fetchBenefitsFailedObj
-            : fetchBenefitsCountFailedObj
-            ? fetchBenefitsCountFailedObj
-            : fetchLifeJourneysFailedObj
-        }
-      />
-    );
-  }
+  // if (
+  //   fetchBenefitsFailed ||
+  //   fetchBenefitsCountFailed ||
+  //   fetchLifeJourneysFailed
+  // ) {
+  //   return (
+  //     <ErrorPage
+  //       errorTitle={t("somethingWentWrong")}
+  //       error={
+  //         fetchBenefitsFailed
+  //           ? fetchBenefitsFailedObj
+  //           : fetchBenefitsCountFailedObj
+  //           ? fetchBenefitsCountFailedObj
+  //           : fetchLifeJourneysFailedObj
+  //       }
+  //     />
+  //   );
+  // }
 
   const onLifeJourneyClick = (id) => {
     history.push(`/lifejourney/${lifeJourneyKeyToId[id]}`);
