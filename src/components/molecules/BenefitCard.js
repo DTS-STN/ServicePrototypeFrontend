@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ActionButton } from "../atoms/ActionButton";
 import { BenefitCardBox } from "../atoms/BenefitCardBox";
-import { CheckBox } from "../atoms/CheckBox";
 
 /**
  * Benefits card that users can use to see preliminarily information on the benefit.
@@ -11,9 +10,9 @@ import { CheckBox } from "../atoms/CheckBox";
  */
 export function BenefitCard(props) {
   // event handler for checkbox
-  function handleSelect(e) {
+  /*function handleSelect(e) {
     props.onBenefitSelect(props.benefitId, e);
-  }
+  }*/
   function handleClick() {
     props.onMoreInfoClick(props.benefitId);
   }
@@ -27,13 +26,6 @@ export function BenefitCard(props) {
           <h3 className="text-l">{props.benefitTitle}</h3>
           {props.benefitTag ? <small>{props.benefitTag}</small> : undefined}
         </div>
-        {props.isEligible === false ? undefined : (
-          <CheckBox
-            checked={props.isSelected === true}
-            ariaLabel={props.checkBoxAriaLabelBy}
-            onChange={handleSelect}
-          />
-        )}
       </div>
       <p className="m-auto truncate-4-lines w-full">
         {props.benefitDescription}
@@ -68,11 +60,6 @@ BenefitCard.propTypes = {
    * More info button text
    */
   moreInfoButtonText: PropTypes.string.isRequired,
-
-  /**
-   * checkbox aria-label
-   */
-  checkBoxAriaLabelBy: PropTypes.string.isRequired,
 
   /**
    * benefit tag
