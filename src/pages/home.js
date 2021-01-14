@@ -4,18 +4,24 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 // redux imports
-import { lifeJourneysDataSelector } from "../redux/selectors";
+import { benefitsDataSelector } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
-import { getLifeJourneys } from "../redux/dispatchers/lifejourneys";
+import {
+  deselectBenefitActionCreator,
+  selectBenefitActionCreator,
+} from "../redux/actions/benefits";
+
 //react router
 
 import { useHistory } from "react-router-dom";
 
 // component imports
 import { Page } from "../components/organisms/Page";
+import { PageDescription } from "../components/atoms/PageDescription";
 import { Title } from "../components/atoms/Title";
-import { LifeJourneyGrid } from "../components/organisms/LifeJourneyGrid";
+import { BenefitGrid } from "../components/organisms/BenefitGrid";
+import { BenefitsCounter } from "../components/atoms/BenefitsCounter";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 
 export function Home() {
@@ -23,8 +29,6 @@ export function Home() {
     false
   );
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
-
-  const [triedFetchLifeJourneys, setTriedFetchLifeJourneys] = useState(false);
 
   // benefit redux subscriptions
   const isFetchingBenefits = useSelector(
@@ -45,22 +49,13 @@ export function Home() {
   const fetchBenefitsCountFailedObj = useSelector(
     (state) => state.benefits.benefitsCount.fetchFailedObj
   );
-
-  const isFetchingLifeJourneys = useSelector(
-    (state) => state.lifejourneys.lifeJourneysData.isFetching
+  const benefitsCount = useSelector(
+    (state) => state.benefits.benefitsCount.count
   );
+  const benefitsData = useSelector(benefitsDataSelector);
 
-  const fetchLifeJourneysFailed = useSelector(
-    (state) => state.lifejourneys.lifeJourneysData.fetchFailed
-  );
-
-  const fetchLifeJourneysFailedObj = useSelector(
-    (state) => state.lifejourneys.lifeJourneysData.fetchFailedObj
-  );
-
-  const lifeJourneyData = useSelector(lifeJourneysDataSelector);
-  const lifeJourneyKeyToId = useSelector(
-    (state) => state.lifejourneys.lifeJourneysData.lifeJourneysKeyToIdMap
+  const benefitKeyToId = useSelector(
+    (state) => state.benefits.benefitsData.benefitsKeyToIdMap
   );
 
   const { t } = useTranslation();
@@ -69,22 +64,6 @@ export function Home() {
   const dispatch = useDispatch();
 
   const history = useHistory();
-
-  useEffect(() => {
-    if (
-      !triedFetchLifeJourneys &&
-      !isFetchingLifeJourneys &&
-      !fetchLifeJourneysFailed
-    ) {
-      dispatch(getLifeJourneys());
-      setTriedFetchLifeJourneys(true);
-    }
-  }, [
-    triedFetchLifeJourneys,
-    isFetchingLifeJourneys,
-    fetchLifeJourneysFailed,
-    dispatch,
-  ]);
 
   // effect to initially fetch count when component mounts
   useEffect(() => {
@@ -110,11 +89,18 @@ export function Home() {
     }
   }, [triedFetchedBenefits, isFetchingBenefits, fetchBenefitsFailed, dispatch]);
 
-  if (
-    fetchBenefitsFailed ||
-    fetchBenefitsCountFailed ||
-    fetchLifeJourneysFailed
-  ) {
+  // handler for when benefit is selected
+  const onBenefitSelect = (benefitId, selected) => {
+    selected
+      ? dispatch(selectBenefitActionCreator(benefitId))
+      : dispatch(deselectBenefitActionCreator(benefitId));
+  };
+
+  const onBenefitMoreInfo = (benefitKey) => {
+    history.push(`/benefit/${benefitKeyToId[benefitKey]}`);
+  };
+
+  if (fetchBenefitsFailed || fetchBenefitsCountFailed) {
     return (
       <ErrorPage
         errorTitle={t("somethingWentWrong")}
@@ -122,26 +108,44 @@ export function Home() {
           fetchBenefitsFailed
             ? fetchBenefitsFailedObj
             : fetchBenefitsCountFailedObj
-            ? fetchBenefitsCountFailedObj
-            : fetchLifeJourneysFailedObj
         }
       />
     );
   }
-
-  const onLifeJourneyClick = (id) => {
-    history.push(`/lifejourney/${lifeJourneyKeyToId[id]}`);
-  };
-
   return (
     <Page>
       <main className="font-sans">
         <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title>
-        <h2 className="text-3xl mb-2">{t("chooseYourTopic")}</h2>
-        <LifeJourneyGrid
-          lifeJourneys={lifeJourneyData || []}
-          onLifeJourneyClick={onLifeJourneyClick}
-        />
+        <PageDescription dataCy={"home-page-description"}>
+          {t("pageDescription")}
+        </PageDescription>
+        <section className="flex mb-12">
+          <BenefitsCounter
+            dataCy={"home-page-benefit-counter"}
+            className="text-center m-auto mr-0 px-6"
+            counter={benefitsCount}
+            text={t("totalBenefits")}
+          />
+        </section>
+        <section
+          className="border-t border-b pt-2 pb-2"
+          data-cy="eligibleBenefitsHeader"
+        >
+          <h2 className="text-3xl mb-2">{t("eligibleBenefitsHeader")}</h2>
+          <BenefitGrid
+            dataCy={"home-page-benefit-grid"}
+            benefitMoreInfoButtonText={t("benefitsMoreInformation")}
+            nextPageButtonAriaLabel={t("benefitsNextPage")}
+            previousPageButtonAriaLabel={t("benefitsPreviousPage")}
+            numberOfPages={
+              benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 6)
+            }
+            numberOfRows={2}
+            onBenefitSelect={onBenefitSelect}
+            onMoreInfoClick={onBenefitMoreInfo}
+            benefits={benefitsData}
+          />
+        </section>
       </main>
     </Page>
   );
