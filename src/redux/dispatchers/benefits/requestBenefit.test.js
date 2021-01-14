@@ -10,7 +10,7 @@ import {
 } from "../../actions";
 import { RESOURCE_TYPES } from "../resourceTypes";
 import thunk from "redux-thunk";
-import { STRAPI_URL } from "../../../variables";
+import { BENEFITSERVICE_URL } from "../../../variables";
 import { getBenefit } from "./requestBenefit";
 
 const middlewares = [thunk];
@@ -31,7 +31,7 @@ describe("requestBenefit", () => {
   });
 
   it("fetches benefit and dispatches the correct action", async () => {
-    fetchMock.getOnce(STRAPI_URL + "/benefits/1", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits/1", {
       status: 200,
       body: {
         id: 1,
@@ -119,7 +119,7 @@ describe("requestBenefit", () => {
 
   it("handles fetch throwing an error due to no network", async () => {
     let errorObj = new Error("no network");
-    fetchMock.getOnce(STRAPI_URL + "/benefits/1", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits/1", {
       throws: errorObj,
       headers: {
         "Content-Type": "application/json",

@@ -1,10 +1,18 @@
 export const ENVIRONMENT = process.env.NODE_ENV;
 
-// strapi_url
-let strapi_env_url = process.env.REACT_APP_STRAPI_BASE_URL;
+// BENEFITSERVICE_URL
+let benefitservice_env_url = process.env.REACT_APP_BENEFITSERVICE_BASE_URL;
 
-if (!strapi_env_url && ENVIRONMENT !== "production") {
-  strapi_env_url = "http://localhost:1337";
+if (!benefitservice_env_url && ENVIRONMENT !== "production") {
+  benefitservice_env_url = "http://localhost:1337";
 }
 
-export const STRAPI_URL = strapi_env_url;
+export const BENEFITSERVICE_URL = benefitservice_env_url;
+
+// let benefitservice_env_url = process.env.REACT_APP_BENEFITSERVICE_BASE_URL;
+
+// if (!benefitservice_env_url && ENVIRONMENT !== "production") {
+//   benefitservice_env_url = "http://localhost:1337";
+// }
+
+// export const BENEFITSERVICE_URL = benefitservice_env_url;
