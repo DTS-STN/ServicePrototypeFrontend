@@ -4,9 +4,9 @@ import Keycloak from "keycloak-js";
 // Pass initialization options as required  TODO
 
 const keycloak = new Keycloak({
-  // url: 'http://localhost:8080/auth',
-  // realm: 'Test',
-  // clientId: 'react-test',
+  url: "https://keycloak.dev.dts-stn.com/auth",
+  realm: "benefit-service-dev",
+  clientId: "benefit-service-frontend",
 });
 
 export default keycloak;

@@ -14,7 +14,7 @@ export function Login(props) {
         id="login"
         text={props.text}
         onClick={handleClick}
-        dataTestId="loginIcon"
+        dataTestId="loginButton"
       />
     </div>
   );

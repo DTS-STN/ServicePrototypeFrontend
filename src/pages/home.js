@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 // i18n imports
 import { useTranslation } from "react-i18next";
@@ -14,9 +14,13 @@ import { useHistory } from "react-router-dom";
 
 // component imports
 import { Page } from "../components/organisms/Page";
-import { Title } from "../components/atoms/Title";
+//import { Title } from "../components/atoms/Title";
+import { TitleUserLogout } from "../components/molecules/TitleUserLogout";
 import { LifeJourneyGrid } from "../components/organisms/LifeJourneyGrid";
 // import { ErrorPage } from "../components/organisms/ErrorPage";
+
+import { Login } from "../components/molecules/Login";
+import { useKeycloak } from "@react-keycloak/web";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
@@ -137,11 +141,53 @@ export function Home() {
     history.push(`/lifejourney/${lifeJourneyKeyToId[id]}`);
   };
 
+  const { keycloak } = useKeycloak();
+  const loginOnClick = useCallback(() => {
+    keycloak.login();
+  }, [keycloak]);
+
   return (
     <Page>
       <main className="font-sans">
-        <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title>
+        {/* <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title> */}
+
+        <TitleUserLogout
+          titleChildren={t("homePageTitle")}
+          titleDataCy={"home-page-title"}
+          isAuthenticated={keycloak.authenticated}
+          userName={`${
+            keycloak.authenticated
+              ? "Token : " + keycloak.idTokenParsed.name
+              : ""
+          }`}
+          logoutText={t("Logout")}
+          onClick={() => keycloak.logout()}
+        />
+
         <h2 className="text-3xl mb-2">{t("chooseYourTopic")}</h2>
+
+        <Login text="Login" onClick={loginOnClick} />
+
+        <div className="mt-10">
+          <p>
+            {`User is ${!keycloak.authenticated ? "NOT " : ""}authenticated`}
+          </p>
+        </div>
+
+        <div className="mt-10 mb-10">
+          <p>
+            {`${
+              keycloak.authenticated
+                ? "Token : " + keycloak.idTokenParsed.name
+                : ""
+            }`}
+          </p>
+        </div>
+
+        {!!keycloak.authenticated && (
+          <Login text="Logout" onClick={() => keycloak.logout()} />
+        )}
+
         <LifeJourneyGrid
           lifeJourneys={lifeJourneyData || []}
           onLifeJourneyClick={onLifeJourneyClick}
