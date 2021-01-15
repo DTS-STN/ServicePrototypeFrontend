@@ -7,7 +7,7 @@ import {
   NETWORK_FAILED_REASONS,
 } from "../../actions";
 import { RESOURCE_TYPES } from "../resourceTypes";
-import { STRAPI_URL } from "../../../variables";
+import { BENEFITSERVICE_URL } from "../../../variables";
 
 async function fetchLifeJourney(dispatch, id) {
   let response;
@@ -21,7 +21,7 @@ async function fetchLifeJourney(dispatch, id) {
         }
       )
     );
-    response = await fetch(STRAPI_URL + `/life-journeys/${id}`);
+    response = await fetch(BENEFITSERVICE_URL + `/life-journeys/${id}`);
   } catch (e) {
     return dispatch(
       networkRequestFailedActionCreator(

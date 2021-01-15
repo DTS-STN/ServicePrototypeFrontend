@@ -10,7 +10,7 @@ import {
 } from "../../actions";
 import { RESOURCE_TYPES } from "../resourceTypes";
 import thunk from "redux-thunk";
-import { STRAPI_URL } from "../../../variables";
+import { BENEFITSERVICE_URL } from "../../../variables";
 import { getBenefits } from "./requestBenefits";
 
 const middlewares = [thunk];
@@ -31,7 +31,7 @@ describe("requestBenefits", () => {
   });
 
   it("fetches benefits and dispatches the correct actions", async () => {
-    fetchMock.getOnce(STRAPI_URL + "/benefits", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits", {
       status: 200,
       body: [
         {
@@ -235,7 +235,7 @@ describe("requestBenefits", () => {
   });
   it("handles fetch throwing an error due to no network", async () => {
     let errorObj = new Error("no network");
-    fetchMock.getOnce(STRAPI_URL + "/benefits", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits", {
       throws: errorObj,
       headers: {
         "Content-Type": "application/json",
@@ -263,7 +263,7 @@ describe("requestBenefits", () => {
   });
   it("handles parameters", async () => {
     fetchMock.getOnce(
-      STRAPI_URL + "/benefits?_start=1&_limit=10&_sort=created_at:asc",
+      BENEFITSERVICE_URL + "/benefits?_start=1&_limit=10&_sort=created_at:asc",
       {
         status: 200,
         body: [
@@ -470,11 +470,11 @@ describe("requestBenefits", () => {
 
     expect(store.getActions()).toEqual(expectedActions);
     expect(fetchMock.calls()[0][0]).toBe(
-      STRAPI_URL + "/benefits?_start=1&_limit=10&_sort=created_at:asc"
+      BENEFITSERVICE_URL + "/benefits?_start=1&_limit=10&_sort=created_at:asc"
     );
   });
   it("handles 400 response from api and dispatches the correct actions", async () => {
-    fetchMock.getOnce(STRAPI_URL + "/benefits", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits", {
       status: 400,
       body: {
         some: "message",
@@ -506,7 +506,7 @@ describe("requestBenefits", () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
   it("handles 404 response from api and dispatches the correct actions", async () => {
-    fetchMock.getOnce(STRAPI_URL + "/benefits", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits", {
       status: 404,
       body: {
         some: "message",
@@ -538,7 +538,7 @@ describe("requestBenefits", () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
   it("handles 500 response from api and dispatches the correct actions", async () => {
-    fetchMock.getOnce(STRAPI_URL + "/benefits", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits", {
       status: 500,
       body: {
         some: "message",
@@ -570,7 +570,7 @@ describe("requestBenefits", () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
   it("handles non application/json mime types", async () => {
-    fetchMock.getOnce(STRAPI_URL + "/benefits", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits", {
       status: 500,
       body: "some message",
     });
