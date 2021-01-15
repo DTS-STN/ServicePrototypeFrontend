@@ -4,21 +4,31 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 // redux imports
+import { benefitsDataSelector } from "../redux/selectors";
 import { lifeJourneysDataSelector } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
 import { getLifeJourneys } from "../redux/dispatchers/lifejourneys";
+import {
+  deselectBenefitActionCreator,
+  selectBenefitActionCreator,
+} from "../redux/actions/benefits";
+
 //react router
 
 import { useHistory } from "react-router-dom";
 
 // component imports
 import { Page } from "../components/organisms/Page";
+import { PageDescription } from "../components/atoms/PageDescription";
 //import { Title } from "../components/atoms/Title";
-import { TitleUserLogout } from "../components/molecules/TitleUserLogout";
-import { LifeJourneyGrid } from "../components/organisms/LifeJourneyGrid";
-// import { ErrorPage } from "../components/organisms/ErrorPage";
+import { BenefitGrid } from "../components/organisms/BenefitGrid";
+import { BenefitsCounter } from "../components/atoms/BenefitsCounter";
 
+import { LifeJourneyGrid } from "../components/organisms/LifeJourneyGrid";
+import { ErrorPage } from "../components/organisms/ErrorPage";
+
+import { TitleUserLogout } from "../components/molecules/TitleUserLogout";
 import { Login } from "../components/molecules/Login";
 import { useKeycloak } from "@react-keycloak/web";
 
@@ -29,6 +39,12 @@ export function Home() {
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
 
   const [triedFetchLifeJourneys, setTriedFetchLifeJourneys] = useState(false);
+
+  // Keycloak Services
+  const { keycloak } = useKeycloak();
+  const loginOnClick = useCallback(() => {
+    keycloak.login();
+  }, [keycloak]);
 
   // benefit redux subscriptions
   const isFetchingBenefits = useSelector(
@@ -44,15 +60,20 @@ export function Home() {
     (state) => state.benefits.benefitsCount.fetchFailed
   );
 
-  //  TODO  un comment the code below after changing the strapi address to
-  //         https://benefit-service-dev.dev.dts-stn.com/benefits
+  const fetchBenefitsFailedObj = useSelector(
+    (state) => state.benefits.benefitsData.fetchFailedObj
+  );
+  const fetchBenefitsCountFailedObj = useSelector(
+    (state) => state.benefits.benefitsCount.fetchFailedObj
+  );
+  const benefitsCount = useSelector(
+    (state) => state.benefits.benefitsCount.count
+  );
+  const benefitsData = useSelector(benefitsDataSelector);
 
-  // const fetchBenefitsFailedObj = useSelector(
-  //   (state) => state.benefits.benefitsData.fetchFailedObj
-  // );
-  // const fetchBenefitsCountFailedObj = useSelector(
-  //   (state) => state.benefits.benefitsCount.fetchFailedObj
-  // );
+  const benefitKeyToId = useSelector(
+    (state) => state.benefits.benefitsData.benefitsKeyToIdMap
+  );
 
   const isFetchingLifeJourneys = useSelector(
     (state) => state.lifejourneys.lifeJourneysData.isFetching
@@ -62,9 +83,9 @@ export function Home() {
     (state) => state.lifejourneys.lifeJourneysData.fetchFailed
   );
 
-  // const fetchLifeJourneysFailedObj = useSelector(
-  //   (state) => state.lifejourneys.lifeJourneysData.fetchFailedObj
-  // );
+  const fetchLifeJourneysFailedObj = useSelector(
+    (state) => state.lifejourneys.lifeJourneysData.fetchFailedObj
+  );
 
   const lifeJourneyData = useSelector(lifeJourneysDataSelector);
   const lifeJourneyKeyToId = useSelector(
@@ -118,33 +139,39 @@ export function Home() {
     }
   }, [triedFetchedBenefits, isFetchingBenefits, fetchBenefitsFailed, dispatch]);
 
-  // if (
-  //   fetchBenefitsFailed ||
-  //   fetchBenefitsCountFailed ||
-  //   fetchLifeJourneysFailed
-  // ) {
-  //   return (
-  //     <ErrorPage
-  //       errorTitle={t("somethingWentWrong")}
-  //       error={
-  //         fetchBenefitsFailed
-  //           ? fetchBenefitsFailedObj
-  //           : fetchBenefitsCountFailedObj
-  //           ? fetchBenefitsCountFailedObj
-  //           : fetchLifeJourneysFailedObj
-  //       }
-  //     />
-  //   );
-  // }
+  // handler for when benefit is selected
+  const onBenefitSelect = (benefitId, selected) => {
+    selected
+      ? dispatch(selectBenefitActionCreator(benefitId))
+      : dispatch(deselectBenefitActionCreator(benefitId));
+  };
+
+  const onBenefitMoreInfo = (benefitKey) => {
+    history.push(`/benefit/${benefitKeyToId[benefitKey]}`);
+  };
+
+  if (
+    fetchBenefitsFailed ||
+    fetchBenefitsCountFailed ||
+    fetchLifeJourneysFailed
+  ) {
+    return (
+      <ErrorPage
+        errorTitle={t("somethingWentWrong")}
+        error={
+          fetchBenefitsFailed
+            ? fetchBenefitsFailedObj
+            : fetchBenefitsCountFailedObj
+            ? fetchBenefitsCountFailedObj
+            : fetchLifeJourneysFailedObj
+        }
+      />
+    );
+  }
 
   const onLifeJourneyClick = (id) => {
     history.push(`/lifejourney/${lifeJourneyKeyToId[id]}`);
   };
-
-  const { keycloak } = useKeycloak();
-  const loginOnClick = useCallback(() => {
-    keycloak.login();
-  }, [keycloak]);
 
   return (
     <Page>
@@ -156,42 +183,55 @@ export function Home() {
           titleDataCy={"home-page-title"}
           isAuthenticated={keycloak.authenticated}
           userName={`${
-            keycloak.authenticated
-              ? "Token : " + keycloak.idTokenParsed.name
-              : ""
+            keycloak.authenticated ? keycloak.idTokenParsed.name : ""
           }`}
           logoutText={t("Logout")}
           onClick={() => keycloak.logout()}
         />
 
-        <h2 className="text-3xl mb-2">{t("chooseYourTopic")}</h2>
-
         <Login text="Login" onClick={loginOnClick} />
 
-        <div className="mt-10">
-          <p>
-            {`User is ${!keycloak.authenticated ? "NOT " : ""}authenticated`}
-          </p>
-        </div>
+        <PageDescription dataCy={"home-page-description"}>
+          {t("pageDescription")}
+        </PageDescription>
 
-        <div className="mt-10 mb-10">
-          <p>
-            {`${
-              keycloak.authenticated
-                ? "Token : " + keycloak.idTokenParsed.name
-                : ""
-            }`}
-          </p>
-        </div>
+        <h2 className="text-3xl mb-2">{t("chooseYourTopic")}</h2>
 
-        {!!keycloak.authenticated && (
-          <Login text="Logout" onClick={() => keycloak.logout()} />
-        )}
+        <section className="flex mb-12">
+          <BenefitsCounter
+            dataCy={"home-page-benefit-counter"}
+            className="text-center m-auto mr-0 px-6"
+            counter={benefitsCount}
+            text={t("totalBenefits")}
+          />
+        </section>
 
-        <LifeJourneyGrid
-          lifeJourneys={lifeJourneyData || []}
-          onLifeJourneyClick={onLifeJourneyClick}
-        />
+        <section
+          className="border-t border-b pt-2 pb-2"
+          data-cy="eligibleBenefitsHeader"
+        >
+          <h2 className="text-3xl mb-2">{t("eligibleBenefitsHeader")}</h2>
+          <BenefitGrid
+            dataCy={"home-page-benefit-grid"}
+            benefitMoreInfoButtonText={t("benefitsMoreInformation")}
+            nextPageButtonAriaLabel={t("benefitsNextPage")}
+            previousPageButtonAriaLabel={t("benefitsPreviousPage")}
+            numberOfPages={
+              benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 6)
+            }
+            numberOfRows={2}
+            onBenefitSelect={onBenefitSelect}
+            onMoreInfoClick={onBenefitMoreInfo}
+            benefits={benefitsData}
+          />
+        </section>
+
+        <section>
+          <LifeJourneyGrid
+            lifeJourneys={lifeJourneyData || []}
+            onLifeJourneyClick={onLifeJourneyClick}
+          />
+        </section>
       </main>
     </Page>
   );
