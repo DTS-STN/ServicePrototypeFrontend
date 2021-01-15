@@ -17,7 +17,6 @@ Primary.args = {
       benefitDescription:
         "This is a description for the first benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select first benefit",
       isSelected: false,
       isEligible: true,
     },
@@ -27,7 +26,6 @@ Primary.args = {
       benefitDescription:
         "This is a description for the two benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select two benefit",
       isSelected: false,
       isEligible: true,
     },
@@ -37,7 +35,6 @@ Primary.args = {
       benefitDescription:
         "This is a description for the three benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select three benefit",
       isSelected: false,
       isEligible: true,
     },
@@ -47,7 +44,6 @@ Primary.args = {
       benefitDescription:
         "This is a description for the four benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select four benefit",
       isSelected: false,
       isEligible: true,
     },
@@ -57,7 +53,6 @@ Primary.args = {
       benefitDescription:
         "This is a description for the five benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select five benefit",
       isSelected: false,
       isEligible: true,
     },
@@ -67,7 +62,6 @@ Primary.args = {
       benefitDescription:
         "This is a description for the six benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select six benefit",
       isSelected: false,
       isEligible: true,
     },
@@ -88,7 +82,6 @@ IncompletePage.args = {
       benefitDescription:
         "This is a description for the first benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select first benefit",
       isSelected: false,
       isEligible: true,
     },
@@ -98,7 +91,6 @@ IncompletePage.args = {
       benefitDescription:
         "This is a description for the two benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select two benefit",
       isSelected: false,
       isEligible: true,
     },
@@ -108,7 +100,6 @@ IncompletePage.args = {
       benefitDescription:
         "This is a description for the three benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select three benefit",
       isSelected: false,
       isEligible: true,
     },
@@ -118,7 +109,6 @@ IncompletePage.args = {
       benefitDescription:
         "This is a description for the four benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select four benefit",
       isSelected: false,
       isEligible: true,
     },
@@ -128,7 +118,6 @@ IncompletePage.args = {
       benefitDescription:
         "This is a description for the five benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select five benefit",
       isSelected: false,
       isEligible: true,
     },
@@ -138,7 +127,6 @@ IncompletePage.args = {
       benefitDescription:
         "This is a description for the six benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select six benefit",
       isSelected: false,
       isEligible: true,
     },
@@ -148,7 +136,6 @@ IncompletePage.args = {
       benefitDescription:
         "This is a description for the six benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select six benefit",
       isSelected: false,
       isEligible: true,
     },
@@ -169,7 +156,6 @@ IneligibleBenefits.args = {
       benefitDescription:
         "This is a description for the first benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select first benefit",
       isSelected: false,
       isEligible: false,
     },
@@ -179,7 +165,6 @@ IneligibleBenefits.args = {
       benefitDescription:
         "This is a description for the two benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select two benefit",
       isSelected: false,
       isEligible: false,
     },
@@ -189,7 +174,6 @@ IneligibleBenefits.args = {
       benefitDescription:
         "This is a description for the three benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select three benefit",
       isSelected: false,
       isEligible: false,
     },
@@ -199,7 +183,6 @@ IneligibleBenefits.args = {
       benefitDescription:
         "This is a description for the four benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select four benefit",
       isSelected: false,
       isEligible: false,
     },
@@ -209,7 +192,6 @@ IneligibleBenefits.args = {
       benefitDescription:
         "This is a description for the five benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select five benefit",
       isSelected: false,
       isEligible: false,
     },
@@ -219,7 +201,6 @@ IneligibleBenefits.args = {
       benefitDescription:
         "This is a description for the six benefit card " +
         "about the benefit that this card represents.",
-      checkBoxAriaLabelBy: "select six benefit",
       isSelected: false,
       isEligible: false,
     },

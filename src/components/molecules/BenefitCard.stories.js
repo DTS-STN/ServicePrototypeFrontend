@@ -22,7 +22,6 @@ Primary.args = {
   benefitDescription:
     "This is a really cool benefit that could help a lot of people. This benefit consists of a lot of payments",
   moreInfoButtonText: "More Information",
-  checkBoxAriaLabelBy: "Select the benefit",
 };
 
 export const WithTag = Template.bind({});
@@ -33,7 +32,6 @@ WithTag.args = {
     "This is a really cool benefit that could help a lot of people. This benefit consists of a lot of payments",
   benefitTag: "awesome benefits",
   moreInfoButtonText: "More Information",
-  checkBoxAriaLabelBy: "Select the benefit",
 };
 
 export const Selected = Template.bind({});
@@ -44,7 +42,6 @@ Selected.args = {
     "This is a really cool benefit that could help a lot of people. This benefit consists of a lot of payments",
   benefitTag: "awesome benefits",
   moreInfoButtonText: "More Information",
-  checkBoxAriaLabelBy: "Select the benefit",
   isSelected: true,
 };
 
@@ -56,6 +53,5 @@ UnEligible.args = {
     "This is a really cool benefit that could help a lot of people. This benefit consists of a lot of payments",
   benefitTag: "awesome benefits",
   moreInfoButtonText: "More Information",
-  checkBoxAriaLabelBy: "Select the benefit",
   isEligible: false,
 };
