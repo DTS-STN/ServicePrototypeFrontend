@@ -112,6 +112,7 @@ export function Home() {
       />
     );
   }
+  console.log(benefitsData);
   return (
     <Page>
       <main className="font-sans">

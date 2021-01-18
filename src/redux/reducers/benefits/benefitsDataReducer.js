@@ -46,7 +46,6 @@ export const benefitsData = function (
         }
         if (Array.isArray(data) && data.length > 0) {
           let newBenefitsMap = { ...state.benefitsMap };
-          console.log(newBenefitsMap);
           let newBenefitsKeyToIdMap = { ...state.benefitsKeyToIdMap };
           data.forEach((value) => {
             if (!newBenefitsMap[value.id]) {
@@ -77,7 +76,6 @@ export const benefitsData = function (
         let data = action.body;
         if (Array.isArray(data) && data.length > 0) {
           let newBenefitsMapFr = { ...state.benefitsMapFr };
-          console.log(newBenefitsMapFr);
           let newBenefitsKeyToIdMap = { ...state.benefitsKeyToIdMap };
           data.forEach((value) => {
             if (!newBenefitsMapFr[value.id]) {
@@ -92,6 +90,8 @@ export const benefitsData = function (
             };
             newBenefitsKeyToIdMap[value.benefit_key] = value.id;
           });
+
+          console.log(state);
 
           return {
             ...state,
