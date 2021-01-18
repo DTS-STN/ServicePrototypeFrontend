@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
-import { ReactKeycloakProvider } from "@react-keycloak/web";
 import "./tailwind.output.css";
 import "./icomoon/style.css";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { languageSelector } from "./redux/selectors";
 import Routes from "./router";
-
-import keycloak from "./keycloak";
 
 function App() {
   // i18n
@@ -23,11 +20,7 @@ function App() {
     }
   }, [i18n, language]);
 
-  return (
-    <ReactKeycloakProvider authClient={keycloak}>
-      <Routes />
-    </ReactKeycloakProvider>
-  );
+  return <Routes />;
 }
 
 export default App;
