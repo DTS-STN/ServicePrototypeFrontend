@@ -36,9 +36,7 @@ describe("requestBenefits", () => {
       body: [
         {
           id: 1,
-          title_en: "Employment Insurance (EN)",
-          title_fr: "Employment Insurance Benefit (FR)",
-          title_es: null,
+          title: "Employment Insurance",
           created_by: {
             id: 1,
             firstname: "admin",
@@ -54,20 +52,14 @@ describe("requestBenefits", () => {
           created_at: "2020-11-24T16:21:56.055Z",
           updated_at: "2020-11-24T16:21:56.090Z",
           benefit_key: "ei_benefit",
-          benefit_description_en:
+          description:
             "This benefit lays out what employment insurance looks like (EN)",
-          benefit_description_fr:
-            "This benefit lays out what employment insurance looks like (FR)",
-          benefit_content_en: null,
-          benefit_content_fr: null,
-          benefit_link_en: null,
-          benefit_link_fr: null,
+          long_description: null,
+          benefit_link: null,
         },
         {
           id: 2,
-          title_en: "Provincial Social Security (EN)",
-          title_fr: "Provincial Social Security (FR)",
-          title_es: null,
+          title_en: "Provincial Social Security",
           created_by: {
             id: 1,
             firstname: "admin",
@@ -83,20 +75,14 @@ describe("requestBenefits", () => {
           created_at: "2020-11-24T16:23:55.819Z",
           updated_at: "2020-11-24T16:23:55.836Z",
           benefit_key: "provincial_social_security",
-          benefit_description_en:
+          description:
             "Provincial Social Security benefit which hands out a check every month at retirement (en)",
-          benefit_description_fr:
-            "Provincial Social Security benefit which hands out a check every month at retirement (fr)",
-          benefit_content_en: null,
-          benefit_content_fr: null,
-          benefit_link_en: null,
-          benefit_link_fr: null,
+          long_description: null,
+          benefit_link: null,
         },
         {
           id: 3,
-          title_en: "New Parents Benefit (EN)",
-          title_fr: "New Parents Benefit (FR)",
-          title_es: null,
+          title_en: "New Parents Benefit",
           created_by: {
             id: 1,
             firstname: "admin",
@@ -112,14 +98,10 @@ describe("requestBenefits", () => {
           created_at: "2020-11-24T16:26:52.646Z",
           updated_at: "2020-11-24T16:26:52.661Z",
           benefit_key: "new_parents_benefit",
-          benefit_description_en:
+          description:
             "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
-          benefit_description_fr:
-            "The new parent benefits supplies supplemental income from the government during parental leave (FR)",
-          benefit_content_en: null,
-          benefit_content_fr: null,
-          benefit_link_en: null,
-          benefit_link_fr: null,
+          long_description: null,
+          benefit_link: null,
         },
       ],
       headers: {
@@ -142,9 +124,7 @@ describe("requestBenefits", () => {
         [
           {
             id: 1,
-            title_en: "Employment Insurance (EN)",
-            title_fr: "Employment Insurance Benefit (FR)",
-            title_es: null,
+            title: "Employment Insurance",
             created_by: {
               id: 1,
               firstname: "admin",
@@ -160,20 +140,14 @@ describe("requestBenefits", () => {
             created_at: "2020-11-24T16:21:56.055Z",
             updated_at: "2020-11-24T16:21:56.090Z",
             benefit_key: "ei_benefit",
-            benefit_description_en:
+            description:
               "This benefit lays out what employment insurance looks like (EN)",
-            benefit_description_fr:
-              "This benefit lays out what employment insurance looks like (FR)",
-            benefit_content_en: null,
-            benefit_content_fr: null,
-            benefit_link_en: null,
-            benefit_link_fr: null,
+            long_description: null,
+            benefit_link: null,
           },
           {
             id: 2,
-            title_en: "Provincial Social Security (EN)",
-            title_fr: "Provincial Social Security (FR)",
-            title_es: null,
+            title: "Provincial Social Security",
             created_by: {
               id: 1,
               firstname: "admin",
@@ -189,20 +163,14 @@ describe("requestBenefits", () => {
             created_at: "2020-11-24T16:23:55.819Z",
             updated_at: "2020-11-24T16:23:55.836Z",
             benefit_key: "provincial_social_security",
-            benefit_description_en:
+            description:
               "Provincial Social Security benefit which hands out a check every month at retirement (en)",
-            benefit_description_fr:
-              "Provincial Social Security benefit which hands out a check every month at retirement (fr)",
-            benefit_content_en: null,
-            benefit_content_fr: null,
-            benefit_link_en: null,
-            benefit_link_fr: null,
+            long_description: null,
+            benefit_link: null,
           },
           {
             id: 3,
-            title_en: "New Parents Benefit (EN)",
-            title_fr: "New Parents Benefit (FR)",
-            title_es: null,
+            title: "New Parents Benefit",
             created_by: {
               id: 1,
               firstname: "admin",
@@ -218,14 +186,10 @@ describe("requestBenefits", () => {
             created_at: "2020-11-24T16:26:52.646Z",
             updated_at: "2020-11-24T16:26:52.661Z",
             benefit_key: "new_parents_benefit",
-            benefit_description_en:
+            description:
               "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
-            benefit_description_fr:
-              "The new parent benefits supplies supplemental income from the government during parental leave (FR)",
-            benefit_content_en: null,
-            benefit_content_fr: null,
-            benefit_link_en: null,
-            benefit_link_fr: null,
+            long_description: null,
+            benefit_link: null,
           },
         ]
       ),

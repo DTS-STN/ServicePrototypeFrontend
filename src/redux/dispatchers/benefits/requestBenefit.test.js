@@ -35,9 +35,7 @@ describe("requestBenefit", () => {
       status: 200,
       body: {
         id: 1,
-        title_en: "Employment Insurance (EN)",
-        title_fr: "Employment Insurance Benefit (FR)",
-        title_es: null,
+        title: "Employment Insurance",
         created_by: {
           id: 1,
           firstname: "admin",
@@ -53,14 +51,10 @@ describe("requestBenefit", () => {
         created_at: "2020-11-24T16:21:56.055Z",
         updated_at: "2020-11-24T16:21:56.090Z",
         benefit_key: "ei_benefit",
-        benefit_description_en:
-          "This benefit lays out what employment insurance looks like (EN)",
-        benefit_description_fr:
-          "This benefit lays out what employment insurance looks like (FR)",
-        benefit_content_en: null,
-        benefit_content_fr: null,
-        benefit_link_en: null,
-        benefit_link_fr: null,
+        description:
+          "This benefit lays out what employment insurance looks like",
+        long_description: null,
+        benefit_link: null,
       },
       headers: {
         "Content-Type": "application/json",
@@ -84,9 +78,7 @@ describe("requestBenefit", () => {
         NETWORK_REQUEST_TYPES.GET,
         {
           id: 1,
-          title_en: "Employment Insurance (EN)",
-          title_fr: "Employment Insurance Benefit (FR)",
-          title_es: null,
+          title: "Employment Insurance",
           created_by: {
             id: 1,
             firstname: "admin",
@@ -102,14 +94,10 @@ describe("requestBenefit", () => {
           created_at: "2020-11-24T16:21:56.055Z",
           updated_at: "2020-11-24T16:21:56.090Z",
           benefit_key: "ei_benefit",
-          benefit_description_en:
-            "This benefit lays out what employment insurance looks like (EN)",
-          benefit_description_fr:
-            "This benefit lays out what employment insurance looks like (FR)",
-          benefit_content_en: null,
-          benefit_content_fr: null,
-          benefit_link_en: null,
-          benefit_link_fr: null,
+          description:
+            "This benefit lays out what employment insurance looks like",
+          long_description: null,
+          benefit_link: null,
         }
       ),
     ];
