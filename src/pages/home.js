@@ -77,7 +77,11 @@ export function Home() {
 
   // effect to initially fetch count when component mounts
   useEffect(() => {
-    if (!triedFetchedBenefitsCount && !isFetchingBenefitsCount) {
+    if (
+      !triedFetchedBenefitsCount &&
+      !isFetchingBenefitsCount &&
+      !fetchBenefitsCountFailed
+    ) {
       dispatch(getBenefitsCount());
       setTriedFetchBenefitsCount(true);
     }
@@ -137,7 +141,12 @@ export function Home() {
           onClick={() => keycloak.logout()}
         />
 
-        <Login text="Login" onClick={loginOnClick} />
+        {/* Displays the login button only when the user hasn't login    */}
+        {!keycloak.authenticated ? (
+          <Login text="Login" onClick={loginOnClick} />
+        ) : (
+          ""
+        )}
 
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}

@@ -4,16 +4,18 @@ import { ActionButton } from "../atoms/ActionButton";
 
 /**
  * This component is for the login button :)
+ *
+ *  NOTE:  the idea is to add to this component (box around, text as per design, etc. )
+ *
  */
 export function Login(props) {
-  const handleClick = (event) => props.onClick(event.currentTarget.id);
   return (
     <div className="flex">
       <ActionButton
         className={"bg-bg-gray-dk text-white hover:bg-black"}
         id="login"
         text={props.text}
-        onClick={handleClick}
+        onClick={props.onClick}
         dataTestId="loginButton"
       />
     </div>

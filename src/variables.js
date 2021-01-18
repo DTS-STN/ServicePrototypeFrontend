@@ -11,6 +11,11 @@ if (!benefitservice_env_url && ENVIRONMENT !== "production") {
 
 export const BENEFITSERVICE_URL = benefitservice_env_url;
 
+// Keycloak service
+export const keycloak_env_url = process.env.KEYCLOAK_URL;
+export const keycloak_env_realm = process.env.KEYCLOAK_REALM;
+export const keycloak_env_clientId = process.env.KEYCLOAK_CLIENTID;
+
 // This is for the benefit-service url
 
 // let benefitservice_env_url = process.env.REACT_APP_BENEFITSERVICE_BASE_URL;
