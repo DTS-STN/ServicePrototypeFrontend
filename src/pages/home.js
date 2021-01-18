@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 import { benefitsDataSelector } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
-
 import {
   deselectBenefitActionCreator,
   selectBenefitActionCreator,
@@ -154,7 +153,6 @@ export function Home() {
             text={t("totalBenefits")}
           />
         </section>
-
         <section
           className="border-t border-b pt-2 pb-2"
           data-cy="eligibleBenefitsHeader"
