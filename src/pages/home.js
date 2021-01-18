@@ -5,10 +5,9 @@ import { useTranslation } from "react-i18next";
 
 // redux imports
 import { benefitsDataSelector } from "../redux/selectors";
-import { lifeJourneysDataSelector } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
-import { getLifeJourneys } from "../redux/dispatchers/lifejourneys";
+
 import {
   deselectBenefitActionCreator,
   selectBenefitActionCreator,
@@ -21,11 +20,8 @@ import { useHistory } from "react-router-dom";
 // component imports
 import { Page } from "../components/organisms/Page";
 import { PageDescription } from "../components/atoms/PageDescription";
-//import { Title } from "../components/atoms/Title";
 import { BenefitGrid } from "../components/organisms/BenefitGrid";
 import { BenefitsCounter } from "../components/atoms/BenefitsCounter";
-
-import { LifeJourneyGrid } from "../components/organisms/LifeJourneyGrid";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 
 import { TitleUserLogout } from "../components/molecules/TitleUserLogout";
@@ -37,8 +33,6 @@ export function Home() {
     false
   );
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
-
-  const [triedFetchLifeJourneys, setTriedFetchLifeJourneys] = useState(false);
 
   // Keycloak Services
   const { keycloak } = useKeycloak();
@@ -75,23 +69,6 @@ export function Home() {
     (state) => state.benefits.benefitsData.benefitsKeyToIdMap
   );
 
-  const isFetchingLifeJourneys = useSelector(
-    (state) => state.lifejourneys.lifeJourneysData.isFetching
-  );
-
-  const fetchLifeJourneysFailed = useSelector(
-    (state) => state.lifejourneys.lifeJourneysData.fetchFailed
-  );
-
-  const fetchLifeJourneysFailedObj = useSelector(
-    (state) => state.lifejourneys.lifeJourneysData.fetchFailedObj
-  );
-
-  const lifeJourneyData = useSelector(lifeJourneysDataSelector);
-  const lifeJourneyKeyToId = useSelector(
-    (state) => state.lifejourneys.lifeJourneysData.lifeJourneysKeyToIdMap
-  );
-
   const { t } = useTranslation();
 
   //redux dispatch
@@ -99,29 +76,9 @@ export function Home() {
 
   const history = useHistory();
 
-  useEffect(() => {
-    if (
-      !triedFetchLifeJourneys &&
-      !isFetchingLifeJourneys &&
-      !fetchLifeJourneysFailed
-    ) {
-      dispatch(getLifeJourneys());
-      setTriedFetchLifeJourneys(true);
-    }
-  }, [
-    triedFetchLifeJourneys,
-    isFetchingLifeJourneys,
-    fetchLifeJourneysFailed,
-    dispatch,
-  ]);
-
   // effect to initially fetch count when component mounts
   useEffect(() => {
-    if (
-      !triedFetchedBenefitsCount &&
-      !isFetchingBenefitsCount &&
-      !fetchBenefitsCountFailed
-    ) {
+    if (!triedFetchedBenefitsCount && !isFetchingBenefitsCount) {
       dispatch(getBenefitsCount());
       setTriedFetchBenefitsCount(true);
     }
@@ -150,11 +107,7 @@ export function Home() {
     history.push(`/benefit/${benefitKeyToId[benefitKey]}`);
   };
 
-  if (
-    fetchBenefitsFailed ||
-    fetchBenefitsCountFailed ||
-    fetchLifeJourneysFailed
-  ) {
+  if (fetchBenefitsFailed || fetchBenefitsCountFailed) {
     return (
       <ErrorPage
         errorTitle={t("somethingWentWrong")}
@@ -162,16 +115,12 @@ export function Home() {
           fetchBenefitsFailed
             ? fetchBenefitsFailedObj
             : fetchBenefitsCountFailedObj
-            ? fetchBenefitsCountFailedObj
-            : fetchLifeJourneysFailedObj
+          // ? fetchBenefitsCountFailedObj    TODO  verify this 2 lines
+          // : fetchLifeJourneysFailedObj
         }
       />
     );
   }
-
-  const onLifeJourneyClick = (id) => {
-    history.push(`/lifejourney/${lifeJourneyKeyToId[id]}`);
-  };
 
   return (
     <Page>
@@ -223,13 +172,6 @@ export function Home() {
             onBenefitSelect={onBenefitSelect}
             onMoreInfoClick={onBenefitMoreInfo}
             benefits={benefitsData}
-          />
-        </section>
-
-        <section>
-          <LifeJourneyGrid
-            lifeJourneys={lifeJourneyData || []}
-            onLifeJourneyClick={onLifeJourneyClick}
           />
         </section>
       </main>
