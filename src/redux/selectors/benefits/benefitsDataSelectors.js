@@ -6,6 +6,7 @@ export const benefitsMapSelector = (state) =>
   state.benefits.benefitsData.benefitsMap;
 
 export const benefitTransformer = (data, lang) => {
+  console.log(data);
   return {
     benefitId: data.benefit_key,
     benefitTag: data.benefit_tags.reduce((accumulator, item, index, array) => {

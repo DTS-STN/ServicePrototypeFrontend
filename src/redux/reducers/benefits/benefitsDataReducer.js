@@ -13,6 +13,8 @@ export const benefitsData = function (
     fetchFailedObj: {},
     // map of benefits data
     benefitsMap: {},
+    // map of french benefits data
+    benefitsMapFr: {},
     // map of benefit OF keys to keys in benefitsMap
     benefitsKeyToIdMap: {},
   },
@@ -44,6 +46,7 @@ export const benefitsData = function (
         }
         if (Array.isArray(data) && data.length > 0) {
           let newBenefitsMap = { ...state.benefitsMap };
+          console.log(newBenefitsMap);
           let newBenefitsKeyToIdMap = { ...state.benefitsKeyToIdMap };
           data.forEach((value) => {
             if (!newBenefitsMap[value.id]) {
@@ -55,9 +58,6 @@ export const benefitsData = function (
             newBenefitsMap[value.id] = {
               ...newBenefitsMap[value.id],
               ...value,
-              life_journeys: value["life_journeys"].map((value) => {
-                return value.id;
-              }),
             };
             newBenefitsKeyToIdMap[value.benefit_key] = value.id;
           });
@@ -69,6 +69,37 @@ export const benefitsData = function (
             fetchFailedReason: "",
             fetchFailedObj: {},
             benefitsMap: newBenefitsMap,
+            benefitsKeyToIdMap: newBenefitsKeyToIdMap,
+          };
+        }
+      }
+      if (action.resourceType === RESOURCE_TYPES.BENEFITS_FR) {
+        let data = action.body;
+        if (Array.isArray(data) && data.length > 0) {
+          let newBenefitsMapFr = { ...state.benefitsMapFr };
+          console.log(newBenefitsMapFr);
+          let newBenefitsKeyToIdMap = { ...state.benefitsKeyToIdMap };
+          data.forEach((value) => {
+            if (!newBenefitsMapFr[value.id]) {
+              newBenefitsMapFr[value.id] = {
+                isEligible: true,
+                isSelected: false,
+              };
+            }
+            newBenefitsMapFr[value.id] = {
+              ...newBenefitsMapFr[value.id],
+              ...value,
+            };
+            newBenefitsKeyToIdMap[value.benefit_key] = value.id;
+          });
+
+          return {
+            ...state,
+            isFetching: false,
+            fetchFailed: false,
+            fetchFailedReason: "",
+            fetchFailedObj: {},
+            benefitsMapFr: newBenefitsMapFr,
             benefitsKeyToIdMap: newBenefitsKeyToIdMap,
           };
         }

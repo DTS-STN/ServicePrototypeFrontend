@@ -11,6 +11,7 @@ import { BENEFITSERVICE_URL } from "../../../variables";
 
 async function fetchBenefits(dispatch, start, limit, sort) {
   let response;
+  let responseFr;
   try {
     dispatch(
       networkRequestActionCreator(
@@ -48,6 +49,7 @@ async function fetchBenefits(dispatch, start, limit, sort) {
     }
 
     response = await fetch(BENEFITSERVICE_URL + url);
+    responseFr = await fetch(BENEFITSERVICE_URL + url + "&lang=fr");
   } catch (e) {
     return dispatch(
       networkRequestFailedActionCreator(
@@ -62,7 +64,9 @@ async function fetchBenefits(dispatch, start, limit, sort) {
   }
   // data received and response is okay
   let textData;
+  let textDataFr;
   let data;
+  let dataFr;
 
   // get json if possible otherwise just get text
   try {
@@ -72,12 +76,26 @@ async function fetchBenefits(dispatch, start, limit, sort) {
     data = textData || "";
   }
 
-  if (response.ok) {
-    return dispatch(
+  try {
+    textDataFr = await responseFr.text();
+    dataFr = JSON.parse(textDataFr);
+  } catch (e) {
+    dataFr = textData || "";
+  }
+
+  if (response.ok & responseFr.ok) {
+    dispatch(
       networkReceivedActionCreator(
         RESOURCE_TYPES.BENEFITS,
         NETWORK_REQUEST_TYPES.GET,
         data
+      )
+    );
+    dispatch(
+      networkReceivedActionCreator(
+        RESOURCE_TYPES.BENEFITS_FR,
+        NETWORK_REQUEST_TYPES.GET,
+        dataFr
       )
     );
   } else {
