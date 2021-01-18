@@ -21,6 +21,14 @@ async function fetchBenefits(dispatch, start, limit, sort) {
       )
     );
 
+    dispatch(
+      networkRequestActionCreator(
+        RESOURCE_TYPES.BENEFITS_FR,
+        NETWORK_REQUEST_TYPES.GET,
+        { start, limit, sort }
+      )
+    );
+
     let url = "/benefits";
     let paramBefore = false;
     if (Number.isInteger(start) && start >= 0) {
