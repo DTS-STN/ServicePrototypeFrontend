@@ -109,7 +109,7 @@ describe("requestBenefits", () => {
       },
     });
 
-    fetchMock.get(BENEFITSERVICE_URL + "/benefits&lang=fr", {
+    fetchMock.get(BENEFITSERVICE_URL + "/benefits?lang=fr", {
       status: 200,
       body: [
         {
@@ -363,7 +363,7 @@ describe("requestBenefits", () => {
       },
     });
 
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits&lang=fr", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
       throws: errorObj,
       headers: {
         "Content-Type": "application/json",
@@ -746,7 +746,7 @@ describe("requestBenefits", () => {
       },
     });
 
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits&lang=fr", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
       status: 400,
       body: {
         some: "message",
@@ -792,7 +792,7 @@ describe("requestBenefits", () => {
       },
     });
 
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits&lang=fr", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
       status: 404,
       body: {
         some: "message",
@@ -838,7 +838,7 @@ describe("requestBenefits", () => {
       },
     });
 
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits&lang=fr", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
       status: 500,
       body: {
         some: "message",
@@ -879,7 +879,7 @@ describe("requestBenefits", () => {
       body: "some message",
     });
 
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits&lang=fr", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
       status: 500,
       body: "some message",
     });

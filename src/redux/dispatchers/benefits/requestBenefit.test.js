@@ -61,6 +61,36 @@ describe("requestBenefit", () => {
       },
     });
 
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits/1?lang=fr", {
+      status: 200,
+      body: {
+        id: 1,
+        title: "Employment Insurance",
+        created_by: {
+          id: 1,
+          firstname: "admin",
+          lastname: "user",
+          username: null,
+        },
+        updated_by: {
+          id: 1,
+          firstname: "admin",
+          lastname: "user",
+          username: null,
+        },
+        created_at: "2020-11-24T16:21:56.055Z",
+        updated_at: "2020-11-24T16:21:56.090Z",
+        benefit_key: "ei_benefit",
+        description:
+          "This benefit lays out what employment insurance looks like",
+        long_description: null,
+        benefit_link: null,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     const store = mockStore({});
 
     await store.dispatch(getBenefit("1"));
@@ -73,8 +103,42 @@ describe("requestBenefit", () => {
           id: "1",
         }
       ),
+      networkRequestActionCreator(
+        RESOURCE_TYPES.BENEFIT_FR,
+        NETWORK_REQUEST_TYPES.GET,
+        {
+          id: "1",
+        }
+      ),
       networkReceivedActionCreator(
         RESOURCE_TYPES.BENEFIT,
+        NETWORK_REQUEST_TYPES.GET,
+        {
+          id: 1,
+          title: "Employment Insurance",
+          created_by: {
+            id: 1,
+            firstname: "admin",
+            lastname: "user",
+            username: null,
+          },
+          updated_by: {
+            id: 1,
+            firstname: "admin",
+            lastname: "user",
+            username: null,
+          },
+          created_at: "2020-11-24T16:21:56.055Z",
+          updated_at: "2020-11-24T16:21:56.090Z",
+          benefit_key: "ei_benefit",
+          description:
+            "This benefit lays out what employment insurance looks like",
+          long_description: null,
+          benefit_link: null,
+        }
+      ),
+      networkReceivedActionCreator(
+        RESOURCE_TYPES.BENEFIT_FR,
         NETWORK_REQUEST_TYPES.GET,
         {
           id: 1,
@@ -120,6 +184,13 @@ describe("requestBenefit", () => {
     expect(store.getActions()).toEqual([
       networkRequestActionCreator(
         RESOURCE_TYPES.BENEFIT,
+        NETWORK_REQUEST_TYPES.GET,
+        {
+          id: "1",
+        }
+      ),
+      networkRequestActionCreator(
+        RESOURCE_TYPES.BENEFIT_FR,
         NETWORK_REQUEST_TYPES.GET,
         {
           id: "1",

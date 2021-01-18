@@ -72,8 +72,14 @@ export const benefitsData = function (
           };
         }
       }
-      if (action.resourceType === RESOURCE_TYPES.BENEFITS_FR) {
+      if (
+        action.resourceType === RESOURCE_TYPES.BENEFITS_FR ||
+        action.resourceType === RESOURCE_TYPES.BENEFIT_FR
+      ) {
         let data = action.body;
+        if (action.resourceType === RESOURCE_TYPES.BENEFIT_FR) {
+          data = [data];
+        }
         if (Array.isArray(data) && data.length > 0) {
           let newBenefitsMapFr = { ...state.benefitsMapFr };
           let newBenefitsKeyToIdMap = { ...state.benefitsKeyToIdMap };

@@ -57,7 +57,13 @@ async function fetchBenefits(dispatch, start, limit, sort) {
     }
 
     response = await fetch(BENEFITSERVICE_URL + url);
-    responseFr = await fetch(BENEFITSERVICE_URL + url + "&lang=fr");
+    if (paramBefore) {
+      responseFr = await fetch(BENEFITSERVICE_URL + url + "&lang=fr");
+    } else {
+      console.log("no param");
+      console.log(BENEFITSERVICE_URL + url + "?lang=fr");
+      responseFr = await fetch(BENEFITSERVICE_URL + url + "?lang=fr");
+    }
   } catch (e) {
     return dispatch(
       networkRequestFailedActionCreator(
@@ -88,7 +94,7 @@ async function fetchBenefits(dispatch, start, limit, sort) {
     textDataFr = await responseFr.text();
     dataFr = JSON.parse(textDataFr);
   } catch (e) {
-    dataFr = textData || "";
+    dataFr = textDataFr || "";
   }
 
   if (response.ok & responseFr.ok) {
