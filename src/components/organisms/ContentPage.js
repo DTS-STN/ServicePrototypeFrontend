@@ -5,6 +5,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import PropTypes from "prop-types";
 import gfm from "remark-gfm";
+import { ActionButton } from "../atoms/ActionButton";
 
 function getCoreProps(props) {
   const source = props["data-sourcepos"];
@@ -79,11 +80,21 @@ export function ContentPage(props) {
         </ReactMarkdownWithHTML>
         {props.afterContent}
       </main>
+      <ActionButton
+        text={props.ApplyButtonText}
+        rounded={true}
+        className={"bg-bg-gray-dk text-white hover:bg-black"}
+        // onClick={handleClick}
+      />
     </Page>
   );
 }
 
 ContentPage.propTypes = {
+  /**
+   * More info button text
+   */
+  ApplyButtonText: PropTypes.string.isRequired,
   /**
    * items before any actual content
    */

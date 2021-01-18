@@ -72,7 +72,7 @@ Primary.args = {
       isEligible: true,
     },
   ],
-  benefitMoreInfoButtonText: "More Information",
+  benefitMoreInfoButtonText: "More Informationaaa",
   numberOfRows: 2,
   numberOfPages: 9,
   nextPageButtonAriaLabel: "navigate to the next page",
