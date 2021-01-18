@@ -19,6 +19,7 @@ describe("benefitsData", () => {
       fetchFailedReason: "",
       fetchFailedObj: {},
       benefitsMap: {},
+      benefitsMapFr: {},
       benefitsKeyToIdMap: {},
     });
   });

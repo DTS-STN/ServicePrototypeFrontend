@@ -91,8 +91,6 @@ export const benefitsData = function (
             newBenefitsKeyToIdMap[value.benefit_key] = value.id;
           });
 
-          console.log(state);
-
           return {
             ...state,
             isFetching: false,
