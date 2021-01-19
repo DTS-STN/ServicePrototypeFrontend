@@ -57,13 +57,9 @@ async function fetchBenefits(dispatch, start, limit, sort) {
     }
 
     response = await fetch(BENEFITSERVICE_URL + url);
-    if (paramBefore) {
-      responseFr = await fetch(BENEFITSERVICE_URL + url + "&lang=fr");
-    } else {
-      console.log("no param");
-      console.log(BENEFITSERVICE_URL + url + "?lang=fr");
-      responseFr = await fetch(BENEFITSERVICE_URL + url + "?lang=fr");
-    }
+    paramBefore
+      ? (responseFr = await fetch(BENEFITSERVICE_URL + url + "&lang=fr"))
+      : (responseFr = await fetch(BENEFITSERVICE_URL + url + "?lang=fr"));
   } catch (e) {
     return dispatch(
       networkRequestFailedActionCreator(
