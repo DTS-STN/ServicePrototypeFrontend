@@ -1,5 +1,4 @@
 import { createSelector } from "reselect";
-import { benefitsData } from "../../reducers/benefits/benefitsDataReducer";
 import { languageSelector } from "../language";
 
 // selector for raw benefits data
