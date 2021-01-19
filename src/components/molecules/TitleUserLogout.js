@@ -13,7 +13,7 @@ export function TitleUserLogout(props) {
   return (
     <div className="flex">
       <div className="w-4/5">
-        <Title data-cy={props.titleDataCy}> {props.titleChildren} </Title>
+        <Title data-cy={props.titleDataCy}>{props.titleChildren}</Title>
       </div>
 
       <div className="flex w-2/5 px-5 border-b mt-2 mb-2 border-h1-underline-color">
@@ -49,7 +49,7 @@ export function TitleUserLogout(props) {
 
 TitleUserLogout.propTypes = {
   /**
-   * Text for the login button
+   * Text for the title
    */
   titleChildren: PropTypes.string.isRequired,
   /**
@@ -57,15 +57,15 @@ TitleUserLogout.propTypes = {
    */
   titleDataCy: PropTypes.string.isRequired,
   /**
-   * Flag for the name
+   * authentication flag
    */
-  isAuthenticated: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool,
   /**
-   * text for the name
+   * text for the user name
    */
   userName: PropTypes.string.isRequired,
   /**
-   * Text for the login button
+   * Text for the logout button
    */
   logoutText: PropTypes.string.isRequired,
   /**
