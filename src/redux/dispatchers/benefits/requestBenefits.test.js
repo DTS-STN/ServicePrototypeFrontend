@@ -36,9 +36,7 @@ describe("requestBenefits", () => {
       body: [
         {
           id: 1,
-          title_en: "Employment Insurance (EN)",
-          title_fr: "Employment Insurance Benefit (FR)",
-          title_es: null,
+          title: "Employment Insurance",
           created_by: {
             id: 1,
             firstname: "admin",
@@ -54,20 +52,14 @@ describe("requestBenefits", () => {
           created_at: "2020-11-24T16:21:56.055Z",
           updated_at: "2020-11-24T16:21:56.090Z",
           benefit_key: "ei_benefit",
-          benefit_description_en:
+          description:
             "This benefit lays out what employment insurance looks like (EN)",
-          benefit_description_fr:
-            "This benefit lays out what employment insurance looks like (FR)",
-          benefit_content_en: null,
-          benefit_content_fr: null,
-          benefit_link_en: null,
-          benefit_link_fr: null,
+          long_description: null,
+          benefit_link: null,
         },
         {
           id: 2,
-          title_en: "Provincial Social Security (EN)",
-          title_fr: "Provincial Social Security (FR)",
-          title_es: null,
+          title: "Provincial Social Security",
           created_by: {
             id: 1,
             firstname: "admin",
@@ -83,20 +75,14 @@ describe("requestBenefits", () => {
           created_at: "2020-11-24T16:23:55.819Z",
           updated_at: "2020-11-24T16:23:55.836Z",
           benefit_key: "provincial_social_security",
-          benefit_description_en:
+          description:
             "Provincial Social Security benefit which hands out a check every month at retirement (en)",
-          benefit_description_fr:
-            "Provincial Social Security benefit which hands out a check every month at retirement (fr)",
-          benefit_content_en: null,
-          benefit_content_fr: null,
-          benefit_link_en: null,
-          benefit_link_fr: null,
+          long_description: null,
+          benefit_link: null,
         },
         {
           id: 3,
-          title_en: "New Parents Benefit (EN)",
-          title_fr: "New Parents Benefit (FR)",
-          title_es: null,
+          title: "New Parents Benefit",
           created_by: {
             id: 1,
             firstname: "admin",
@@ -112,14 +98,88 @@ describe("requestBenefits", () => {
           created_at: "2020-11-24T16:26:52.646Z",
           updated_at: "2020-11-24T16:26:52.661Z",
           benefit_key: "new_parents_benefit",
-          benefit_description_en:
+          description:
             "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
-          benefit_description_fr:
-            "The new parent benefits supplies supplemental income from the government during parental leave (FR)",
-          benefit_content_en: null,
-          benefit_content_fr: null,
-          benefit_link_en: null,
-          benefit_link_fr: null,
+          long_description: null,
+          benefit_link: null,
+        },
+      ],
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
+      status: 200,
+      body: [
+        {
+          id: 1,
+          title: "Employment Insurance",
+          created_by: {
+            id: 1,
+            firstname: "admin",
+            lastname: "user",
+            username: null,
+          },
+          updated_by: {
+            id: 1,
+            firstname: "admin",
+            lastname: "user",
+            username: null,
+          },
+          created_at: "2020-11-24T16:21:56.055Z",
+          updated_at: "2020-11-24T16:21:56.090Z",
+          benefit_key: "ei_benefit",
+          description:
+            "This benefit lays out what employment insurance looks like (EN)",
+          long_description: null,
+          benefit_link: null,
+        },
+        {
+          id: 2,
+          title: "Provincial Social Security",
+          created_by: {
+            id: 1,
+            firstname: "admin",
+            lastname: "user",
+            username: null,
+          },
+          updated_by: {
+            id: 1,
+            firstname: "admin",
+            lastname: "user",
+            username: null,
+          },
+          created_at: "2020-11-24T16:23:55.819Z",
+          updated_at: "2020-11-24T16:23:55.836Z",
+          benefit_key: "provincial_social_security",
+          description:
+            "Provincial Social Security benefit which hands out a check every month at retirement (en)",
+          long_description: null,
+          benefit_link: null,
+        },
+        {
+          id: 3,
+          title: "New Parents Benefit",
+          created_by: {
+            id: 1,
+            firstname: "admin",
+            lastname: "user",
+            username: null,
+          },
+          updated_by: {
+            id: 1,
+            firstname: "admin",
+            lastname: "user",
+            username: null,
+          },
+          created_at: "2020-11-24T16:26:52.646Z",
+          updated_at: "2020-11-24T16:26:52.661Z",
+          benefit_key: "new_parents_benefit",
+          description:
+            "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
+          long_description: null,
+          benefit_link: null,
         },
       ],
       headers: {
@@ -136,15 +196,17 @@ describe("requestBenefits", () => {
         RESOURCE_TYPES.BENEFITS,
         NETWORK_REQUEST_TYPES.GET
       ),
+      networkRequestActionCreator(
+        RESOURCE_TYPES.BENEFITS_FR,
+        NETWORK_REQUEST_TYPES.GET
+      ),
       networkReceivedActionCreator(
         RESOURCE_TYPES.BENEFITS,
         NETWORK_REQUEST_TYPES.GET,
         [
           {
             id: 1,
-            title_en: "Employment Insurance (EN)",
-            title_fr: "Employment Insurance Benefit (FR)",
-            title_es: null,
+            title: "Employment Insurance",
             created_by: {
               id: 1,
               firstname: "admin",
@@ -160,20 +222,14 @@ describe("requestBenefits", () => {
             created_at: "2020-11-24T16:21:56.055Z",
             updated_at: "2020-11-24T16:21:56.090Z",
             benefit_key: "ei_benefit",
-            benefit_description_en:
+            description:
               "This benefit lays out what employment insurance looks like (EN)",
-            benefit_description_fr:
-              "This benefit lays out what employment insurance looks like (FR)",
-            benefit_content_en: null,
-            benefit_content_fr: null,
-            benefit_link_en: null,
-            benefit_link_fr: null,
+            long_description: null,
+            benefit_link: null,
           },
           {
             id: 2,
-            title_en: "Provincial Social Security (EN)",
-            title_fr: "Provincial Social Security (FR)",
-            title_es: null,
+            title: "Provincial Social Security",
             created_by: {
               id: 1,
               firstname: "admin",
@@ -189,20 +245,14 @@ describe("requestBenefits", () => {
             created_at: "2020-11-24T16:23:55.819Z",
             updated_at: "2020-11-24T16:23:55.836Z",
             benefit_key: "provincial_social_security",
-            benefit_description_en:
+            description:
               "Provincial Social Security benefit which hands out a check every month at retirement (en)",
-            benefit_description_fr:
-              "Provincial Social Security benefit which hands out a check every month at retirement (fr)",
-            benefit_content_en: null,
-            benefit_content_fr: null,
-            benefit_link_en: null,
-            benefit_link_fr: null,
+            long_description: null,
+            benefit_link: null,
           },
           {
             id: 3,
-            title_en: "New Parents Benefit (EN)",
-            title_fr: "New Parents Benefit (FR)",
-            title_es: null,
+            title: "New Parents Benefit",
             created_by: {
               id: 1,
               firstname: "admin",
@@ -218,14 +268,85 @@ describe("requestBenefits", () => {
             created_at: "2020-11-24T16:26:52.646Z",
             updated_at: "2020-11-24T16:26:52.661Z",
             benefit_key: "new_parents_benefit",
-            benefit_description_en:
+            description:
               "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
-            benefit_description_fr:
-              "The new parent benefits supplies supplemental income from the government during parental leave (FR)",
-            benefit_content_en: null,
-            benefit_content_fr: null,
-            benefit_link_en: null,
-            benefit_link_fr: null,
+            long_description: null,
+            benefit_link: null,
+          },
+        ]
+      ),
+      networkReceivedActionCreator(
+        RESOURCE_TYPES.BENEFITS_FR,
+        NETWORK_REQUEST_TYPES.GET,
+        [
+          {
+            id: 1,
+            title: "Employment Insurance",
+            created_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            updated_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            created_at: "2020-11-24T16:21:56.055Z",
+            updated_at: "2020-11-24T16:21:56.090Z",
+            benefit_key: "ei_benefit",
+            description:
+              "This benefit lays out what employment insurance looks like (EN)",
+            long_description: null,
+            benefit_link: null,
+          },
+          {
+            id: 2,
+            title: "Provincial Social Security",
+            created_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            updated_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            created_at: "2020-11-24T16:23:55.819Z",
+            updated_at: "2020-11-24T16:23:55.836Z",
+            benefit_key: "provincial_social_security",
+            description:
+              "Provincial Social Security benefit which hands out a check every month at retirement (en)",
+            long_description: null,
+            benefit_link: null,
+          },
+          {
+            id: 3,
+            title: "New Parents Benefit",
+            created_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            updated_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            created_at: "2020-11-24T16:26:52.646Z",
+            updated_at: "2020-11-24T16:26:52.661Z",
+            benefit_key: "new_parents_benefit",
+            description:
+              "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
+            long_description: null,
+            benefit_link: null,
           },
         ]
       ),
@@ -242,6 +363,13 @@ describe("requestBenefits", () => {
       },
     });
 
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
+      throws: errorObj,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     const store = mockStore({});
 
     await store.dispatch(getBenefits());
@@ -249,6 +377,10 @@ describe("requestBenefits", () => {
     expect(store.getActions()).toEqual([
       networkRequestActionCreator(
         RESOURCE_TYPES.BENEFITS,
+        NETWORK_REQUEST_TYPES.GET
+      ),
+      networkRequestActionCreator(
+        RESOURCE_TYPES.BENEFITS_FR,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestFailedActionCreator(
@@ -269,9 +401,7 @@ describe("requestBenefits", () => {
         body: [
           {
             id: 1,
-            title_en: "Employment Insurance (EN)",
-            title_fr: "Employment Insurance Benefit (FR)",
-            title_es: null,
+            title: "Employment Insurance",
             created_by: {
               id: 1,
               firstname: "admin",
@@ -287,20 +417,14 @@ describe("requestBenefits", () => {
             created_at: "2020-11-24T16:21:56.055Z",
             updated_at: "2020-11-24T16:21:56.090Z",
             benefit_key: "ei_benefit",
-            benefit_description_en:
+            description:
               "This benefit lays out what employment insurance looks like (EN)",
-            benefit_description_fr:
-              "This benefit lays out what employment insurance looks like (FR)",
-            benefit_content_en: null,
-            benefit_content_fr: null,
-            benefit_link_en: null,
-            benefit_link_fr: null,
+            long_description: null,
+            benefit_link: null,
           },
           {
             id: 2,
-            title_en: "Provincial Social Security (EN)",
-            title_fr: "Provincial Social Security (FR)",
-            title_es: null,
+            title: "Provincial Social Security",
             created_by: {
               id: 1,
               firstname: "admin",
@@ -316,20 +440,14 @@ describe("requestBenefits", () => {
             created_at: "2020-11-24T16:23:55.819Z",
             updated_at: "2020-11-24T16:23:55.836Z",
             benefit_key: "provincial_social_security",
-            benefit_description_en:
+            description:
               "Provincial Social Security benefit which hands out a check every month at retirement (en)",
-            benefit_description_fr:
-              "Provincial Social Security benefit which hands out a check every month at retirement (fr)",
-            benefit_content_en: null,
-            benefit_content_fr: null,
-            benefit_link_en: null,
-            benefit_link_fr: null,
+            long_description: null,
+            benefit_link: null,
           },
           {
             id: 3,
-            title_en: "New Parents Benefit (EN)",
-            title_fr: "New Parents Benefit (FR)",
-            title_es: null,
+            title: "New Parents Benefit",
             created_by: {
               id: 1,
               firstname: "admin",
@@ -345,14 +463,92 @@ describe("requestBenefits", () => {
             created_at: "2020-11-24T16:26:52.646Z",
             updated_at: "2020-11-24T16:26:52.661Z",
             benefit_key: "new_parents_benefit",
-            benefit_description_en:
+            description:
               "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
-            benefit_description_fr:
-              "The new parent benefits supplies supplemental income from the government during parental leave (FR)",
-            benefit_content_en: null,
-            benefit_content_fr: null,
-            benefit_link_en: null,
-            benefit_link_fr: null,
+            long_description: null,
+            benefit_link: null,
+          },
+        ],
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    fetchMock.getOnce(
+      BENEFITSERVICE_URL +
+        "/benefits?_start=1&_limit=10&_sort=created_at:asc&lang=fr",
+      {
+        status: 200,
+        body: [
+          {
+            id: 1,
+            title: "Employment Insurance",
+            created_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            updated_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            created_at: "2020-11-24T16:21:56.055Z",
+            updated_at: "2020-11-24T16:21:56.090Z",
+            benefit_key: "ei_benefit",
+            description:
+              "This benefit lays out what employment insurance looks like (EN)",
+            long_description: null,
+            benefit_link: null,
+          },
+          {
+            id: 2,
+            title: "Provincial Social Security",
+            created_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            updated_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            created_at: "2020-11-24T16:23:55.819Z",
+            updated_at: "2020-11-24T16:23:55.836Z",
+            benefit_key: "provincial_social_security",
+            description:
+              "Provincial Social Security benefit which hands out a check every month at retirement (en)",
+            long_description: null,
+            benefit_link: null,
+          },
+          {
+            id: 3,
+            title: "New Parents Benefit",
+            created_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            updated_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            created_at: "2020-11-24T16:26:52.646Z",
+            updated_at: "2020-11-24T16:26:52.661Z",
+            benefit_key: "new_parents_benefit",
+            description:
+              "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
+            long_description: null,
+            benefit_link: null,
           },
         ],
         headers: {
@@ -373,15 +569,22 @@ describe("requestBenefits", () => {
           sort: "created_at:asc",
         }
       ),
+      networkRequestActionCreator(
+        RESOURCE_TYPES.BENEFITS_FR,
+        NETWORK_REQUEST_TYPES.GET,
+        {
+          start: 1,
+          limit: 10,
+          sort: "created_at:asc",
+        }
+      ),
       networkReceivedActionCreator(
         RESOURCE_TYPES.BENEFITS,
         NETWORK_REQUEST_TYPES.GET,
         [
           {
             id: 1,
-            title_en: "Employment Insurance (EN)",
-            title_fr: "Employment Insurance Benefit (FR)",
-            title_es: null,
+            title: "Employment Insurance",
             created_by: {
               id: 1,
               firstname: "admin",
@@ -397,20 +600,14 @@ describe("requestBenefits", () => {
             created_at: "2020-11-24T16:21:56.055Z",
             updated_at: "2020-11-24T16:21:56.090Z",
             benefit_key: "ei_benefit",
-            benefit_description_en:
+            description:
               "This benefit lays out what employment insurance looks like (EN)",
-            benefit_description_fr:
-              "This benefit lays out what employment insurance looks like (FR)",
-            benefit_content_en: null,
-            benefit_content_fr: null,
-            benefit_link_en: null,
-            benefit_link_fr: null,
+            long_description: null,
+            benefit_link: null,
           },
           {
             id: 2,
-            title_en: "Provincial Social Security (EN)",
-            title_fr: "Provincial Social Security (FR)",
-            title_es: null,
+            title: "Provincial Social Security",
             created_by: {
               id: 1,
               firstname: "admin",
@@ -426,20 +623,14 @@ describe("requestBenefits", () => {
             created_at: "2020-11-24T16:23:55.819Z",
             updated_at: "2020-11-24T16:23:55.836Z",
             benefit_key: "provincial_social_security",
-            benefit_description_en:
+            description:
               "Provincial Social Security benefit which hands out a check every month at retirement (en)",
-            benefit_description_fr:
-              "Provincial Social Security benefit which hands out a check every month at retirement (fr)",
-            benefit_content_en: null,
-            benefit_content_fr: null,
-            benefit_link_en: null,
-            benefit_link_fr: null,
+            long_description: null,
+            benefit_link: null,
           },
           {
             id: 3,
-            title_en: "New Parents Benefit (EN)",
-            title_fr: "New Parents Benefit (FR)",
-            title_es: null,
+            title: "New Parents Benefit",
             created_by: {
               id: 1,
               firstname: "admin",
@@ -455,14 +646,85 @@ describe("requestBenefits", () => {
             created_at: "2020-11-24T16:26:52.646Z",
             updated_at: "2020-11-24T16:26:52.661Z",
             benefit_key: "new_parents_benefit",
-            benefit_description_en:
+            description:
               "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
-            benefit_description_fr:
-              "The new parent benefits supplies supplemental income from the government during parental leave (FR)",
-            benefit_content_en: null,
-            benefit_content_fr: null,
-            benefit_link_en: null,
-            benefit_link_fr: null,
+            long_description: null,
+            benefit_link: null,
+          },
+        ]
+      ),
+      networkReceivedActionCreator(
+        RESOURCE_TYPES.BENEFITS_FR,
+        NETWORK_REQUEST_TYPES.GET,
+        [
+          {
+            id: 1,
+            title: "Employment Insurance",
+            created_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            updated_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            created_at: "2020-11-24T16:21:56.055Z",
+            updated_at: "2020-11-24T16:21:56.090Z",
+            benefit_key: "ei_benefit",
+            description:
+              "This benefit lays out what employment insurance looks like (EN)",
+            long_description: null,
+            benefit_link: null,
+          },
+          {
+            id: 2,
+            title: "Provincial Social Security",
+            created_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            updated_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            created_at: "2020-11-24T16:23:55.819Z",
+            updated_at: "2020-11-24T16:23:55.836Z",
+            benefit_key: "provincial_social_security",
+            description:
+              "Provincial Social Security benefit which hands out a check every month at retirement (en)",
+            long_description: null,
+            benefit_link: null,
+          },
+          {
+            id: 3,
+            title: "New Parents Benefit",
+            created_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            updated_by: {
+              id: 1,
+              firstname: "admin",
+              lastname: "user",
+              username: null,
+            },
+            created_at: "2020-11-24T16:26:52.646Z",
+            updated_at: "2020-11-24T16:26:52.661Z",
+            benefit_key: "new_parents_benefit",
+            description:
+              "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
+            long_description: null,
+            benefit_link: null,
           },
         ]
       ),
@@ -484,6 +746,16 @@ describe("requestBenefits", () => {
       },
     });
 
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
+      status: 400,
+      body: {
+        some: "message",
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     const store = mockStore({});
 
     await store.dispatch(getBenefits());
@@ -491,6 +763,10 @@ describe("requestBenefits", () => {
     const expectedActions = [
       networkRequestActionCreator(
         RESOURCE_TYPES.BENEFITS,
+        NETWORK_REQUEST_TYPES.GET
+      ),
+      networkRequestActionCreator(
+        RESOURCE_TYPES.BENEFITS_FR,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestFailedActionCreator(
@@ -516,6 +792,16 @@ describe("requestBenefits", () => {
       },
     });
 
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
+      status: 404,
+      body: {
+        some: "message",
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     const store = mockStore({});
 
     await store.dispatch(getBenefits());
@@ -523,6 +809,10 @@ describe("requestBenefits", () => {
     const expectedActions = [
       networkRequestActionCreator(
         RESOURCE_TYPES.BENEFITS,
+        NETWORK_REQUEST_TYPES.GET
+      ),
+      networkRequestActionCreator(
+        RESOURCE_TYPES.BENEFITS_FR,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestFailedActionCreator(
@@ -548,6 +838,16 @@ describe("requestBenefits", () => {
       },
     });
 
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
+      status: 500,
+      body: {
+        some: "message",
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     const store = mockStore({});
 
     await store.dispatch(getBenefits());
@@ -555,6 +855,10 @@ describe("requestBenefits", () => {
     const expectedActions = [
       networkRequestActionCreator(
         RESOURCE_TYPES.BENEFITS,
+        NETWORK_REQUEST_TYPES.GET
+      ),
+      networkRequestActionCreator(
+        RESOURCE_TYPES.BENEFITS_FR,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestFailedActionCreator(
@@ -575,6 +879,11 @@ describe("requestBenefits", () => {
       body: "some message",
     });
 
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
+      status: 500,
+      body: "some message",
+    });
+
     const store = mockStore({});
 
     await store.dispatch(getBenefits());
@@ -582,6 +891,10 @@ describe("requestBenefits", () => {
     const expectedActions = [
       networkRequestActionCreator(
         RESOURCE_TYPES.BENEFITS,
+        NETWORK_REQUEST_TYPES.GET
+      ),
+      networkRequestActionCreator(
+        RESOURCE_TYPES.BENEFITS_FR,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestFailedActionCreator(
