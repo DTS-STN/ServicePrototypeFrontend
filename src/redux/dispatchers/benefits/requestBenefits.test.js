@@ -31,7 +31,7 @@ describe("requestBenefits", () => {
   });
 
   it("fetches benefits and dispatches the correct actions", async () => {
-    fetchMock.get(BENEFITSERVICE_URL + "/benefits", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits", {
       status: 200,
       body: [
         {
@@ -109,7 +109,7 @@ describe("requestBenefits", () => {
       },
     });
 
-    fetchMock.get(BENEFITSERVICE_URL + "/benefits?lang=fr", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
       status: 200,
       body: [
         {
