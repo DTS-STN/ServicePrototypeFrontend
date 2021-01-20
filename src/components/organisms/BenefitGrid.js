@@ -95,7 +95,6 @@ export function BenefitGrid(props) {
           moreInfoButtonText={props.benefitMoreInfoButtonText}
           onMoreInfoClick={props.onMoreInfoClick}
           onBenefitSelect={props.onBenefitSelect}
-          checkBoxAriaLabelBy={benefitData.checkBoxAriaLabelBy}
         />
       );
     }
@@ -131,7 +130,6 @@ BenefitGrid.propTypes = {
       benefitTag: PropTypes.string,
       benefitTitle: PropTypes.string.isRequired,
       benefitDescription: PropTypes.string.isRequired,
-      checkBoxAriaLabelBy: PropTypes.string.isRequired,
       isSelected: PropTypes.bool,
       isEligible: PropTypes.bool,
     })
