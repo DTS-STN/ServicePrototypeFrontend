@@ -9,7 +9,7 @@ export const en = {
   benefitsNextPage: "next benefits page",
   benefitsPreviousPage: "previous benefits page",
   chooseYourTopic: "Choose Your Topic",
-  ApplyButtonText: "Apply",
+  ApplyButtonText: "Apply Now",
 
   //links
   departmentAndAgenciesLink: "https://www.canada.ca/en/government/dept.html",

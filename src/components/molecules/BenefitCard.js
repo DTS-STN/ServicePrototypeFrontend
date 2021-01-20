@@ -38,12 +38,14 @@ export function BenefitCard(props) {
       <p className="m-auto truncate-4-lines w-full">
         {props.benefitDescription}
       </p>
-      <ActionButton
-        text={props.moreInfoButtonText}
-        rounded={true}
-        className={"bg-bg-gray-dk text-white hover:bg-black"}
-        onClick={handleClick}
-      />
+      <div className="mt-4">
+        <ActionButton
+          text={props.moreInfoButtonText}
+          rounded={true}
+          className={"bg-bg-gray-dk text-white hover:bg-black"}
+          onClick={handleClick}
+        />
+      </div>
     </BenefitCardBox>
   );
 }
