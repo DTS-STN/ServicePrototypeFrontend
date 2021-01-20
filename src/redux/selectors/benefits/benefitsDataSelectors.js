@@ -5,36 +5,40 @@ import { languageSelector } from "../language";
 export const benefitsMapSelector = (state) =>
   state.benefits.benefitsData.benefitsMap;
 
+export const benefitsMapSelectorFr = (state) =>
+  state.benefits.benefitsData.benefitsMapFr;
+
 export const benefitTransformer = (data, lang) => {
   return {
     benefitId: data.benefit_key,
-    benefitTag: data.benefit_tags.reduce((accumulator, item, index, array) => {
-      if (accumulator === "") {
-        return accumulator + item[`tag_${lang}`];
-      }
-      return accumulator + ", " + item[`tag_${lang}`];
-    }, ""),
-    benefitTitle: data[`title_${lang}`],
-    benefitDescription: data[`benefit_description_${lang}`],
-    benefitContent: data[`benefit_content_${lang}`],
+    benefitTitle: data[`title`],
+    benefitDescription: data[`description`],
+    benefitContent: data[`long_description`],
     checkBoxAriaLabelBy:
       lang === "fr"
-        ? `sélectionner ${data["title_fr"]}`
-        : `select ${data["title_en"]}`,
+        ? `sélectionner ${data["title"]}`
+        : `select ${data["title"]}`,
     isSelected: data.isSelected,
     isEligible: data.isEligible,
   };
 };
 
 // selector for one particular benefit
-export const benefitSelectorFactory = (benefitID) => {
+export const benefitSelectorFactory = (benefitId) => {
   return createSelector(
     languageSelector,
     benefitsMapSelector,
-    (lang, benefitsData) => {
-      return benefitsData[benefitID]
-        ? benefitTransformer(benefitsData[benefitID], lang)
-        : undefined;
+    benefitsMapSelectorFr,
+    (lang, benefitsData, benefitsDataFr) => {
+      if (lang === "fr") {
+        return benefitsDataFr[benefitId]
+          ? benefitTransformer(benefitsDataFr[benefitId], lang)
+          : undefined;
+      } else {
+        return benefitsData[benefitId]
+          ? benefitTransformer(benefitsData[benefitId], lang)
+          : undefined;
+      }
     }
   );
 };
@@ -43,9 +47,16 @@ export const benefitSelectorFactory = (benefitID) => {
 export const benefitsDataSelector = createSelector(
   languageSelector,
   benefitsMapSelector,
-  (lang, benefitsData) => {
-    return Object.keys(benefitsData).map((id) => {
-      return benefitTransformer(benefitsData[id], lang);
-    });
+  benefitsMapSelectorFr,
+  (lang, benefitsData, benefitsDataFr) => {
+    if (lang === "fr") {
+      return Object.keys(benefitsDataFr).map((id) => {
+        return benefitTransformer(benefitsDataFr[id], lang);
+      });
+    } else {
+      return Object.keys(benefitsData).map((id) => {
+        return benefitTransformer(benefitsData[id], lang);
+      });
+    }
   }
 );
