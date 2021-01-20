@@ -31,7 +31,7 @@ export const benefitsCount = function (
           fetchFailed: false,
           fetchFailedReason: "",
           fetchFailedObj: {},
-          count: state.count + action.body.count,
+          count: action.body.count,
         };
       }
       break;

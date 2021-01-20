@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 // react router imports
 import { useParams } from "react-router-dom";
 
+// i18n imports
+import { useTranslation } from "react-i18next";
+
 // redux imports
 import { useSelector, useDispatch } from "react-redux";
 import { benefitSelectorFactory } from "../redux/selectors/benefits";
@@ -42,6 +45,8 @@ export function BenefitPage() {
   const benefitSelector = benefitSelectorFactory(id);
   const benefitData = useSelector(benefitSelector);
 
+  const { t } = useTranslation();
+
   //redux dispatch
   const dispatch = useDispatch();
 
@@ -78,6 +83,7 @@ export function BenefitPage() {
           ? benefitData.benefitContent
           : "Looks like there is no content yet"
       }
+      ApplyButtonText={t("ApplyButtonText")}
     />
   );
 }

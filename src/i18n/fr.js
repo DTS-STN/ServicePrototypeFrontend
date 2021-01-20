@@ -8,6 +8,7 @@ export const fr = {
   benefitsNextPage: "page suivante des avantages",
   benefitsPreviousPage: "page des avantages précédente",
   chooseYourTopic: "Choisissez votre sujet",
+  ApplyButtonText: "appliquer maintenant",
 
   //links
   departmentAndAgenciesLink: "https://www.canada.ca/fr/gouvernement/min.html",
