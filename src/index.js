@@ -6,8 +6,7 @@ import App from "./App";
 import store from "./redux";
 import { Provider } from "react-redux";
 import "./i18n";
-
-import keycloak from "./keycloak";
+import { keycloak } from "./keycloak";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
