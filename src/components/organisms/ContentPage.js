@@ -83,7 +83,7 @@ export function ContentPage(props) {
       <div className="mt-6 flex justify-end">
         <ActionButton
           text={props.ApplyButtonText}
-          className={"bg-bg-gray-dk text-white hover:bg-black mb-4 py-2 px-16 "}
+          className={"bg-bg-gray-dk text-white hover:bg-black mb-4 py-2 px-16"}
           // onClick={handleClick}
         />
       </div>
