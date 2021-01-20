@@ -4,6 +4,7 @@ import { Home } from "../pages/home";
 import { NotFoundPage } from "../pages/404";
 import { BenefitPage } from "../pages/benefit";
 import { LifeJourneyPage } from "../pages/lifejourneys";
+import { ThankYouPage } from "../pages/thankyou";
 
 function Routes() {
   return (
@@ -12,6 +13,7 @@ function Routes() {
         <Route path="/" exact component={Home} />
         <Route path="/benefit/:id" component={BenefitPage} />
         <Route path="/lifejourney/:id" component={LifeJourneyPage} />
+        <Route path="/thankyou" component={ThankYouPage} />
         <Route path="*" component={NotFoundPage} />
       </Switch>
     </Router>

@@ -8,6 +8,7 @@ export const fr = {
   benefitsNextPage: "page suivante des avantages",
   benefitsPreviousPage: "page des avantages précédente",
   chooseYourTopic: "Choisissez votre sujet",
+  ApplyButtonText: "appliquer maintenant",
 
   //links
   departmentAndAgenciesLink: "https://www.canada.ca/fr/gouvernement/min.html",
@@ -56,4 +57,8 @@ export const fr = {
   //404
   notFound: "(404) Page non trouvée.",
   pageDoesntExist: "La page suivante n'existe pas",
+
+  //thankyou page
+  thankYouTitle: "FR: Thank you",
+  thankYouContent: "FR: Thank you for applying",
 };

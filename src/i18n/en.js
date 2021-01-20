@@ -9,6 +9,7 @@ export const en = {
   benefitsNextPage: "next benefits page",
   benefitsPreviousPage: "previous benefits page",
   chooseYourTopic: "Choose Your Topic",
+  ApplyButtonText: "Apply Now",
 
   //links
   departmentAndAgenciesLink: "https://www.canada.ca/en/government/dept.html",
@@ -57,4 +58,8 @@ export const en = {
   //404
   notFound: "(404) Page not found.",
   pageDoesntExist: "The following page does not exist",
+
+  //thankyou page
+  thankYouTitle: "Thank you",
+  thankYouContent: "Thank you for applying",
 };
