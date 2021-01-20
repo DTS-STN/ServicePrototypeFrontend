@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 // i18n imports
 import { useTranslation } from "react-i18next";
@@ -19,16 +19,25 @@ import { useHistory } from "react-router-dom";
 // component imports
 import { Page } from "../components/organisms/Page";
 import { PageDescription } from "../components/atoms/PageDescription";
-import { Title } from "../components/atoms/Title";
 import { BenefitGrid } from "../components/organisms/BenefitGrid";
 import { BenefitsCounter } from "../components/atoms/BenefitsCounter";
 import { ErrorPage } from "../components/organisms/ErrorPage";
+
+import { TitleUserLogout } from "../components/molecules/TitleUserLogout";
+import { Login } from "../components/molecules/Login";
+import { useKeycloak } from "@react-keycloak/web";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
     false
   );
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
+
+  // Keycloak Services
+  const { keycloak } = useKeycloak();
+  const loginOnClick = useCallback(() => {
+    keycloak.login();
+  }, [keycloak]);
 
   // benefit redux subscriptions
   const isFetchingBenefits = useSelector(
@@ -43,6 +52,7 @@ export function Home() {
   const fetchBenefitsCountFailed = useSelector(
     (state) => state.benefits.benefitsCount.fetchFailed
   );
+
   const fetchBenefitsFailedObj = useSelector(
     (state) => state.benefits.benefitsData.fetchFailedObj
   );
@@ -108,17 +118,42 @@ export function Home() {
           fetchBenefitsFailed
             ? fetchBenefitsFailedObj
             : fetchBenefitsCountFailedObj
+          // ? fetchBenefitsCountFailedObj    TODO  verify this 2 lines
+          // : fetchLifeJourneysFailedObj
         }
       />
     );
   }
+
   return (
     <Page>
       <main className="font-sans">
-        <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title>
+        {/* <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title> */}
+
+        <TitleUserLogout
+          titleChildren={t("homePageTitle")}
+          titleDataCy={"home-page-title"}
+          isAuthenticated={keycloak.authenticated}
+          userName={`${
+            keycloak.authenticated ? keycloak.idTokenParsed.name : ""
+          }`}
+          logoutText={t("Logout")}
+          onClick={() => keycloak.logout()}
+        />
+
+        {/* Displays the login button only when the user hasn't login    */}
+        {!keycloak.authenticated ? (
+          <Login text="Login" onClick={loginOnClick} />
+        ) : (
+          ""
+        )}
+
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>
+
+        <h2 className="text-3xl mb-2">{t("chooseYourTopic")}</h2>
+
         <section className="flex mb-12">
           <BenefitsCounter
             dataCy={"home-page-benefit-counter"}
