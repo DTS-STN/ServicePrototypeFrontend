@@ -23,6 +23,7 @@ export function ActionButton(props) {
       onMouseLeave={props.onMouseLeave}
       id={props.id}
       data-cy={props.id}
+      data-cy-button={props.dataCyButton}
     >
       {props.icon ? (
         <span className={props.icon} data-testid={props.dataTestId} />
@@ -94,4 +95,12 @@ ActionButton.propTypes = {
    * Test id for unit test
    */
   dataTestId: PropTypes.string,
+  /**
+   * Test id for e2e test
+   */
+  dataCy: PropTypes.string,
+  /**
+   * Test id for e2e test
+   */
+  dataCyButton: PropTypes.string,
 };
