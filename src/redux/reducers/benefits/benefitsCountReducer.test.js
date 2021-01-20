@@ -69,7 +69,7 @@ describe("benefitsCountReducer", () => {
       fetchFailed: false,
       fetchFailedReason: "",
       fetchFailedObj: {},
-      count: 20,
+      count: 10,
     });
   });
   it("handles network request failed action", () => {
