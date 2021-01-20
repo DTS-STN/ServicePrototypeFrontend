@@ -56,4 +56,8 @@ export const fr = {
   //404
   notFound: "(404) Page non trouvée.",
   pageDoesntExist: "La page suivante n'existe pas",
+
+  //thankyou page
+  thankYouTitle: "FR: Thank you",
+  thankYouContent: "FR: Thank you for applying",
 };
