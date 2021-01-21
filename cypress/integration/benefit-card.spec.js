@@ -93,25 +93,7 @@ it('always gets the new data for the count for the benefits returned from the se
          cy.url().should('include', '/benefit/1') 
       });
       
-      it.only("Should show the Benefit details page", () => {
-        // the benefit text is returned from the server, the text here is being mocked
-         cy.intercept("benefit/1", { fixture: "benefit-cardEN.json" }).as("getBenefitsEN");
-  
-         cy.visit("http://localhost:3000/benefit/1");
-  
-         cy.wait("@getBenefitsEN");
-        // these commands will not run until the wait command resolves above
-        //  cy.get("[data-cy-button=more-info-button]").should("be.visible")
-        //  cy.get("[data-cy-button=more-info-button]").should('have.length', 3)
-        //  cy.get("[data-cy-button=more-info-button]").first().as('firstButton')
-        //  cy.get('@firstButton').click()
-        //  cy.get("[data-cy-button=more-info-button]").first().as('firstButton')
-        //  cy.get('@firstButton').click()
-        //  cy.intercept("benefit/1", { fixture: "benefit-cardEN.json" }).as("getBenefitsEN");
-        //  cy.wait("@getBenefitsEN");
-        //  cy.get('@firstButton').click()
-        //  cy.url().should('include', '/benefit/1') 
-      });
+
       
 
 
