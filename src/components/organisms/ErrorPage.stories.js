@@ -7,6 +7,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import "./../../i18n";
+import { ReactKeycloakProvider } from "@react-keycloak/web";
 
 function Wrapper(props) {
   const language = useSelector((state) => state.language);
@@ -20,17 +21,27 @@ function Wrapper(props) {
   return <>{props.children}</>;
 }
 
+const keycloak = {
+  init: () => {
+    return Promise.resolve({});
+  },
+  login: () => {},
+  logout: () => {},
+};
+
 export default {
   title: "Components/Organisms/ErrorPage",
   component: ErrorPage,
   decorators: [
     (Story) => {
       return (
-        <Provider store={createStore(rootReducer, composeWithDevTools())}>
-          <Wrapper>
-            <Story />
-          </Wrapper>
-        </Provider>
+        <ReactKeycloakProvider authClient={keycloak}>
+          <Provider store={createStore(rootReducer, composeWithDevTools())}>
+            <Wrapper>
+              <Story />
+            </Wrapper>
+          </Provider>
+        </ReactKeycloakProvider>
       );
     },
   ],

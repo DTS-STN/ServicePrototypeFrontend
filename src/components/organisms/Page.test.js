@@ -14,6 +14,10 @@ let mockStore;
 
 jest.mock("react-i18next");
 
+beforeEach(() => {
+  mockStore = configureMockStore();
+});
+
 const keycloak = {
   init: () => {
     return Promise.resolve({});
@@ -21,10 +25,6 @@ const keycloak = {
   login: () => {},
   logout: () => {},
 };
-
-beforeEach(() => {
-  mockStore = configureMockStore();
-});
 
 it("renders Page component in its Primary state when language is english", () => {
   let store = mockStore({

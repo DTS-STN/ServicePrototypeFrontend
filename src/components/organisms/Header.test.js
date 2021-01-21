@@ -8,7 +8,7 @@ it("renders header component in Primary state", () => {
   render(<Primary {...Primary.args} />);
 
   screen.getByAltText(Primary.args.headerCanadaCaAltText);
-  const button = screen.getByRole("button");
+  const button = screen.getByRole("button", { name: Primary.args.language });
 
   expect(button.innerHTML).toEqual(Primary.args.language);
   expect(screen.getByRole("heading").innerHTML).toEqual(Primary.args.siteTitle);
