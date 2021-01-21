@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 // i18n imports
 import { useTranslation } from "react-i18next";
@@ -24,20 +24,12 @@ import { BenefitsCounter } from "../components/atoms/BenefitsCounter";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 
 import { Title } from "../components/atoms/Title";
-import { useKeycloak } from "@react-keycloak/web";
-import { LogInOut } from "../components/molecules/LogInOut";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
     false
   );
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
-
-  // Keycloak Services
-  const { keycloak } = useKeycloak();
-  const loginOnClick = useCallback(() => {
-    keycloak.login();
-  }, [keycloak]);
 
   // benefit redux subscriptions
   const isFetchingBenefits = useSelector(
@@ -126,17 +118,6 @@ export function Home() {
   return (
     <Page>
       <main className="font-sans">
-        <LogInOut
-          loginText="Login"
-          onLogin={loginOnClick}
-          isAuthenticated={keycloak.authenticated}
-          userName={`${
-            keycloak.authenticated ? keycloak.idTokenParsed.name : ""
-          }`}
-          logoutText={t("Logout")}
-          onLogout={() => keycloak.logout()}
-        />
-
         <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title>
 
         <PageDescription dataCy={"home-page-description"}>

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { changeLanguageCreator, LANGUAGES } from "../../redux/actions";
+import { useKeycloak } from "@react-keycloak/web";
 
 /**
  * page component complete with canada.ca header and footer
@@ -23,6 +24,12 @@ export function Page(props) {
     }
   };
 
+  // Keycloak Services
+  const { keycloak } = useKeycloak();
+  const loginOnClick = useCallback(() => {
+    keycloak.login();
+  }, [keycloak]);
+
   return (
     <div className="w-screen h-screen flex flex-col">
       <Header
@@ -30,7 +37,16 @@ export function Page(props) {
         headerCanadaCaAltText={t("headerCanadaCaAltText")}
         language={language === "fr" ? "English" : "Français"}
         siteTitle={t("siteTitle")}
+        loginText={t("Login")}
+        onLogin={loginOnClick}
+        isAuthenticated={keycloak.authenticated}
+        userName={`${
+          keycloak.authenticated ? keycloak.idTokenParsed.name : ""
+        }`}
+        logoutText={t("Logout")}
+        onLogout={() => keycloak.logout()}
       />
+
       <div className="w-full md:w-2/3 m-0 md:mr-auto md:ml-auto p-4 md:p-0">
         {props.children}
       </div>

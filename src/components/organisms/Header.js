@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ActionButton } from "../atoms/ActionButton";
 import headerLogo from "../../assets/images/sig-blk-en.svg";
+import { LogInOut } from "../molecules/LogInOut";
 
 export function Header(props) {
   return (
@@ -33,6 +34,19 @@ export function Header(props) {
           </h1>
         </div>
       </div>
+
+      <div className="w-full flex justify-center items-center mt-2">
+        <div className="w-full md:w-2/3 flex justify-end items-center">
+          <LogInOut
+            loginText={props.loginText}
+            onLogin={props.onLogin}
+            isAuthenticated={props.isAuthenticated}
+            userName={props.userName}
+            logoutText={props.logoutText}
+            onLogout={props.onLogout}
+          />
+        </div>
+      </div>
     </div>
   );
 }
@@ -57,4 +71,29 @@ Header.propTypes = {
    * title of the site
    */
   siteTitle: PropTypes.string.isRequired,
+
+  /**
+   * Text for the LogInOut button
+   */
+  loginText: PropTypes.string,
+  /**
+   * Text for the LogInOut button
+   */
+  logoutText: PropTypes.string,
+  /**
+   * authentication flag
+   */
+  isAuthenticated: PropTypes.bool,
+  /**
+   * text for the user name
+   */
+  userName: PropTypes.string,
+  /**
+   * Event Handler for the Login function
+   */
+  onLogin: PropTypes.func,
+  /**
+   * Event Handler for the Logout function
+   */
+  onLogout: PropTypes.func,
 };
