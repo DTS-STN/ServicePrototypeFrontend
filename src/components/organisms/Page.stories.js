@@ -6,6 +6,7 @@ import { rootReducer } from "../../redux/reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { ReactKeycloakProvider } from "@react-keycloak/web";
 import "./../../i18n";
 
 function Wrapper(props) {
@@ -20,17 +21,26 @@ function Wrapper(props) {
   return <>{props.children}</>;
 }
 
+const keycloak = {
+  init: () => {
+    return Promise.resolve({});
+  },
+  login: () => {},
+  logout: () => {},
+};
 export default {
   title: "Components/Organisms/Page",
   component: Page,
   decorators: [
     (Story) => {
       return (
-        <Provider store={createStore(rootReducer, composeWithDevTools())}>
-          <Wrapper>
-            <Story />
-          </Wrapper>
-        </Provider>
+        <ReactKeycloakProvider authClient={keycloak}>
+          <Provider store={createStore(rootReducer, composeWithDevTools())}>
+            <Wrapper>
+              <Story />
+            </Wrapper>
+          </Provider>
+        </ReactKeycloakProvider>
       );
     },
   ],

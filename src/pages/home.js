@@ -22,22 +22,13 @@ import { PageDescription } from "../components/atoms/PageDescription";
 import { BenefitGrid } from "../components/organisms/BenefitGrid";
 import { BenefitsCounter } from "../components/atoms/BenefitsCounter";
 import { ErrorPage } from "../components/organisms/ErrorPage";
-
-import { TitleUserLogout } from "../components/molecules/TitleUserLogout";
-import { Login } from "../components/molecules/Login";
-import { useKeycloak } from "@react-keycloak/web";
+import { Title } from "../components/atoms/Title";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
     false
   );
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
-
-  // Keycloak Services
-  const { keycloak } = useKeycloak();
-  const loginOnClick = useCallback(() => {
-    keycloak.login();
-  }, [keycloak]);
 
   // benefit redux subscriptions
   const isFetchingBenefits = useSelector(
@@ -118,8 +109,6 @@ export function Home() {
           fetchBenefitsFailed
             ? fetchBenefitsFailedObj
             : fetchBenefitsCountFailedObj
-          // ? fetchBenefitsCountFailedObj    TODO  verify this 2 lines
-          // : fetchLifeJourneysFailedObj
         }
       />
     );
@@ -128,26 +117,7 @@ export function Home() {
   return (
     <Page>
       <main className="font-sans">
-        {/* <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title> */}
-
-        <TitleUserLogout
-          titleChildren={t("homePageTitle")}
-          titleDataCy={"home-page-title"}
-          isAuthenticated={keycloak.authenticated}
-          userName={`${
-            keycloak.authenticated ? keycloak.idTokenParsed.name : ""
-          }`}
-          logoutText={t("Logout")}
-          onClick={() => keycloak.logout()}
-        />
-
-        {/* Displays the login button only when the user hasn't login    */}
-        {!keycloak.authenticated ? (
-          <Login text="Login" onClick={loginOnClick} />
-        ) : (
-          ""
-        )}
-
+        <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title>
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>

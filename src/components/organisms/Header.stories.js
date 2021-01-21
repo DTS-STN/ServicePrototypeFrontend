@@ -13,4 +13,17 @@ Primary.args = {
   headerCanadaCaAltText: "Canada.ca logo",
   language: "French",
   siteTitle: "Benefits Finder",
+  loginText: "Log In",
+  logoutText: "Log Out",
+};
+
+export const Authenticated = Template.bind({});
+Authenticated.args = {
+  headerCanadaCaAltText: "Canada.ca logo",
+  language: "French",
+  siteTitle: "Benefits Finder",
+  loginText: "Log In",
+  logoutText: "Log Out",
+  isAuthenticated: true,
+  userName: "Linda Smith",
 };
