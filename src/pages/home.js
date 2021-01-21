@@ -23,9 +23,8 @@ import { BenefitGrid } from "../components/organisms/BenefitGrid";
 import { BenefitsCounter } from "../components/atoms/BenefitsCounter";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 
-import { Title } from "../components/atoms/Title";
-//import { TitleUserLogout } from "../components/molecules/TitleUserLogout";
-import { LogInOut } from "../components/molecules/LogInOut";
+import { TitleUserLogout } from "../components/molecules/TitleUserLogout";
+import { Login } from "../components/molecules/Login";
 import { useKeycloak } from "@react-keycloak/web";
 
 export function Home() {
@@ -119,6 +118,8 @@ export function Home() {
           fetchBenefitsFailed
             ? fetchBenefitsFailedObj
             : fetchBenefitsCountFailedObj
+          // ? fetchBenefitsCountFailedObj    TODO  verify this 2 lines
+          // : fetchLifeJourneysFailedObj
         }
       />
     );
@@ -127,18 +128,9 @@ export function Home() {
   return (
     <Page>
       <main className="font-sans">
-        {/* Displays the login button only when the user hasn't login    */}
-        <LogInOut
-          loginText={t("Login")}
-          onLogin={loginOnClick}
-          isAuthenticated={keycloak.authenticated}
-          logoutText={t("Logout")}
-          onLogout={keycloak.logout()}
-        />
+        {/* <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title> */}
 
-        <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title>
-
-        {/* <TitleUserLogout
+        <TitleUserLogout
           titleChildren={t("homePageTitle")}
           titleDataCy={"home-page-title"}
           isAuthenticated={keycloak.authenticated}
@@ -147,7 +139,14 @@ export function Home() {
           }`}
           logoutText={t("Logout")}
           onClick={() => keycloak.logout()}
-        /> */}
+        />
+
+        {/* Displays the login button only when the user hasn't login    */}
+        {!keycloak.authenticated ? (
+          <Login text="Login" onClick={loginOnClick} />
+        ) : (
+          ""
+        )}
 
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
