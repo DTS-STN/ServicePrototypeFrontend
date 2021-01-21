@@ -8,12 +8,12 @@ import { ActionButton } from "../atoms/ActionButton";
 export function LogInOut(props) {
   return (
     <div className="flex justify-end">
-      <div className="text-blue-700 font-normal pt-1 pr-4">
+      <div className="text-white font-normal pt-1 pr-4">
         {props.isAuthenticated ? props.userName : ""}
       </div>
 
       <ActionButton
-        className={"bg-bg-gray-dk text-white  hover:bg-black"}
+        invert
         id="LogInOut"
         text={!props.isAuthenticated ? props.loginText : props.logoutText}
         onClick={!props.isAuthenticated ? props.onLogin : props.onLogout}

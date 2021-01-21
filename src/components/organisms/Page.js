@@ -4,15 +4,16 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
+import { useKeycloak } from "@react-keycloak/web";
 import { changeLanguageCreator, LANGUAGES } from "../../redux/actions";
 
 /**
  * page component complete with canada.ca header and footer
  */
-
 export function Page(props) {
   const language = useSelector((state) => state.language);
   const dispatch = useDispatch();
+  const { keycloak } = useKeycloak();
   const { t } = useTranslation();
 
   let languageButtonHandler = () => {
@@ -30,6 +31,16 @@ export function Page(props) {
         headerCanadaCaAltText={t("headerCanadaCaAltText")}
         language={language === "fr" ? "English" : "Français"}
         siteTitle={t("siteTitle")}
+        loginText={t("Login")}
+        logoutText={t("Logout")}
+        isAuthenticated={keycloak.authenticated}
+        onLogin={() => {
+          keycloak.login();
+        }}
+        userName={`${
+          keycloak.authenticated ? keycloak.idTokenParsed.name : ""
+        }`}
+        onLogout={() => keycloak.logout()}
       />
       <div className="w-full md:w-2/3 m-0 md:mr-auto md:ml-auto p-4 md:p-0">
         {props.children}

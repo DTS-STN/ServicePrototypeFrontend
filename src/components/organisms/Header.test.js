@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import { Primary } from "./Header.stories";
+import { Authenticated, Primary } from "./Header.stories";
 
 it("renders header component in Primary state", () => {
   Primary.args.onLanguageClick = jest.fn((x) => "");
@@ -16,4 +16,11 @@ it("renders header component in Primary state", () => {
   button.click();
 
   expect(Primary.args.onLanguageClick.mock.calls.length).toBe(1);
+});
+
+it("renders header component in Authenticated state", () => {
+  render(<Authenticated {...Authenticated.args} />);
+
+  screen.getByRole("button", { name: Authenticated.args.logoutText });
+  screen.getByText(Authenticated.args.userName);
 });
