@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 // i18n imports
 import { useTranslation } from "react-i18next";
@@ -19,10 +19,10 @@ import { useHistory } from "react-router-dom";
 // component imports
 import { Page } from "../components/organisms/Page";
 import { PageDescription } from "../components/atoms/PageDescription";
-import { Title } from "../components/atoms/Title";
 import { BenefitGrid } from "../components/organisms/BenefitGrid";
 import { BenefitsCounter } from "../components/atoms/BenefitsCounter";
 import { ErrorPage } from "../components/organisms/ErrorPage";
+import { Title } from "../components/atoms/Title";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
@@ -43,6 +43,7 @@ export function Home() {
   const fetchBenefitsCountFailed = useSelector(
     (state) => state.benefits.benefitsCount.fetchFailed
   );
+
   const fetchBenefitsFailedObj = useSelector(
     (state) => state.benefits.benefitsData.fetchFailedObj
   );
@@ -112,6 +113,7 @@ export function Home() {
       />
     );
   }
+
   return (
     <Page>
       <main className="font-sans">
@@ -119,6 +121,9 @@ export function Home() {
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>
+
+        <h2 className="text-3xl mb-2">{t("chooseYourTopic")}</h2>
+
         <section className="flex mb-12">
           <BenefitsCounter
             dataCy={"home-page-benefit-counter"}

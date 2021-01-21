@@ -8,6 +8,7 @@ import { changeLanguageCreator, LANGUAGES } from "../../redux/actions";
 import { useTranslation } from "react-i18next";
 import { en } from "../../i18n/en";
 import { fr } from "../../i18n/fr";
+import { ReactKeycloakProvider } from "@react-keycloak/web";
 
 let mockStore;
 
@@ -16,6 +17,14 @@ jest.mock("react-i18next");
 beforeEach(() => {
   mockStore = configureMockStore();
 });
+
+const keycloak = {
+  init: () => {
+    return Promise.resolve({});
+  },
+  login: () => {},
+  logout: () => {},
+};
 
 it("renders Page component in its Primary state when language is english", () => {
   let store = mockStore({
@@ -29,9 +38,11 @@ it("renders Page component in its Primary state when language is english", () =>
   });
 
   render(
-    <Provider store={store}>
-      <Primary {...Primary.args} />
-    </Provider>
+    <ReactKeycloakProvider authClient={keycloak}>
+      <Provider store={store}>
+        <Primary {...Primary.args} />
+      </Provider>
+    </ReactKeycloakProvider>
   );
 
   expect(screen.getAllByAltText(en.headerCanadaCaAltText).length).toBe(2);
@@ -77,9 +88,11 @@ it("renders Page component in its Primary state when language is french", () => 
   });
 
   render(
-    <Provider store={store}>
-      <Primary {...Primary.args} />
-    </Provider>
+    <ReactKeycloakProvider authClient={keycloak}>
+      <Provider store={store}>
+        <Primary {...Primary.args} />
+      </Provider>
+    </ReactKeycloakProvider>
   );
 
   expect(screen.getAllByAltText(fr.headerCanadaCaAltText).length).toBe(2);

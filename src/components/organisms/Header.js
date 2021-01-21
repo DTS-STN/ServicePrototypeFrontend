@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ActionButton } from "../atoms/ActionButton";
+import { LogInOut } from "../molecules/LogInOut";
 import headerLogo from "../../assets/images/sig-blk-en.svg";
 
 export function Header(props) {
@@ -31,6 +32,14 @@ export function Header(props) {
           >
             {props.siteTitle}
           </h1>
+          <LogInOut
+            isAuthenticated={props.isAuthenticated}
+            userName={props.userName}
+            loginText={props.loginText}
+            logoutText={props.logoutText}
+            onLogin={props.onLogin}
+            onLogout={props.onLogout}
+          />
         </div>
       </div>
     </div>
@@ -57,4 +66,34 @@ Header.propTypes = {
    * title of the site
    */
   siteTitle: PropTypes.string.isRequired,
+
+  /**
+   * Text for the log in button
+   */
+  loginText: PropTypes.string.isRequired,
+
+  /**
+   * Text for the log out button
+   */
+  logoutText: PropTypes.string.isRequired,
+
+  /**
+   * auth flag
+   */
+  isAuthenticated: PropTypes.bool,
+
+  /**
+   * text for username
+   */
+  userName: PropTypes.string,
+
+  /**
+   * Event handler for login function
+   */
+  onLogin: PropTypes.func,
+
+  /**
+   * Event handler for logout function
+   */
+  onLogout: PropTypes.func,
 };

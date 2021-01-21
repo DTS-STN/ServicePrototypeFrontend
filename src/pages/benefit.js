@@ -19,8 +19,15 @@ import { NotFoundPage } from "./404";
 import { Page } from "../components/organisms/Page";
 import { Spinner } from "../components/atoms/Spinner";
 
+// variable imports
+import { CURAM_UA_LINK } from "../variables";
+
+//keycloak
+import { useKeycloak } from "@react-keycloak/web";
+
 export function BenefitPage() {
   const [triedFetch, setTriedFetch] = useState(false);
+  const { keycloak } = useKeycloak();
 
   // react router
   const { id } = useParams();
@@ -57,6 +64,15 @@ export function BenefitPage() {
     }
   }, [triedFetch, isFetchingBenefits, fetchBenefitsFailed, id, dispatch]);
 
+  const applyButtonClickHandler = () => {
+    // if not logged in log in first
+    if (!keycloak.authenticated) {
+      keycloak.login();
+    } else {
+      window.location.replace(CURAM_UA_LINK);
+    }
+  };
+
   if (fetchBenefitsFailed) {
     if (fetchBenefitsFailedReason === NETWORK_FAILED_REASONS.NOT_FOUND) {
       return <NotFoundPage />;
@@ -84,6 +100,7 @@ export function BenefitPage() {
           : "Looks like there is no content yet"
       }
       ApplyButtonText={t("ApplyButtonText")}
+      onApplyButtonClick={applyButtonClickHandler}
     />
   );
 }

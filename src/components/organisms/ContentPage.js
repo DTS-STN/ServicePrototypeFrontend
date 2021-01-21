@@ -80,22 +80,32 @@ export function ContentPage(props) {
         </ReactMarkdownWithHTML>
         {props.afterContent}
       </main>
-      <div className="mt-6 flex justify-end">
-        <ActionButton
-          text={props.ApplyButtonText}
-          className={"bg-bg-gray-dk text-white hover:bg-black mb-4 py-2 px-16"}
-          // onClick={handleClick}
-        />
-      </div>
+      {props.ApplyButtonText ? (
+        <div className="mt-6 flex justify-end">
+          <ActionButton
+            text={props.ApplyButtonText}
+            className={
+              "bg-bg-gray-dk text-white hover:bg-black mb-4 py-2 px-16"
+            }
+            onClick={props.onApplyButtonClick}
+          />
+        </div>
+      ) : null}
     </Page>
   );
 }
 
 ContentPage.propTypes = {
   /**
-   * More info button text
+   * Apply button text
    */
   ApplyButtonText: PropTypes.string.isRequired,
+
+  /**
+   * Apply button handler
+   */
+  onApplyButtonClick: PropTypes.func,
+
   /**
    * items before any actual content
    */
