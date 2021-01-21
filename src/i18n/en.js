@@ -62,4 +62,7 @@ export const en = {
   //thankyou page
   thankYouTitle: "Thank you",
   thankYouContent: "Thank you for applying",
+
+  login: "Login",
+  logout: "Logout",
 };

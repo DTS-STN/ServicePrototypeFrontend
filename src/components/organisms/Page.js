@@ -31,8 +31,8 @@ export function Page(props) {
         headerCanadaCaAltText={t("headerCanadaCaAltText")}
         language={language === "fr" ? "English" : "Français"}
         siteTitle={t("siteTitle")}
-        loginText={t("Login")}
-        logoutText={t("Logout")}
+        loginText={t("login")}
+        logoutText={t("logout")}
         isAuthenticated={keycloak.authenticated}
         onLogin={() => {
           keycloak.login();
