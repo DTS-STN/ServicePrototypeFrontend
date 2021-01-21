@@ -61,4 +61,8 @@ export const fr = {
   //thankyou page
   thankYouTitle: "FR: Thank you",
   thankYouContent: "FR: Thank you for applying",
+
+  //login / logout
+  login: "Login FR",
+  logout: "Logout FR",
 };
