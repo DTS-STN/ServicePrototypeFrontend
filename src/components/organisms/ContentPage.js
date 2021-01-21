@@ -87,7 +87,7 @@ export function ContentPage(props) {
             className={
               "bg-bg-gray-dk text-white hover:bg-black mb-4 py-2 px-16"
             }
-            // onClick={handleClick}
+            onClick={props.onApplyButtonClick}
           />
         </div>
       ) : null}
@@ -97,9 +97,15 @@ export function ContentPage(props) {
 
 ContentPage.propTypes = {
   /**
-   * More info button text
+   * Apply button text
    */
   ApplyButtonText: PropTypes.string.isRequired,
+
+  /**
+   * Apply button handler
+   */
+  onApplyButtonClick: PropTypes.func,
+
   /**
    * items before any actual content
    */
