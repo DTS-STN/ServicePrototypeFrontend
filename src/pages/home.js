@@ -23,9 +23,9 @@ import { BenefitGrid } from "../components/organisms/BenefitGrid";
 import { BenefitsCounter } from "../components/atoms/BenefitsCounter";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 
-import { TitleUserLogout } from "../components/molecules/TitleUserLogout";
-import { Login } from "../components/molecules/Login";
+import { Title } from "../components/atoms/Title";
 import { useKeycloak } from "@react-keycloak/web";
+import { LogInOut } from "../components/molecules/LogInOut";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
@@ -118,8 +118,6 @@ export function Home() {
           fetchBenefitsFailed
             ? fetchBenefitsFailedObj
             : fetchBenefitsCountFailedObj
-          // ? fetchBenefitsCountFailedObj    TODO  verify this 2 lines
-          // : fetchLifeJourneysFailedObj
         }
       />
     );
@@ -128,25 +126,18 @@ export function Home() {
   return (
     <Page>
       <main className="font-sans">
-        {/* <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title> */}
-
-        <TitleUserLogout
-          titleChildren={t("homePageTitle")}
-          titleDataCy={"home-page-title"}
+        <LogInOut
+          loginText="Login"
+          onLogin={loginOnClick}
           isAuthenticated={keycloak.authenticated}
           userName={`${
             keycloak.authenticated ? keycloak.idTokenParsed.name : ""
           }`}
           logoutText={t("Logout")}
-          onClick={() => keycloak.logout()}
+          onLogout={() => keycloak.logout()}
         />
 
-        {/* Displays the login button only when the user hasn't login    */}
-        {!keycloak.authenticated ? (
-          <Login text="Login" onClick={loginOnClick} />
-        ) : (
-          ""
-        )}
+        <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title>
 
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
