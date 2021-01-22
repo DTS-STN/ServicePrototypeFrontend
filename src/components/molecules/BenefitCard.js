@@ -19,7 +19,9 @@ export function BenefitCard(props) {
     >
       <div className="flex justify-between items-center w-full">
         <div className="flex flex-col justify-start">
-          <h3 className="text-l">{props.benefitTitle}</h3>
+          <h3 className="text-l" data-cy={props.dataCy}>
+            {props.benefitTitle}
+          </h3>
           {props.benefitTag ? <small>{props.benefitTag}</small> : undefined}
         </div>
       </div>
@@ -31,6 +33,7 @@ export function BenefitCard(props) {
         rounded={true}
         className={"bg-bg-gray-dk text-white hover:bg-black"}
         onClick={handleClick}
+        dataCyButton={"more-info-button"}
       />
     </BenefitCardBox>
   );
@@ -84,4 +87,8 @@ BenefitCard.propTypes = {
    * is the benefitId that was passed into this component.
    */
   onMoreInfoClick: PropTypes.func,
+  /**
+   * This is for adding an id for testing in cypress
+   */
+  dataCy: PropTypes.string,
 };

@@ -42,7 +42,11 @@ export function Page(props) {
         }`}
         onLogout={() => keycloak.logout()}
       />
-      <div className="w-full md:w-2/3 m-0 md:mr-auto md:ml-auto p-4 md:p-0">
+
+      <div
+        className="w-full md:w-2/3 m-0 md:mr-auto md:ml-auto p-4 md:p-0"
+        data-cy={props.dataCy}
+      >
         {props.children}
       </div>
 
@@ -96,4 +100,8 @@ Page.propTypes = {
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
   ]),
+  /**
+   * This is for adding an id for testing in cypress
+   */
+  dataCy: PropTypes.string,
 };
