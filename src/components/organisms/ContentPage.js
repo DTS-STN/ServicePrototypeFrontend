@@ -68,7 +68,7 @@ const renders = {
  */
 export function ContentPage(props) {
   return (
-    <Page>
+    <Page dataCy={"benefit-details"}>
       <main className="font-sans">
         {props.beforeContent}
         <ReactMarkdownWithHTML

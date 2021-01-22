@@ -18,8 +18,7 @@ describe('400 page functions', () => {
   
         it("show 404 error for page that does not exist", () => {
           cy.visit('/')
-          cy.wait(2000)
-          cy.screenshot('home-page-before')
+       //   cy.screenshot('home-page-before')
           cy.visit('localhost:3000/blah/', { failOnStatusCode: false })
           cy.wait(2000)
          // cy.get('[data-testid=error-message-title]').should('contain.text', '404')
@@ -27,7 +26,6 @@ describe('400 page functions', () => {
           })
        
    // it seems like the 500 message is not yet added it to this project yet.
-  
       it.skip("Stub 500 error for the count- only works first time otherwise the response is cached", () => {
         cy.visit('/', { failOnStatusCode: false });
         // message to intergect into the page.

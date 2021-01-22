@@ -11,7 +11,7 @@ describe("Benefits cards spec", () => {
     it("The benefit grid appears on the homepage", () => {
         cy.visit( 'http://localhost:3000/')
         cy.get('[ data-cy="home-page-benefit-grid"]').should('be.visible')
-        cy.screenshot('grid')
+      //  cy.screenshot('grid')
     
     });
 
