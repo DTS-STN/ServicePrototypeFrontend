@@ -127,7 +127,6 @@ export function Home() {
           text={t("matchMeToBenefits")}
           className={"bg-bg-gray-dk text-white hover:bg-black"}
         />
-        <h2 className="text-3xl mb-2">{t("chooseYourTopic")}</h2>
 
         <section className="flex mb-12">
           <BenefitsCounter

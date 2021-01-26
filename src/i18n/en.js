@@ -9,7 +9,6 @@ export const en = {
   benefitsMoreInformation: "More Information",
   benefitsNextPage: "next benefits page",
   benefitsPreviousPage: "previous benefits page",
-  chooseYourTopic: "Choose Your Topic",
   ApplyButtonText: "Apply Now",
 
   //links

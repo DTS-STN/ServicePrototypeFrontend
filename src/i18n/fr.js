@@ -8,7 +8,6 @@ export const fr = {
   benefitsMoreInformation: "Plus d'information",
   benefitsNextPage: "page suivante des avantages",
   benefitsPreviousPage: "page des avantages précédente",
-  chooseYourTopic: "Choisissez votre sujet",
   ApplyButtonText: "appliquer maintenant",
 
   //links
