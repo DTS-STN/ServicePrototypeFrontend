@@ -1,15 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ActionButton } from "../atoms/ActionButton";
+import { Alink } from "../atoms/Alink";
 
 /**
  * This component show login or a logout button according to the user authenticated flag
  */
 export function LogInOut(props) {
+  //Link for user
+  let url = "https://169.59.166.63:9044/ua/";
+
   return (
     <div className="flex justify-end">
       <div className="text-white font-normal pt-1 pr-4">
-        {props.isAuthenticated ? props.userName : ""}
+        <Alink href={url} customClass={"text-white hover:text-black"}>
+          {props.isAuthenticated ? props.userName : ""}
+        </Alink>
       </div>
 
       <ActionButton
