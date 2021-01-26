@@ -23,6 +23,7 @@ import { BenefitGrid } from "../components/organisms/BenefitGrid";
 import { BenefitsCounter } from "../components/atoms/BenefitsCounter";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 import { Title } from "../components/atoms/Title";
+import { ActionButton } from "../components/atoms/ActionButton";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
@@ -121,7 +122,11 @@ export function Home() {
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>
-
+        <ActionButton
+          id="MatchMeToBenefits"
+          text={t("matchMeToBenefits")}
+          className={"bg-bg-gray-dk text-white hover:bg-black"}
+        />
         <h2 className="text-3xl mb-2">{t("chooseYourTopic")}</h2>
 
         <section className="flex mb-12">
