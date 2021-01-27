@@ -15,8 +15,6 @@ export const questionsData = function (
     questionsMap: {},
     // map of french questions data
     questionsMapFr: {},
-    // map of question OF keys to keys in questionsMap
-    // questionsKeyToIdMap: {},
   },
   action
 ) {
@@ -47,7 +45,6 @@ export const questionsData = function (
         }
         if (Array.isArray(data) && data.length > 0) {
           let newQuestionsMap = { ...state.questionsMap };
-          //   let newQuestionsKeyToIdMap = { ...state.questionsKeyToIdMap };
           data.forEach((value) => {
             if (!newQuestionsMap[value.id]) {
               newQuestionsMap[value.id] = {
@@ -59,7 +56,6 @@ export const questionsData = function (
               ...newQuestionsMap[value.id],
               ...value,
             };
-            // newQuestionsKeyToIdMap[value.benefit_key] = value.id;
           });
 
           return {
@@ -69,7 +65,6 @@ export const questionsData = function (
             fetchFailedReason: "",
             fetchFailedObj: {},
             questionsMap: newQuestionsMap,
-            // questionsKeyToIdMap: newQuestionsKeyToIdMap,
           };
         }
       }
@@ -84,7 +79,6 @@ export const questionsData = function (
         }
         if (Array.isArray(data) && data.length > 0) {
           let newQuestionsMapFr = { ...state.questionsMapFr };
-          //   let newQuestionsKeyToIdMap = { ...state.questionsKeyToIdMap };
           data.forEach((value) => {
             if (!newQuestionsMapFr[value.id]) {
               newQuestionsMapFr[value.id] = {
@@ -96,7 +90,6 @@ export const questionsData = function (
               ...newQuestionsMapFr[value.id],
               ...value,
             };
-            // newQuestionsKeyToIdMap[value.benefit_key] = value.id;
           });
 
           return {
@@ -106,7 +99,6 @@ export const questionsData = function (
             fetchFailedReason: "",
             fetchFailedObj: {},
             questionsMapFr: newQuestionsMapFr,
-            // questionsKeyToIdMap: newQuestionsKeyToIdMap,
           };
         }
       }
@@ -125,48 +117,6 @@ export const questionsData = function (
         };
       }
       break;
-    // case ACTION_TYPES.SELECT_BENEFIT:
-    //   if (
-    //     action.id &&
-    //     (state.questionsMap[action.id] ||
-    //       state.questionsMap[state.questionsKeyToIdMap[action.id]])
-    //   ) {
-    //     let benefit_id = state.questionsMap[action.id]
-    //       ? action.id
-    //       : state.questionsKeyToIdMap[action.id];
-    //     return {
-    //       ...state,
-    //       questionsMap: {
-    //         ...state.questionsMap,
-    //         [benefit_id]: {
-    //           ...state.questionsMap[benefit_id],
-    //           isSelected: true,
-    //         },
-    //       },
-    //     };
-    //   }
-    //   break;
-    // case ACTION_TYPES.DESELECT_BENEFIT:
-    //   if (
-    //     action.id &&
-    //     (state.questionsMap[action.id] ||
-    //       state.questionsMap[state.questionsKeyToIdMap[action.id]])
-    //   ) {
-    //     let benefit_id = state.questionsMap[action.id]
-    //       ? action.id
-    //       : state.questionsKeyToIdMap[action.id];
-    //     return {
-    //       ...state,
-    //       questionsMap: {
-    //         ...state.questionsMap,
-    //         [benefit_id]: {
-    //           ...state.questionsMap[benefit_id],
-    //           isSelected: false,
-    //         },
-    //       },
-    //     };
-    //   }
-    //   break;
     default:
       return state;
   }
