@@ -128,19 +128,21 @@ export function Home() {
           className={"bg-bg-gray-dk text-white hover:bg-black"}
         />
 
-        <section className="flex mb-12">
-          <BenefitsCounter
-            dataCy={"home-page-benefit-counter"}
-            className="text-center m-auto mr-0 px-6"
-            counter={benefitsCount}
-            text={t("totalBenefits")}
-          />
-        </section>
         <section
-          className="border-t border-b pt-2 pb-2"
+          className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"
         >
-          <h2 className="text-3xl mb-2">{t("eligibleBenefitsHeader")}</h2>
+          <div className="flex m-auto items-start relative">
+            <h2 className="text-3xl mb-2">{t("eligibleBenefitsHeader")}</h2>
+            <section className="flex mb-12 absolute right-0">
+              <BenefitsCounter
+                dataCy={"home-page-benefit-counter"}
+                className="text-center m-auto mr-0 px-6"
+                counter={benefitsCount}
+                text={t("totalBenefits")}
+              />
+            </section>
+          </div>
           <BenefitGrid
             dataCy={"home-page-benefit-grid"}
             benefitMoreInfoButtonText={t("benefitsMoreInformation")}
