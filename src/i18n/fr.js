@@ -2,12 +2,12 @@ export const fr = {
   pageDescription:
     "Répondez aux questions ci-dessous pour obtenir une liste personnalisée des avantages auxquels vous pourriez être admissible. Les avantages des gouvernements fédéral, provinciaux ou territoriaux, et ne recueille ni ne suit vos renseignements. Plus vous répondrez à de questions, plus votre résultat sera personnalisé.",
   homePageTitle: "Bienvenue dans Service Canada",
+  matchMeToBenefits: "FR: Match me to Benefits",
   eligibleBenefitsHeader: "Avantages qui s'appliquent à vous",
   totalBenefits: "Avantages totaux",
   benefitsMoreInformation: "Plus d'information",
   benefitsNextPage: "page suivante des avantages",
   benefitsPreviousPage: "page des avantages précédente",
-  chooseYourTopic: "Choisissez votre sujet",
   ApplyButtonText: "appliquer maintenant",
 
   //links
