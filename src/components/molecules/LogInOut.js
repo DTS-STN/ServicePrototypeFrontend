@@ -13,7 +13,11 @@ export function LogInOut(props) {
   return (
     <div className="flex justify-end">
       <div className="text-white font-normal pt-1 pr-4">
-        <Alink href={url} customClass={"text-white hover:text-black"}>
+        <Alink
+          href={url}
+          customClass={"text-white hover:text-black"}
+          id="CuramUaLink"
+        >
           {props.isAuthenticated ? props.userName : ""}
         </Alink>
       </div>
