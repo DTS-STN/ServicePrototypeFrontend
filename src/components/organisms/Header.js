@@ -39,6 +39,7 @@ export function Header(props) {
             logoutText={props.logoutText}
             onLogin={props.onLogin}
             onLogout={props.onLogout}
+            curamUaLink={props.curamUaLink}
           />
         </div>
       </div>

@@ -8,7 +8,7 @@ import { Alink } from "../atoms/Alink";
  */
 export function LogInOut(props) {
   //Link for user
-  let url = "https://169.59.166.63:9044/ua/";
+  let url = props.curamUaLink;
 
   return (
     <div className="flex justify-end">
@@ -50,6 +50,10 @@ LogInOut.propTypes = {
    * text for the user name
    */
   userName: PropTypes.string,
+  /**
+   * Link for redrirecting to curam
+   */
+  curamUaLink: PropTypes.string,
   /**
    * Event Handler for the Login function
    */

@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { useKeycloak } from "@react-keycloak/web";
 import { changeLanguageCreator, LANGUAGES } from "../../redux/actions";
+import { CURAM_UA_LINK } from "../../variables";
 
 /**
  * page component complete with canada.ca header and footer
@@ -34,6 +35,7 @@ export function Page(props) {
         loginText={t("login")}
         logoutText={t("logout")}
         isAuthenticated={keycloak.authenticated}
+        curamUaLink={CURAM_UA_LINK}
         onLogin={() => {
           keycloak.login();
         }}
