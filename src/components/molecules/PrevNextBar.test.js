@@ -2,9 +2,9 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import { Primary } from "./PrevNextBar.stories";
+import { Primary, SkipLinkRemoved } from "./PrevNextBar.stories";
 
-it("renders a previous / skip / next Bar", () => {
+it("renders a bar with:  previous / skip / next ", () => {
   render(<Primary {...Primary.args} />);
 
   const links = screen.getAllByRole("link");
@@ -16,5 +16,15 @@ it("renders a previous / skip / next Bar", () => {
 
   expect(links[0]).toHaveTextContent("Prev");
   expect(links[1]).toHaveTextContent("Skip");
+  expect(nextButton).toHaveTextContent("Next");
+});
+
+it("renders a bar with just : previous and next ", () => {
+  render(<SkipLinkRemoved {...SkipLinkRemoved.args} />);
+
+  const links = screen.getAllByRole("link");
+  const nextButton = screen.getByRole("button");
+
+  expect(links[0]).toHaveTextContent("Prev");
   expect(nextButton).toHaveTextContent("Next");
 });

@@ -12,6 +12,7 @@ export function PrevNextBar(props) {
     customClass,
     hrefPrev,
     hrefSkip,
+    skipFlag,
     id,
     prevText,
     skipText,
@@ -24,9 +25,9 @@ export function PrevNextBar(props) {
   }
 
   return (
-    <div id={id} className="flex p-2 inline-flex w-full">
+    <div id={id} className="flex p-2 bg-gray-300 justify-end">
       <Router>
-        <div className="px-4">
+        <div className="pr-4">
           <Link
             className={`text-black underline ${customClass ? customClass : ""}`}
             to={hrefPrev}
@@ -37,18 +38,25 @@ export function PrevNextBar(props) {
         </div>
 
         {/* on mobile Skip is not visible, tailwind's  sm: is not working. So I added a css file */}
-        <div className="pl-32 pr-4 sm:display-none skipLink">
-          <Link
-            className={`text-black underline ${customClass ? customClass : ""}`}
-            to={hrefSkip}
-            data-testid={id + "-Skip"}
-          >
-            {skipText}
-          </Link>
-        </div>
+        {skipFlag ? (
+          <div className="pl-32 pr-4 sm:display-none skipLink">
+            <Link
+              className={`text-black underline ${
+                customClass ? customClass : ""
+              }`}
+              to={hrefSkip}
+              data-testid={id + "-Skip"}
+            >
+              {skipText}
+            </Link>
+          </div>
+        ) : (
+          ""
+        )}
 
-        <div className="px-4">
+        <div className="pl-20 pr-4">
           <ActionButton
+            invert
             data-testid={id + "-Next"}
             text={nextText}
             onClick={handleNextButton}
@@ -70,13 +78,17 @@ PrevNextBar.propTypes = {
    */
   prevText: PropTypes.string.isRequired,
   /**
+   * Flag it display or not the skip link
+   */
+  skipFlag: PropTypes.bool,
+  /**
    * Address to where the link is going to
    */
-  hrefSkip: PropTypes.string.isRequired,
+  hrefSkip: PropTypes.string,
   /**
    * Text for Skip link
    */
-  skipText: PropTypes.string.isRequired,
+  skipText: PropTypes.string,
   /**
    * Optional overrides the default css
    */
