@@ -8,7 +8,7 @@ import { ActionButton } from "../atoms/ActionButton";
 export function LogInOut(props) {
   return (
     <div className="flex justify-end">
-      <div className="text-white font-normal pt-1 pr-4">
+      <div className="text-white font-normal pt-1 pr-4" data-cy={props.dataCy}>
         {props.isAuthenticated ? props.userName : ""}
       </div>
 
@@ -52,4 +52,8 @@ LogInOut.propTypes = {
    * Event Handler for the Logout function
    */
   onLogout: PropTypes.func,
+  /**
+   * This is for adding an id for testing in cypress
+   */
+  dataCy: PropTypes.string,
 };

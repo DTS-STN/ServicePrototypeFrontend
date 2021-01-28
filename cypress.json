@@ -1,5 +1,10 @@
 {
     "baseUrl": "http://localhost:3000",
-    "video": false
+    "video": false,
+    "env": {
+        "auth_base_url": "https://keycloak.dev.dts-stn.com/auth",
+        "auth_realm": "benefit-service-dev",
+        "auth_client_id": "benefit-service-frontend"
+      }
   
 }
