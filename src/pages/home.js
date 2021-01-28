@@ -134,7 +134,7 @@ export function Home() {
         >
           <div className="flex m-auto items-start relative">
             <h2 className="text-3xl mb-2">{t("eligibleBenefitsHeader")}</h2>
-            <section className="flex mb-12 absolute right-0">
+            <section className="flex mb-12 md:absolute md:right-0">
               <BenefitsCounter
                 dataCy={"home-page-benefit-counter"}
                 className="text-center m-auto mr-0 px-6"
