@@ -107,7 +107,6 @@ export function Home() {
       !fetchQuestionsFailed
     ) {
       dispatch(getQuestions());
-      // dispatch(getQuestion(1));
       setTriedFetchedQuestions(true);
     }
   }, [

@@ -97,8 +97,8 @@ async function fetchQuestion(dispatch, id) {
 }
 
 /**
- * dispatch function which gets a single benefit based on id
- * @param id - the id of the benefit
+ * dispatch function which gets a single question based on id
+ * @param id - the id of the question
  */
 export function getQuestion(id) {
   return (dispatch) => fetchQuestion(dispatch, id);
