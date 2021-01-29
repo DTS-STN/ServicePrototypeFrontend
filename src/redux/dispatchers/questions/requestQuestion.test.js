@@ -66,7 +66,7 @@ describe("requestQuestion", () => {
         }
       ),
       networkRequestActionCreator(
-        RESOURCE_TYPES.QUESTIONS_FR,
+        RESOURCE_TYPES.QUESTION_FR,
         NETWORK_REQUEST_TYPES.GET,
         {
           id: "1",
@@ -125,7 +125,7 @@ describe("requestQuestion", () => {
         NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.NO_NETWORK,
         {
-          message: "Could not connect to CMS to retrieve Question",
+          message: "Could not connect to CMS to retrieve question",
         }
       ),
     ]);
