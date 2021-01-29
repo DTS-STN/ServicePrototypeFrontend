@@ -161,7 +161,7 @@ describe("requestQuestions", () => {
         NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.NO_NETWORK,
         {
-          message: "Could not connect to CMS to retrieve questions",
+          message: "Could not connect to CMS to retrieve questions.",
         }
       ),
     ]);
@@ -305,7 +305,7 @@ describe("requestQuestions", () => {
 
     const store = mockStore({});
 
-    await store.dispatch(getBenefits());
+    await store.dispatch(getQuestions());
 
     const expectedActions = [
       networkRequestActionCreator(
@@ -351,7 +351,7 @@ describe("requestQuestions", () => {
 
     const store = mockStore({});
 
-    await store.dispatch(getBenefits());
+    await store.dispatch(getQuestions());
 
     const expectedActions = [
       networkRequestActionCreator(
@@ -397,7 +397,7 @@ describe("requestQuestions", () => {
 
     const store = mockStore({});
 
-    await store.dispatch(getBenefits());
+    await store.dispatch(getQuestions());
 
     const expectedActions = [
       networkRequestActionCreator(
@@ -433,7 +433,7 @@ describe("requestQuestions", () => {
 
     const store = mockStore({});
 
-    await store.dispatch(getBenefits());
+    await store.dispatch(getQuestions());
 
     const expectedActions = [
       networkRequestActionCreator(

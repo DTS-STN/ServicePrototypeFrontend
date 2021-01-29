@@ -15,7 +15,7 @@ async function fetchQuestion(dispatch, id) {
   try {
     dispatch(
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFIT,
+        RESOURCE_TYPES.QUESTION,
         NETWORK_REQUEST_TYPES.GET,
         {
           id: id,
@@ -25,7 +25,7 @@ async function fetchQuestion(dispatch, id) {
 
     dispatch(
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFIT_FR,
+        RESOURCE_TYPES.QUESTION_FR,
         NETWORK_REQUEST_TYPES.GET,
         {
           id: id,
@@ -38,7 +38,7 @@ async function fetchQuestion(dispatch, id) {
   } catch (e) {
     return dispatch(
       networkRequestFailedActionCreator(
-        RESOURCE_TYPES.BENEFIT,
+        RESOURCE_TYPES.QUESTION,
         NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.NO_NETWORK,
         {
@@ -71,14 +71,14 @@ async function fetchQuestion(dispatch, id) {
   if (response.ok && responseFr.ok) {
     dispatch(
       networkReceivedActionCreator(
-        RESOURCE_TYPES.BENEFIT,
+        RESOURCE_TYPES.QUESTION,
         NETWORK_REQUEST_TYPES.GET,
         data
       )
     );
     dispatch(
       networkReceivedActionCreator(
-        RESOURCE_TYPES.BENEFIT_FR,
+        RESOURCE_TYPES.QUESTION_FR,
         NETWORK_REQUEST_TYPES.GET,
         dataFr
       )
@@ -86,7 +86,7 @@ async function fetchQuestion(dispatch, id) {
   } else {
     return dispatch(
       networkRequestFailedActionCreator(
-        RESOURCE_TYPES.BENEFIT,
+        RESOURCE_TYPES.QUESTION,
         NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS[response.status] ||
           NETWORK_FAILED_REASONS.INTERNAL_SERVER_ERROR,
