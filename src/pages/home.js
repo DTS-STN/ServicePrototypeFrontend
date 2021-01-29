@@ -64,7 +64,6 @@ export function Home() {
 
   const { t } = useTranslation();
 
-  // question selectors
   const isFetchingQuestions = useSelector(
     (state) => state.questions.isFetching
   );
@@ -108,6 +107,7 @@ export function Home() {
       !fetchQuestionsFailed
     ) {
       dispatch(getQuestions());
+      // dispatch(getQuestion(1));
       setTriedFetchedQuestions(true);
     }
   }, [
