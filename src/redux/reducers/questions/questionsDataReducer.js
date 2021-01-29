@@ -74,7 +74,7 @@ export const questionsData = function (
         action.resourceType === RESOURCE_TYPES.QUESTION_FR
       ) {
         let data = action.body;
-        if (action.resourceType === RESOURCE_TYPES.BENEFIT_FR) {
+        if (action.resourceType === RESOURCE_TYPES.QUESTION_FR) {
           data = [data];
         }
         if (Array.isArray(data) && data.length > 0) {
@@ -105,8 +105,8 @@ export const questionsData = function (
       break;
     case ACTION_TYPES.NETWORK_REQUEST_FAILED:
       if (
-        action.resourceType === RESOURCE_TYPES.BENEFITS ||
-        action.resourceType === RESOURCE_TYPES.BENEFIT
+        action.resourceType === RESOURCE_TYPES.QUESTIONS ||
+        action.resourceType === RESOURCE_TYPES.QUESTION
       ) {
         return {
           ...state,

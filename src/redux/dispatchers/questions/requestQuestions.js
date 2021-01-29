@@ -60,12 +60,6 @@ async function fetchQuestions(dispatch, start, limit, sort) {
     paramBefore
       ? (responseFr = await fetch(BENEFITSERVICE_URL + url + "&lang=fr"))
       : (responseFr = await fetch(BENEFITSERVICE_URL + url + "?lang=fr"));
-
-    // This is a fake API until we have our own to get the questions.
-    // The code above is what is needed when we have our API.
-
-    // response = await fetch(`https://api.mocki.io/v1/9d9f6ed9`);
-    // responseFr = await fetch(`https://api.mocki.io/v1/9d9f6ed9`);
   } catch (e) {
     return dispatch(
       networkRequestFailedActionCreator(

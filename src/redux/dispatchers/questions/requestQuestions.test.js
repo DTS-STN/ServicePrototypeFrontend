@@ -11,7 +11,7 @@ import {
 import { RESOURCE_TYPES } from "../resourceTypes";
 import thunk from "redux-thunk";
 import { BENEFITSERVICE_URL } from "../../../variables";
-import { getBenefits } from "./requestBenefits";
+import { getQuestions } from "./requestQuestions";
 
 const middlewares = [thunk];
 
@@ -36,72 +36,15 @@ describe("requestQuestions", () => {
       body: [
         {
           id: 1,
-          title: "Employment Insurance",
-          created_by: {
-            id: 1,
-            firstname: "admin",
-            lastname: "user",
-            username: null,
-          },
-          updated_by: {
-            id: 1,
-            firstname: "admin",
-            lastname: "user",
-            username: null,
-          },
-          created_at: "2020-11-24T16:21:56.055Z",
-          updated_at: "2020-11-24T16:21:56.090Z",
-          benefit_key: "ei_benefit",
-          description:
-            "This benefit lays out what employment insurance looks like (EN)",
-          long_description: null,
-          benefit_link: null,
+          text: "How much income have you earned in Canada the last year?",
         },
         {
           id: 2,
-          title: "Provincial Social Security",
-          created_by: {
-            id: 1,
-            firstname: "admin",
-            lastname: "user",
-            username: null,
-          },
-          updated_by: {
-            id: 1,
-            firstname: "admin",
-            lastname: "user",
-            username: null,
-          },
-          created_at: "2020-11-24T16:23:55.819Z",
-          updated_at: "2020-11-24T16:23:55.836Z",
-          benefit_key: "provincial_social_security",
-          description:
-            "Provincial Social Security benefit which hands out a check every month at retirement (en)",
-          long_description: null,
-          benefit_link: null,
+          text: "How long have you been out of work?",
         },
         {
           id: 3,
-          title: "New Parents Benefit",
-          created_by: {
-            id: 1,
-            firstname: "admin",
-            lastname: "user",
-            username: null,
-          },
-          updated_by: {
-            id: 1,
-            firstname: "admin",
-            lastname: "user",
-            username: null,
-          },
-          created_at: "2020-11-24T16:26:52.646Z",
-          updated_at: "2020-11-24T16:26:52.661Z",
-          benefit_key: "new_parents_benefit",
-          description:
-            "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
-          long_description: null,
-          benefit_link: null,
+          text: "Are you able to work / look for work?",
         },
       ],
       headers: {
@@ -109,77 +52,20 @@ describe("requestQuestions", () => {
       },
     });
 
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/questions?lang=fr", {
       status: 200,
       body: [
         {
           id: 1,
-          title: "Employment Insurance",
-          created_by: {
-            id: 1,
-            firstname: "admin",
-            lastname: "user",
-            username: null,
-          },
-          updated_by: {
-            id: 1,
-            firstname: "admin",
-            lastname: "user",
-            username: null,
-          },
-          created_at: "2020-11-24T16:21:56.055Z",
-          updated_at: "2020-11-24T16:21:56.090Z",
-          benefit_key: "ei_benefit",
-          description:
-            "This benefit lays out what employment insurance looks like (EN)",
-          long_description: null,
-          benefit_link: null,
+          text: "How much income have you earned in Canada the last year? [FR]",
         },
         {
           id: 2,
-          title: "Provincial Social Security",
-          created_by: {
-            id: 1,
-            firstname: "admin",
-            lastname: "user",
-            username: null,
-          },
-          updated_by: {
-            id: 1,
-            firstname: "admin",
-            lastname: "user",
-            username: null,
-          },
-          created_at: "2020-11-24T16:23:55.819Z",
-          updated_at: "2020-11-24T16:23:55.836Z",
-          benefit_key: "provincial_social_security",
-          description:
-            "Provincial Social Security benefit which hands out a check every month at retirement (en)",
-          long_description: null,
-          benefit_link: null,
+          text: "How long have you been out of work? [FR]",
         },
         {
           id: 3,
-          title: "New Parents Benefit",
-          created_by: {
-            id: 1,
-            firstname: "admin",
-            lastname: "user",
-            username: null,
-          },
-          updated_by: {
-            id: 1,
-            firstname: "admin",
-            lastname: "user",
-            username: null,
-          },
-          created_at: "2020-11-24T16:26:52.646Z",
-          updated_at: "2020-11-24T16:26:52.661Z",
-          benefit_key: "new_parents_benefit",
-          description:
-            "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
-          long_description: null,
-          benefit_link: null,
+          text: "Are you able to work / look for work? [FR]",
         },
       ],
       headers: {
@@ -189,164 +75,51 @@ describe("requestQuestions", () => {
 
     const store = mockStore({});
 
-    await store.dispatch(getBenefits());
+    await store.dispatch(getQuestions());
 
     const expectedActions = [
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.QUESTIONS,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFITS_FR,
+        RESOURCE_TYPES.QUESTIONS_FR,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkReceivedActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.QUESTIONS,
         NETWORK_REQUEST_TYPES.GET,
         [
           {
             id: 1,
-            title: "Employment Insurance",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:21:56.055Z",
-            updated_at: "2020-11-24T16:21:56.090Z",
-            benefit_key: "ei_benefit",
-            description:
-              "This benefit lays out what employment insurance looks like (EN)",
-            long_description: null,
-            benefit_link: null,
+            text: "How much income have you earned in Canada the last year?",
           },
           {
             id: 2,
-            title: "Provincial Social Security",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:23:55.819Z",
-            updated_at: "2020-11-24T16:23:55.836Z",
-            benefit_key: "provincial_social_security",
-            description:
-              "Provincial Social Security benefit which hands out a check every month at retirement (en)",
-            long_description: null,
-            benefit_link: null,
+            text: "How long have you been out of work?",
           },
           {
             id: 3,
-            title: "New Parents Benefit",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:26:52.646Z",
-            updated_at: "2020-11-24T16:26:52.661Z",
-            benefit_key: "new_parents_benefit",
-            description:
-              "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
-            long_description: null,
-            benefit_link: null,
+            text: "Are you able to work / look for work?",
           },
         ]
       ),
       networkReceivedActionCreator(
-        RESOURCE_TYPES.BENEFITS_FR,
+        RESOURCE_TYPES.QUESTIONS_FR,
         NETWORK_REQUEST_TYPES.GET,
         [
           {
             id: 1,
-            title: "Employment Insurance",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:21:56.055Z",
-            updated_at: "2020-11-24T16:21:56.090Z",
-            benefit_key: "ei_benefit",
-            description:
-              "This benefit lays out what employment insurance looks like (EN)",
-            long_description: null,
-            benefit_link: null,
+            text:
+              "How much income have you earned in Canada the last year? [FR]",
           },
           {
             id: 2,
-            title: "Provincial Social Security",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:23:55.819Z",
-            updated_at: "2020-11-24T16:23:55.836Z",
-            benefit_key: "provincial_social_security",
-            description:
-              "Provincial Social Security benefit which hands out a check every month at retirement (en)",
-            long_description: null,
-            benefit_link: null,
+            text: "How long have you been out of work? [FR]",
           },
           {
             id: 3,
-            title: "New Parents Benefit",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:26:52.646Z",
-            updated_at: "2020-11-24T16:26:52.661Z",
-            benefit_key: "new_parents_benefit",
-            description:
-              "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
-            long_description: null,
-            benefit_link: null,
+            text: "Are you able to work / look for work? [FR]",
           },
         ]
       ),
@@ -356,14 +129,14 @@ describe("requestQuestions", () => {
   });
   it("handles fetch throwing an error due to no network", async () => {
     let errorObj = new Error("no network");
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/questions", {
       throws: errorObj,
       headers: {
         "Content-Type": "application/json",
       },
     });
 
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/questions?lang=fr", {
       throws: errorObj,
       headers: {
         "Content-Type": "application/json",
@@ -372,101 +145,44 @@ describe("requestQuestions", () => {
 
     const store = mockStore({});
 
-    await store.dispatch(getBenefits());
+    await store.dispatch(getQuestions());
 
     expect(store.getActions()).toEqual([
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.QUESTIONS,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFITS_FR,
+        RESOURCE_TYPES.QUESTIONS_FR,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestFailedActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.QUESTIONS,
         NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.NO_NETWORK,
         {
-          message: "Could not connect to CMS to retrieve benefits",
+          message: "Could not connect to CMS to retrieve questions",
         }
       ),
     ]);
   });
   it("handles parameters", async () => {
     fetchMock.getOnce(
-      BENEFITSERVICE_URL + "/benefits?_start=1&_limit=10&_sort=created_at:asc",
+      BENEFITSERVICE_URL + "/questions?_start=1&_limit=10&_sort=created_at:asc",
       {
         status: 200,
         body: [
           {
             id: 1,
-            title: "Employment Insurance",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:21:56.055Z",
-            updated_at: "2020-11-24T16:21:56.090Z",
-            benefit_key: "ei_benefit",
-            description:
-              "This benefit lays out what employment insurance looks like (EN)",
-            long_description: null,
-            benefit_link: null,
+            text: "How much income have you earned in Canada the last year?",
           },
           {
             id: 2,
-            title: "Provincial Social Security",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:23:55.819Z",
-            updated_at: "2020-11-24T16:23:55.836Z",
-            benefit_key: "provincial_social_security",
-            description:
-              "Provincial Social Security benefit which hands out a check every month at retirement (en)",
-            long_description: null,
-            benefit_link: null,
+            text: "How long have you been out of work?",
           },
           {
             id: 3,
-            title: "New Parents Benefit",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:26:52.646Z",
-            updated_at: "2020-11-24T16:26:52.661Z",
-            benefit_key: "new_parents_benefit",
-            description:
-              "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
-            long_description: null,
-            benefit_link: null,
+            text: "Are you able to work / look for work?",
           },
         ],
         headers: {
@@ -477,78 +193,22 @@ describe("requestQuestions", () => {
 
     fetchMock.getOnce(
       BENEFITSERVICE_URL +
-        "/benefits?_start=1&_limit=10&_sort=created_at:asc&lang=fr",
+        "/questions?_start=1&_limit=10&_sort=created_at:asc&lang=fr",
       {
         status: 200,
         body: [
           {
             id: 1,
-            title: "Employment Insurance",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:21:56.055Z",
-            updated_at: "2020-11-24T16:21:56.090Z",
-            benefit_key: "ei_benefit",
-            description:
-              "This benefit lays out what employment insurance looks like (EN)",
-            long_description: null,
-            benefit_link: null,
+            text:
+              "How much income have you earned in Canada the last year? [FR]",
           },
           {
             id: 2,
-            title: "Provincial Social Security",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:23:55.819Z",
-            updated_at: "2020-11-24T16:23:55.836Z",
-            benefit_key: "provincial_social_security",
-            description:
-              "Provincial Social Security benefit which hands out a check every month at retirement (en)",
-            long_description: null,
-            benefit_link: null,
+            text: "How long have you been out of work? [FR]",
           },
           {
             id: 3,
-            title: "New Parents Benefit",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:26:52.646Z",
-            updated_at: "2020-11-24T16:26:52.661Z",
-            benefit_key: "new_parents_benefit",
-            description:
-              "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
-            long_description: null,
-            benefit_link: null,
+            text: "Are you able to work / look for work? [FR]",
           },
         ],
         headers: {
@@ -558,10 +218,10 @@ describe("requestQuestions", () => {
     );
 
     const store = mockStore({});
-    await store.dispatch(getBenefits(1, 10, "created_at:asc"));
+    await store.dispatch(getQuestions(1, 10, "created_at:asc"));
     const expectedActions = [
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.QUESTIONS,
         NETWORK_REQUEST_TYPES.GET,
         {
           start: 1,
@@ -570,7 +230,7 @@ describe("requestQuestions", () => {
         }
       ),
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFITS_FR,
+        RESOURCE_TYPES.QUESTIONS_FR,
         NETWORK_REQUEST_TYPES.GET,
         {
           start: 1,
@@ -579,152 +239,39 @@ describe("requestQuestions", () => {
         }
       ),
       networkReceivedActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.QUESTIONS,
         NETWORK_REQUEST_TYPES.GET,
         [
           {
             id: 1,
-            title: "Employment Insurance",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:21:56.055Z",
-            updated_at: "2020-11-24T16:21:56.090Z",
-            benefit_key: "ei_benefit",
-            description:
-              "This benefit lays out what employment insurance looks like (EN)",
-            long_description: null,
-            benefit_link: null,
+            text: "How much income have you earned in Canada the last year?",
           },
           {
             id: 2,
-            title: "Provincial Social Security",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:23:55.819Z",
-            updated_at: "2020-11-24T16:23:55.836Z",
-            benefit_key: "provincial_social_security",
-            description:
-              "Provincial Social Security benefit which hands out a check every month at retirement (en)",
-            long_description: null,
-            benefit_link: null,
+            text: "How long have you been out of work?",
           },
           {
             id: 3,
-            title: "New Parents Benefit",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:26:52.646Z",
-            updated_at: "2020-11-24T16:26:52.661Z",
-            benefit_key: "new_parents_benefit",
-            description:
-              "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
-            long_description: null,
-            benefit_link: null,
+            text: "Are you able to work / look for work?",
           },
         ]
       ),
       networkReceivedActionCreator(
-        RESOURCE_TYPES.BENEFITS_FR,
+        RESOURCE_TYPES.QUESTIONS_FR,
         NETWORK_REQUEST_TYPES.GET,
         [
           {
             id: 1,
-            title: "Employment Insurance",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:21:56.055Z",
-            updated_at: "2020-11-24T16:21:56.090Z",
-            benefit_key: "ei_benefit",
-            description:
-              "This benefit lays out what employment insurance looks like (EN)",
-            long_description: null,
-            benefit_link: null,
+            text:
+              "How much income have you earned in Canada the last year? [FR]",
           },
           {
             id: 2,
-            title: "Provincial Social Security",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:23:55.819Z",
-            updated_at: "2020-11-24T16:23:55.836Z",
-            benefit_key: "provincial_social_security",
-            description:
-              "Provincial Social Security benefit which hands out a check every month at retirement (en)",
-            long_description: null,
-            benefit_link: null,
+            text: "How long have you been out of work? [FR]",
           },
           {
             id: 3,
-            title: "New Parents Benefit",
-            created_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            updated_by: {
-              id: 1,
-              firstname: "admin",
-              lastname: "user",
-              username: null,
-            },
-            created_at: "2020-11-24T16:26:52.646Z",
-            updated_at: "2020-11-24T16:26:52.661Z",
-            benefit_key: "new_parents_benefit",
-            description:
-              "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
-            long_description: null,
-            benefit_link: null,
+            text: "Are you able to work / look for work? [FR]",
           },
         ]
       ),
@@ -732,11 +279,11 @@ describe("requestQuestions", () => {
 
     expect(store.getActions()).toEqual(expectedActions);
     expect(fetchMock.calls()[0][0]).toBe(
-      BENEFITSERVICE_URL + "/benefits?_start=1&_limit=10&_sort=created_at:asc"
+      BENEFITSERVICE_URL + "/questions?_start=1&_limit=10&_sort=created_at:asc"
     );
   });
   it("handles 400 response from api and dispatches the correct actions", async () => {
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/questions", {
       status: 400,
       body: {
         some: "message",
@@ -746,7 +293,7 @@ describe("requestQuestions", () => {
       },
     });
 
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/questions?lang=fr", {
       status: 400,
       body: {
         some: "message",
@@ -762,15 +309,15 @@ describe("requestQuestions", () => {
 
     const expectedActions = [
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.QUESTIONS,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFITS_FR,
+        RESOURCE_TYPES.QUESTIONS_FR,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestFailedActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.QUESTIONS,
         NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.BAD_REQUEST,
         {
@@ -782,7 +329,7 @@ describe("requestQuestions", () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
   it("handles 404 response from api and dispatches the correct actions", async () => {
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/questions", {
       status: 404,
       body: {
         some: "message",
@@ -792,7 +339,7 @@ describe("requestQuestions", () => {
       },
     });
 
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/questions?lang=fr", {
       status: 404,
       body: {
         some: "message",
@@ -808,15 +355,15 @@ describe("requestQuestions", () => {
 
     const expectedActions = [
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.QUESTIONS,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFITS_FR,
+        RESOURCE_TYPES.QUESTIONS_FR,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestFailedActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.QUESTIONS,
         NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.NOT_FOUND,
         {
@@ -828,7 +375,7 @@ describe("requestQuestions", () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
   it("handles 500 response from api and dispatches the correct actions", async () => {
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/questions", {
       status: 500,
       body: {
         some: "message",
@@ -838,7 +385,7 @@ describe("requestQuestions", () => {
       },
     });
 
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/questions?lang=fr", {
       status: 500,
       body: {
         some: "message",
@@ -854,15 +401,15 @@ describe("requestQuestions", () => {
 
     const expectedActions = [
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.QUESTIONS,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFITS_FR,
+        RESOURCE_TYPES.QUESTIONS_FR,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestFailedActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.QUESTIONS,
         NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.INTERNAL_SERVER_ERROR,
         {
@@ -874,12 +421,12 @@ describe("requestQuestions", () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
   it("handles non application/json mime types", async () => {
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/questions", {
       status: 500,
       body: "some message",
     });
 
-    fetchMock.getOnce(BENEFITSERVICE_URL + "/benefits?lang=fr", {
+    fetchMock.getOnce(BENEFITSERVICE_URL + "/questions?lang=fr", {
       status: 500,
       body: "some message",
     });
@@ -890,15 +437,15 @@ describe("requestQuestions", () => {
 
     const expectedActions = [
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.QUESTIONS,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestActionCreator(
-        RESOURCE_TYPES.BENEFITS_FR,
+        RESOURCE_TYPES.QUESTIONS_FR,
         NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestFailedActionCreator(
-        RESOURCE_TYPES.BENEFITS,
+        RESOURCE_TYPES.QUESTIONS,
         NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.INTERNAL_SERVER_ERROR,
         {
