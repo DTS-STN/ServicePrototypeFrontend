@@ -1,6 +1,7 @@
 {
     "baseUrl": "http://localhost:3000",
     "video": false,
+    "chromeWebSecurity": false,
     "env": {
         "auth_base_url": "https://keycloak.dev.dts-stn.com/auth",
         "auth_realm": "benefit-service-dev",
