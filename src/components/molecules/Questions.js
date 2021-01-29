@@ -7,11 +7,6 @@ import { PrevNextBar } from "../molecules/PrevNextBar";
 export function Questions(props) {
   const { id, required, textRequired, legend, name, options, onChange } = props;
 
-  function onChangeHandler(value) {
-    console.log(value);
-    onChange(value);
-  }
-
   return (
     <div className="max-w-lg">
       <fieldset>
@@ -29,7 +24,7 @@ export function Questions(props) {
             value={value}
             label={label}
             name={name}
-            onChange={() => onChangeHandler(value)}
+            onChange={onChange}
           />
         ))}
       </fieldset>
