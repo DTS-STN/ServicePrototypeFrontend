@@ -1,33 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Legend } from "../atoms/Legend";
-import { Radio } from "../atoms/Radio";
+import { RadioGroup } from "../molecules/RadioGroup";
 import { PrevNextBar } from "../molecules/PrevNextBar";
 
 export function Questions(props) {
   const { id, required, textRequired, legend, name, options, onChange } = props;
 
+  function onChangeHandler(e) {
+    onChange(e);
+  }
+
   return (
     <div className="max-w-lg">
-      <fieldset>
-        <Legend
-          id={id}
-          required={required}
-          strRequired={textRequired}
-          legend={legend}
-        />
-
-        {options.map(({ id, value, label }) => (
-          <Radio
-            id={id}
-            key={id}
-            value={value}
-            label={label}
-            name={name}
-            onChange={onChange}
-          />
-        ))}
-      </fieldset>
+      <RadioGroup
+        id={id}
+        required={required}
+        textRequired={textRequired}
+        legend={legend}
+        name={name}
+        options={options}
+        onChange={() => onChangeHandler()}
+      />
 
       <PrevNextBar
         hrefPrev={props.hrefPrev}

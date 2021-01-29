@@ -10,6 +10,8 @@ const Template = (args) => <Questions {...args} />;
 
 export const Primary = Template.bind({});
 
+function onChangeHandler(e) {}
+
 Primary.args = {
   legend: "Question #1.- What was your income last year?",
   name: "Q1",
@@ -21,7 +23,7 @@ Primary.args = {
     { id: "1", value: "B", label: "B) Between $30,000 & 60,000" },
     { id: "2", value: "C", label: "C) More than $60,000" },
   ],
-  // onChange: onChangeHandler() // Function this could update the state with the user selection, or something else.
+  onChange: () => onChangeHandler(), // Function this could update the state with the user selection, or something else.
   //--
   hrefPrev: "/previous.html",
   prevText: "Previous",
