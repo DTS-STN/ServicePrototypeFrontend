@@ -43,28 +43,25 @@ describe("Benefit details Page", () => {
     cy.get("[data-cy=benefit-details]").should("be.visible").and("contain.text", "mocked");
   });
 
+
   it("Mocked FR benefit details show on page in the UI", () => {
+  
     // The number of the benefit details are being mocked
-    cy.intercept("/benefits/1?lang=fr", { fixture: "descriptionFR.json" }).as("getFRdetails");
+  cy.intercept("/benefits/1?lang=fr", { fixture: "descriptionFR.json" }).as("getFRdetails");
+  // add another intercept to wait for the page to load before changing the language
 
-    cy.visit("http://localhost:3000/benefit/1");
+  cy.visit("http://localhost:3000/benefit/1");
+  // wait for the item to be visible
+  cy.contains('Français').should('be.visible')
 
-   cy.window().then(w => w.beforeReload = true)
-    // initially the new property is there
-   cy.window().should('have.prop', 'beforeReload', true)
-    // after reload the property should be gone
-  // cy.window().should('not.have.prop', 'beforeReload')
-    // Change to French page
-    cy.get('[data-cy=language-button]').click()
-     cy.wait(2000)
-    // or wait for the page to reload after changing language
- //  cy.window().should('not.have.prop', 'beforeReload')
-    // pass an array of Route Aliases that forces Cypress to wait
-    // each of these aliases   cy.wait(['@getBenefits', '@getCount'])
-    cy.wait(["@getFRdetails"]).its('response.statusCode').should('eq', 200)
-   
-    // these commands will not run until the wait command resolves above
-    cy.get("[data-cy=benefit-details]").should("be.visible").and("contain.text", "mockedFR");
-  });
+  cy.get('[data-cy=language-button]').click()
+  // pass an array of Route Aliases that forces Cypress to wait
+  // each of these aliases   cy.wait(['@getBenefits', '@getCount'])
+  cy.wait(["@getFRdetails"]);
+  // these commands will not run until the wait command resolves above
+  cy.get("[data-cy=benefit-details]").should("be.visible").and("contain.text", "mockedFR");
+});
+
+
 
 });
