@@ -10,6 +10,8 @@ const Template = (args) => <RadioGroup {...args} />;
 
 export const Primary = Template.bind({});
 
+function onChangeHandler(e) {}
+
 Primary.args = {
   legend: "Question #1.- What was your income last year ?",
   name: "Q1",
@@ -24,5 +26,5 @@ Primary.args = {
   /**
    * Function this could update the state with the user selection, or something else.
    */
-  // onChange: onChangeHandler()
+  onChange: () => onChangeHandler(),
 };
