@@ -1,4 +1,3 @@
-import * as langSelectors from "../language";
 import * as benefitsSelectors from "./benefitsDataSelectors";
 
 it("benefitsSelectors transforms data properly", () => {
@@ -23,6 +22,7 @@ it("benefitsSelectors transforms data properly", () => {
         created_at: "2020-11-24T16:23:55.819Z",
         updated_at: "2020-11-24T16:23:55.836Z",
         benefit_key: "provincial_social_security",
+        benefit_type: "HFP11",
         description:
           "Provincial Social Security benefit which hands out a check every month at retirement (en)",
         long_description: null,
@@ -48,6 +48,7 @@ it("benefitsSelectors transforms data properly", () => {
         created_at: "2020-11-24T16:26:52.646Z",
         updated_at: "2020-11-24T16:26:52.661Z",
         benefit_key: "new_parents_benefit",
+        benefit_type: "HFP11",
         description:
           "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
         long_description: null,
@@ -73,6 +74,7 @@ it("benefitsSelectors transforms data properly", () => {
         created_at: "2020-11-24T16:32:25.836Z",
         updated_at: "2020-11-24T16:32:25.854Z",
         benefit_key: "new_commers_benefit",
+        benefit_type: "HFP11",
         description:
           "Newcomers benefit to help assist in the settling of new immigrants and refuges to Canada (EN)",
         long_description: null,
@@ -98,6 +100,7 @@ it("benefitsSelectors transforms data properly", () => {
         created_at: "2020-11-24T16:21:56.055Z",
         updated_at: "2020-11-29T23:52:46.231Z",
         benefit_key: "ei_benefit",
+        benefit_type: "HFP11",
         description:
           "This benefit lays out what employment insurance looks like (EN)",
         long_description: "hello this is some content",
@@ -115,6 +118,7 @@ it("benefitsSelectors transforms data properly", () => {
       benefitDescription:
         "This benefit lays out what employment insurance looks like (EN)",
       benefitContent: "hello this is some content",
+      benefitType: "HFP11",
       checkBoxAriaLabelBy: "select Employment Insurance (EN)",
       isSelected: false,
       isEligible: false,
@@ -125,6 +129,7 @@ it("benefitsSelectors transforms data properly", () => {
       benefitDescription:
         "Provincial Social Security benefit which hands out a check every month at retirement (en)",
       benefitContent: null,
+      benefitType: "HFP11",
       checkBoxAriaLabelBy: "select Provincial Social Security",
       isSelected: false,
       isEligible: false,
@@ -135,6 +140,7 @@ it("benefitsSelectors transforms data properly", () => {
       benefitDescription:
         "The new parent benefits supplies supplemental income from the government during parental leave (EN)",
       benefitContent: null,
+      benefitType: "HFP11",
       checkBoxAriaLabelBy: "select New Parents Benefit (EN)",
       isSelected: false,
       isEligible: false,
@@ -145,6 +151,7 @@ it("benefitsSelectors transforms data properly", () => {
       benefitDescription:
         "Newcomers benefit to help assist in the settling of new immigrants and refuges to Canada (EN)",
       benefitContent: null,
+      benefitType: "HFP11",
       checkBoxAriaLabelBy: "select Newcomers Benefit (EN) ",
       isSelected: false,
       isEligible: false,
@@ -176,6 +183,7 @@ it("benefitSelector selects correct benefit and transforms data properly", () =>
         created_at: "2020-11-24T16:23:55.819Z",
         updated_at: "2020-11-24T16:23:55.836Z",
         benefit_key: "provincial_social_security",
+        benefit_type: "HFP11",
         description:
           "Provincial Social Security benefit which hands out a check every month at retirement (fr)",
         long_description: null,
@@ -201,6 +209,7 @@ it("benefitSelector selects correct benefit and transforms data properly", () =>
         created_at: "2020-11-24T16:26:52.646Z",
         updated_at: "2020-11-24T16:26:52.661Z",
         benefit_key: "new_parents_benefit",
+        benefit_type: "HFP11",
         description:
           "The new parent benefits supplies supplemental income from the government during parental leave (FR)",
         long_description: null,
@@ -226,6 +235,7 @@ it("benefitSelector selects correct benefit and transforms data properly", () =>
         created_at: "2020-11-24T16:32:25.836Z",
         updated_at: "2020-11-24T16:32:25.854Z",
         benefit_key: "new_commers_benefit",
+        benefit_type: "HFP11",
         description:
           "Newcomers benefit to help assist in the settling of new immigrants and refuges to Canada (FR)",
         long_description: null,
@@ -251,6 +261,7 @@ it("benefitSelector selects correct benefit and transforms data properly", () =>
         created_at: "2020-11-24T16:21:56.055Z",
         updated_at: "2020-11-29T23:52:46.231Z",
         benefit_key: "ei_benefit",
+        benefit_type: "HFP11",
         description:
           "This benefit lays out what employment insurance looks like (FR)",
         long_description: null,
@@ -266,6 +277,7 @@ it("benefitSelector selects correct benefit and transforms data properly", () =>
     benefitDescription:
       "The new parent benefits supplies supplemental income from the government during parental leave (FR)",
     benefitContent: null,
+    benefitType: "HFP11",
     checkBoxAriaLabelBy: "sélectionner New Parents Benefit (FR)",
     isSelected: false,
     isEligible: false,

@@ -10,17 +10,14 @@ import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { benefitSelectorFactory } from "../redux/selectors/benefits";
 import { NETWORK_FAILED_REASONS } from "../redux/actions";
+import { getBenefit, applyForBenefit } from "../redux/dispatchers";
 
 //component imports
 import { ContentPage } from "../components/organisms/ContentPage";
-import { getBenefit } from "../redux/dispatchers/benefits";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 import { NotFoundPage } from "./404";
 import { Page } from "../components/organisms/Page";
 import { Spinner } from "../components/atoms/Spinner";
-
-// variable imports
-import { CURAM_UA_LINK } from "../variables";
 
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
@@ -69,7 +66,7 @@ export function BenefitPage() {
     if (!keycloak.authenticated) {
       keycloak.login();
     } else {
-      window.location.replace(CURAM_UA_LINK);
+      dispatch(applyForBenefit(benefitData.benefitType, keycloak));
     }
   };
 
