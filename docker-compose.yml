@@ -20,7 +20,7 @@ services:
       - web 
     environment:  
       - CYPRESS_baseUrl=http://localhost:3000
-    command: npx cypress run --reporter junit --reporter-options "mochaFile=/cypress/report/test-output-[hash].xml"
+    command: npx cypress run --browser chrome --reporter junit --reporter-options "mochaFile=/cypress/report/test-output-[hash].xml"
     network_mode: 'host' 
     volumes:  
       - "./cypress/reports:/web/cypress/report"
