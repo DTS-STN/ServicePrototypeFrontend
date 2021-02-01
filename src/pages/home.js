@@ -23,17 +23,13 @@ import { BenefitGrid } from "../components/organisms/BenefitGrid";
 import { BenefitsCounter } from "../components/atoms/BenefitsCounter";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 import { Title } from "../components/atoms/Title";
-import { ActionButton } from "../components/atoms/ActionButton";
-
-//keycloak
-import { useKeycloak } from "@react-keycloak/web";
+import { MatchMeToBenefits } from "../components/molecules/MatchMeToBenefits";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
     false
   );
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
-  const { keycloak } = useKeycloak();
 
   // benefit redux subscriptions
   const isFetchingBenefits = useSelector(
@@ -106,14 +102,6 @@ export function Home() {
     history.push(`/benefit/${benefitKeyToId[benefitKey]}`);
   };
 
-  const matchMeToBenefitsButtonClickHandler = () => {
-    // if not logged in log in first
-    if (!keycloak.authenticated) {
-      keycloak.login();
-    } else {
-    }
-  };
-
   if (fetchBenefitsFailed || fetchBenefitsCountFailed) {
     return (
       <ErrorPage
@@ -134,12 +122,7 @@ export function Home() {
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>
-        <ActionButton
-          id="MatchMeToBenefits"
-          text={t("matchMeToBenefits")}
-          className={"bg-bg-gray-dk text-white hover:bg-black"}
-          onClick={matchMeToBenefitsButtonClickHandler}
-        />
+        <MatchMeToBenefits displayQuestion={false} />
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"
