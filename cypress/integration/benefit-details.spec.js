@@ -53,7 +53,12 @@ describe("Benefit details Page", () => {
   cy.visit("http://localhost:3000/benefit/1");
   // wait for the item to be visible
   cy.contains('Français').should('be.visible')
-
+  // There are two calls to the page, one for EN and then FR - try this to see if it will work???
+  cy.intercept("**/1", (req) => {
+    // if the response was cached
+    delete req.headers["if-none-match"];
+  }).as("number1");
+  cy.wait(["@number1"]);
   cy.get('[data-cy=language-button]').click()
   // pass an array of Route Aliases that forces Cypress to wait
   // each of these aliases   cy.wait(['@getBenefits', '@getCount'])
