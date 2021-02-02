@@ -2,7 +2,7 @@ import React from "react";
 import { MtchMeToBenefits } from "./MtchMeToBenefits";
 
 export default {
-  title: "Components/molecules/MtchMeToBenefits",
+  title: "Components/molecules/MatchMeToBenefits",
   component: MtchMeToBenefits,
 };
 
