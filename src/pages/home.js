@@ -24,6 +24,7 @@ import { BenefitsCounter } from "../components/atoms/BenefitsCounter";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 import { Title } from "../components/atoms/Title";
 import { MatchMeToBenefits } from "../components/molecules/MatchMeToBenefits";
+import { Questions } from "../components/molecules/Questions";
 
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
@@ -140,6 +141,7 @@ export function Home() {
           text={t("matchMeToBenefits")}
           onClick={matchMeToBenefitsButtonClickHandler}
         />
+        <Questions />
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"

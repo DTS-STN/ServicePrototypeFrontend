@@ -14,7 +14,6 @@ export function MatchMeToBenefits(props) {
         className={"bg-bg-gray-dk text-white hover:bg-black"}
         onClick={props.onClick}
       />
-      {props.displayQuestion ? <div>Display questions here</div> : null}
     </div>
   );
 }
