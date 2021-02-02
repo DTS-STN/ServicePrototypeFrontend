@@ -132,7 +132,7 @@ export function Home() {
 
   const onChange = () => {};
   var questions = {
-    id: 1,
+    radioGroupId: 1,
     required: false,
     textRequired: "test",
     text: "How much income have you earned in Canada the last year?",
@@ -155,6 +155,11 @@ export function Home() {
       },
     ],
     onChange: onChange,
+    prevNextBarId: "prevNext",
+    hrefPrev: "prev",
+    prevText: "prev",
+    nextText: "next",
+    customClass: "",
   };
   /*2:{
       "id": 2,
@@ -238,7 +243,36 @@ export function Home() {
           text={t("matchMeToBenefits")}
           onClick={matchMeToBenefitsButtonClickHandler}
         />
-        <Questions questions={questions} />
+        <Questions
+          radioGroupId={"1"}
+          required={false}
+          textRequired="test"
+          text="How much income have you earned in Canada the last year?"
+          name="test"
+          answers={[
+            {
+              id: "lt-30k",
+              label: "Less than $30,000",
+              value: "test",
+            },
+            {
+              id: "30k-to-60k",
+              label: "Between $30,000 & $60,000",
+              value: "test",
+            },
+            {
+              id: "gt-60k",
+              label: "More than $60,000",
+              value: "test",
+            },
+          ]}
+          onChange={onChange}
+          prevNextBarId="NavBar"
+          hrefPrev="prev"
+          prevText="prev"
+          nextText="next"
+          customClass=""
+        />
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"
