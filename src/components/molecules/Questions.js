@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import { RadioGroup } from "../molecules/RadioGroup";
 import { PrevNext } from "../molecules/PrevNext";
 
+/**
+ *  This component is meant to display:
+ *   A question with a set of radio buttons to select answer, and
+ *     previous and next buttons for navigation
+ */
 export function Questions(props) {
   const {
     id,
@@ -16,18 +21,6 @@ export function Questions(props) {
     onNextClick,
   } = props;
 
-  function onChangeHandler(e) {
-    onChange(e);
-  }
-
-  function onPrevHandler(e) {
-    onPrevClick(e);
-  }
-
-  function onNextHandler(e) {
-    onNextClick(e);
-  }
-
   return (
     <div className="max-w-lg">
       <RadioGroup
@@ -37,15 +30,15 @@ export function Questions(props) {
         legend={legend}
         name={name}
         options={options}
-        onChange={() => onChangeHandler()}
+        onChange={() => onChange()}
       />
 
       <PrevNext
         prevText={props.prevText}
-        onPrevClick={() => onPrevHandler()}
+        onPrevClick={() => onPrevClick()}
         id={id}
         nextText={props.nextText}
-        onNextClick={() => onNextHandler()}
+        onNextClick={() => onNextClick()}
       />
     </div>
   );
