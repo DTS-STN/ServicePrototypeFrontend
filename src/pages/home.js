@@ -107,6 +107,15 @@ export function Home() {
     history.push(`/benefit/${benefitKeyToId[benefitKey]}`);
   };
 
+  const matchMeToBenefitsButtonClickHandler = () => {
+    // if not logged in log in first
+    if (!keycloak.authenticated) {
+      keycloak.login();
+    } else {
+      //display questions
+    }
+  };
+
   if (fetchBenefitsFailed || fetchBenefitsCountFailed) {
     return (
       <ErrorPage
