@@ -7,7 +7,7 @@ import { useKeycloak } from "@react-keycloak/web";
 import { useTranslation } from "react-i18next";
 
 /**
- * This component show login or a logout button according to the user authenticated flag
+ * This component shows match me to benefits button and questions when authenticated and clicked
  */
 export function MatchMeToBenefits(props) {
   const { keycloak } = useKeycloak();
@@ -17,8 +17,10 @@ export function MatchMeToBenefits(props) {
     if (!keycloak.authenticated) {
       keycloak.login();
     } else {
+      //display questions
     }
   };
+
   return (
     <div>
       <ActionButton
