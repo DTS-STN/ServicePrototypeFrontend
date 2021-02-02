@@ -1,19 +1,15 @@
 import React from "react";
-import { MtchMeToBenefits } from "./MtchMeToBenefits";
+import { MatchMeToBenefits } from "./MatchMeToBenefits";
 
 export default {
   title: "Components/molecules/MatchMeToBenefits",
-  component: MtchMeToBenefits,
+  component: MatchMeToBenefits,
 };
 
-const Template = (args) => <MtchMeToBenefits {...args} />;
+const Template = (args) => <MatchMeToBenefits {...args} />;
 
 export const Primary = Template.bind({});
 
-Primary.args = {};
-
-export const Authenticated = Template.bind({});
-
-Authenticated.args = {
-  MatchMeToBenefitsText: "Match me to Benefits",
+Primary.args = {
+  text: "Match me to Benefits",
 };

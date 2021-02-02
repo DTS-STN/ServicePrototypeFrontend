@@ -25,11 +25,16 @@ import { ErrorPage } from "../components/organisms/ErrorPage";
 import { Title } from "../components/atoms/Title";
 import { MatchMeToBenefits } from "../components/molecules/MatchMeToBenefits";
 
+//keycloak
+import { useKeycloak } from "@react-keycloak/web";
+
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
     false
   );
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
+
+  const { keycloak } = useKeycloak();
 
   // benefit redux subscriptions
   const isFetchingBenefits = useSelector(
@@ -122,7 +127,10 @@ export function Home() {
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>
-        <MatchMeToBenefits />
+        <MatchMeToBenefits
+          text={t("matchMeToBenefits")}
+          onClick={matchMeToBenefitsButtonClickHandler}
+        />
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"
