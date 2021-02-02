@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 /**
- * plain link component using html a tag meant for out of the app navigation.
+ * A 'Label' title for Forms
  */
 export function Legend(props) {
   const { customClass, required, strRequired, legend, id } = props;

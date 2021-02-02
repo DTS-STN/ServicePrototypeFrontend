@@ -11,13 +11,13 @@ export function PrevNext(props) {
 
   // event handler for Previous button
   function handlePrevClick(e) {
-    console.log("previous button clicked");
+    // console.log("previous button clicked");  // for debugging
     onPrevClick(e);
   }
 
   // event handler for Next button
   function handleNextClick(e) {
-    console.log("Next button clicked");
+    // console.log("Next button clicked");      // for debugging
     onNextClick(e);
   }
 
