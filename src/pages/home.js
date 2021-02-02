@@ -133,7 +133,7 @@ export function Home() {
   const onChange = () => {};
   var questions = {
     id: 1,
-    required: true,
+    required: false,
     textRequired: "test",
     text: "How much income have you earned in Canada the last year?",
     name: "test",
@@ -238,7 +238,7 @@ export function Home() {
           text={t("matchMeToBenefits")}
           onClick={matchMeToBenefitsButtonClickHandler}
         />
-        <Questions props={questions} />
+        <Questions questions={questions} />
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"
