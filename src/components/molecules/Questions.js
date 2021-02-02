@@ -30,15 +30,15 @@ export function Questions(props) {
         legend={legend}
         name={name}
         options={options}
-        onChange={() => onChange()}
+        onChange={onChange}
       />
 
       <PrevNext
         prevText={props.prevText}
-        onPrevClick={() => onPrevClick()}
+        onPrevClick={onPrevClick}
         id={id}
         nextText={props.nextText}
-        onNextClick={() => onNextClick()}
+        onNextClick={onNextClick}
       />
     </div>
   );
