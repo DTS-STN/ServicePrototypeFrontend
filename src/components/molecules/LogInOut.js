@@ -7,14 +7,11 @@ import { Alink } from "../atoms/Alink";
  * This component show login or a logout button according to the user authenticated flag
  */
 export function LogInOut(props) {
-  //Link for user
-  let url = props.curamUaLink;
-
   return (
     <div className="flex justify-end">
       <div className="text-white font-normal pt-1 pr-4">
         <Alink
-          href={url}
+          href={props.curamUaLink}
           customClass={"text-white hover:text-black"}
           id="CuramUaLink"
         >
