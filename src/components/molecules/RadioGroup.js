@@ -20,7 +20,6 @@ export function RadioGroup(props) {
         strRequired={textRequired}
         legend={text}
       />
-
       {answers.map(({ id, value, label }) => (
         <Radio
           id={id}
@@ -39,7 +38,7 @@ RadioGroup.propTypes = {
   /**
    * text used mostly for testing, to identify each of the controls must be unique within the page
    */
-  id: PropTypes.number,
+  id: PropTypes.string,
 
   /**
    * Main Label for group of Radio buttons

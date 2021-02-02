@@ -43,5 +43,5 @@ Legend.propTypes = {
   /**
    * Element ID used for testing
    */
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 };
