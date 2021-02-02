@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
+import { userDataSelector } from "../../redux/selectors";
 import { useKeycloak } from "@react-keycloak/web";
 import { changeLanguageCreator, LANGUAGES } from "../../redux/actions";
+import { getUserData } from "../../redux/dispatchers/user/requestUserData";
 
 /**
  * page component complete with canada.ca header and footer
@@ -15,6 +17,7 @@ export function Page(props) {
   const dispatch = useDispatch();
   const { keycloak } = useKeycloak();
   const { t } = useTranslation();
+  const userProfileData = useSelector(userDataSelector);
 
   let languageButtonHandler = () => {
     if (language === "en") {
@@ -23,6 +26,12 @@ export function Page(props) {
       dispatch(changeLanguageCreator(LANGUAGES.EN));
     }
   };
+
+  useEffect(() => {
+    if (keycloak.authenticated && userProfileData === {}) {
+      console.log(keycloak);
+    }
+  }, [keycloak, dispatch, userProfileData]);
 
   return (
     <div className="w-screen h-screen flex flex-col">

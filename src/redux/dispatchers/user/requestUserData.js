@@ -1,4 +1,5 @@
 import "cross-fetch/polyfill";
+import { USER_SERVICE_URL } from "../../../variables";
 import {
   networkRequestActionCreator,
   networkReceivedActionCreator,
@@ -10,6 +11,7 @@ import { RESOURCE_TYPES } from "../resourceTypes";
 
 export async function getUserData(dispatch) {
   let response;
+  let userInfoUrl = "/account/v1beta1/profile/";
 
   try {
     dispatch(
@@ -19,7 +21,7 @@ export async function getUserData(dispatch) {
       )
     );
 
-    response = await fetch(USER_SERVICE_URL);
+    response = await fetch(USER_SERVICE_URL + userInfoUrl);
   } catch (e) {
     return dispatch(
       networkRequestFailedActionCreator(
