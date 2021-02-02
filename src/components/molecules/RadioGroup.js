@@ -4,7 +4,7 @@ import { Legend } from "../atoms/Legend";
 import { Radio } from "../atoms/Radio";
 
 export function RadioGroup(props) {
-  const { id, required, textRequired, legend, name, options, onChange } = props;
+  const { id, required, textRequired, text, name, answers, onChange } = props;
 
   function onChangeHandler(e) {
     console.log(e);
@@ -17,10 +17,10 @@ export function RadioGroup(props) {
         id={id}
         required={required}
         strRequired={textRequired}
-        legend={legend}
+        legend={text}
       />
 
-      {options.map(({ id, value, label }) => (
+      {answers.map(({ id, value, label }) => (
         <Radio
           id={id}
           key={id}
@@ -43,7 +43,7 @@ RadioGroup.propTypes = {
   /**
    * Main Label for group of Radio buttons
    */
-  legend: PropTypes.string,
+  text: PropTypes.string,
 
   /**
    * Required boolean adds a (required)
@@ -63,7 +63,7 @@ RadioGroup.propTypes = {
   /**
    * Array that contains [id, value, label] for each of the radio buttons
    */
-  options: PropTypes.array,
+  answers: PropTypes.array,
 
   /**
    * Function this could update the state with the user selection, or something else.

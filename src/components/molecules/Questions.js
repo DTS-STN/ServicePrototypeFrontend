@@ -4,7 +4,7 @@ import { RadioGroup } from "../molecules/RadioGroup";
 import { PrevNextBar } from "../molecules/PrevNextBar";
 
 export function Questions(props) {
-  const { id, required, textRequired, legend, name, options, onChange } = props;
+  const { id, required, textRequired, text, name, answers, onChange } = props;
 
   function onChangeHandler(e) {
     onChange(e);
@@ -16,9 +16,9 @@ export function Questions(props) {
         id={id}
         required={required}
         textRequired={textRequired}
-        legend={legend}
+        text={text}
         name={name}
-        options={options}
+        answers={answers}
         onChange={() => onChangeHandler()}
       />
 
@@ -43,7 +43,7 @@ Questions.propTypes = {
   /**
    * Main Label for group of Radio buttons
    */
-  legend: PropTypes.string,
+  text: PropTypes.string,
 
   /**
    * Required boolean adds a (required)
@@ -63,7 +63,7 @@ Questions.propTypes = {
   /**
    * Array that contains [id, value, label] for each of the radio buttons
    */
-  options: PropTypes.array,
+  answers: PropTypes.array,
 
   /**
    * Function this could update the state with the user selection, or something else.
