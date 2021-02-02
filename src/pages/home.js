@@ -133,7 +133,7 @@ export function Home() {
   const onChange = () => {};
   var questions = {
     id: 1,
-    required: true,
+    required: false,
     textRequired: "test",
     text: "How much income have you earned in Canada the last year?",
     name: "test",

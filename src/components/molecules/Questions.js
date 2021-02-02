@@ -29,14 +29,14 @@ export function Questions(props) {
         onChange={() => onChangeHandler()}
       />
 
-      {/* <PrevNextBar
+      <PrevNextBar
         hrefPrev={props.hrefPrev}
         prevText={props.prevText}
         skipFlag={false}
         customClass={props.customClass}
         id={id}
         nextText={props.nextText}
-      /> */}
+      />
     </div>
   );
 }
