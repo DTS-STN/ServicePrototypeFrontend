@@ -5,6 +5,7 @@ import { Radio } from "../atoms/Radio";
 
 export function RadioGroup(props) {
   const { id, required, textRequired, text, name, answers, onChange } = props;
+  // console.log(props);
 
   function onChangeHandler(e) {
     console.log(e);
@@ -38,7 +39,7 @@ RadioGroup.propTypes = {
   /**
    * text used mostly for testing, to identify each of the controls must be unique within the page
    */
-  id: PropTypes.string,
+  id: PropTypes.number,
 
   /**
    * Main Label for group of Radio buttons

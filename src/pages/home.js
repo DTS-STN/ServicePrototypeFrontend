@@ -238,7 +238,7 @@ export function Home() {
           text={t("matchMeToBenefits")}
           onClick={matchMeToBenefitsButtonClickHandler}
         />
-        <Questions props={questions} />
+        <Questions questions={questions} />
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"
