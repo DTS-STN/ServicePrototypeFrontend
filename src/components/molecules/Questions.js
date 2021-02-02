@@ -1,13 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { RadioGroup } from "../molecules/RadioGroup";
-import { PrevNextBar } from "../molecules/PrevNextBar";
+import { PrevNext } from "../molecules/PrevNext";
 
 export function Questions(props) {
-  const { id, required, textRequired, legend, name, options, onChange } = props;
+  const {
+    id,
+    required,
+    textRequired,
+    legend,
+    name,
+    options,
+    onChange,
+    onPrevClick,
+    onNextClick,
+  } = props;
 
   function onChangeHandler(e) {
     onChange(e);
+  }
+
+  function onPrevHandler(e) {
+    onPrevClick(e);
+  }
+
+  function onNextHandler(e) {
+    onNextClick(e);
   }
 
   return (
@@ -22,13 +40,12 @@ export function Questions(props) {
         onChange={() => onChangeHandler()}
       />
 
-      <PrevNextBar
-        hrefPrev={props.hrefPrev}
+      <PrevNext
         prevText={props.prevText}
-        skipFlag={false}
-        customClass={props.customClass}
+        onPrevClick={() => onPrevHandler()}
         id={id}
         nextText={props.nextText}
+        onNextClick={() => onNextHandler()}
       />
     </div>
   );
@@ -71,22 +88,22 @@ Questions.propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * Address to where the link is going to
-   */
-  hrefPrev: PropTypes.string.isRequired,
-
-  /**
    * Text for Back link
    */
   prevText: PropTypes.string.isRequired,
 
   /**
-   * Optional overrides the default css
+   * Function to be called when onClick on Previous button
    */
-  customClass: PropTypes.string,
+  onPrevClick: PropTypes.func,
 
   /**
    * Next button text
    */
   nextText: PropTypes.string.isRequired,
+
+  /**
+   * Function to be called when onClick on Next button
+   */
+  onNextClick: PropTypes.func,
 };

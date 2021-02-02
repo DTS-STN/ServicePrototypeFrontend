@@ -45,11 +45,13 @@ it("renders 'Primary' ", () => {
   expect(one).not.toBeChecked();
   expect(two).toBeChecked();
 
-  // Checks the Links
+  const prevButton = screen.getByRole("button", {
+    name: Primary.args.prevText,
+  });
+  const nextButton = screen.getByRole("button", {
+    name: Primary.args.nextText,
+  });
 
-  const links = screen.getAllByRole("link");
-  const nextButton = screen.getByRole("button");
-
-  expect(links[0]).toHaveTextContent("Prev");
-  expect(nextButton).toHaveTextContent("Next");
+  expect(prevButton).toHaveTextContent(Primary.args.prevText);
+  expect(nextButton).toHaveTextContent(Primary.args.nextText);
 });

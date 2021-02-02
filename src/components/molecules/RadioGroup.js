@@ -27,7 +27,7 @@ export function RadioGroup(props) {
           value={value}
           label={label}
           name={name}
-          onChange={() => onChangeHandler(value)}
+          onChange={(e) => onChangeHandler(e.currentTarget.value)}
         />
       ))}
     </fieldset>
