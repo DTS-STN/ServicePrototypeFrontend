@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 // i18n imports
 import { useTranslation } from "react-i18next";
@@ -36,11 +36,10 @@ export function CasesPage() {
   const isFetchingBenefits = useSelector(
     (state) => state.benefits.benefitsData.isFetching
   );
-  
+
   const fetchBenefitsFailed = useSelector(
     (state) => state.benefits.benefitsData.fetchFailed
   );
- 
 
   const fetchBenefitsFailedObj = useSelector(
     (state) => state.benefits.benefitsData.fetchFailedObj
@@ -58,14 +57,27 @@ export function CasesPage() {
 
   const history = useHistory();
 
+  // iframe Ref
+  let iframe;
+
+  // message listener
+  const messageListener = (event) => {
+    // console.log(event);
+    if (event.data === "ready") {
+      iframe.contentWindow.postMessage({ jwt: "", guid: "" }, "*");
+    }
+  };
 
   useEffect(() => {
+    window.addEventListener("message", messageListener);
+
     if (!triedFetchedBenefits && !isFetchingBenefits && !fetchBenefitsFailed) {
       dispatch(getCases(undefined, undefined, "created_at:asc"));
       setTriedFetchedBenefits(true);
     }
-  }, [triedFetchedBenefits, isFetchingBenefits, fetchBenefitsFailed, dispatch]);
 
+    return () => window.removeEventListener("message", messageListener);
+  }, [triedFetchedBenefits, isFetchingBenefits, fetchBenefitsFailed, dispatch]);
 
   const onBenefitMoreInfo = (benefitKey) => {
     history.push(`/benefit/${benefitKeyToId[benefitKey]}`);
@@ -75,11 +87,7 @@ export function CasesPage() {
     return (
       <ErrorPage
         errorTitle={t("somethingWentWrong")}
-        error={
-          fetchBenefitsFailed
-            ? fetchBenefitsFailedObj
-            : ''
-        }
+        error={fetchBenefitsFailed ? fetchBenefitsFailedObj : ""}
       />
     );
   }
@@ -87,8 +95,8 @@ export function CasesPage() {
   return (
     <Page>
       <section>
-      <main className="font-sans">
-      {/* <main className="font-sans">
+        <main className="font-sans">
+          {/* <main className="font-sans">
         <Title dataCy={"home-page-title"}>{t("homePageTitle")}</Title>
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
@@ -125,14 +133,28 @@ export function CasesPage() {
             // onMoreInfoClick={onBenefitMoreInfo}
             benefits={benefitsData}
           />
-          </main>
-        </section>
+          <iframe
+            ref={(webview) => {
+              iframe = webview;
+            }}
+            style={{
+              position: "absolute",
+              height: "400px",
+              width: "400px",
+              bottom: "0",
+              right: "0",
+            }}
+            src="https://vigilant-mayer-92de00.netlify.app/"
+            // src="http://localhost:3001"
+            title="Chatbot"
+          ></iframe>
+        </main>
+      </section>
     </Page>
   );
 }
 
 // import React, { useState, useEffect } from "react";
-
 
 // // react router imports
 // import { useParams } from "react-router-dom";
