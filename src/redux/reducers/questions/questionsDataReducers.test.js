@@ -61,8 +61,6 @@ describe("questionsData", () => {
         },
         questionsMap: {
           1: {
-            isEligible: true,
-            isSelected: false,
             id: 1,
             text:
               "How much income have you earned in Canada the last year? [FR]",
@@ -88,8 +86,6 @@ describe("questionsData", () => {
         NETWORK_REQUEST_TYPES.GET,
         [
           {
-            isEligible: true,
-            isSelected: false,
             id: 2,
             text: "How long have you been out of work? [FR]",
             answers: [
@@ -118,8 +114,6 @@ describe("questionsData", () => {
       fetchFailedObj: {},
       questionsMap: {
         1: {
-          isEligible: true,
-          isSelected: false,
           id: 1,
           text: "How much income have you earned in Canada the last year? [FR]",
           answers: [
@@ -138,8 +132,6 @@ describe("questionsData", () => {
           ],
         },
         2: {
-          isEligible: true,
-          isSelected: false,
           id: 2,
           text: "How long have you been out of work? [FR]",
           answers: [

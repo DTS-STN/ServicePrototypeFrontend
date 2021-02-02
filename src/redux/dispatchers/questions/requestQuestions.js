@@ -57,6 +57,7 @@ async function fetchQuestions(dispatch, start, limit, sort) {
     }
 
     response = await fetch(BENEFITSERVICE_URL + url);
+
     paramBefore
       ? (responseFr = await fetch(BENEFITSERVICE_URL + url + "&lang=fr"))
       : (responseFr = await fetch(BENEFITSERVICE_URL + url + "?lang=fr"));
