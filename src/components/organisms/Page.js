@@ -28,8 +28,8 @@ export function Page(props) {
   };
 
   useEffect(() => {
-    if (keycloak.authenticated && userProfileData === {}) {
-      console.log(keycloak);
+    if (keycloak.authenticated && Object.keys(userDataSelector).length === 0) {
+      dispatch(getUserData(keycloak));
     }
   }, [keycloak, dispatch, userProfileData]);
 

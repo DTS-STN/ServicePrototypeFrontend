@@ -9,9 +9,10 @@ import {
 } from "../../actions";
 import { RESOURCE_TYPES } from "../resourceTypes";
 
-export async function getUserData(dispatch) {
+async function fetchUserData(dispatch, keycloak) {
   let response;
   let userInfoUrl = "/account/v1beta1/profile/";
+  let userGuid = keycloak.idTokenParsed.guid;
 
   try {
     dispatch(
@@ -20,8 +21,14 @@ export async function getUserData(dispatch) {
         NETWORK_REQUEST_TYPES.GET
       )
     );
-
-    response = await fetch(USER_SERVICE_URL + userInfoUrl);
+    console.log(USER_SERVICE_URL + userInfoUrl + userGuid);
+    response = await fetch(USER_SERVICE_URL + userInfoUrl + userGuid, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "bearer " + keycloak.token,
+      },
+    });
   } catch (e) {
     return dispatch(
       networkRequestFailedActionCreator(
@@ -66,4 +73,17 @@ export async function getUserData(dispatch) {
       )
     );
   }
+}
+
+/**
+ * dispatch function which gets a list of benefits from the strapi api.
+ * see strapi documentation on parameters
+ * https://strapi.io/documentation/v3.x/content-api/parameters.html
+ * @param start - the start index
+ * @param limit - the limit of how much to return
+ * @param sort - how to sort benefits
+ * @returns {function(*=): Promise<void>}
+ */
+export function getUserData(keycloak) {
+  return (dispatch) => fetchUserData(dispatch, keycloak);
 }
