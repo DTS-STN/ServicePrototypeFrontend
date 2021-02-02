@@ -12,7 +12,7 @@ export function Questions(props) {
 
   return (
     <div className="max-w-lg">
-      <RadioGroup
+      {/* <RadioGroup
         id={id}
         required={required}
         textRequired={textRequired}
@@ -20,16 +20,16 @@ export function Questions(props) {
         name={name}
         answers={answers}
         onChange={() => onChangeHandler()}
-      />
+      /> */}
 
-      <PrevNextBar
+      {/* <PrevNextBar
         hrefPrev={props.hrefPrev}
         prevText={props.prevText}
         skipFlag={false}
         customClass={props.customClass}
         id={id}
         nextText={props.nextText}
-      />
+      /> */}
     </div>
   );
 }
