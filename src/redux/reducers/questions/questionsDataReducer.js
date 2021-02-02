@@ -46,12 +46,6 @@ export const questionsData = function (
         if (Array.isArray(data) && data.length > 0) {
           let newQuestionsMap = { ...state.questionsMap };
           data.forEach((value) => {
-            if (!newQuestionsMap[value.id]) {
-              newQuestionsMap[value.id] = {
-                isEligible: true,
-                isSelected: false,
-              };
-            }
             newQuestionsMap[value.id] = {
               ...newQuestionsMap[value.id],
               ...value,
@@ -80,12 +74,6 @@ export const questionsData = function (
         if (Array.isArray(data) && data.length > 0) {
           let newQuestionsMapFr = { ...state.questionsMapFr };
           data.forEach((value) => {
-            if (!newQuestionsMapFr[value.id]) {
-              newQuestionsMapFr[value.id] = {
-                isEligible: true,
-                isSelected: false,
-              };
-            }
             newQuestionsMapFr[value.id] = {
               ...newQuestionsMapFr[value.id],
               ...value,
