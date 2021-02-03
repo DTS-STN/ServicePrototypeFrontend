@@ -10,7 +10,9 @@ const Template = (args) => <Questions {...args} />;
 
 export const Primary = Template.bind({});
 
-function onChangeHandler(e) {}
+function onChangeHandler(e) {
+  console.log(e);
+}
 
 function onPrevHandler(e) {}
 
@@ -27,7 +29,7 @@ Primary.args = {
     { id: "1", value: "B", label: "B) Between $30,000 & 60,000" },
     { id: "2", value: "C", label: "C) More than $60,000" },
   ],
-  onChange: () => onChangeHandler(),
+  onChange: (e) => onChangeHandler(e),
   onPrevClick: () => onPrevHandler(),
   prevText: "Previous Question",
   nextText: "Next Question",
