@@ -3,14 +3,13 @@ import PropTypes from "prop-types";
 import { Legend } from "../atoms/Legend";
 import { Radio } from "../atoms/Radio";
 
+/**
+ *  This component is display a title and a set of radio buttons,
+ *    it returns the value of the button that was clicked
+ */
 export function RadioGroup(props) {
   const { id, required, textRequired, text, name, answers, onChange } = props;
   // console.log(props);
-
-  function onChangeHandler(e) {
-    console.log(e);
-    onChange(e);
-  }
 
   return (
     <fieldset>
@@ -27,7 +26,7 @@ export function RadioGroup(props) {
           value={value}
           label={label}
           name={name}
-          onChange={() => onChangeHandler(value)}
+          onChange={() => onChange(value)}
         />
       ))}
     </fieldset>

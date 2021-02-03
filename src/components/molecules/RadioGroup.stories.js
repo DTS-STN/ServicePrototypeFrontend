@@ -10,7 +10,9 @@ const Template = (args) => <RadioGroup {...args} />;
 
 export const Primary = Template.bind({});
 
-function onChangeHandler(e) {}
+function onChangeHandler(e) {
+  console.log(e);
+}
 
 Primary.args = {
   text: "Question #1.- What was your income last year ?",
@@ -26,5 +28,5 @@ Primary.args = {
   /**
    * Function this could update the state with the user selection, or something else.
    */
-  onChange: () => onChangeHandler(),
+  onChange: (e) => onChangeHandler(e),
 };

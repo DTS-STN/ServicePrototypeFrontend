@@ -1,8 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { RadioGroup } from "../molecules/RadioGroup";
-import { PrevNextBar } from "../molecules/PrevNextBar";
+import { PrevNext } from "../molecules/PrevNext";
 
+/**
+ *  This component is meant to display:
+ *   A question with a set of radio buttons to select answer, and
+ *     previous and next buttons for navigation
+ */
 export function Questions(props) {
   const {
     radioGroupId,
@@ -12,11 +17,12 @@ export function Questions(props) {
     name,
     answers,
     onChange,
+    onPrevClick,
+    onNextClick,
   } = props;
   function onChangeHandler(e) {
     onChange(e);
   }
-  console.log(answers);
   return (
     <div className="max-w-lg">
       <RadioGroup
@@ -26,16 +32,15 @@ export function Questions(props) {
         text={text}
         name={name}
         answers={answers}
-        onChange={() => onChangeHandler()}
+        onChange={onChangeHandler}
       />
 
-      <PrevNextBar
-        hrefPrev={props.hrefPrev}
+      <PrevNext
         prevText={props.prevText}
-        skipFlag={false}
-        customClass={props.customClass}
         id={props.prevNextBarId}
+        onPrevClick={onPrevClick}
         nextText={props.nextText}
+        onNextClick={onNextClick}
       />
     </div>
   );
@@ -93,12 +98,17 @@ Questions.propTypes = {
   prevText: PropTypes.string.isRequired,
 
   /**
-   * Optional overrides the default css
+   * Function to be called when onClick on Previous button
    */
-  customClass: PropTypes.string,
+  onPrevClick: PropTypes.func,
 
   /**
    * Next button text
    */
   nextText: PropTypes.string.isRequired,
+
+  /**
+   * Function to be called when onClick on Next button
+   */
+  onNextClick: PropTypes.func,
 };
