@@ -16,6 +16,7 @@ import { getBenefit, applyForBenefit } from "../redux/dispatchers";
 import { ContentPage } from "../components/organisms/ContentPage";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 import { NotFoundPage } from "./404";
+import { InternalServerErrorPage } from "./500";
 import { Page } from "../components/organisms/Page";
 import { Spinner } from "../components/atoms/Spinner";
 
@@ -73,6 +74,10 @@ export function BenefitPage() {
   if (fetchBenefitsFailed) {
     if (fetchBenefitsFailedReason === NETWORK_FAILED_REASONS.NOT_FOUND) {
       return <NotFoundPage />;
+    } else if (
+      fetchBenefitsFailedReason === NETWORK_FAILED_REASONS.INTERNAL_SERVER_ERROR
+    ) {
+      return <InternalServerErrorPage />;
     }
     return (
       <ErrorPage

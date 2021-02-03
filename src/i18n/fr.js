@@ -58,6 +58,10 @@ export const fr = {
   notFound: "(404) Page non trouvée.",
   pageDoesntExist: "La page suivante n'existe pas",
 
+  //500
+  urlOpenError: "(500) Erreur interne du serveur",
+  urlOpenErrorInfo: "Impossible de se connecter au point d'accès",
+
   //thankyou page
   thankYouTitle: "FR: Thank you",
   thankYouContent: "FR: Thank you for applying",
