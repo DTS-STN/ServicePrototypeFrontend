@@ -37,7 +37,7 @@ export function Home() {
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
   const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
   const [questions, setQuestions] = useState([]);
-  const [currentQuestion, setCurrentQuestion] = useState({});
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   const [displayQuestions, setDisplayQuestions] = useState(false);
 
@@ -132,7 +132,6 @@ export function Home() {
 
   useEffect(() => {
     if (questions.length !== 0) {
-      setCurrentQuestion(questions[0]);
       setDisplayQuestions(true);
     }
   }, [questions]);
@@ -175,9 +174,12 @@ export function Home() {
   }
 
   const onChange = () => {};
-  const changeCurrentQuestion = (id) => {
-    console.log(id);
-    // setCurrentQuestion(questions[id]);
+
+  const nextCurrentQuestion = () => {
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
+  };
+  const prevCurrentQuestion = () => {
+    setCurrentQuestionIndex(currentQuestionIndex - 1);
   };
 
   return (
@@ -194,17 +196,17 @@ export function Home() {
 
         {displayQuestions ? (
           <Questions
-            id={currentQuestion.id.toString()}
+            id={questions[currentQuestionIndex].id.toString()}
             required={true}
             textRequired="required"
-            legend={currentQuestion.text}
+            legend={questions[currentQuestionIndex].text}
             name="currentQuestion"
-            options={currentQuestion.answers}
+            options={questions[currentQuestionIndex].answers}
             onChange={onChange}
             prevText="Previous Question"
             nextText="Next Question"
-            onNextClick={changeCurrentQuestion}
-            onPrevClick={changeCurrentQuestion}
+            onNextClick={nextCurrentQuestion}
+            onPrevClick={prevCurrentQuestion}
           />
         ) : (
           ""
