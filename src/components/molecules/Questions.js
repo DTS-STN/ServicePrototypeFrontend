@@ -10,35 +10,33 @@ import { PrevNext } from "../molecules/PrevNext";
  */
 export function Questions(props) {
   const {
-    radioGroupId,
+    id,
     required,
     textRequired,
-    text,
+    legend,
     name,
-    answers,
+    options,
     onChange,
     onPrevClick,
     onNextClick,
   } = props;
-  function onChangeHandler(e) {
-    onChange(e);
-  }
+
   return (
     <div className="max-w-lg">
       <RadioGroup
-        id={radioGroupId}
+        id={id}
         required={required}
         textRequired={textRequired}
         legend={legend}
         name={name}
-        answers={answers}
-        onChange={onChangeHandler}
+        options={options}
+        onChange={onChange}
       />
 
       <PrevNext
         prevText={props.prevText}
-        id={props.prevNextBarId}
         onPrevClick={onPrevClick}
+        id={id}
         nextText={props.nextText}
         onNextClick={onNextClick}
       />
@@ -50,12 +48,12 @@ Questions.propTypes = {
   /**
    * text used mostly for testing, to identify each of the controls must be unique within the page
    */
-  radioGroupId: PropTypes.string,
+  id: PropTypes.string,
 
   /**
    * Main Label for group of Radio buttons
    */
-  text: PropTypes.string,
+  legend: PropTypes.string,
 
   /**
    * Required boolean adds a (required)
@@ -75,22 +73,12 @@ Questions.propTypes = {
   /**
    * Array that contains [id, value, label] for each of the radio buttons
    */
-  answers: PropTypes.array,
+  options: PropTypes.array,
 
   /**
    * Function this could update the state with the user selection, or something else.
    */
   onChange: PropTypes.func,
-
-  /**
-   * text used mostly for testing, to identify each of the controls must be unique within the page
-   */
-  prevNextBarId: PropTypes.string,
-
-  /**
-   * Address to where the link is going to
-   */
-  hrefPrev: PropTypes.string.isRequired,
 
   /**
    * Text for Back link
