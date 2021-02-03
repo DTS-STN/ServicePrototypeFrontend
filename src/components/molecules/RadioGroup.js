@@ -19,12 +19,12 @@ export function RadioGroup(props) {
         strRequired={textRequired}
         legend={legend}
       />
-      {options.map(({ id, value, label }) => (
+      {options.map(({ id, value, text }) => (
         <Radio
           id={id}
           key={id}
           value={value}
-          label={label}
+          label={text}
           name={name}
           onChange={() => onChange(value)}
         />

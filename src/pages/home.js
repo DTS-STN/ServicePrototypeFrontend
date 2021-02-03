@@ -130,6 +130,13 @@ export function Home() {
     dispatch,
   ]);
 
+  useEffect(() => {
+    if (questions.length !== 0) {
+      setCurrentQuestion(questions[0]);
+      setDisplayQuestions(true);
+    }
+  }, [questions]);
+
   // handler for when benefit is selected
   const onBenefitSelect = (benefitId, selected) => {
     selected
@@ -150,11 +157,7 @@ export function Home() {
       for (const [key, value] of Object.entries(questionsMap)) {
         res.push(value);
       }
-      console.log(res);
       setQuestions(res);
-      console.log(questions);
-      setCurrentQuestion(questions[1]);
-      setDisplayQuestions(true);
     }
   };
 
@@ -173,9 +176,8 @@ export function Home() {
 
   const onChange = () => {};
   const changeCurrentQuestion = (id) => {
-    {
-      setCurrentQuestion(questions[id]);
-    }
+    console.log(id);
+    // setCurrentQuestion(questions[id]);
   };
 
   return (
@@ -185,13 +187,10 @@ export function Home() {
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>
-        <MatchMeToBenefits
-          text={t("matchMeToBenefits")}
-          onClick={matchMeToBenefitsButtonClickHandler}
-        />
+
         {displayQuestions ? (
           <Questions
-            id={currentQuestion.id}
+            id={currentQuestion.id.toString()}
             required={true}
             textRequired="required"
             legend={currentQuestion.text}
@@ -200,11 +199,14 @@ export function Home() {
             onChange={onChange}
             prevText="Previous Question"
             nextText="Next Question"
-            onNextClick={changeCurrentQuestion(currentQuestion.id + 1)}
-            onPrevClick={changeCurrentQuestion(currentQuestion.id - 1)}
+            onNextClick={changeCurrentQuestion}
+            onPrevClick={changeCurrentQuestion}
           />
         ) : (
-          ""
+          <MatchMeToBenefits
+            text={t("matchMeToBenefits")}
+            onClick={matchMeToBenefitsButtonClickHandler}
+          />
         )}
 
         <section
