@@ -6,9 +6,9 @@ import {
   NETWORK_FAILED_REASONS,
 } from "../../actions";
 import { RESOURCE_TYPES } from "../resourceTypes";
-import { BENEFITSERVICE_URL } from "../../../variables";
+import { CURAM_PRESCREEN_LINK } from "../../../variables";
 
-async function postApplyForBenefit(dispatch, benefitType, keycloak) {
+async function postApplyForBenefit(dispatch, benefitType, keycloak, guid) {
   let response;
   try {
     dispatch(
@@ -21,11 +21,12 @@ async function postApplyForBenefit(dispatch, benefitType, keycloak) {
         }
       )
     );
-    response = await fetch(BENEFITSERVICE_URL + "/benefits/apply", {
+    response = await fetch(CURAM_PRESCREEN_LINK, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "bearer " + keycloak.token,
+        guid: guid,
+        Authorization: "Bearer " + keycloak.token,
       },
       body: JSON.stringify({
         benefitType,
@@ -69,7 +70,9 @@ async function postApplyForBenefit(dispatch, benefitType, keycloak) {
  * dispatch function which applies for a single benefit based on benefit type
  * @param benefitType
  * @param keycloak
+ * @param guid
  */
-export function applyForBenefit(benefitType, keycloak) {
-  return (dispatch) => postApplyForBenefit(dispatch, benefitType, keycloak);
+export function applyForBenefit(benefitType, keycloak, guid) {
+  return (dispatch) =>
+    postApplyForBenefit(dispatch, benefitType, keycloak, guid);
 }
