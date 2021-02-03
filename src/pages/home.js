@@ -176,10 +176,14 @@ export function Home() {
   const onChange = () => {};
 
   const nextCurrentQuestion = () => {
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
+    if (currentQuestionIndex < questions.length - 1) {
+      console.log(questions);
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    }
   };
   const prevCurrentQuestion = () => {
-    setCurrentQuestionIndex(currentQuestionIndex - 1);
+    if (currentQuestionIndex > 0)
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
   };
 
   return (
