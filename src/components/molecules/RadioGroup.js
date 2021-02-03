@@ -10,11 +10,6 @@ import { Radio } from "../atoms/Radio";
 export function RadioGroup(props) {
   const { id, required, textRequired, legend, name, options, onChange } = props;
 
-  function onChangeHandler(e) {
-    // console.log(e);   //for debugging
-    onChange(e);
-  }
-
   return (
     <fieldset>
       <Legend
@@ -31,7 +26,7 @@ export function RadioGroup(props) {
           value={value}
           label={label}
           name={name}
-          onChange={() => onChangeHandler(value)}
+          onChange={() => onChange(value)}
         />
       ))}
     </fieldset>
