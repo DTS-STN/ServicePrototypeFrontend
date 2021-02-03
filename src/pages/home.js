@@ -131,106 +131,6 @@ export function Home() {
   }
 
   const onChange = () => {};
-  var questions = {
-    radioGroupId: 1,
-    required: false,
-    textRequired: "test",
-    text: "How much income have you earned in Canada the last year?",
-    name: "test",
-    answers: [
-      {
-        id: "lt-30k",
-        label: "Less than $30,000",
-        value: "test",
-      },
-      {
-        id: "30k-to-60k",
-        label: "Between $30,000 & $60,000",
-        value: "test",
-      },
-      {
-        id: "gt-60k",
-        label: "More than $60,000",
-        value: "test",
-      },
-    ],
-    onChange: onChange,
-    prevNextBarId: "prevNext",
-    hrefPrev: "prev",
-    prevText: "prev",
-    nextText: "next",
-    customClass: "",
-  };
-  /*2:{
-      "id": 2,
-      "required": true,
-      "text": "How long have you been out of work?",
-      "answers": [
-        {
-          "id": "lt-2weeks",
-          "text": "Less than 2 weeks"
-        },
-        {
-          "id": "2weeks-3months",
-          "text": "More than 2 weeks but less than 3 months"
-        },
-        {
-          "id": "gt-3months",
-          "text": "More than 3 months"
-        }
-      ]
-    },
-    3:{
-      "id": 3,
-      "required": true,
-      "text": "Are you able to work / look for work?",
-      "answers": [
-        {
-          "id": "yes",
-          "text": "Yes"
-        },
-        {
-          "id": "no",
-          "text": "No"
-        }
-      ]
-    },
-    4:{
-      "id": 4,
-      "required": true,
-      "text": "Why are you currently out of work?",
-      "answers": [
-        {
-          "id": "lost-job",
-          "text": "I lost my job"
-        },
-        {
-          "id": "sick",
-          "text": "I am sick/injured"
-        },
-        {
-          "id": "baby",
-          "text": "I had a baby"
-        }
-      ]
-    },
-    5:{
-      "id": 5,
-      "required": true,
-      "text": "What is your gender?",
-      "answers": [
-        {
-          "id": "male",
-          "text": "Male"
-        },
-        {
-          "id": "female",
-          "text": "Female"
-        }
-      ]
-    }
-    
-  }*/
 
   return (
     <Page>
@@ -268,9 +168,9 @@ export function Home() {
           ]}
           onChange={onChange}
           prevNextBarId="NavBar"
-          hrefPrev="prev"
-          prevText="prev"
-          nextText="next"
+          hrefPrev="/previous.html"
+          prevText="Previous Question"
+          nextText="Next Question"
           customClass=""
         />
         <section
