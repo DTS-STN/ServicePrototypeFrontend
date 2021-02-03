@@ -23,6 +23,7 @@ async function postApplyForBenefit(dispatch, benefitType, keycloak, guid) {
     );
     response = await fetch(CURAM_PRESCREEN_LINK, {
       method: "POST",
+      redirect: "follow",
       headers: {
         "Content-Type": "application/json",
         guid: guid,
@@ -44,8 +45,9 @@ async function postApplyForBenefit(dispatch, benefitType, keycloak, guid) {
       )
     );
   }
-
-  if (response.status !== 307) {
+  if (response.status === 200) {
+    window.location = response.url;
+  } else {
     let textData;
     let data;
     try {
