@@ -22,6 +22,7 @@ jobs:
       - name: Run unit tests 🧪
         run: npm run test
         env:
+          REACT_APP_CURAM_PRESCREEN_LINK: https://api.us-east.apiconnect.appdomain.cloud/hmakhijadeloitteca-api/dev/hfp-client-apis/v1/redirect/prescreen/intake
           CI: true
 
       - name: Run Cypress end-to-end 🧪
