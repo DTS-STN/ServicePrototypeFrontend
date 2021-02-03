@@ -25,7 +25,6 @@ async function fetchUserData(dispatch, keycloak) {
     response = await fetch(USER_SERVICE_URL + userInfoUrl + userGuid, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
         Authorization: "bearer " + keycloak.token,
       },
     });

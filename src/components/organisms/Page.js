@@ -28,7 +28,7 @@ export function Page(props) {
   };
 
   useEffect(() => {
-    if (keycloak.authenticated && Object.keys(userDataSelector).length === 0) {
+    if (keycloak.authenticated && Object.keys(userProfileData).length === 0) {
       dispatch(getUserData(keycloak));
     }
   }, [keycloak, dispatch, userProfileData]);
