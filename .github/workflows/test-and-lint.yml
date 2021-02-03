@@ -22,6 +22,7 @@ jobs:
       - name: Run unit tests 🧪
         run: npm run test
         env:
+          REACT_APP_CURAM_PRESCREEN_LINK: https://api.us-east.apiconnect.appdomain.cloud/hmakhijadeloitteca-api/dev/hfp-client-apis/v1/redirect/prescreen/intake
           CI: true
 
       - name: Run Cypress end-to-end 🧪
@@ -31,7 +32,8 @@ jobs:
           NODE_ENV: production
           REACT_APP_KEYCLOAK_URL: https://keycloak.dev.dts-stn.com/auth
           REACT_APP_KEYCLOAK_REALM: benefit-service-dev
-          REACT_APP_KEYCLOAK_CLIENT_ID: benefit-service-frontend  
+          REACT_APP_KEYCLOAK_CLIENT_ID: benefit-service-frontend
+          REACT_APP_CURAM_PRESCREEN_LINK: https://api.us-east.apiconnect.appdomain.cloud/hmakhijadeloitteca-api/dev/hfp-client-apis/v1/redirect/prescreen/intake
           CI: true
         with:
           install: false
