@@ -9,7 +9,7 @@ import {
 } from "../../actions";
 import { RESOURCE_TYPES } from "../resourceTypes";
 import thunk from "redux-thunk";
-import { BENEFITSERVICE_URL } from "../../../variables";
+import { CURAM_PRESCREEN_LINK } from "../../../variables";
 import { applyForBenefit } from "./applyForBenefit";
 
 const middlewares = [thunk];
@@ -35,8 +35,8 @@ describe("applyForBenefit", () => {
   });
 
   it("posts to apply benefit route and dispatches the correct", async () => {
-    fetchMock.postOnce(BENEFITSERVICE_URL + "/benefits/apply", {
-      status: 307,
+    fetchMock.postOnce(CURAM_PRESCREEN_LINK, {
+      status: 200,
     });
 
     const store = mockStore({});
@@ -57,7 +57,7 @@ describe("applyForBenefit", () => {
 
   it("handles fetch throwing an error due to no network", async () => {
     let errorObj = new Error("no network");
-    fetchMock.postOnce(BENEFITSERVICE_URL + "/benefits/apply", {
+    fetchMock.postOnce(CURAM_PRESCREEN_LINK, {
       throws: errorObj,
     });
 
@@ -85,7 +85,7 @@ describe("applyForBenefit", () => {
   });
 
   it("handles error response from fetch", async () => {
-    fetchMock.postOnce(BENEFITSERVICE_URL + "/benefits/apply", {
+    fetchMock.postOnce(CURAM_PRESCREEN_LINK, {
       status: 500,
       body: {
         Status: 500,
