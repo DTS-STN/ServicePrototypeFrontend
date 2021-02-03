@@ -36,6 +36,10 @@ export function Home() {
   );
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
   const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState({});
+
+  const [displayQuestions, setDisplayQuestions] = useState(false);
 
   const { keycloak } = useKeycloak();
 
@@ -142,12 +146,15 @@ export function Home() {
     if (!keycloak.authenticated) {
       keycloak.login();
     } else {
-      //display questions
-      var obj = JSON.parse(questionsMap);
-      var res = [];
-
-      for (var i in obj) res.push(obj[i]);
-      console.log(obj);
+      let res = [];
+      for (const [key, value] of Object.entries(questionsMap)) {
+        res.push(value);
+      }
+      console.log(res);
+      setQuestions(res);
+      console.log(questions);
+      setCurrentQuestion(questions[1]);
+      setDisplayQuestions(true);
     }
   };
 
@@ -165,6 +172,11 @@ export function Home() {
   }
 
   const onChange = () => {};
+  const changeCurrentQuestion = (id) => {
+    {
+      setCurrentQuestion(questions[id]);
+    }
+  };
 
   return (
     <Page>
@@ -177,36 +189,24 @@ export function Home() {
           text={t("matchMeToBenefits")}
           onClick={matchMeToBenefitsButtonClickHandler}
         />
-        <Questions
-          id={"1"}
-          required={false}
-          textRequired="test"
-          legend="How much income have you earned in Canada the last year?"
-          name="test"
-          options={[
-            {
-              id: "lt-30k",
-              label: "Less than $30,000",
-              value: "lt-30k",
-            },
-            {
-              id: "30k-to-60k",
-              label: "Between $30,000 & $60,000",
-              value: "30k-to-60k",
-            },
-            {
-              id: "gt-60k",
-              label: "More than $60,000",
-              value: "gt-60k",
-            },
-          ]}
-          onChange={onChange}
-          prevNextBarId="NavBar"
-          hrefPrev="/previous.html"
-          prevText="Previous Question"
-          nextText="Next Question"
-          customClass=""
-        />
+        {displayQuestions ? (
+          <Questions
+            id={currentQuestion.id}
+            required={true}
+            textRequired="required"
+            legend={currentQuestion.text}
+            name="currentQuestion"
+            options={currentQuestion.answers}
+            onChange={onChange}
+            prevText="Previous Question"
+            nextText="Next Question"
+            onNextClick={changeCurrentQuestion(currentQuestion.id + 1)}
+            onPrevClick={changeCurrentQuestion(currentQuestion.id - 1)}
+          />
+        ) : (
+          ""
+        )}
+
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"
