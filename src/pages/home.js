@@ -77,6 +77,10 @@ export function Home() {
     (state) => state.questions.fetchFailed
   );
 
+  const questionsMap = useSelector(
+    (state) => state.questions.questionsData.questionsMap
+  );
+
   //redux dispatch
   const dispatch = useDispatch();
 
@@ -139,6 +143,11 @@ export function Home() {
       keycloak.login();
     } else {
       //display questions
+      var obj = JSON.parse(questionsMap);
+      var res = [];
+
+      for (var i in obj) res.push(obj[i]);
+      console.log(obj);
     }
   };
 
