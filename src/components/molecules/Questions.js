@@ -1,21 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { RadioGroup } from "../molecules/RadioGroup";
-import { PrevNextBar } from "../molecules/PrevNextBar";
+import { PrevNext } from "../molecules/PrevNext";
 
+/**
+ *  This component is meant to display:
+ *   A question with a set of radio buttons to select answer, and
+ *     previous and next buttons for navigation
+ */
 export function Questions(props) {
   const {
     id,
     required,
     textRequired,
-    text,
+    legend,
     name,
-    answers,
+    options,
     onChange,
-  } = props.questions;
-  function onChangeHandler(e) {
-    onChange(e);
-  }
+    onPrevClick,
+    onNextClick,
+  } = props;
 
   return (
     <div className="max-w-lg">
@@ -23,19 +27,18 @@ export function Questions(props) {
         id={id}
         required={required}
         textRequired={textRequired}
-        text={text}
+        legend={legend}
         name={name}
-        answers={answers}
-        onChange={() => onChangeHandler()}
+        options={options}
+        onChange={onChange}
       />
 
-      <PrevNextBar
-        hrefPrev={props.hrefPrev}
+      <PrevNext
         prevText={props.prevText}
-        skipFlag={false}
-        customClass={props.customClass}
+        onPrevClick={onPrevClick}
         id={id}
         nextText={props.nextText}
+        onNextClick={onNextClick}
       />
     </div>
   );
@@ -78,22 +81,22 @@ Questions.propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * Address to where the link is going to
-   */
-  // hrefPrev: PropTypes.string.isRequired,
-
-  /**
    * Text for Back link
    */
   // prevText: PropTypes.string.isRequired,
 
   /**
-   * Optional overrides the default css
+   * Function to be called when onClick on Previous button
    */
-  // customClass: PropTypes.string,
+  onPrevClick: PropTypes.func,
 
   /**
    * Next button text
    */
-  // nextText: PropTypes.string.isRequired,
+  nextText: PropTypes.string.isRequired,
+
+  /**
+   * Function to be called when onClick on Next button
+   */
+  onNextClick: PropTypes.func,
 };
