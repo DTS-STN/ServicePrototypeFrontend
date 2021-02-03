@@ -2,7 +2,7 @@ export const ENVIRONMENT = process.env.NODE_ENV;
 
 // BENEFITSERVICE_URL
 let benefitservice_env_url = process.env.REACT_APP_BENEFITSERVICE_BASE_URL;
-let caseservice_env_url = process.env.REACT_APP_CASESERVICE_BASE_URL
+let caseservice_env_url = process.env.REACT_APP_CASESERVICE_BASE_URL;
 
 if (!benefitservice_env_url && ENVIRONMENT !== "production") {
   //  benefitservice_env_url = "http://localhost:1337";
@@ -13,7 +13,7 @@ if (!benefitservice_env_url && ENVIRONMENT !== "production") {
 if (!caseservice_env_url && ENVIRONMENT !== "production") {
   //  benefitservice_env_url = "http://localhost:1337";
   // this uses the published version of strapi until we get the benefit service working.
-  benefitservice_env_url = "http://localhost:4200";
+  caseservice_env_url = "http://localhost:3001";
 }
 
 // KEYCLOAK

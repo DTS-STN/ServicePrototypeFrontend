@@ -52,7 +52,6 @@ export function CasesPage() {
 
   //message listner
   const messageListener = (event) => {
-    // console.log(event);
     if (event.data === "ready") {
       iframe.contentWindow.postMessage({ jwt: "", guid: "" }, "*");
     }
@@ -76,7 +75,6 @@ export function CasesPage() {
       />
     );
   }
-  console.log("cases data in page is ****", casesData);
   return (
     <Page>
       <main className="font-sans">

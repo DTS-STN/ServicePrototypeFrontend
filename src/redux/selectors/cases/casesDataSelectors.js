@@ -2,43 +2,26 @@ import { createSelector } from "reselect";
 import { languageSelector } from "../language";
 
 // selector for raw case data
-export const casesMapSelector = (state) =>
-  state.benefits.benefitsData.benefitsMap;
-
-export const casesMapSelectorFr = (state) =>
-  state.benefits.benefitsData.benefitsMapFr;
+export const casesMapSelector = (state) => state.cases.casesData.casesMap;
 
 export const caseTransformer = (data, lang) => {
   return {
-    benefitId: data.benefit_key,
-    benefitTitle: data[`title`],
-    benefitDescription: data[`description`],
-    benefitContent: data[`long_description`],
-    checkBoxAriaLabelBy:
-      lang === "fr"
-        ? `sélectionner ${data["title"]}`
-        : `select ${data["title"]}`,
-    isSelected: data.isSelected,
-    isEligible: data.isEligible,
+    id: data.id,
+    referenceNumber: data.referenceNumber,
+    status: data[`status`],
+    benefitType: data[`benefitType`],
   };
 };
 
 // selector for one particular case
-export const caseSelectorFactory = (benefitId) => {
+export const caseSelectorFactory = (caseId) => {
   return createSelector(
     languageSelector,
     casesMapSelector,
-    casesMapSelectorFr,
-    (lang, benefitsData, benefitsDataFr) => {
-      if (lang === "fr") {
-        return benefitsDataFr[benefitId]
-          ? caseTransformer(benefitsDataFr[benefitId], lang)
-          : undefined;
-      } else {
-        return benefitsData[benefitId]
-          ? caseTransformer(benefitsData[benefitId], lang)
-          : undefined;
-      }
+    (lang, casesData, benefitsDataFr) => {
+      return casesData[caseId]
+        ? caseTransformer(casesData[caseId], lang)
+        : undefined;
     }
   );
 };
@@ -47,15 +30,14 @@ export const caseSelectorFactory = (benefitId) => {
 export const casesDataSelector = createSelector(
   languageSelector,
   casesMapSelector,
-  casesMapSelectorFr,
-  (lang, benefitsData, benefitsDataFr) => {
+  (lang, casesData, casesDataFr) => {
     if (lang === "fr") {
-      return Object.keys(benefitsDataFr).map((id) => {
-        return caseTransformer(benefitsDataFr[id], lang);
+      return Object.keys(casesDataFr).map((id) => {
+        return caseTransformer(casesDataFr[id], lang);
       });
     } else {
-      return Object.keys(benefitsData).map((id) => {
-        return caseTransformer(benefitsData[id], lang);
+      return Object.keys(casesData).map((id) => {
+        return caseTransformer(casesData[id], lang);
       });
     }
   }
