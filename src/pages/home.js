@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { benefitsDataSelector } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
+import { getQuestions } from "../redux/dispatchers/questions";
 import {
   deselectBenefitActionCreator,
   selectBenefitActionCreator,
@@ -34,6 +35,7 @@ export function Home() {
     false
   );
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
+  const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
 
   const { keycloak } = useKeycloak();
 
@@ -68,6 +70,13 @@ export function Home() {
 
   const { t } = useTranslation();
 
+  const isFetchingQuestions = useSelector(
+    (state) => state.questions.isFetching
+  );
+  const fetchQuestionsFailed = useSelector(
+    (state) => state.questions.fetchFailed
+  );
+
   //redux dispatch
   const dispatch = useDispatch();
 
@@ -96,6 +105,22 @@ export function Home() {
       setTriedFetchedBenefits(true);
     }
   }, [triedFetchedBenefits, isFetchingBenefits, fetchBenefitsFailed, dispatch]);
+
+  useEffect(() => {
+    if (
+      !triedFetchedQuestions &&
+      !isFetchingQuestions &&
+      !fetchQuestionsFailed
+    ) {
+      dispatch(getQuestions());
+      setTriedFetchedQuestions(true);
+    }
+  }, [
+    triedFetchedQuestions,
+    isFetchingQuestions,
+    fetchQuestionsFailed,
+    dispatch,
+  ]);
 
   // handler for when benefit is selected
   const onBenefitSelect = (benefitId, selected) => {
