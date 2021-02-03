@@ -187,10 +187,6 @@ export function Home() {
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>
-        <MatchMeToBenefits
-          text={t("matchMeToBenefits")}
-          onClick={matchMeToBenefitsButtonClickHandler}
-        />
 
         {displayQuestions ? (
           <Questions
@@ -207,7 +203,10 @@ export function Home() {
             onPrevClick={changeCurrentQuestion}
           />
         ) : (
-          ""
+          <MatchMeToBenefits
+            text={t("matchMeToBenefits")}
+            onClick={matchMeToBenefitsButtonClickHandler}
+          />
         )}
 
         <section
