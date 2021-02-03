@@ -8,6 +8,7 @@ import { userDataSelector } from "../../redux/selectors";
 import { useKeycloak } from "@react-keycloak/web";
 import { changeLanguageCreator, LANGUAGES } from "../../redux/actions";
 import { getUserData } from "../../redux/dispatchers/user/requestUserData";
+import { getClientDash } from "../../redux/dispatchers/benefits";
 
 /**
  * page component complete with canada.ca header and footer
@@ -32,6 +33,16 @@ export function Page(props) {
       dispatch(getUserData(keycloak));
     }
   }, [keycloak, dispatch, userProfileData]);
+  
+  let userNameClickHandler = () => {
+    dispatch(
+      getClientDash(
+        keycloak,
+        // purposely hardcoded GUID, they only accept one value atm
+        "cc6e16b0-db92-459a-91df-f8144befdda9"
+      )
+    );
+  };
 
   return (
     <div className="w-screen h-screen flex flex-col">
@@ -50,6 +61,7 @@ export function Page(props) {
           keycloak.authenticated ? keycloak.idTokenParsed.name : ""
         }`}
         onLogout={() => keycloak.logout()}
+        onUsernameClick={userNameClickHandler}
       />
 
       <div

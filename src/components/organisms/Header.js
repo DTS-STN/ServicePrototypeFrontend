@@ -39,6 +39,7 @@ export function Header(props) {
             logoutText={props.logoutText}
             onLogin={props.onLogin}
             onLogout={props.onLogout}
+            onUsernameClick={props.onUsernameClick}
           />
         </div>
       </div>
@@ -96,4 +97,9 @@ Header.propTypes = {
    * Event handler for logout function
    */
   onLogout: PropTypes.func,
+
+  /**
+   * Event handler for when username is clicked
+   */
+  onUsernameClick: PropTypes.func,
 };
