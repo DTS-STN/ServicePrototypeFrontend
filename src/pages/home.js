@@ -169,26 +169,26 @@ export function Home() {
           onClick={matchMeToBenefitsButtonClickHandler}
         />
         <Questions
-          radioGroupId={"1"}
+          id={"1"}
           required={false}
           textRequired="test"
-          text="How much income have you earned in Canada the last year?"
+          legend="How much income have you earned in Canada the last year?"
           name="test"
-          answers={[
+          options={[
             {
               id: "lt-30k",
               label: "Less than $30,000",
-              value: "test",
+              value: "lt-30k",
             },
             {
               id: "30k-to-60k",
               label: "Between $30,000 & $60,000",
-              value: "test",
+              value: "30k-to-60k",
             },
             {
               id: "gt-60k",
               label: "More than $60,000",
-              value: "test",
+              value: "gt-60k",
             },
           ]}
           onChange={onChange}
