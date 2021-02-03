@@ -15,9 +15,9 @@ it("renders 'Primary' ", () => {
 
   let opt = screen.getAllByRole("radio");
 
-  expect(opt[0].value).toBe(Primary.args.options[0].value);
-  expect(opt[1].value).toBe(Primary.args.options[1].value);
-  expect(opt[2].value).toBe(Primary.args.options[2].value);
+  expect(opt[0].value).toBe(Primary.args.answers[0].value);
+  expect(opt[1].value).toBe(Primary.args.answers[1].value);
+  expect(opt[2].value).toBe(Primary.args.answers[2].value);
 
   const zero = screen.getByTestId("0");
   const one = screen.getByTestId("1");
@@ -45,11 +45,13 @@ it("renders 'Primary' ", () => {
   expect(one).not.toBeChecked();
   expect(two).toBeChecked();
 
-  // Checks the Links
+  const prevButton = screen.getByRole("button", {
+    name: Primary.args.prevText,
+  });
+  const nextButton = screen.getByRole("button", {
+    name: Primary.args.nextText,
+  });
 
-  const links = screen.getAllByRole("link");
-  const nextButton = screen.getByRole("button");
-
-  expect(links[0]).toHaveTextContent("Prev");
-  expect(nextButton).toHaveTextContent("Next");
+  expect(prevButton).toHaveTextContent(Primary.args.prevText);
+  expect(nextButton).toHaveTextContent(Primary.args.nextText);
 });

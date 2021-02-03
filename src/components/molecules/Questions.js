@@ -1,41 +1,46 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { RadioGroup } from "../molecules/RadioGroup";
-import { PrevNextBar } from "../molecules/PrevNextBar";
+import { PrevNext } from "../molecules/PrevNext";
 
+/**
+ *  This component is meant to display:
+ *   A question with a set of radio buttons to select answer, and
+ *     previous and next buttons for navigation
+ */
 export function Questions(props) {
   const {
-    id,
+    radioGroupId,
     required,
     textRequired,
     text,
     name,
     answers,
     onChange,
-  } = props.questions;
+    onPrevClick,
+    onNextClick,
+  } = props;
   function onChangeHandler(e) {
     onChange(e);
   }
-
   return (
     <div className="max-w-lg">
       <RadioGroup
-        id={id}
+        id={radioGroupId}
         required={required}
         textRequired={textRequired}
         text={text}
         name={name}
         answers={answers}
-        onChange={() => onChangeHandler()}
+        onChange={onChangeHandler}
       />
 
-      <PrevNextBar
-        hrefPrev={props.hrefPrev}
+      <PrevNext
         prevText={props.prevText}
-        skipFlag={false}
-        customClass={props.customClass}
-        id={id}
+        id={props.prevNextBarId}
+        onPrevClick={onPrevClick}
         nextText={props.nextText}
+        onNextClick={onNextClick}
       />
     </div>
   );
@@ -45,7 +50,7 @@ Questions.propTypes = {
   /**
    * text used mostly for testing, to identify each of the controls must be unique within the page
    */
-  id: PropTypes.number,
+  radioGroupId: PropTypes.string,
 
   /**
    * Main Label for group of Radio buttons
@@ -78,22 +83,32 @@ Questions.propTypes = {
   onChange: PropTypes.func,
 
   /**
+   * text used mostly for testing, to identify each of the controls must be unique within the page
+   */
+  prevNextBarId: PropTypes.string,
+
+  /**
    * Address to where the link is going to
    */
-  // hrefPrev: PropTypes.string.isRequired,
+  hrefPrev: PropTypes.string.isRequired,
 
   /**
    * Text for Back link
    */
-  // prevText: PropTypes.string.isRequired,
+  prevText: PropTypes.string.isRequired,
 
   /**
-   * Optional overrides the default css
+   * Function to be called when onClick on Previous button
    */
-  // customClass: PropTypes.string,
+  onPrevClick: PropTypes.func,
 
   /**
    * Next button text
    */
-  // nextText: PropTypes.string.isRequired,
+  nextText: PropTypes.string.isRequired,
+
+  /**
+   * Function to be called when onClick on Next button
+   */
+  onNextClick: PropTypes.func,
 };
