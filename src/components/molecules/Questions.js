@@ -10,33 +10,35 @@ import { PrevNext } from "../molecules/PrevNext";
  */
 export function Questions(props) {
   const {
-    id,
+    radioGroupId,
     required,
     textRequired,
-    legend,
+    text,
     name,
-    options,
+    answers,
     onChange,
     onPrevClick,
     onNextClick,
   } = props;
-
+  function onChangeHandler(e) {
+    onChange(e);
+  }
   return (
     <div className="max-w-lg">
       <RadioGroup
-        id={id}
+        id={radioGroupId}
         required={required}
         textRequired={textRequired}
         legend={legend}
         name={name}
-        options={options}
-        onChange={onChange}
+        answers={answers}
+        onChange={onChangeHandler}
       />
 
       <PrevNext
         prevText={props.prevText}
+        id={props.prevNextBarId}
         onPrevClick={onPrevClick}
-        id={id}
         nextText={props.nextText}
         onNextClick={onNextClick}
       />
@@ -48,7 +50,7 @@ Questions.propTypes = {
   /**
    * text used mostly for testing, to identify each of the controls must be unique within the page
    */
-  id: PropTypes.number,
+  radioGroupId: PropTypes.string,
 
   /**
    * Main Label for group of Radio buttons
@@ -81,9 +83,19 @@ Questions.propTypes = {
   onChange: PropTypes.func,
 
   /**
+   * text used mostly for testing, to identify each of the controls must be unique within the page
+   */
+  prevNextBarId: PropTypes.string,
+
+  /**
+   * Address to where the link is going to
+   */
+  hrefPrev: PropTypes.string.isRequired,
+
+  /**
    * Text for Back link
    */
-  // prevText: PropTypes.string.isRequired,
+  prevText: PropTypes.string.isRequired,
 
   /**
    * Function to be called when onClick on Previous button
