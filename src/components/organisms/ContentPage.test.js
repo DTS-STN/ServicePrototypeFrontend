@@ -23,6 +23,11 @@ const keycloak = {
 it("renders ContentPage in its primary state", () => {
   let store = mockStore({
     language: "en",
+    user: {
+      userData: {
+        user: {},
+      },
+    },
   });
   render(
     <ReactKeycloakProvider authClient={keycloak}>

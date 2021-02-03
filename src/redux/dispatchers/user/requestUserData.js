@@ -21,7 +21,6 @@ async function fetchUserData(dispatch, keycloak) {
         NETWORK_REQUEST_TYPES.GET
       )
     );
-    console.log(USER_SERVICE_URL + userInfoUrl + userGuid);
     response = await fetch(USER_SERVICE_URL + userInfoUrl + userGuid, {
       method: "GET",
       headers: {
