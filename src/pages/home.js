@@ -37,8 +37,8 @@ export function Home() {
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
   const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
   const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
   const [displayQuestions, setDisplayQuestions] = useState(false);
 
   const { keycloak } = useKeycloak();
@@ -132,6 +132,7 @@ export function Home() {
 
   useEffect(() => {
     if (questions.length !== 0) {
+      setAnswers(new Array(questions.length));
       setDisplayQuestions(true);
     }
   }, [questions]);
@@ -173,7 +174,11 @@ export function Home() {
     );
   }
 
-  const onChange = () => {};
+  const onChange = (e) => {
+    console.log(e);
+    answers[currentQuestionIndex] = e;
+    console.log(answers);
+  };
 
   const nextCurrentQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
@@ -201,7 +206,7 @@ export function Home() {
             legend={questions[currentQuestionIndex].text}
             name="currentQuestion"
             options={questions[currentQuestionIndex].answers}
-            onChange={onChange}
+            onChange={(e) => onChange(e)}
             prevText="Previous Question"
             nextText="Next Question"
             onNextClick={nextCurrentQuestion}
