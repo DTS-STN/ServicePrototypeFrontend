@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./PrevNextBar.css";
+import "./PrevNext.css";
 import { ActionButton } from "../atoms/ActionButton";
 
 /**
