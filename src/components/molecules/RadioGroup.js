@@ -77,4 +77,9 @@ RadioGroup.propTypes = {
    * Function this could update the state with the user selection, or something else.
    */
   onChange: PropTypes.func,
+
+  /**
+   * Sets the checked attrib when answer == id of one of the radio options
+   */
+  answer: PropTypes.string,
 };

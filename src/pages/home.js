@@ -40,6 +40,8 @@ export function Home() {
   const [answers, setAnswers] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [displayQuestions, setDisplayQuestions] = useState(false);
+  const [previouBtnDisabled, setPreviousBtnDisabled] = useState(true);
+  const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
 
   const { keycloak } = useKeycloak();
 
@@ -176,16 +178,23 @@ export function Home() {
 
   const onChange = (e) => {
     answers[currentQuestionIndex] = e;
+    setNextBtnDisabled(false);
   };
 
   const nextCurrentQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setNextBtnDisabled(true);
+      setPreviousBtnDisabled(false);
     }
   };
+
   const prevCurrentQuestion = () => {
-    if (currentQuestionIndex > 0)
+    if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
+    } else {
+      setPreviousBtnDisabled(true);
+    }
   };
 
   return (
@@ -195,29 +204,37 @@ export function Home() {
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>
-        {displayQuestions ? (
-          <Questions
-            id={questions[currentQuestionIndex].id.toString()}
-            required={true}
-            textRequired="required"
-            legend={questions[currentQuestionIndex].text}
-            name="currentQuestion"
-            options={questions[currentQuestionIndex].answers}
-            onChange={(e) => onChange(e)}
-            prevText="Previous Question"
-            nextText="Next Question"
-            onNextClick={nextCurrentQuestion}
-            onPrevClick={prevCurrentQuestion}
-            answer={answers[currentQuestionIndex]}
-          />
-        ) : (
-          <ActionButton
-            id="MatchMeToBenefits"
-            text={t("matchMeToBenefits")}
-            className={"bg-bg-gray-dk text-white hover:bg-black"}
-            onClick={matchMeToBenefitsButtonClickHandler}
-          />
-        )}
+
+        {/* Display the questions or button  */}
+
+        <section>
+          {displayQuestions ? (
+            <Questions
+              id={questions[currentQuestionIndex].id.toString()}
+              required={true}
+              textRequired="required"
+              legend={questions[currentQuestionIndex].text}
+              name="currentQuestion"
+              options={questions[currentQuestionIndex].answers}
+              onChange={(e) => onChange(e)}
+              prevText="Previous Question"
+              onPrevClick={prevCurrentQuestion}
+              disabledPrev={previouBtnDisabled}
+              nextText="Next Question"
+              onNextClick={nextCurrentQuestion}
+              disabledNext={nextBtnDisabled}
+              answer={answers[currentQuestionIndex]}
+            />
+          ) : (
+            <ActionButton
+              id="MatchMeToBenefits"
+              text={t("matchMeToBenefits")}
+              className={"bg-bg-gray-dk text-white hover:bg-black"}
+              onClick={matchMeToBenefitsButtonClickHandler}
+            />
+          )}
+        </section>
+
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"
