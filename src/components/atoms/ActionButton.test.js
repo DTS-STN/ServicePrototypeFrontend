@@ -7,6 +7,7 @@ import {
   Rounded,
   WithCounter,
   StartAgain,
+  Disabled,
 } from "./ActionButton.stories";
 
 it("renders ActionButton in its primary state", () => {
@@ -32,4 +33,10 @@ it("renders StartAgainButton in its icon state", () => {
   expect(document.getElementsByTagName("span")[0].classList).toContain(
     "icon-loop2"
   );
+});
+
+it("renders ActionButton disabled", () => {
+  render(<Disabled {...Disabled.args} />);
+  expect(screen.getByRole("button")).toHaveTextContent(Disabled.args.text);
+  expect(screen.getByRole("button")).toHaveAttribute("disabled");
 });

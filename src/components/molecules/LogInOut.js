@@ -8,10 +8,14 @@ import { ActionButton } from "../atoms/ActionButton";
 export function LogInOut(props) {
   return (
     <div className="flex justify-end">
-      <div className="text-white font-normal pt-1 pr-4">
-        {props.isAuthenticated ? props.userName : ""}
-      </div>
-
+      {props.isAuthenticated ? (
+        <div
+          className="text-white font-normal pt-1 pr-4 cursor-pointer hover:underline"
+          onClick={props.onUsernameClick}
+        >
+          {props.userName}
+        </div>
+      ) : undefined}
       <ActionButton
         invert
         id="LogInOut"
@@ -52,4 +56,9 @@ LogInOut.propTypes = {
    * Event Handler for the Logout function
    */
   onLogout: PropTypes.func,
+
+  /**
+   * Event handler for when the username is clicked
+   */
+  onUsernameClick: PropTypes.func,
 };
