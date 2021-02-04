@@ -1,4 +1,1 @@
-export {
-    casesDataSelector,
-    caseSelectorFactory,
-  } from "./casesDataSelectors";
+export { casesDataSelector, caseSelectorFactory } from "./casesDataSelectors";
