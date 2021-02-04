@@ -175,9 +175,7 @@ export function Home() {
   }
 
   const onChange = (e) => {
-    console.log(e);
     answers[currentQuestionIndex] = e;
-    console.log(answers);
   };
 
   const nextCurrentQuestion = () => {

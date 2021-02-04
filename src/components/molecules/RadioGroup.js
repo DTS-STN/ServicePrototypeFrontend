@@ -19,14 +19,14 @@ export function RadioGroup(props) {
         strRequired={textRequired}
         legend={legend}
       />
-      {options.map(({ id, value, text }) => (
+      {options.map(({ id, text }) => (
         <Radio
           id={id}
           key={id}
-          value={value}
+          value={id}
           label={text}
           name={name}
-          onChange={() => onChange(value)}
+          onChange={() => onChange(id)}
         />
       ))}
     </fieldset>
