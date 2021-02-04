@@ -24,8 +24,8 @@ import { BenefitGrid } from "../components/organisms/BenefitGrid";
 import { BenefitsCounter } from "../components/atoms/BenefitsCounter";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 import { Title } from "../components/atoms/Title";
-import { MatchMeToBenefits } from "../components/molecules/MatchMeToBenefits";
 import { Questions } from "../components/molecules/Questions";
+import { ActionButton } from "../components/atoms/ActionButton";
 
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
@@ -37,8 +37,8 @@ export function Home() {
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
   const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
   const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
   const [displayQuestions, setDisplayQuestions] = useState(false);
 
   const { keycloak } = useKeycloak();
@@ -132,6 +132,7 @@ export function Home() {
 
   useEffect(() => {
     if (questions.length !== 0) {
+      setAnswers(new Array(questions.length));
       setDisplayQuestions(true);
     }
   }, [questions]);
@@ -173,11 +174,12 @@ export function Home() {
     );
   }
 
-  const onChange = () => {};
+  const onChange = (e) => {
+    answers[currentQuestionIndex] = e;
+  };
 
   const nextCurrentQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      console.log(questions);
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };
@@ -193,7 +195,6 @@ export function Home() {
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>
-
         {displayQuestions ? (
           <Questions
             id={questions[currentQuestionIndex].id.toString()}
@@ -202,19 +203,21 @@ export function Home() {
             legend={questions[currentQuestionIndex].text}
             name="currentQuestion"
             options={questions[currentQuestionIndex].answers}
-            onChange={onChange}
+            onChange={(e) => onChange(e)}
             prevText="Previous Question"
             nextText="Next Question"
             onNextClick={nextCurrentQuestion}
             onPrevClick={prevCurrentQuestion}
+            answer={answers[currentQuestionIndex]}
           />
         ) : (
-          <MatchMeToBenefits
+          <ActionButton
+            id="MatchMeToBenefits"
             text={t("matchMeToBenefits")}
+            className={"bg-bg-gray-dk text-white hover:bg-black"}
             onClick={matchMeToBenefitsButtonClickHandler}
           />
         )}
-
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"
