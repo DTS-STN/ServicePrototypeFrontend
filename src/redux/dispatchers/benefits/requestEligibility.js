@@ -42,27 +42,7 @@ async function getEligibility(dispatch, answers) {
       )
     );
   }
-  if (response.status === 200) {
-    return response;
-  } else {
-    let textData;
-    let data;
-    try {
-      textData = await response.text();
-      data = JSON.parse(textData);
-    } catch (e) {
-      data = textData || "";
-    }
-    return dispatch(
-      networkRequestFailedActionCreator(
-        RESOURCE_TYPES.ELIGIBILITY,
-        NETWORK_REQUEST_TYPES.POST,
-        NETWORK_FAILED_REASONS[response.status] ||
-          NETWORK_FAILED_REASONS.INTERNAL_SERVER_ERROR,
-        typeof data === "string" ? { message: data } : data
-      )
-    );
-  }
+  return [1];
 }
 
 /**

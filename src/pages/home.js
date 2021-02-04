@@ -29,6 +29,7 @@ import { ActionButton } from "../components/atoms/ActionButton";
 
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
+import { requestEligibility } from "../redux/dispatchers/benefits/requestEligibility";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
@@ -42,6 +43,7 @@ export function Home() {
   const [displayQuestions, setDisplayQuestions] = useState(false);
   const [previouBtnDisabled, setPreviousBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
+  const [nextButtonText, setNextButtonText] = useState("Next Question");
 
   const { keycloak } = useKeycloak();
 
@@ -134,7 +136,6 @@ export function Home() {
 
   useEffect(() => {
     if (questions.length !== 0) {
-      setAnswers(new Array(questions.length));
       setDisplayQuestions(true);
     }
   }, [questions]);
@@ -177,15 +178,19 @@ export function Home() {
   }
 
   const onChange = (e) => {
-    answers[currentQuestionIndex] = e;
+    answers[questions[currentQuestionIndex].value] = e;
     setNextBtnDisabled(false);
   };
 
   const nextCurrentQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setNextBtnDisabled(true);
       setPreviousBtnDisabled(false);
+    } else if (currentQuestionIndex === questions.length - 1) {
+      dispatch(requestEligibility(answers));
+      //console.log(state)
+    } else if (currentQuestionIndex === questions.length - 2) {
+      setNextButtonText("Submit");
     }
   };
 
@@ -220,14 +225,10 @@ export function Home() {
               prevText="Previous Question"
               onPrevClick={prevCurrentQuestion}
               disabledPrev={previouBtnDisabled}
-              nextText={
-                currentQuestionIndex === questions.length - 1
-                  ? "Submit"
-                  : "Next Question"
-              }
+              nextText={nextButtonText}
               onNextClick={nextCurrentQuestion}
               disabledNext={nextBtnDisabled}
-              answer={answers[currentQuestionIndex]}
+              answer={answers[questions[currentQuestionIndex].value]}
             />
           ) : (
             <ActionButton
