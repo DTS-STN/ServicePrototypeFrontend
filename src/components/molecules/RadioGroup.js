@@ -8,7 +8,16 @@ import { Radio } from "../atoms/Radio";
  *    it returns the value of the button that was clicked
  */
 export function RadioGroup(props) {
-  const { id, required, textRequired, legend, name, options, onChange } = props;
+  const {
+    id,
+    required,
+    textRequired,
+    legend,
+    name,
+    options,
+    onChange,
+    answer,
+  } = props;
 
   return (
     <fieldset>
@@ -18,15 +27,15 @@ export function RadioGroup(props) {
         strRequired={textRequired}
         legend={legend}
       />
-
-      {options.map(({ id, value, label }) => (
+      {options.map(({ id, text }) => (
         <Radio
           id={id}
           key={id}
-          value={value}
-          label={label}
+          value={id}
+          label={text}
           name={name}
-          onChange={() => onChange(value)}
+          onChange={() => onChange(id)}
+          answer={answer}
         />
       ))}
     </fieldset>
@@ -68,4 +77,9 @@ RadioGroup.propTypes = {
    * Function this could update the state with the user selection, or something else.
    */
   onChange: PropTypes.func,
+
+  /**
+   * Sets the checked attrib when answer == id of one of the radio options
+   */
+  answer: PropTypes.string,
 };

@@ -23,6 +23,7 @@ export function Questions(props) {
     nextText,
     onNextClick,
     disabledNext,
+    answer,
   } = props;
 
   return (
@@ -35,6 +36,7 @@ export function Questions(props) {
         name={name}
         options={options}
         onChange={onChange}
+        answer={answer}
       />
 
       <PrevNext
@@ -115,4 +117,9 @@ Questions.propTypes = {
    * Flag disables the Next button
    */
   disabledNext: PropTypes.bool,
+
+  /**
+   * Sets the checked attrib when answer == id of one of the radio options
+   */
+  answer: PropTypes.string,
 };
