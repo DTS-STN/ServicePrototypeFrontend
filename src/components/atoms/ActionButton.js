@@ -14,8 +14,12 @@ export function ActionButton(props) {
           ? "rounded-sm"
           : "rounded-md"
       } shadow-lg ${
-        props.invert
+        props.invert && !props.disabled
           ? "bg-gray-light text-text-gray-dk border border-gray-md hover:bg-bg-gray-dk hover:text-white focus:bg-bg-gray-dk focus:text-white"
+          : props.className
+      } ${
+        props.disabled
+          ? "bg-gray-light text-gray-600 border border-gray-md "
           : props.className
       } text-sm px-4 focus:outline-none`}
       onClick={props.onClick}
@@ -24,6 +28,7 @@ export function ActionButton(props) {
       id={props.id}
       data-cy={props.id}
       data-cy-button={props.dataCyButton}
+      disabled={props.disabled}
     >
       {props.icon ? (
         <span className={props.icon} data-testid={props.dataTestId} />
@@ -103,4 +108,8 @@ ActionButton.propTypes = {
    * Test id for e2e test
    */
   dataCyButton: PropTypes.string,
+  /**
+   * Enabled or disabled the button
+   */
+  disabled: PropTypes.bool,
 };

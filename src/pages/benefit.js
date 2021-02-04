@@ -66,7 +66,14 @@ export function BenefitPage() {
     if (!keycloak.authenticated) {
       keycloak.login();
     } else {
-      dispatch(applyForBenefit(benefitData.benefitType, keycloak));
+      dispatch(
+        applyForBenefit(
+          benefitData.benefitType,
+          keycloak,
+          // purposely hardcoded GUID, they only accept one value atm
+          "cc6e16b0-db92-459a-91df-f8144befdda9"
+        )
+      );
     }
   };
 
@@ -97,6 +104,7 @@ export function BenefitPage() {
           : "Looks like there is no content yet"
       }
       ApplyButtonText={t("ApplyButtonText")}
+      dataCy={"apply-button"}
       onApplyButtonClick={applyButtonClickHandler}
     />
   );

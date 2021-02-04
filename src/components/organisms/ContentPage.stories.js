@@ -51,6 +51,7 @@ const Template = (args) => <ContentPage {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
+  ApplyButtonText: "apply text for the button",
   content:
     "# react-markdown\n" +
     "\n" +

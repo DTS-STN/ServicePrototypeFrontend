@@ -6,6 +6,8 @@ export default {
   component: Header,
 };
 
+function onLanguageClickHandler() {} // this is just to pass the test
+
 const Template = (args) => <Header {...args} />;
 
 export const Primary = Template.bind({});
@@ -15,6 +17,7 @@ Primary.args = {
   siteTitle: "Benefits Finder",
   loginText: "Log In",
   logoutText: "Log Out",
+  onLanguageClick: () => onLanguageClickHandler(),
 };
 
 export const Authenticated = Template.bind({});
@@ -26,4 +29,5 @@ Authenticated.args = {
   logoutText: "Log Out",
   isAuthenticated: true,
   userName: "Linda Smith",
+  onLanguageClick: () => onLanguageClickHandler(),
 };

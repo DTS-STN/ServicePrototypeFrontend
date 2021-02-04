@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { benefitsDataSelector } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
+import { getQuestions } from "../redux/dispatchers/questions";
 import {
   deselectBenefitActionCreator,
   selectBenefitActionCreator,
@@ -23,13 +24,26 @@ import { BenefitGrid } from "../components/organisms/BenefitGrid";
 import { BenefitsCounter } from "../components/atoms/BenefitsCounter";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 import { Title } from "../components/atoms/Title";
+import { Questions } from "../components/molecules/Questions";
 import { ActionButton } from "../components/atoms/ActionButton";
+
+//keycloak
+import { useKeycloak } from "@react-keycloak/web";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
     false
   );
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
+  const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [displayQuestions, setDisplayQuestions] = useState(false);
+  const [previouBtnDisabled, setPreviousBtnDisabled] = useState(true);
+  const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
+
+  const { keycloak } = useKeycloak();
 
   // benefit redux subscriptions
   const isFetchingBenefits = useSelector(
@@ -62,6 +76,17 @@ export function Home() {
 
   const { t } = useTranslation();
 
+  const isFetchingQuestions = useSelector(
+    (state) => state.questions.isFetching
+  );
+  const fetchQuestionsFailed = useSelector(
+    (state) => state.questions.fetchFailed
+  );
+
+  const questionsMap = useSelector(
+    (state) => state.questions.questionsData.questionsMap
+  );
+
   //redux dispatch
   const dispatch = useDispatch();
 
@@ -91,6 +116,30 @@ export function Home() {
     }
   }, [triedFetchedBenefits, isFetchingBenefits, fetchBenefitsFailed, dispatch]);
 
+  useEffect(() => {
+    if (
+      !triedFetchedQuestions &&
+      !isFetchingQuestions &&
+      !fetchQuestionsFailed
+    ) {
+      dispatch(getQuestions());
+      setTriedFetchedQuestions(true);
+    }
+  }, [
+    triedFetchedQuestions,
+    isFetchingQuestions,
+    fetchQuestionsFailed,
+    dispatch,
+  ]);
+
+  // handler for when questions are set from Redux.
+  useEffect(() => {
+    if (questions.length !== 0) {
+      setAnswers(new Array(questions.length));
+      setDisplayQuestions(true);
+    }
+  }, [questions]);
+
   // handler for when benefit is selected
   const onBenefitSelect = (benefitId, selected) => {
     selected
@@ -100,6 +149,19 @@ export function Home() {
 
   const onBenefitMoreInfo = (benefitKey) => {
     history.push(`/benefit/${benefitKeyToId[benefitKey]}`);
+  };
+
+  const matchMeToBenefitsButtonClickHandler = () => {
+    // if not logged in log in first
+    if (!keycloak.authenticated) {
+      keycloak.login();
+    } else {
+      let res = [];
+      for (const [key, value] of Object.entries(questionsMap)) {
+        res.push(value);
+      }
+      setQuestions(res);
+    }
   };
 
   if (fetchBenefitsFailed || fetchBenefitsCountFailed) {
@@ -115,6 +177,27 @@ export function Home() {
     );
   }
 
+  const onChange = (e) => {
+    answers[currentQuestionIndex] = e;
+    setNextBtnDisabled(false);
+  };
+
+  const nextCurrentQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setNextBtnDisabled(true);
+      setPreviousBtnDisabled(false);
+    }
+  };
+
+  const prevCurrentQuestion = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+    } else {
+      setPreviousBtnDisabled(true);
+    }
+  };
+
   return (
     <Page>
       <main className="font-sans">
@@ -122,11 +205,36 @@ export function Home() {
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>
-        <ActionButton
-          id="MatchMeToBenefits"
-          text={t("matchMeToBenefits")}
-          className={"bg-bg-gray-dk text-white hover:bg-black"}
-        />
+
+        {/* Display the questions or button  */}
+
+        <section>
+          {displayQuestions ? (
+            <Questions
+              id={questions[currentQuestionIndex].id.toString()}
+              required={true}
+              textRequired="required"
+              legend={questions[currentQuestionIndex].text}
+              name="currentQuestion"
+              options={questions[currentQuestionIndex].answers}
+              onChange={(e) => onChange(e)}
+              prevText="Previous Question"
+              onPrevClick={prevCurrentQuestion}
+              disabledPrev={previouBtnDisabled}
+              nextText="Next Question"
+              onNextClick={nextCurrentQuestion}
+              disabledNext={nextBtnDisabled}
+              answer={answers[currentQuestionIndex]}
+            />
+          ) : (
+            <ActionButton
+              id="MatchMeToBenefits"
+              text={t("matchMeToBenefits")}
+              className={"bg-bg-gray-dk text-white hover:bg-black"}
+              onClick={matchMeToBenefitsButtonClickHandler}
+            />
+          )}
+        </section>
 
         <section
           className="border-t border-b pt-2 pb-2 mt-8"

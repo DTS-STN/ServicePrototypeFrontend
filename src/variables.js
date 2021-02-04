@@ -22,12 +22,12 @@ let keycloak_env_url = process.env.REACT_APP_KEYCLOAK_URL;
 let keycloak_env_realm = process.env.REACT_APP_KEYCLOAK_REALM;
 let keycloak_env_clientId = process.env.REACT_APP_KEYCLOAK_CLIENT_ID;
 
-// Universal Access
-let curam_ua_link = process.env.REACT_APP_CURAM_UA_LINK;
+// Curam prescreen link
+let curam_prescreen_link = process.env.REACT_APP_CURAM_PRESCREEN_LINK;
 
 export const BENEFITSERVICE_URL = benefitservice_env_url;
 export const CASESERVICE_URL = caseservice_env_url;
 export const KEYCLOAK_URL = keycloak_env_url;
 export const KEYCLOAK_REALM = keycloak_env_realm;
 export const KEYCLOAK_CLIENT_ID = keycloak_env_clientId;
-export const CURAM_UA_LINK = curam_ua_link;
+export const CURAM_PRESCREEN_LINK = curam_prescreen_link;
