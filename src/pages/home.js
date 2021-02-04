@@ -45,8 +45,6 @@ export function Home() {
 
   const { keycloak } = useKeycloak();
 
-  const { keycloak } = useKeycloak();
-
   // benefit redux subscriptions
   const isFetchingBenefits = useSelector(
     (state) => state.benefits.benefitsData.isFetching
