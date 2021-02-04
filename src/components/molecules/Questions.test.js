@@ -15,9 +15,9 @@ it("renders 'Primary' ", () => {
 
   let opt = screen.getAllByRole("radio");
 
-  expect(opt[0].value).toBe(Primary.args.options[0].value);
-  expect(opt[1].value).toBe(Primary.args.options[1].value);
-  expect(opt[2].value).toBe(Primary.args.options[2].value);
+  expect(opt[0].value).toBe(Primary.args.options[0].id);
+  expect(opt[1].value).toBe(Primary.args.options[1].id);
+  expect(opt[2].value).toBe(Primary.args.options[2].id);
 
   const zero = screen.getByTestId("0");
   const one = screen.getByTestId("1");

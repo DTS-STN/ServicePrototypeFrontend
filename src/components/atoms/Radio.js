@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "./Radio.css";
 
 export function Radio(props) {
-  const { id, name, value, label, onChange } = props;
+  const { id, name, value, label, onChange, answer } = props;
 
   return (
     <div className="RadioContainer">
@@ -16,6 +16,7 @@ export function Radio(props) {
           data-testid={id}
           value={value}
           onChange={onChange}
+          checked={answer === id ? true : null}
         />
         <span className="checkmark"></span>
       </label>
@@ -48,4 +49,9 @@ Radio.propTypes = {
    * Function this could update the state with the user selection, or something else.
    */
   onChange: PropTypes.func,
+
+  /**
+   * Sets the checked attrib when answer == id
+   */
+  answer: PropTypes.string,
 };
