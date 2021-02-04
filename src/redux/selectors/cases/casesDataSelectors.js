@@ -7,9 +7,9 @@ export const casesMapSelector = (state) => state.cases.casesData.casesMap;
 export const caseTransformer = (data, lang) => {
   return {
     id: data.id,
-    referenceNumber: data.referenceNumber,
-    status: data[`status`],
-    benefitType: data[`benefitType`],
+    caseReferenceNumber: data.referenceNumber,
+    caseStatus: data[`status`],
+    caseBenefitType: data[`benefitType`],
   };
 };
 
