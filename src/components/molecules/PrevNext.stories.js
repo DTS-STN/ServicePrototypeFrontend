@@ -21,3 +21,25 @@ Primary.args = {
   nextText: "Next Question",
   onNextClick: () => onNextHandler(),
 };
+
+export const PreviousDisabled = Template.bind({});
+
+PreviousDisabled.args = {
+  onPrevClick: () => onPrevHandler(),
+  prevText: "Previous Question",
+  disabledPrev: true,
+  id: "PrevNext",
+  nextText: "Next Question",
+  onNextClick: () => onNextHandler(),
+};
+
+export const NextDisabled = Template.bind({});
+
+NextDisabled.args = {
+  onPrevClick: () => onPrevHandler(),
+  prevText: "Previous Question",
+  disabledNext: true,
+  id: "PrevNext",
+  nextText: "Next Question",
+  onNextClick: () => onNextHandler(),
+};

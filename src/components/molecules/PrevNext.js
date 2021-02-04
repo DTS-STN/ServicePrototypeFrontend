@@ -7,19 +7,15 @@ import { ActionButton } from "../atoms/ActionButton";
  * Previous, Next Buttons
  */
 export function PrevNext(props) {
-  const { id, onPrevClick, onNextClick, prevText, nextText } = props;
-
-  // event handler for Previous button
-  // function handlePrevClick(e) {
-  //   // console.log("previous button clicked");  // for debugging
-  //   onPrevClick(e);
-  // }
-
-  // event handler for Next button
-  // function handleNextClick(e) {
-  //   // console.log("Next button clicked");      // for debugging
-  //   onNextClick(e);
-  // }
+  const {
+    id,
+    onPrevClick,
+    onNextClick,
+    prevText,
+    nextText,
+    disabledPrev,
+    disabledNext,
+  } = props;
 
   return (
     <div id={id} className="flex p-2 bg-gray-300 justify-end">
@@ -28,9 +24,9 @@ export function PrevNext(props) {
           invert
           id={id + "-Prev"}
           text={prevText}
-          //onClick={() => handlePrevClick()}
           onClick={onPrevClick}
           className="rounded-b-none rounded-t-none px-8"
+          disabled={disabledPrev}
         />
       </div>
 
@@ -39,9 +35,9 @@ export function PrevNext(props) {
           invert
           id={id + "-Next"}
           text={nextText}
-          //onClick={() => handleNextClick()}
           onClick={onNextClick}
           className="rounded-b-none rounded-t-none px-8"
+          disabled={disabledNext}
         />
       </div>
     </div>
@@ -58,9 +54,17 @@ PrevNext.propTypes = {
    */
   onPrevClick: PropTypes.func,
   /**
+   * Flag disables the Previous button
+   */
+  disabledPrev: PropTypes.bool,
+  /**
    * ID required for cypress testing must be unique within the page
    */
   id: PropTypes.string.isRequired,
+  /**
+   * Flag disables the Next button
+   */
+  disabledNext: PropTypes.bool,
   /**
    * Next button text
    */

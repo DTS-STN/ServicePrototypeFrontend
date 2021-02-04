@@ -17,8 +17,12 @@ export function Questions(props) {
     name,
     options,
     onChange,
+    prevText,
     onPrevClick,
+    disabledPrev,
+    nextText,
     onNextClick,
+    disabledNext,
   } = props;
 
   return (
@@ -34,11 +38,13 @@ export function Questions(props) {
       />
 
       <PrevNext
-        prevText={props.prevText}
+        prevText={prevText}
         onPrevClick={onPrevClick}
+        disabledPrev={disabledPrev}
         id={id}
-        nextText={props.nextText}
+        nextText={nextText}
         onNextClick={onNextClick}
+        disabledNext={disabledNext}
       />
     </div>
   );
@@ -91,6 +97,11 @@ Questions.propTypes = {
   onPrevClick: PropTypes.func,
 
   /**
+   * Flag disables the Previous button
+   */
+  disabledPrev: PropTypes.bool,
+
+  /**
    * Next button text
    */
   nextText: PropTypes.string.isRequired,
@@ -99,4 +110,9 @@ Questions.propTypes = {
    * Function to be called when onClick on Next button
    */
   onNextClick: PropTypes.func,
+
+  /**
+   * Flag disables the Next button
+   */
+  disabledNext: PropTypes.bool,
 };
