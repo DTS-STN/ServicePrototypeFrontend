@@ -14,7 +14,7 @@ describe("Keycloak Login", () => {
   });
 
   it("should show the logged in username on the header", () => {
-    cy.get("[data-cy=login-user-name]").should("contain.text", "Citizen User");
+    cy.get("[data-cy=login-user-name]").should("contain.text", "William Johnson");
   });
 
   it("should not show the username on the header on logout", () => {

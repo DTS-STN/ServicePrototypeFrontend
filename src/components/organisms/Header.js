@@ -40,6 +40,7 @@ export function Header(props) {
             onLogin={props.onLogin}
             onLogout={props.onLogout}
             dataCy={"login-user-name"}
+            onUsernameClick={props.onUsernameClick}
           />
         </div>
       </div>
@@ -97,4 +98,9 @@ Header.propTypes = {
    * Event handler for logout function
    */
   onLogout: PropTypes.func,
+
+  /**
+   * Event handler for when username is clicked
+   */
+  onUsernameClick: PropTypes.func,
 };

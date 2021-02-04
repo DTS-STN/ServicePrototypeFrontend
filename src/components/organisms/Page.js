@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { useKeycloak } from "@react-keycloak/web";
 import { changeLanguageCreator, LANGUAGES } from "../../redux/actions";
+import { getClientDash } from "../../redux/dispatchers/benefits";
 
 /**
  * page component complete with canada.ca header and footer
@@ -22,6 +23,16 @@ export function Page(props) {
     } else {
       dispatch(changeLanguageCreator(LANGUAGES.EN));
     }
+  };
+
+  let userNameClickHandler = () => {
+    dispatch(
+      getClientDash(
+        keycloak,
+        // purposely hardcoded GUID, they only accept one value atm
+        "cc6e16b0-db92-459a-91df-f8144befdda9"
+      )
+    );
   };
 
   return (
@@ -41,6 +52,7 @@ export function Page(props) {
           keycloak.authenticated ? keycloak.idTokenParsed.name : ""
         }`}
         onLogout={() => keycloak.logout()}
+        onUsernameClick={userNameClickHandler}
       />
 
       <div
