@@ -7,27 +7,18 @@ import { CaseCard } from "../molecules/CaseCard";
  * Mobile first flex grid component for cases.
  */
 export function CasesList(props) {
-  // calculate the number of rows (TODO eventually expanded this to handle multiple page)
-  const numberOfElementsPerPage = 1 * props.cases.length;
-
-  // elements have not loaded yet if this is the case
+  // no cases to show
+  // TO DO repurpose this when we have pagination built in the api to show loading card
   const casesCards = [];
   if (props.cases.length <= 0) {
-    const loadingCards = [];
-    for (let i = 0; i < numberOfElementsPerPage; i++) {
-      loadingCards.push(
-        <LoadingCard
-          key={`loading-card-${i}`}
-          isDark={props.isNonEligibleGrid === true}
-        />
-      );
-    }
     return (
       <div
         className="w-full flex flex-col items-center md:items-start"
         data-cy={props.dataCy}
       >
-        <div className="flex flex-wrap w-full mb-5">{loadingCards}</div>
+        <div className="flex flex-wrap w-full mb-5">
+          {props.noCasesFoundLabel}
+        </div>
       </div>
     );
   } else {
@@ -44,8 +35,8 @@ export function CasesList(props) {
         />
       );
     }
+    return <ul>{casesCards}</ul>;
   }
-  return <ul>{casesCards}</ul>;
 }
 
 CasesList.propTypes = {
@@ -69,7 +60,11 @@ CasesList.propTypes = {
    */
   caseBenefitTypeLabel: PropTypes.string.isRequired,
   /**
-   * the number of pages
+   * label for the no cases to show message
+   */
+  noCasesFoundLabel: PropTypes.string.isRequired,
+  /**
+   * Label for number of pages to show
    */
   numberOfPages: PropTypes.number.isRequired,
   /**
