@@ -220,7 +220,11 @@ export function Home() {
               prevText="Previous Question"
               onPrevClick={prevCurrentQuestion}
               disabledPrev={previouBtnDisabled}
-              nextText="Next Question"
+              nextText={
+                currentQuestionIndex === questions.length - 1
+                  ? "Submit"
+                  : "Next Question"
+              }
               onNextClick={nextCurrentQuestion}
               disabledNext={nextBtnDisabled}
               answer={answers[currentQuestionIndex]}
