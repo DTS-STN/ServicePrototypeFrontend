@@ -25,7 +25,8 @@ export const benefitsData = function (
       if (
         action.resourceType === RESOURCE_TYPES.BENEFITS ||
         action.resourceType === RESOURCE_TYPES.BENEFIT ||
-        action.resourceType === RESOURCE_TYPES.APPLY_FOR_BENEFIT
+        action.resourceType === RESOURCE_TYPES.APPLY_FOR_BENEFIT ||
+        action.resourceType === RESOURCE_TYPES.REDIRECT_CLIENT_DASH
       ) {
         return {
           ...state,
@@ -114,7 +115,8 @@ export const benefitsData = function (
       if (
         action.resourceType === RESOURCE_TYPES.BENEFITS ||
         action.resourceType === RESOURCE_TYPES.BENEFIT ||
-        action.resourceType === RESOURCE_TYPES.APPLY_FOR_BENEFIT
+        action.resourceType === RESOURCE_TYPES.APPLY_FOR_BENEFIT ||
+        action.resourceType === RESOURCE_TYPES.REDIRECT_CLIENT_DASH
       ) {
         return {
           ...state,

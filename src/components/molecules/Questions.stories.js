@@ -10,13 +10,10 @@ const Template = (args) => <Questions {...args} />;
 
 export const Primary = Template.bind({});
 
+// This is required to pass the test
 function onChangeHandler(e) {
   console.log(e);
 }
-
-function onPrevHandler(e) {}
-
-function onNextHandler(e) {}
 
 Primary.args = {
   legend: "Question #1.- What was your income last year?",
@@ -36,8 +33,6 @@ Primary.args = {
   skipText: "Skip",
   customClass: "",
   onChange: (e) => onChangeHandler(e),
-  onPrevClick: () => onPrevHandler(),
   prevText: "Previous Question",
   nextText: "Next Question",
-  onNextClick: () => onNextHandler(),
 };
