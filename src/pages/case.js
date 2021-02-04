@@ -14,6 +14,7 @@ import { getCases } from "../redux/dispatchers/cases";
 import { Page } from "../components/organisms/Page";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 import { Title } from "../components/atoms/Title";
+import { CasesList } from "../components/organisms/CasesList";
 
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
@@ -42,20 +43,10 @@ export function CasesPage() {
   //redux dispatch
   const dispatch = useDispatch();
 
-  // TO DO MOVE THIS INTO A SEPARATE COMPONENT
-  const statusColors = {
-    Open: "#3A73D8",
-    Active: "#3ab4d8",
-    Approved: "#87c673",
-    Submitted: "#1C3A5A",
-    Suspended: "#8a4864",
-    "Pending Closure": "#B0B5CA",
-    Closed: "#6D7486",
-  };
   // iframe Ref
   let iframe;
 
-  //message listner
+  //message listener
   const messageListener = (event) => {
     if (event.data === "ready") {
       iframe.contentWindow.postMessage(
@@ -73,7 +64,13 @@ export function CasesPage() {
       setTriedFetchedCases(true);
     }
     return () => window.removeEventListener("message", messageListener);
-  }, [triedFetchedCases, isFetchingCases, fetchCasesFailed, dispatch]);
+  }, [
+    triedFetchedCases,
+    isFetchingCases,
+    fetchCasesFailed,
+    messageListener,
+    dispatch,
+  ]);
 
   // if (fetchCasesFailed) {
   //   return (
@@ -89,53 +86,18 @@ export function CasesPage() {
         <Title dataCy={"case-page-title"}>{t("casePageTitle")}</Title>
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
-          data-cy="eligibleBenefitsHeader"
+          data-cy="casesHeader"
         >
           <div className="flex m-auto items-start relative">
             <section className="flex mb-12 md:absolute md:right-0"></section>
           </div>
-          <ul>
-            {casesData.map(function (obj, index) {
-              // TO DO BREAK THIS OUT INTO ITS OWN COMPONENT AND REMOVE INLINE STYLES
-              return (
-                <li
-                  key={index}
-                  style={{ backgroundColor: "#EFEFEF" }}
-                  className="mt-5 mb-5 p-5"
-                >
-                  <div className="grid grid-cols-2">
-                    <div className="">
-                      <span className="block">
-                        <span className="font-bold">
-                          {t("caseReferenceLabel")}
-                        </span>{" "}
-                        | {obj.referenceNumber}
-                      </span>
-                      <span className="block">
-                        <span className="font-bold">
-                          {t("caseBenefitTypeLabel")}
-                        </span>{" "}
-                        | {obj.benefitType}
-                      </span>
-                    </div>
-                    <div className="text-right">
-                      <div
-                        className="inline-block p-2 text-center"
-                        style={{
-                          backgroundColor: statusColors[obj.status],
-                          color: "white",
-                          width: "180px",
-                          borderRadius: "8px",
-                        }}
-                      >
-                        {obj.status}
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+          <CasesList
+            dataCy={"case-page-card-list"}
+            cases={casesData}
+            numberOfPages={1}
+            caseReferenceNumberLabel={t("caseReferenceLabel")}
+            caseBenefitTypeLabel={t("caseBenefitTypeLabel")}
+          />
           <iframe
             ref={(webview) => {
               iframe = webview;
