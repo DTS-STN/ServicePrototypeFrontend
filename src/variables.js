@@ -13,7 +13,8 @@ if (!benefitservice_env_url && ENVIRONMENT !== "production") {
 if (!caseservice_env_url && ENVIRONMENT !== "production") {
   //  benefitservice_env_url = "http://localhost:1337";
   // this uses the published version of strapi until we get the benefit service working.
-  caseservice_env_url = "http://localhost:3001";
+  caseservice_env_url =
+    "https://api.us-east.apiconnect.appdomain.cloud/hmakhijadeloitteca-api/dev/hfp-client-apis/v1";
 }
 
 // KEYCLOAK

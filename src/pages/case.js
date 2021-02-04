@@ -15,8 +15,13 @@ import { Page } from "../components/organisms/Page";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 import { Title } from "../components/atoms/Title";
 
+//keycloak
+import { useKeycloak } from "@react-keycloak/web";
+
 export function CasesPage() {
   const [triedFetchedCases, setTriedFetchedCases] = useState(false);
+
+  const { keycloak } = useKeycloak();
 
   // case redux subscriptions
   const isFetchingCases = useSelector(
@@ -53,7 +58,10 @@ export function CasesPage() {
   //message listner
   const messageListener = (event) => {
     if (event.data === "ready") {
-      iframe.contentWindow.postMessage({ jwt: "", guid: "" }, "*");
+      iframe.contentWindow.postMessage(
+        { jwt: keycloak.token, guid: "cc6e16b0-db92-459a-91df-f8144befdda9" },
+        "*"
+      );
     }
   };
 
@@ -61,20 +69,20 @@ export function CasesPage() {
     window.addEventListener("message", messageListener);
 
     if (!triedFetchedCases && !isFetchingCases && !fetchCasesFailed) {
-      dispatch(getCases(undefined, undefined, "created_at:asc"));
+      dispatch(getCases(undefined, undefined, "created_at:asc", keycloak));
       setTriedFetchedCases(true);
     }
     return () => window.removeEventListener("message", messageListener);
   }, [triedFetchedCases, isFetchingCases, fetchCasesFailed, dispatch]);
 
-  if (fetchCasesFailed) {
-    return (
-      <ErrorPage
-        errorTitle={t("somethingWentWrong")}
-        error={fetchCasesFailed ? fetchCasesFailedObj : ""}
-      />
-    );
-  }
+  // if (fetchCasesFailed) {
+  //   return (
+  //     <ErrorPage
+  //       errorTitle={t("somethingWentWrong")}
+  //       error={fetchCasesFailed ? fetchCasesFailedObj : ""}
+  //     />
+  //   );
+  // }
   return (
     <Page>
       <main className="font-sans">
@@ -139,8 +147,8 @@ export function CasesPage() {
               bottom: "0",
               right: "0",
             }}
-            src="https://vigilant-mayer-92de00.netlify.app/"
-            // src="http://localhost:3001"
+            // src="https://vigilant-mayer-92de00.netlify.app/"
+            src="http://localhost:3001"
             title="Chatbot"
           ></iframe>
         </section>

@@ -9,7 +9,7 @@ import {
 import { RESOURCE_TYPES } from "../resourceTypes";
 import { CASESERVICE_URL } from "../../../variables";
 
-async function fetchCases(dispatch, start, limit, sort) {
+async function fetchCases(dispatch, start, limit, sort, keycloak) {
   let response;
   try {
     dispatch(
@@ -19,9 +19,17 @@ async function fetchCases(dispatch, start, limit, sort) {
         { start, limit, sort }
       )
     );
-    let url = "/cases";
+    let url = "/casedetails";
 
-    response = await fetch(CASESERVICE_URL + url);
+    response = await fetch(CASESERVICE_URL + url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Bearer " + keycloak.token,
+        guid: "cc6e16b0-db92-459a-91df-f8144befdda9",
+      },
+    });
   } catch (e) {
     return dispatch(
       networkRequestFailedActionCreator(
@@ -72,8 +80,9 @@ async function fetchCases(dispatch, start, limit, sort) {
  * @param start - the start index
  * @param limit - the limit of how much to return
  * @param sort - how to sort cases
+ * @param keycloak - keycloak token
  * @returns {function(*=): Promise<void>}
  */
-export function getCases(start, limit, sort) {
-  return (dispatch) => fetchCases(dispatch, start, limit, sort);
+export function getCases(start, limit, sort, keycloak) {
+  return (dispatch) => fetchCases(dispatch, start, limit, sort, keycloak);
 }
