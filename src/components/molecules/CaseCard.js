@@ -16,15 +16,18 @@ export function CaseCard(props) {
   };
 
   return (
-    <li className="mt-5 mb-5 p-5 bg-gray-100">
+    <li
+      className="mt-5 mb-5 p-5 bg-gray-100 w-full"
+      data-testid={props.caseReferenceNumber}
+    >
       <div className="grid grid-cols-2">
         <div className="">
           <span className="block">
             <span className="font-bold">{props.caseReferenceNumberLabel}</span>{" "}
-            | {props.caseReferenceNumber}
+            {props.caseReferenceNumber}
           </span>
           <span className="block">
-            <span className="font-bold">{props.caseBenefitTypeLabel}</span> |{" "}
+            <span className="font-bold">{props.caseBenefitTypeLabel}</span>{" "}
             {props.caseBenefitType}
           </span>
         </div>
@@ -71,7 +74,7 @@ CaseCard.propTypes = {
   caseBenefitType: PropTypes.string.isRequired,
 
   /**
-   * This is for adding an id for testing in cypress
+   * test id for unit tests
    */
-  dataCy: PropTypes.string,
+  dataTestId: PropTypes.string,
 };
