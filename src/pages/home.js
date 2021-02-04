@@ -180,7 +180,6 @@ export function Home() {
 
   const nextCurrentQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      console.log(questions);
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };
@@ -209,6 +208,7 @@ export function Home() {
             nextText="Next Question"
             onNextClick={nextCurrentQuestion}
             onPrevClick={prevCurrentQuestion}
+            answer={answers[currentQuestionIndex]}
           />
         ) : (
           <ActionButton

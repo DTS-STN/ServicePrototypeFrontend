@@ -19,6 +19,7 @@ export function Questions(props) {
     onChange,
     onPrevClick,
     onNextClick,
+    answer,
   } = props;
 
   return (
@@ -31,6 +32,7 @@ export function Questions(props) {
         name={name}
         options={options}
         onChange={onChange}
+        answer={answer}
       />
 
       <PrevNext

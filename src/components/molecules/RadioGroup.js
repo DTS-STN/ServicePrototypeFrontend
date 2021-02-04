@@ -8,8 +8,16 @@ import { Radio } from "../atoms/Radio";
  *    it returns the value of the button that was clicked
  */
 export function RadioGroup(props) {
-  const { id, required, textRequired, legend, name, options, onChange } = props;
-  // console.log(props);
+  const {
+    id,
+    required,
+    textRequired,
+    legend,
+    name,
+    options,
+    onChange,
+    answer,
+  } = props;
 
   return (
     <fieldset>
@@ -27,6 +35,7 @@ export function RadioGroup(props) {
           label={text}
           name={name}
           onChange={() => onChange(id)}
+          answer={answer}
         />
       ))}
     </fieldset>
