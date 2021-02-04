@@ -81,7 +81,7 @@ export function ContentPage(props) {
         {props.afterContent}
       </main>
       {props.ApplyButtonText ? (
-        <div className="mt-6 flex justify-end">
+        <div className="mt-6 flex justify-end" data-cy={props.dataCy}>
           <ActionButton
             text={props.ApplyButtonText}
             className={
@@ -128,4 +128,8 @@ ContentPage.propTypes = {
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
   ]),
+  /**
+   * This is for adding an id for testing in cypress
+   */
+  dataCy: PropTypes.string,
 };
