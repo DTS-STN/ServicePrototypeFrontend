@@ -104,6 +104,7 @@ export function BenefitPage() {
           : "Looks like there is no content yet"
       }
       ApplyButtonText={t("ApplyButtonText")}
+      dataCy={"apply-button"}
       onApplyButtonClick={applyButtonClickHandler}
     />
   );

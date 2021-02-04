@@ -11,6 +11,7 @@ export function LogInOut(props) {
       {props.isAuthenticated ? (
         <div
           className="text-white font-normal pt-1 pr-4 cursor-pointer hover:underline"
+          data-cy={props.dataCy}
           onClick={props.onUsernameClick}
         >
           {props.userName}
@@ -56,6 +57,10 @@ LogInOut.propTypes = {
    * Event Handler for the Logout function
    */
   onLogout: PropTypes.func,
+  /**
+   * This is for adding an id for testing in cypress
+   */
+  dataCy: PropTypes.string,
 
   /**
    * Event handler for when the username is clicked
