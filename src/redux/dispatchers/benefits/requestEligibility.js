@@ -1,6 +1,7 @@
 import "cross-fetch/polyfill";
 import {
   networkRequestActionCreator,
+  networkReceivedActionCreator,
   networkRequestFailedActionCreator,
   NETWORK_REQUEST_TYPES,
   NETWORK_FAILED_REASONS,
@@ -42,7 +43,35 @@ async function getEligibility(dispatch, answers) {
       )
     );
   }
-  return [1];
+  if (true) {
+    dispatch(
+      networkReceivedActionCreator(
+        RESOURCE_TYPES.ELIGIBILITY,
+        NETWORK_REQUEST_TYPES.POST,
+        {
+          benefits: [1, 2],
+        }
+      )
+    );
+  } else {
+    let textData;
+    let data;
+    try {
+      textData = await response.text();
+      data = JSON.parse(textData);
+    } catch (e) {
+      data = textData || "";
+    }
+    return dispatch(
+      networkRequestFailedActionCreator(
+        RESOURCE_TYPES.ELIGIBILITY,
+        NETWORK_REQUEST_TYPES.POST,
+        NETWORK_FAILED_REASONS[response.status] ||
+          NETWORK_FAILED_REASONS.INTERNAL_SERVER_ERROR,
+        typeof data === "string" ? { message: data } : data
+      )
+    );
+  }
 }
 
 /**
