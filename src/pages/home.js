@@ -24,8 +24,8 @@ import { BenefitGrid } from "../components/organisms/BenefitGrid";
 import { BenefitsCounter } from "../components/atoms/BenefitsCounter";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 import { Title } from "../components/atoms/Title";
-import { MatchMeToBenefits } from "../components/molecules/MatchMeToBenefits";
 import { Questions } from "../components/molecules/Questions";
+import { ActionButton } from "../components/atoms/ActionButton";
 
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
@@ -193,7 +193,6 @@ export function Home() {
         <PageDescription dataCy={"home-page-description"}>
           {t("pageDescription")}
         </PageDescription>
-
         {displayQuestions ? (
           <Questions
             id={questions[currentQuestionIndex].id.toString()}
@@ -209,12 +208,13 @@ export function Home() {
             onPrevClick={prevCurrentQuestion}
           />
         ) : (
-          <MatchMeToBenefits
+          <ActionButton
+            id="MatchMeToBenefits"
             text={t("matchMeToBenefits")}
+            className={"bg-bg-gray-dk text-white hover:bg-black"}
             onClick={matchMeToBenefitsButtonClickHandler}
           />
         )}
-
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"
