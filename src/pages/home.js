@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 // i18n imports
 import { useTranslation } from "react-i18next";
@@ -26,12 +26,17 @@ import { ErrorPage } from "../components/organisms/ErrorPage";
 import { Title } from "../components/atoms/Title";
 import { ActionButton } from "../components/atoms/ActionButton";
 
+//keycloak
+import { useKeycloak } from "@react-keycloak/web";
+
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
     false
   );
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
   const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
+
+  const { keycloak } = useKeycloak();
 
   // benefit redux subscriptions
   const isFetchingBenefits = useSelector(
@@ -127,6 +132,15 @@ export function Home() {
     history.push(`/benefit/${benefitKeyToId[benefitKey]}`);
   };
 
+  const matchMeToBenefitsButtonClickHandler = () => {
+    // if not logged in log in first
+    if (!keycloak.authenticated) {
+      keycloak.login();
+    } else {
+      //display questions
+    }
+  };
+
   if (fetchBenefitsFailed || fetchBenefitsCountFailed) {
     return (
       <ErrorPage
@@ -151,8 +165,8 @@ export function Home() {
           id="MatchMeToBenefits"
           text={t("matchMeToBenefits")}
           className={"bg-bg-gray-dk text-white hover:bg-black"}
+          onClick={matchMeToBenefitsButtonClickHandler}
         />
-
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"
