@@ -132,6 +132,7 @@ export function Home() {
     dispatch,
   ]);
 
+  // handler for when questions are set from Redux.
   useEffect(() => {
     if (questions.length !== 0) {
       setAnswers(new Array(questions.length));
