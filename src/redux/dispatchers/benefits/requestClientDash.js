@@ -8,42 +8,40 @@ import {
 import { RESOURCE_TYPES } from "../resourceTypes";
 import { CURAM_PRESCREEN_LINK } from "../../../variables";
 
-async function postApplyForBenefit(dispatch, benefitType, keycloak, guid) {
+async function fetchClientDash(dispatch, keycloak, guid) {
   let response;
   try {
     dispatch(
       networkRequestActionCreator(
-        RESOURCE_TYPES.APPLY_FOR_BENEFIT,
-        NETWORK_REQUEST_TYPES.POST,
-        undefined,
-        {
-          benefitType,
-        }
+        RESOURCE_TYPES.REDIRECT_CLIENT_DASH,
+        NETWORK_REQUEST_TYPES.GET
       )
     );
-    response = await fetch(
-      CURAM_PRESCREEN_LINK + "/redirect/prescreen/intake",
-      {
-        method: "POST",
-        redirect: "follow",
-        headers: {
-          "Content-Type": "application/json",
-          guid: guid,
-          Authorization: "Bearer " + keycloak.token,
-        },
-        body: JSON.stringify({
-          benefitType,
-        }),
-      }
-    );
+    response = await fetch(CURAM_PRESCREEN_LINK + "/login", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        guid: guid,
+        Authorization: "Bearer " + keycloak.token,
+      },
+    });
+    response = await fetch(CURAM_PRESCREEN_LINK + "/redirect/dashboard", {
+      method: "GET",
+      redirect: "follow",
+      headers: {
+        "Content-Type": "application/json",
+        guid: guid,
+        Authorization: "Bearer " + keycloak.token,
+      },
+    });
   } catch (e) {
     return dispatch(
       networkRequestFailedActionCreator(
-        RESOURCE_TYPES.APPLY_FOR_BENEFIT,
-        NETWORK_REQUEST_TYPES.POST,
+        RESOURCE_TYPES.REDIRECT_CLIENT_DASH,
+        NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.NO_NETWORK,
         {
-          message: "Could not connect to curam to apply for benefit",
+          message: "Could not connect to curam to redirect to client dash",
         }
       )
     );
@@ -61,8 +59,8 @@ async function postApplyForBenefit(dispatch, benefitType, keycloak, guid) {
     }
     return dispatch(
       networkRequestFailedActionCreator(
-        RESOURCE_TYPES.APPLY_FOR_BENEFIT,
-        NETWORK_REQUEST_TYPES.POST,
+        RESOURCE_TYPES.REDIRECT_CLIENT_DASH,
+        NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS[response.status] ||
           NETWORK_FAILED_REASONS.INTERNAL_SERVER_ERROR,
         typeof data === "string" ? { message: data } : data
@@ -73,11 +71,9 @@ async function postApplyForBenefit(dispatch, benefitType, keycloak, guid) {
 
 /**
  * dispatch function which applies for a single benefit based on benefit type
- * @param benefitType
  * @param keycloak
  * @param guid
  */
-export function applyForBenefit(benefitType, keycloak, guid) {
-  return (dispatch) =>
-    postApplyForBenefit(dispatch, benefitType, keycloak, guid);
+export function getClientDash(keycloak, guid) {
+  return (dispatch) => fetchClientDash(dispatch, keycloak, guid);
 }

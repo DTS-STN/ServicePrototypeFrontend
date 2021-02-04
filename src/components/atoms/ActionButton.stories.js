@@ -13,6 +13,7 @@ export const Primary = Template.bind({});
 export const Rounded = Template.bind({});
 export const WithCounter = Template.bind({});
 export const StartAgain = Template.bind({});
+export const Disabled = Template.bind({});
 
 Primary.args = {
   text: "Example Action 🚀",
@@ -34,4 +35,10 @@ StartAgain.args = {
   className: "bg-bg-gray-dk text-white",
   icon: "icon-loop2 my-1 mr-4",
   text: "Start again and clear answers",
+};
+
+Disabled.args = {
+  text: "Disabled Button 🚀",
+  disabled: true,
+  invert: true,
 };
