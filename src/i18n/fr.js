@@ -62,6 +62,12 @@ export const fr = {
   thankYouTitle: "FR: Thank you",
   thankYouContent: "FR: Thank you for applying",
 
+  //cases page
+  casePageTitle: "FR: My Cases",
+  caseReferenceLabel: "FR: Reference Number",
+  caseBenefitTypeLabel: "FR: Benefit Type",
+  noCasesFound: "FR: No Cases Found",
+
   login: "S'identifier",
   logout: "Se déconnecter",
 };
