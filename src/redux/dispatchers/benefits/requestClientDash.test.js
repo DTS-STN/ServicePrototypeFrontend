@@ -10,11 +10,11 @@ import {
 import { RESOURCE_TYPES } from "../resourceTypes";
 import thunk from "redux-thunk";
 import { CURAM_PRESCREEN_LINK } from "../../../variables";
-import { applyForBenefit } from "./applyForBenefit";
+import { getClientDash } from "./requestClientDash";
 
 const middlewares = [thunk];
 
-describe("applyForBenefit", () => {
+describe("fetchClientDash", () => {
   let mockStore;
   let dateTimeSpy;
   let mockKeycloakFunc;
@@ -35,57 +35,49 @@ describe("applyForBenefit", () => {
   });
 
   it("posts to apply benefit route and dispatches the correct", async () => {
-    fetchMock.postOnce(CURAM_PRESCREEN_LINK + "/redirect/prescreen/intake", {
+    fetchMock.getOnce(CURAM_PRESCREEN_LINK + "/redirect/dashboard", {
       status: 200,
     });
 
     const store = mockStore({});
 
-    await store.dispatch(applyForBenefit("HFP111", mockKeycloakFunc));
+    await store.dispatch(getClientDash(mockKeycloakFunc));
 
     expect(store.getActions()).toEqual([
       networkRequestActionCreator(
-        RESOURCE_TYPES.APPLY_FOR_BENEFIT,
-        NETWORK_REQUEST_TYPES.POST,
-        undefined,
-        {
-          benefitType: "HFP111",
-        }
+        RESOURCE_TYPES.REDIRECT_CLIENT_DASH,
+        NETWORK_REQUEST_TYPES.GET
       ),
     ]);
   });
 
   it("handles fetch throwing an error due to no network", async () => {
     let errorObj = new Error("no network");
-    fetchMock.postOnce(CURAM_PRESCREEN_LINK + "/redirect/prescreen/intake", {
+    fetchMock.getOnce(CURAM_PRESCREEN_LINK + "/redirect/dashboard", {
       throws: errorObj,
     });
 
     const store = mockStore({});
-    await store.dispatch(applyForBenefit("HFP111", mockKeycloakFunc));
+    await store.dispatch(getClientDash(mockKeycloakFunc));
 
     expect(store.getActions()).toEqual([
       networkRequestActionCreator(
-        RESOURCE_TYPES.APPLY_FOR_BENEFIT,
-        NETWORK_REQUEST_TYPES.POST,
-        undefined,
-        {
-          benefitType: "HFP111",
-        }
+        RESOURCE_TYPES.REDIRECT_CLIENT_DASH,
+        NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestFailedActionCreator(
-        RESOURCE_TYPES.APPLY_FOR_BENEFIT,
-        NETWORK_REQUEST_TYPES.POST,
+        RESOURCE_TYPES.REDIRECT_CLIENT_DASH,
+        NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.NO_NETWORK,
         {
-          message: "Could not connect to curam to apply for benefit",
+          message: "Could not connect to curam to redirect to client dash",
         }
       ),
     ]);
   });
 
   it("handles error response from fetch", async () => {
-    fetchMock.postOnce(CURAM_PRESCREEN_LINK + "/redirect/prescreen/intake", {
+    fetchMock.getOnce(CURAM_PRESCREEN_LINK + "/redirect/dashboard", {
       status: 500,
       body: {
         Status: 500,
@@ -95,20 +87,16 @@ describe("applyForBenefit", () => {
     });
 
     const store = mockStore({});
-    await store.dispatch(applyForBenefit("HFP111", mockKeycloakFunc));
+    await store.dispatch(getClientDash(mockKeycloakFunc));
 
     expect(store.getActions()).toEqual([
       networkRequestActionCreator(
-        RESOURCE_TYPES.APPLY_FOR_BENEFIT,
-        NETWORK_REQUEST_TYPES.POST,
-        undefined,
-        {
-          benefitType: "HFP111",
-        }
+        RESOURCE_TYPES.REDIRECT_CLIENT_DASH,
+        NETWORK_REQUEST_TYPES.GET
       ),
       networkRequestFailedActionCreator(
-        RESOURCE_TYPES.APPLY_FOR_BENEFIT,
-        NETWORK_REQUEST_TYPES.POST,
+        RESOURCE_TYPES.REDIRECT_CLIENT_DASH,
+        NETWORK_REQUEST_TYPES.GET,
         NETWORK_FAILED_REASONS.INTERNAL_SERVER_ERROR,
         {
           Status: 500,
