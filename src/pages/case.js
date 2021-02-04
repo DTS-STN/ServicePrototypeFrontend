@@ -70,16 +70,17 @@ export function CasesPage() {
     fetchCasesFailed,
     messageListener,
     dispatch,
+    keycloak,
   ]);
 
-  // if (fetchCasesFailed) {
-  //   return (
-  //     <ErrorPage
-  //       errorTitle={t("somethingWentWrong")}
-  //       error={fetchCasesFailed ? fetchCasesFailedObj : ""}
-  //     />
-  //   );
-  // }
+  if (fetchCasesFailed) {
+    return (
+      <ErrorPage
+        errorTitle={t("somethingWentWrong")}
+        error={fetchCasesFailed ? fetchCasesFailedObj : ""}
+      />
+    );
+  }
   return (
     <Page>
       <main className="font-sans">
@@ -97,6 +98,7 @@ export function CasesPage() {
             numberOfPages={1}
             caseReferenceNumberLabel={t("caseReferenceLabel")}
             caseBenefitTypeLabel={t("caseBenefitTypeLabel")}
+            noCasesFoundLabel={t("noCasesFound")}
           />
           <iframe
             ref={(webview) => {
@@ -109,8 +111,8 @@ export function CasesPage() {
               bottom: "0",
               right: "0",
             }}
-            // src="https://vigilant-mayer-92de00.netlify.app/"
-            src="http://localhost:3001"
+            src="https://vigilant-mayer-92de00.netlify.app/"
+            // src="http://localhost:3001"
             title="Chatbot"
           ></iframe>
         </section>

@@ -25,4 +25,5 @@ Primary.args = {
   numberOfPages: 1,
   caseReferenceNumberLabel: "Reference Number",
   caseBenefitTypeLabel: "Benefit Type",
+  noCasesFoundLabel: "No cases today :(",
 };
