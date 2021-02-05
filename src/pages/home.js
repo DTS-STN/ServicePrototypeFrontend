@@ -164,6 +164,10 @@ export function Home() {
     }
   };
 
+  const seeMyCasesButtonClickHandler = () => {
+    history.push(`/cases/`);
+  };
+
   if (fetchBenefitsFailed || fetchBenefitsCountFailed) {
     return (
       <ErrorPage
@@ -195,6 +199,30 @@ export function Home() {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
     } else {
       setPreviousBtnDisabled(true);
+    }
+  };
+
+  const showCases = () => {
+    //show link to cases button if user is logged in
+    if (keycloak.authenticated) {
+      return (
+        <section
+          className="border-t border-b pt-2 pb-2 mt-8"
+          data-cy="showCasesHeader"
+        >
+          <div className="flex m-auto items-start relative">
+            <h2 className="text-3xl mb-2">{t("yourCases")}</h2>
+          </div>
+          <ActionButton
+            id="GoToCases"
+            text={t("See My Cases")}
+            className={"bg-bg-gray-dk text-white hover:bg-black"}
+            onClick={seeMyCasesButtonClickHandler}
+          />
+        </section>
+      );
+    } else {
+      return;
     }
   };
 
@@ -235,7 +263,6 @@ export function Home() {
             />
           )}
         </section>
-
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"
@@ -265,6 +292,7 @@ export function Home() {
             benefits={benefitsData}
           />
         </section>
+        {showCases()}
       </main>
     </Page>
   );

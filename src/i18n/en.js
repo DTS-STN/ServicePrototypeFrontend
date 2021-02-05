@@ -68,6 +68,8 @@ export const en = {
   caseReferenceLabel: "Reference Number",
   caseBenefitTypeLabel: "Benefit Type",
   noCasesFound: "No Cases Found",
+  yourCases: "Your Cases",
+  seeCasesButton: "See My Cases",
 
   login: "Login",
   logout: "Logout",

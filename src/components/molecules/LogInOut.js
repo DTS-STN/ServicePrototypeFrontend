@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ActionButton } from "../atoms/ActionButton";
-import { Link } from "react-router-dom";
 
 /**
  * This component show login or a logout button according to the user authenticated flag
@@ -10,23 +9,11 @@ export function LogInOut(props) {
   return (
     <div className="flex justify-end">
       {props.isAuthenticated ? (
-        <div className="text-white font-normal pt-1 pr-4">
-          <span data-cy={props.dataCy} onClick={props.onUsernameClick}>
-            <span className="cursor-pointer hover:underline mr-1">
-              {props.userName}
-            </span>
-          </span>
-          <span>
-            {" "}
-            {/* This is tempory should ideally create a menu item for logged in users */}
-            <Link
-              to="/cases"
-              className="border-l-2 border-white-600 ml-1 pl-2 cursor-pointer hover:underline "
-            >
-              {" "}
-              My cases{" "}
-            </Link>
-          </span>
+        <div
+          className="text-white font-normal pt-1 pr-4 cursor-pointer hover:underline"
+          onClick={props.onUsernameClick}
+        >
+          {props.userName}
         </div>
       ) : undefined}
       <ActionButton
@@ -69,10 +56,6 @@ LogInOut.propTypes = {
    * Event Handler for the Logout function
    */
   onLogout: PropTypes.func,
-  /**
-   * This is for adding an id for testing in cypress
-   */
-  dataCy: PropTypes.string,
 
   /**
    * Event handler for when the username is clicked

@@ -20,7 +20,6 @@ async function fetchCases(dispatch, start, limit, sort, keycloak) {
       )
     );
     let url = "/casedetails";
-
     response = await fetch(CASESERVICE_URL + url, {
       method: "GET",
       headers: {
@@ -86,3 +85,17 @@ async function fetchCases(dispatch, start, limit, sort, keycloak) {
 export function getCases(start, limit, sort, keycloak) {
   return (dispatch) => fetchCases(dispatch, start, limit, sort, keycloak);
 }
+
+/*
+//TO DO extract this to utility function and make it available everywhere
+const tokenDecoder = (token) => { 
+  console.log('this test');
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+}; 
+*/
