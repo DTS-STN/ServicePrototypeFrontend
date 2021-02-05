@@ -8,6 +8,9 @@ export const benefitsMapSelector = (state) =>
 export const benefitsMapSelectorFr = (state) =>
   state.benefits.benefitsData.benefitsMapFr;
 
+export const benefitsEligibilitySelector = (state) =>
+  state.benefits.benefitsEligibility.benefits;
+
 export const benefitTransformer = (data, lang) => {
   return {
     benefitId: data.benefit_key,
@@ -59,5 +62,29 @@ export const benefitsDataSelector = createSelector(
         return benefitTransformer(benefitsData[id], lang);
       });
     }
+  }
+);
+
+export const eligibleBenefitsSelector = createSelector(
+  languageSelector,
+  benefitsMapSelector,
+  benefitsMapSelectorFr,
+  benefitsEligibilitySelector,
+  (lang, benefitsData, benefitsDataFr, benefitsEligibility) => {
+    let eligibleBenefits = [];
+    if (lang === "fr") {
+      Object.keys(benefitsDataFr).map((k, v) => {
+        if (benefitsEligibility.includes(v.benefitId)) {
+          eligibleBenefits.push(v);
+        }
+      });
+    } else {
+      Object.keys(benefitsData).map((k, v) => {
+        if (benefitsEligibility.includes(v.benefitId)) {
+          eligibleBenefits.push(v);
+        }
+      });
+    }
+    return eligibleBenefits;
   }
 );

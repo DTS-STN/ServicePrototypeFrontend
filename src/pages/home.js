@@ -4,7 +4,11 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 // redux imports
-import { benefitsDataSelector, questionsSelector } from "../redux/selectors";
+import {
+  benefitsDataSelector,
+  questionsSelector,
+  eligibleBenefitsSelector,
+} from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
 import { getQuestions } from "../redux/dispatchers/questions";
@@ -70,6 +74,7 @@ export function Home() {
     (state) => state.benefits.benefitsCount.count
   );
   const benefitsData = useSelector(benefitsDataSelector);
+  const eligibleBenefitsData = useSelector(eligibleBenefitsSelector);
 
   const benefitKeyToId = useSelector(
     (state) => state.benefits.benefitsData.benefitsKeyToIdMap
@@ -155,11 +160,13 @@ export function Home() {
       benefitsEligibility
     ) {
       console.log(benefitsEligibility);
+      console.log(eligibleBenefitsData);
     }
   }, [
     isFetchingBenefitsEligibility,
     fetchBenefitsEligibilityFailed,
     benefitsEligibility,
+    eligibleBenefitsData,
   ]);
 
   // handler for when benefit is selected
@@ -284,19 +291,35 @@ export function Home() {
               />
             </section>
           </div>
-          <BenefitGrid
-            dataCy={"home-page-benefit-grid"}
-            benefitMoreInfoButtonText={t("benefitsMoreInformation")}
-            nextPageButtonAriaLabel={t("benefitsNextPage")}
-            previousPageButtonAriaLabel={t("benefitsPreviousPage")}
-            numberOfPages={
-              benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 6)
-            }
-            numberOfRows={2}
-            onBenefitSelect={onBenefitSelect}
-            onMoreInfoClick={onBenefitMoreInfo}
-            benefits={benefitsData}
-          />
+          {eligibleBenefitsData.length > 0 ? (
+            <BenefitGrid
+              dataCy={"home-page-benefit-grid"}
+              benefitMoreInfoButtonText={t("benefitsMoreInformation")}
+              nextPageButtonAriaLabel={t("benefitsNextPage")}
+              previousPageButtonAriaLabel={t("benefitsPreviousPage")}
+              numberOfPages={
+                benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 6)
+              }
+              numberOfRows={2}
+              onBenefitSelect={onBenefitSelect}
+              onMoreInfoClick={onBenefitMoreInfo}
+              benefits={eligibleBenefitsData}
+            />
+          ) : (
+            <BenefitGrid
+              dataCy={"home-page-benefit-grid"}
+              benefitMoreInfoButtonText={t("benefitsMoreInformation")}
+              nextPageButtonAriaLabel={t("benefitsNextPage")}
+              previousPageButtonAriaLabel={t("benefitsPreviousPage")}
+              numberOfPages={
+                benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 6)
+              }
+              numberOfRows={2}
+              onBenefitSelect={onBenefitSelect}
+              onMoreInfoClick={onBenefitMoreInfo}
+              benefits={benefitsData}
+            />
+          )}
         </section>
       </main>
     </Page>
