@@ -17,14 +17,6 @@ async function fetchClientDash(dispatch, keycloak, guid) {
         NETWORK_REQUEST_TYPES.GET
       )
     );
-    response = await fetch(CURAM_PRESCREEN_LINK + "/login", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        guid: guid,
-        Authorization: "Bearer " + keycloak.token,
-      },
-    });
     response = await fetch(CURAM_PRESCREEN_LINK + "/redirect/dashboard", {
       method: "GET",
       redirect: "follow",
