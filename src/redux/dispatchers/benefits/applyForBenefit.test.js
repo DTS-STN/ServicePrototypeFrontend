@@ -41,7 +41,14 @@ describe("applyForBenefit", () => {
 
     const store = mockStore({});
 
-    await store.dispatch(applyForBenefit("HFP111", mockKeycloakFunc));
+    await store.dispatch(
+      applyForBenefit(
+        "HFP111",
+        mockKeycloakFunc,
+        "cc6e16b0-db92-459a-91df-f8144befdda9",
+        {}
+      )
+    );
 
     expect(store.getActions()).toEqual([
       networkRequestActionCreator(
@@ -62,7 +69,14 @@ describe("applyForBenefit", () => {
     });
 
     const store = mockStore({});
-    await store.dispatch(applyForBenefit("HFP111", mockKeycloakFunc));
+    await store.dispatch(
+      applyForBenefit(
+        "HFP111",
+        mockKeycloakFunc,
+        "cc6e16b0-db92-459a-91df-f8144befdda9",
+        {}
+      )
+    );
 
     expect(store.getActions()).toEqual([
       networkRequestActionCreator(
@@ -95,7 +109,14 @@ describe("applyForBenefit", () => {
     });
 
     const store = mockStore({});
-    await store.dispatch(applyForBenefit("HFP111", mockKeycloakFunc));
+    await store.dispatch(
+      applyForBenefit(
+        "HFP111",
+        mockKeycloakFunc,
+        "cc6e16b0-db92-459a-91df-f8144befdda9",
+        {}
+      )
+    );
 
     expect(store.getActions()).toEqual([
       networkRequestActionCreator(
