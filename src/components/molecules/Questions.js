@@ -35,7 +35,7 @@ export function Questions(props) {
         legend={legend}
         name={name}
         options={options}
-        onChange={onChange}
+        onChange={(value) => onChange({ key: id, value })}
         answer={answer}
       />
 

@@ -12,10 +12,4 @@ it("renders 'Primary' ", () => {
   expect(opt.value).toBe(Primary.args.value);
 
   const zero = screen.getByTestId(Primary.args.id);
-
-  expect(zero).not.toBeChecked();
-
-  fireEvent.click(zero);
-
-  expect(zero).toBeChecked();
 });
