@@ -75,7 +75,15 @@ export function Home() {
   const benefitKeyToId = useSelector(
     (state) => state.benefits.benefitsData.benefitsKeyToIdMap
   );
-
+  const benefitsEligibility = useSelector(
+    (state) => state.benefits.benefitsEligibility.benefits
+  );
+  const isFetchingBenefitsEligibility = useSelector(
+    (state) => state.benefits.benefitsEligibility.isFetching
+  );
+  const fetchBenefitsEligibilityFailed = useSelector(
+    (state) => state.benefits.benefitsEligibility.fetchFailed
+  );
   const { t } = useTranslation();
 
   const isFetchingQuestions = useSelector(
@@ -139,6 +147,20 @@ export function Home() {
       setDisplayQuestions(true);
     }
   }, [questions]);
+
+  useEffect(() => {
+    if (
+      !isFetchingBenefitsEligibility &&
+      !fetchBenefitsEligibilityFailed &&
+      benefitsEligibility.length !== 0
+    ) {
+      console.log(benefitsEligibility);
+    }
+  }, [
+    isFetchingBenefitsEligibility,
+    fetchBenefitsEligibilityFailed,
+    benefitsEligibility,
+  ]);
 
   // handler for when benefit is selected
   const onBenefitSelect = (benefitId, selected) => {
