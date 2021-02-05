@@ -28,7 +28,11 @@ async function getEligibility(dispatch, answers) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        answers,
+        ableToWork: answers["ableToWork"],
+        gender: answers["gender"],
+        incomeDetails: answers["incomeDetails"],
+        outOfWork: answers["outOfWork"],
+        reasonForSeparation: answers["reasonForSeparation"],
       }),
     });
   } catch (e) {
@@ -43,25 +47,27 @@ async function getEligibility(dispatch, answers) {
       )
     );
   }
-  if (true) {
+
+  let textData;
+  let data;
+  try {
+    textData = await response.text();
+    data = JSON.parse(textData);
+  } catch (e) {
+    data = textData || "";
+  }
+
+  if (response.ok) {
     dispatch(
       networkReceivedActionCreator(
         RESOURCE_TYPES.ELIGIBILITY,
         NETWORK_REQUEST_TYPES.POST,
         {
-          benefits: [1, 2],
+          benefits: data,
         }
       )
     );
   } else {
-    let textData;
-    let data;
-    try {
-      textData = await response.text();
-      data = JSON.parse(textData);
-    } catch (e) {
-      data = textData || "";
-    }
     return dispatch(
       networkRequestFailedActionCreator(
         RESOURCE_TYPES.ELIGIBILITY,

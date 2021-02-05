@@ -152,7 +152,7 @@ export function Home() {
     if (
       !isFetchingBenefitsEligibility &&
       !fetchBenefitsEligibilityFailed &&
-      benefitsEligibility.length !== 0
+      benefitsEligibility
     ) {
       console.log(benefitsEligibility);
     }
