@@ -13,4 +13,8 @@ export {
   selectBenefitActionCreator,
   deselectBenefitActionCreator,
 } from "./benefits";
+
+//answer actions
+export { removeAnswerActionCreator, setAnswerActionCreator } from "./answers";
+
 export * from "./actionTypes";

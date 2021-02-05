@@ -5,3 +5,5 @@ export {
   lifeJourneySelectorFactory,
   benefitForLifeJourney,
 } from "./lifejourneys";
+
+export { questionsSelector } from "./questions";

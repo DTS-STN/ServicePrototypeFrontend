@@ -23,28 +23,6 @@ it("renders 'Primary' ", () => {
   const one = screen.getByTestId("1");
   const two = screen.getByTestId("2");
 
-  expect(zero).not.toBeChecked();
-  expect(one).not.toBeChecked();
-  expect(two).not.toBeChecked();
-
-  fireEvent.click(zero);
-
-  expect(zero).toBeChecked();
-  expect(one).not.toBeChecked();
-  expect(two).not.toBeChecked();
-
-  fireEvent.click(one);
-
-  expect(zero).not.toBeChecked();
-  expect(one).toBeChecked();
-  expect(two).not.toBeChecked();
-
-  fireEvent.click(two);
-
-  expect(zero).not.toBeChecked();
-  expect(one).not.toBeChecked();
-  expect(two).toBeChecked();
-
   const prevButton = screen.getByRole("button", {
     name: Primary.args.prevText,
   });

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 // redux imports
-import { benefitsDataSelector } from "../redux/selectors";
+import { benefitsDataSelector, questionsSelector } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
 import { getQuestions } from "../redux/dispatchers/questions";
@@ -29,6 +29,7 @@ import { ActionButton } from "../components/atoms/ActionButton";
 
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
+import { setAnswerActionCreator } from "../redux/actions/answers";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
@@ -36,8 +37,6 @@ export function Home() {
   );
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
   const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
-  const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [displayQuestions, setDisplayQuestions] = useState(false);
   const [previouBtnDisabled, setPreviousBtnDisabled] = useState(true);
@@ -83,9 +82,9 @@ export function Home() {
     (state) => state.questions.fetchFailed
   );
 
-  const questionsMap = useSelector(
-    (state) => state.questions.questionsData.questionsMap
-  );
+  const questions = useSelector(questionsSelector);
+
+  const answers = useSelector((state) => state.answers);
 
   //redux dispatch
   const dispatch = useDispatch();
@@ -135,7 +134,6 @@ export function Home() {
   // handler for when questions are set from Redux.
   useEffect(() => {
     if (questions.length !== 0) {
-      setAnswers(new Array(questions.length));
       setDisplayQuestions(true);
     }
   }, [questions]);
@@ -155,12 +153,6 @@ export function Home() {
     // if not logged in log in first
     if (!keycloak.authenticated) {
       keycloak.login();
-    } else {
-      let res = [];
-      for (const [key, value] of Object.entries(questionsMap)) {
-        res.push(value);
-      }
-      setQuestions(res);
     }
   };
 
@@ -177,15 +169,19 @@ export function Home() {
     );
   }
 
-  const onChange = (e) => {
-    answers[currentQuestionIndex] = e;
+  const questionOnChangeHandler = ({ key, value }) => {
+    dispatch(setAnswerActionCreator(key, value));
     setNextBtnDisabled(false);
   };
 
   const nextCurrentQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
       setNextBtnDisabled(true);
+    }
+
+    if (previouBtnDisabled) {
       setPreviousBtnDisabled(false);
     }
   };
@@ -193,8 +189,12 @@ export function Home() {
   const prevCurrentQuestion = () => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
-    } else {
+    }
+    if (currentQuestionIndex <= 1) {
       setPreviousBtnDisabled(true);
+    }
+    if (nextBtnDisabled) {
+      setNextBtnDisabled(false);
     }
   };
 
@@ -211,20 +211,20 @@ export function Home() {
         <section>
           {displayQuestions ? (
             <Questions
-              id={questions[currentQuestionIndex].id.toString()}
+              id={questions[currentQuestionIndex].questionId}
               required={true}
               textRequired="required"
-              legend={questions[currentQuestionIndex].text}
-              name="currentQuestion"
-              options={questions[currentQuestionIndex].answers}
-              onChange={(e) => onChange(e)}
+              legend={questions[currentQuestionIndex].questionText}
+              name={questions[currentQuestionIndex].questionId}
+              options={questions[currentQuestionIndex].questionOptions}
+              onChange={questionOnChangeHandler}
               prevText="Previous Question"
               onPrevClick={prevCurrentQuestion}
               disabledPrev={previouBtnDisabled}
               nextText="Next Question"
               onNextClick={nextCurrentQuestion}
               disabledNext={nextBtnDisabled}
-              answer={answers[currentQuestionIndex]}
+              answer={answers[questions[currentQuestionIndex].questionId]}
             />
           ) : (
             <ActionButton
