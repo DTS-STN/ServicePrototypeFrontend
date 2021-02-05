@@ -83,7 +83,6 @@ export function Home() {
   );
 
   const questions = useSelector(questionsSelector);
-
   const answers = useSelector((state) => state.answers);
 
   //redux dispatch
@@ -131,13 +130,6 @@ export function Home() {
     dispatch,
   ]);
 
-  // handler for when questions are set from Redux.
-  useEffect(() => {
-    if (questions.length !== 0) {
-      setDisplayQuestions(true);
-    }
-  }, [questions]);
-
   // handler for when benefit is selected
   const onBenefitSelect = (benefitId, selected) => {
     selected
@@ -154,6 +146,7 @@ export function Home() {
     if (!keycloak.authenticated) {
       keycloak.login();
     }
+    setDisplayQuestions(true);
   };
 
   if (fetchBenefitsFailed || fetchBenefitsCountFailed) {
