@@ -226,7 +226,7 @@ export function Home() {
       setNextBtnDisabled(false);
     }
   };
-  console.log(eligibleBenefitsData);
+
   return (
     <Page>
       <main className="font-sans">
