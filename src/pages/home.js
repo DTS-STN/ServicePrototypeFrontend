@@ -47,6 +47,7 @@ export function Home() {
   const [previouBtnDisabled, setPreviousBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
   const [nextButtonText, setNextButtonText] = useState("Next Question");
+  const [triedFetchElegibility, setTriedFetchElegibility] = useState(false);
 
   const { keycloak } = useKeycloak();
 
@@ -79,15 +80,14 @@ export function Home() {
   const benefitKeyToId = useSelector(
     (state) => state.benefits.benefitsData.benefitsKeyToIdMap
   );
-  const benefitsEligibility = useSelector(
-    (state) => state.benefits.benefitsEligibility.benefits
-  );
+
   const isFetchingBenefitsEligibility = useSelector(
     (state) => state.benefits.benefitsEligibility.isFetching
   );
   const fetchBenefitsEligibilityFailed = useSelector(
     (state) => state.benefits.benefitsEligibility.fetchFailed
   );
+
   const { t } = useTranslation();
 
   const isFetchingQuestions = useSelector(
@@ -153,22 +153,6 @@ export function Home() {
     }
   }, [questions]);
 
-  useEffect(() => {
-    if (
-      !isFetchingBenefitsEligibility &&
-      !fetchBenefitsEligibilityFailed &&
-      benefitsEligibility
-    ) {
-      console.log(benefitsEligibility);
-      console.log(eligibleBenefitsData);
-    }
-  }, [
-    isFetchingBenefitsEligibility,
-    fetchBenefitsEligibilityFailed,
-    benefitsEligibility,
-    eligibleBenefitsData,
-  ]);
-
   // handler for when benefit is selected
   const onBenefitSelect = (benefitId, selected) => {
     selected
@@ -219,6 +203,7 @@ export function Home() {
       setPreviousBtnDisabled(false);
     } else if (currentQuestionIndex === questions.length - 1) {
       dispatch(requestEligibility(answers));
+      setTriedFetchElegibility(true);
     }
   };
 
@@ -237,7 +222,7 @@ export function Home() {
       setNextBtnDisabled(false);
     }
   };
-
+  console.log(eligibleBenefitsData);
   return (
     <Page>
       <main className="font-sans">
@@ -291,20 +276,24 @@ export function Home() {
               />
             </section>
           </div>
-          {eligibleBenefitsData.length > 0 ? (
-            <BenefitGrid
-              dataCy={"home-page-benefit-grid"}
-              benefitMoreInfoButtonText={t("benefitsMoreInformation")}
-              nextPageButtonAriaLabel={t("benefitsNextPage")}
-              previousPageButtonAriaLabel={t("benefitsPreviousPage")}
-              numberOfPages={
-                benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 6)
-              }
-              numberOfRows={2}
-              onBenefitSelect={onBenefitSelect}
-              onMoreInfoClick={onBenefitMoreInfo}
-              benefits={eligibleBenefitsData}
-            />
+          {triedFetchElegibility ? (
+            eligibleBenefitsData.length === 0 ? (
+              "No benefits!"
+            ) : (
+              <BenefitGrid
+                dataCy={"home-page-benefit-grid"}
+                benefitMoreInfoButtonText={t("benefitsMoreInformation")}
+                nextPageButtonAriaLabel={t("benefitsNextPage")}
+                previousPageButtonAriaLabel={t("benefitsPreviousPage")}
+                numberOfPages={
+                  benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 6)
+                }
+                numberOfRows={2}
+                onBenefitSelect={onBenefitSelect}
+                onMoreInfoClick={onBenefitMoreInfo}
+                benefits={eligibleBenefitsData}
+              />
+            )
           ) : (
             <BenefitGrid
               dataCy={"home-page-benefit-grid"}
