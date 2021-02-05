@@ -171,7 +171,11 @@ export function Home() {
     }
   };
 
-  if (fetchBenefitsFailed || fetchBenefitsCountFailed) {
+  if (
+    fetchBenefitsFailed ||
+    fetchBenefitsCountFailed ||
+    fetchBenefitsEligibilityFailed
+  ) {
     return (
       <ErrorPage
         errorTitle={t("somethingWentWrong")}
@@ -271,7 +275,11 @@ export function Home() {
               <BenefitsCounter
                 dataCy={"home-page-benefit-counter"}
                 className="text-center m-auto mr-0 px-6"
-                counter={benefitsCount}
+                counter={
+                  triedFetchElegibility
+                    ? eligibleBenefitsData.length
+                    : benefitsCount
+                }
                 text={t("totalBenefits")}
               />
             </section>

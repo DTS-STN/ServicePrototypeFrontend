@@ -71,6 +71,7 @@ export const eligibleBenefitsSelector = createSelector(
   benefitsMapSelectorFr,
   benefitsEligibilitySelector,
   (lang, benefitsData, benefitsDataFr, benefitsEligibility) => {
+    if (!benefitsEligibility) return [];
     if (lang === "fr") {
       return benefitsEligibility.map((value) =>
         benefitTransformer(benefitsDataFr[value])
