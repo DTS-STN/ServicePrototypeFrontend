@@ -8,7 +8,13 @@ import {
 import { RESOURCE_TYPES } from "../resourceTypes";
 import { CURAM_PRESCREEN_LINK } from "../../../variables";
 
-async function postApplyForBenefit(dispatch, benefitType, keycloak, guid) {
+async function postApplyForBenefit(
+  dispatch,
+  benefitType,
+  keycloak,
+  guid,
+  answers
+) {
   let response;
   try {
     dispatch(
@@ -18,6 +24,9 @@ async function postApplyForBenefit(dispatch, benefitType, keycloak, guid) {
         undefined,
         {
           benefitType,
+          reasonForSeparation: answers["reasonForSeparation"],
+          incomeDetails: answers["incomeDetails"],
+          outOfWork: answers["outOfWork"],
         }
       )
     );
@@ -33,6 +42,9 @@ async function postApplyForBenefit(dispatch, benefitType, keycloak, guid) {
         },
         body: JSON.stringify({
           benefitType,
+          reasonForSeparation: answers["reasonForSeparation"],
+          incomeDetails: answers["incomeDetails"],
+          outOfWork: answers["outOfWork"],
         }),
       }
     );
@@ -76,8 +88,9 @@ async function postApplyForBenefit(dispatch, benefitType, keycloak, guid) {
  * @param benefitType
  * @param keycloak
  * @param guid
+ * @param answers
  */
-export function applyForBenefit(benefitType, keycloak, guid) {
+export function applyForBenefit(benefitType, keycloak, guid, answers) {
   return (dispatch) =>
-    postApplyForBenefit(dispatch, benefitType, keycloak, guid);
+    postApplyForBenefit(dispatch, benefitType, keycloak, guid, answers);
 }

@@ -16,7 +16,7 @@ export function Radio(props) {
           data-testid={id}
           value={value}
           onChange={onChange}
-          checked={answer === id ? true : null}
+          checked={answer === id}
         />
         <span className="checkmark"></span>
       </label>
