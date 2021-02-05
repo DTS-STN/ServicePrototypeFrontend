@@ -72,17 +72,14 @@ export const eligibleBenefitsSelector = createSelector(
   benefitsEligibilitySelector,
   (lang, benefitsData, benefitsDataFr, benefitsEligibility) => {
     let eligibleBenefits = [];
+
     if (lang === "fr") {
-      Object.keys(benefitsDataFr).map((k, v) => {
-        if (benefitsEligibility.includes(v.benefitId)) {
-          eligibleBenefits.push(v);
-        }
+      benefitsEligibility.forEach((k) => {
+        eligibleBenefits.push(benefitTransformer(benefitsDataFr[k], lang));
       });
     } else {
-      Object.keys(benefitsData).map((k, v) => {
-        if (benefitsEligibility.includes(v.benefitId)) {
-          eligibleBenefits.push(v);
-        }
+      benefitsEligibility.forEach((k) => {
+        eligibleBenefits.push(benefitTransformer(benefitsData[k], lang));
       });
     }
     return eligibleBenefits;
