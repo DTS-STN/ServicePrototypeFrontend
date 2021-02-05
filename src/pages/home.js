@@ -183,22 +183,24 @@ export function Home() {
   };
 
   const nextCurrentQuestion = () => {
+    if (currentQuestionIndex === questions.length - 2) {
+      setNextButtonText("Submit");
+    }
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setPreviousBtnDisabled(false);
     } else if (currentQuestionIndex === questions.length - 1) {
       dispatch(requestEligibility(answers));
-      //console.log(state)
-    } else if (currentQuestionIndex === questions.length - 2) {
-      setNextButtonText("Submit");
     }
   };
 
   const prevCurrentQuestion = () => {
+    if (currentQuestionIndex - 1 === 0) {
+      setPreviousBtnDisabled(true);
+    }
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
-    } else {
-      setPreviousBtnDisabled(true);
+      setNextButtonText("Next Question");
     }
   };
 
