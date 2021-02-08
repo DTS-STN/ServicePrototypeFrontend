@@ -38,8 +38,7 @@ export function Page(props) {
     dispatch(
       getClientDash(
         keycloak,
-        // purposely hardcoded GUID, they only accept one value atm
-        "cc6e16b0-db92-459a-91df-f8144befdda9"
+        keycloak.authenticated ? keycloak.idTokenParsed.guid : ""
       )
     );
   };
