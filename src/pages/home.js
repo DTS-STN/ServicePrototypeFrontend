@@ -4,7 +4,11 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 // redux imports
-import { benefitsDataSelector, questionsSelector } from "../redux/selectors";
+import {
+  benefitsDataSelector,
+  questionsSelector,
+  eligibleBenefitsSelector,
+} from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
 import { getQuestions } from "../redux/dispatchers/questions";
@@ -29,6 +33,7 @@ import { ActionButton } from "../components/atoms/ActionButton";
 
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
+import { requestEligibility } from "../redux/dispatchers/benefits/requestEligibility";
 import { setAnswerActionCreator } from "../redux/actions/answers";
 
 export function Home() {
@@ -41,6 +46,8 @@ export function Home() {
   const [displayQuestions, setDisplayQuestions] = useState(false);
   const [previouBtnDisabled, setPreviousBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
+  const [nextButtonText, setNextButtonText] = useState("Next Question");
+  const [triedFetchElegibility, setTriedFetchElegibility] = useState(false);
 
   const { keycloak } = useKeycloak();
 
@@ -68,9 +75,17 @@ export function Home() {
     (state) => state.benefits.benefitsCount.count
   );
   const benefitsData = useSelector(benefitsDataSelector);
+  const eligibleBenefitsData = useSelector(eligibleBenefitsSelector);
 
   const benefitKeyToId = useSelector(
     (state) => state.benefits.benefitsData.benefitsKeyToIdMap
+  );
+
+  const isFetchingBenefitsEligibility = useSelector(
+    (state) => state.benefits.benefitsEligibility.isFetching
+  );
+  const fetchBenefitsEligibilityFailed = useSelector(
+    (state) => state.benefits.benefitsEligibility.fetchFailed
   );
 
   const { t } = useTranslation();
@@ -149,7 +164,11 @@ export function Home() {
     setDisplayQuestions(true);
   };
 
-  if (fetchBenefitsFailed || fetchBenefitsCountFailed) {
+  if (
+    fetchBenefitsFailed ||
+    fetchBenefitsCountFailed ||
+    fetchBenefitsEligibilityFailed
+  ) {
     return (
       <ErrorPage
         errorTitle={t("somethingWentWrong")}
@@ -168,6 +187,9 @@ export function Home() {
   };
 
   const nextCurrentQuestion = () => {
+    if (currentQuestionIndex === questions.length - 2) {
+      setNextButtonText("Submit");
+    }
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
@@ -176,12 +198,19 @@ export function Home() {
 
     if (previouBtnDisabled) {
       setPreviousBtnDisabled(false);
+    } else if (currentQuestionIndex === questions.length - 1) {
+      dispatch(requestEligibility(answers));
+      setTriedFetchElegibility(true);
     }
   };
 
   const prevCurrentQuestion = () => {
+    if (currentQuestionIndex - 1 === 0) {
+      setPreviousBtnDisabled(true);
+    }
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
+      setNextButtonText("Next Question");
     }
     if (currentQuestionIndex <= 1) {
       setPreviousBtnDisabled(true);
@@ -214,7 +243,7 @@ export function Home() {
               prevText="Previous Question"
               onPrevClick={prevCurrentQuestion}
               disabledPrev={previouBtnDisabled}
-              nextText="Next Question"
+              nextText={nextButtonText}
               onNextClick={nextCurrentQuestion}
               disabledNext={nextBtnDisabled}
               answer={answers[questions[currentQuestionIndex].questionId]}
@@ -234,29 +263,53 @@ export function Home() {
           data-cy="eligibleBenefitsHeader"
         >
           <div className="flex m-auto items-start relative">
-            <h2 className="text-3xl mb-2">{t("eligibleBenefitsHeader")}</h2>
+            <h2 className="text-3xl mb-2">{t("allEligibleBenefitsHeader")}</h2>
             <section className="flex mb-12 md:absolute md:right-0">
               <BenefitsCounter
                 dataCy={"home-page-benefit-counter"}
                 className="text-center m-auto mr-0 px-6"
-                counter={benefitsCount}
+                counter={
+                  triedFetchElegibility
+                    ? eligibleBenefitsData.length
+                    : benefitsCount
+                }
                 text={t("totalBenefits")}
               />
             </section>
           </div>
-          <BenefitGrid
-            dataCy={"home-page-benefit-grid"}
-            benefitMoreInfoButtonText={t("benefitsMoreInformation")}
-            nextPageButtonAriaLabel={t("benefitsNextPage")}
-            previousPageButtonAriaLabel={t("benefitsPreviousPage")}
-            numberOfPages={
-              benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 6)
-            }
-            numberOfRows={2}
-            onBenefitSelect={onBenefitSelect}
-            onMoreInfoClick={onBenefitMoreInfo}
-            benefits={benefitsData}
-          />
+          {triedFetchElegibility ? (
+            eligibleBenefitsData.length === 0 ? (
+              "No benefits!"
+            ) : (
+              <BenefitGrid
+                dataCy={"home-page-benefit-grid"}
+                benefitMoreInfoButtonText={t("benefitsMoreInformation")}
+                nextPageButtonAriaLabel={t("benefitsNextPage")}
+                previousPageButtonAriaLabel={t("benefitsPreviousPage")}
+                numberOfPages={
+                  benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 6)
+                }
+                numberOfRows={2}
+                onBenefitSelect={onBenefitSelect}
+                onMoreInfoClick={onBenefitMoreInfo}
+                benefits={eligibleBenefitsData}
+              />
+            )
+          ) : (
+            <BenefitGrid
+              dataCy={"home-page-benefit-grid"}
+              benefitMoreInfoButtonText={t("benefitsMoreInformation")}
+              nextPageButtonAriaLabel={t("benefitsNextPage")}
+              previousPageButtonAriaLabel={t("benefitsPreviousPage")}
+              numberOfPages={
+                benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 6)
+              }
+              numberOfRows={2}
+              onBenefitSelect={onBenefitSelect}
+              onMoreInfoClick={onBenefitMoreInfo}
+              benefits={benefitsData}
+            />
+          )}
         </section>
       </main>
     </Page>
