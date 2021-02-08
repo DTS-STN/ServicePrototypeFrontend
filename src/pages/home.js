@@ -81,9 +81,6 @@ export function Home() {
     (state) => state.benefits.benefitsData.benefitsKeyToIdMap
   );
 
-  const isFetchingBenefitsEligibility = useSelector(
-    (state) => state.benefits.benefitsEligibility.isFetching
-  );
   const fetchBenefitsEligibilityFailed = useSelector(
     (state) => state.benefits.benefitsEligibility.fetchFailed
   );
@@ -167,7 +164,7 @@ export function Home() {
   const seeMyCasesButtonClickHandler = () => {
     history.push(`/cases/`);
   };
-  
+
   if (
     fetchBenefitsFailed ||
     fetchBenefitsCountFailed ||
