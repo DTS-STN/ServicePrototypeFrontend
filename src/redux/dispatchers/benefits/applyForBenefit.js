@@ -35,6 +35,7 @@ async function postApplyForBenefit(
       {
         method: "POST",
         redirect: "follow",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
           guid: guid,
