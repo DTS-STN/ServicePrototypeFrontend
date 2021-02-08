@@ -4,6 +4,7 @@ import { useKeycloak } from "@react-keycloak/web";
 import { Home } from "../pages/home";
 import { NotFoundPage } from "../pages/404";
 import { BenefitPage } from "../pages/benefit";
+import { CasesPage } from "../pages/case";
 import { LifeJourneyPage } from "../pages/lifejourneys";
 import { ThankYouPage } from "../pages/thankyou";
 import { Page } from "../components/organisms/Page";
@@ -26,8 +27,10 @@ function Routes() {
     <Router>
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/cases" exact component={CasesPage} />
         <Route path="/benefit/:id" component={BenefitPage} />
         <Route path="/lifejourney/:id" component={LifeJourneyPage} />
+        <Route path="/case/:id" component={CasesPage} />
         <Route path="/thankyou" component={ThankYouPage} />
         <Route path="*" component={NotFoundPage} />
       </Switch>

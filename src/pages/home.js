@@ -81,9 +81,6 @@ export function Home() {
     (state) => state.benefits.benefitsData.benefitsKeyToIdMap
   );
 
-  const isFetchingBenefitsEligibility = useSelector(
-    (state) => state.benefits.benefitsEligibility.isFetching
-  );
   const fetchBenefitsEligibilityFailed = useSelector(
     (state) => state.benefits.benefitsEligibility.fetchFailed
   );
@@ -164,6 +161,10 @@ export function Home() {
     setDisplayQuestions(true);
   };
 
+  const seeMyCasesButtonClickHandler = () => {
+    history.push(`/cases/`);
+  };
+
   if (
     fetchBenefitsFailed ||
     fetchBenefitsCountFailed ||
@@ -220,6 +221,30 @@ export function Home() {
     }
   };
 
+  const showCases = () => {
+    //show link to cases button if user is logged in
+    if (keycloak.authenticated) {
+      return (
+        <section
+          className="border-t border-b pt-2 pb-2 mt-8"
+          data-cy="showCasesHeader"
+        >
+          <div className="flex m-auto items-start relative">
+            <h2 className="text-3xl mb-2">{t("yourCases")}</h2>
+          </div>
+          <ActionButton
+            id="GoToCases"
+            text={t("See My Cases")}
+            className={"bg-bg-gray-dk text-white hover:bg-black"}
+            onClick={seeMyCasesButtonClickHandler}
+          />
+        </section>
+      );
+    } else {
+      return;
+    }
+  };
+
   return (
     <Page>
       <main className="font-sans">
@@ -257,7 +282,6 @@ export function Home() {
             />
           )}
         </section>
-
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"
@@ -311,6 +335,7 @@ export function Home() {
             />
           )}
         </section>
+        {showCases()}
       </main>
     </Page>
   );
