@@ -20,7 +20,7 @@ async function fetchClientDash(dispatch, keycloak, guid) {
     response = await fetch(CURAM_PRESCREEN_LINK + "/redirect/dashboard", {
       method: "GET",
       redirect: "follow",
-      credentials: "same-origin",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         guid: guid,
