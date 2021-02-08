@@ -23,6 +23,11 @@ const keycloak = {
 it("renders ErrorPage component with string message", () => {
   let store = mockStore({
     language: "en",
+    user: {
+      userData: {
+        user: {},
+      },
+    },
   });
 
   render(
@@ -40,6 +45,11 @@ it("renders ErrorPage component with string message", () => {
 it("renders ErrorPage component with error object", () => {
   let store = mockStore({
     language: "en",
+    user: {
+      userData: {
+        user: {},
+      },
+    },
   });
 
   render(

@@ -9,6 +9,14 @@ if (!benefitservice_env_url && ENVIRONMENT !== "production") {
   benefitservice_env_url = "https://benefit-service-dev.dev.dts-stn.com";
 }
 
+// User Service URL
+let user_service_env_url = process.env.REACT_APP_USER_SERVICE_BASE_URL;
+
+if (!user_service_env_url && ENVIRONMENT !== "production") {
+  user_service_env_url =
+    "http://client-service.355ff83590384b89bcbf.canadacentral.aksapp.io";
+}
+
 // KEYCLOAK
 let keycloak_env_url = process.env.REACT_APP_KEYCLOAK_URL;
 let keycloak_env_realm = process.env.REACT_APP_KEYCLOAK_REALM;
@@ -21,4 +29,5 @@ export const BENEFITSERVICE_URL = benefitservice_env_url;
 export const KEYCLOAK_URL = keycloak_env_url;
 export const KEYCLOAK_REALM = keycloak_env_realm;
 export const KEYCLOAK_CLIENT_ID = keycloak_env_clientId;
+export const USER_SERVICE_URL = user_service_env_url;
 export const CURAM_PRESCREEN_LINK = curam_prescreen_link;

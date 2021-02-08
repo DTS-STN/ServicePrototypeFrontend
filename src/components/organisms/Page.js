@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
+import { userDataSelector } from "../../redux/selectors";
 import { useKeycloak } from "@react-keycloak/web";
 import { changeLanguageCreator, LANGUAGES } from "../../redux/actions";
+import { getUserData } from "../../redux/dispatchers/user/requestUserData";
 import { getClientDash } from "../../redux/dispatchers/benefits";
 
 /**
@@ -16,6 +18,7 @@ export function Page(props) {
   const dispatch = useDispatch();
   const { keycloak } = useKeycloak();
   const { t } = useTranslation();
+  const userProfileData = useSelector(userDataSelector);
 
   let languageButtonHandler = () => {
     if (language === "en") {
@@ -24,6 +27,12 @@ export function Page(props) {
       dispatch(changeLanguageCreator(LANGUAGES.EN));
     }
   };
+
+  useEffect(() => {
+    if (keycloak.authenticated && Object.keys(userProfileData).length === 0) {
+      dispatch(getUserData(keycloak));
+    }
+  }, [keycloak, dispatch, userProfileData]);
 
   let userNameClickHandler = () => {
     dispatch(

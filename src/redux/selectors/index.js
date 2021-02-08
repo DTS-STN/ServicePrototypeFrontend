@@ -1,4 +1,5 @@
 export { languageSelector } from "./language";
+export { userDataSelector } from "./user/userDataSelector";
 export {
   benefitsDataSelector,
   benefitSelectorFactory,
