@@ -35,9 +35,6 @@ describe("fetchClientDash", () => {
   });
 
   it("posts to apply benefit route and dispatches the correct", async () => {
-    fetchMock.getOnce(CURAM_PRESCREEN_LINK + "/login", {
-      status: 200,
-    });
     fetchMock.getOnce(CURAM_PRESCREEN_LINK + "/redirect/dashboard", {
       status: 200,
     });
@@ -56,9 +53,6 @@ describe("fetchClientDash", () => {
 
   it("handles fetch throwing an error due to no network", async () => {
     let errorObj = new Error("no network");
-    fetchMock.getOnce(CURAM_PRESCREEN_LINK + "/login", {
-      status: 200,
-    });
     fetchMock.getOnce(CURAM_PRESCREEN_LINK + "/redirect/dashboard", {
       throws: errorObj,
     });
@@ -83,9 +77,6 @@ describe("fetchClientDash", () => {
   });
 
   it("handles error response from fetch", async () => {
-    fetchMock.getOnce(CURAM_PRESCREEN_LINK + "/login", {
-      status: 200,
-    });
     fetchMock.getOnce(CURAM_PRESCREEN_LINK + "/redirect/dashboard", {
       status: 500,
       body: {

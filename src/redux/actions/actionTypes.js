@@ -10,6 +10,9 @@ export const ACTION_TYPES = {
   // benefits action types
   SELECT_BENEFIT: "SELECT_BENEFIT",
   DESELECT_BENEFIT: "DESELECT_BENEFIT",
+
+  SET_ANSWER: "SET_ANSWER",
+  REMOVE_ANSWER: "REMOVE_ANSWER",
 };
 
 // network action constants

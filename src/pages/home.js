@@ -4,7 +4,11 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 // redux imports
-import { benefitsDataSelector } from "../redux/selectors";
+import {
+  benefitsDataSelector,
+  questionsSelector,
+  eligibleBenefitsSelector,
+} from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
 import { getQuestions } from "../redux/dispatchers/questions";
@@ -29,6 +33,8 @@ import { ActionButton } from "../components/atoms/ActionButton";
 
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
+import { requestEligibility } from "../redux/dispatchers/benefits/requestEligibility";
+import { setAnswerActionCreator } from "../redux/actions/answers";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
@@ -36,12 +42,12 @@ export function Home() {
   );
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
   const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
-  const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [displayQuestions, setDisplayQuestions] = useState(false);
   const [previouBtnDisabled, setPreviousBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
+  const [nextButtonText, setNextButtonText] = useState("Next Question");
+  const [triedFetchElegibility, setTriedFetchElegibility] = useState(false);
 
   const { keycloak } = useKeycloak();
 
@@ -69,9 +75,17 @@ export function Home() {
     (state) => state.benefits.benefitsCount.count
   );
   const benefitsData = useSelector(benefitsDataSelector);
+  const eligibleBenefitsData = useSelector(eligibleBenefitsSelector);
 
   const benefitKeyToId = useSelector(
     (state) => state.benefits.benefitsData.benefitsKeyToIdMap
+  );
+
+  const isFetchingBenefitsEligibility = useSelector(
+    (state) => state.benefits.benefitsEligibility.isFetching
+  );
+  const fetchBenefitsEligibilityFailed = useSelector(
+    (state) => state.benefits.benefitsEligibility.fetchFailed
   );
 
   const { t } = useTranslation();
@@ -83,9 +97,8 @@ export function Home() {
     (state) => state.questions.fetchFailed
   );
 
-  const questionsMap = useSelector(
-    (state) => state.questions.questionsData.questionsMap
-  );
+  const questions = useSelector(questionsSelector);
+  const answers = useSelector((state) => state.answers);
 
   //redux dispatch
   const dispatch = useDispatch();
@@ -132,14 +145,6 @@ export function Home() {
     dispatch,
   ]);
 
-  // handler for when questions are set from Redux.
-  useEffect(() => {
-    if (questions.length !== 0) {
-      setAnswers(new Array(questions.length));
-      setDisplayQuestions(true);
-    }
-  }, [questions]);
-
   // handler for when benefit is selected
   const onBenefitSelect = (benefitId, selected) => {
     selected
@@ -155,20 +160,19 @@ export function Home() {
     // if not logged in log in first
     if (!keycloak.authenticated) {
       keycloak.login();
-    } else {
-      let res = [];
-      for (const [key, value] of Object.entries(questionsMap)) {
-        res.push(value);
-      }
-      setQuestions(res);
     }
+    setDisplayQuestions(true);
   };
 
   const seeMyCasesButtonClickHandler = () => {
     history.push(`/cases/`);
   };
-
-  if (fetchBenefitsFailed || fetchBenefitsCountFailed) {
+  
+  if (
+    fetchBenefitsFailed ||
+    fetchBenefitsCountFailed ||
+    fetchBenefitsEligibilityFailed
+  ) {
     return (
       <ErrorPage
         errorTitle={t("somethingWentWrong")}
@@ -181,24 +185,42 @@ export function Home() {
     );
   }
 
-  const onChange = (e) => {
-    answers[currentQuestionIndex] = e;
+  const questionOnChangeHandler = ({ key, value }) => {
+    dispatch(setAnswerActionCreator(key, value));
     setNextBtnDisabled(false);
   };
 
   const nextCurrentQuestion = () => {
+    if (currentQuestionIndex === questions.length - 2) {
+      setNextButtonText("Submit");
+    }
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
       setNextBtnDisabled(true);
+    }
+
+    if (previouBtnDisabled) {
       setPreviousBtnDisabled(false);
+    } else if (currentQuestionIndex === questions.length - 1) {
+      dispatch(requestEligibility(answers));
+      setTriedFetchElegibility(true);
     }
   };
 
   const prevCurrentQuestion = () => {
+    if (currentQuestionIndex - 1 === 0) {
+      setPreviousBtnDisabled(true);
+    }
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
-    } else {
+      setNextButtonText("Next Question");
+    }
+    if (currentQuestionIndex <= 1) {
       setPreviousBtnDisabled(true);
+    }
+    if (nextBtnDisabled) {
+      setNextBtnDisabled(false);
     }
   };
 
@@ -239,20 +261,20 @@ export function Home() {
         <section>
           {displayQuestions ? (
             <Questions
-              id={questions[currentQuestionIndex].id.toString()}
+              id={questions[currentQuestionIndex].questionId}
               required={true}
               textRequired="required"
-              legend={questions[currentQuestionIndex].text}
-              name="currentQuestion"
-              options={questions[currentQuestionIndex].answers}
-              onChange={(e) => onChange(e)}
+              legend={questions[currentQuestionIndex].questionText}
+              name={questions[currentQuestionIndex].questionId}
+              options={questions[currentQuestionIndex].questionOptions}
+              onChange={questionOnChangeHandler}
               prevText="Previous Question"
               onPrevClick={prevCurrentQuestion}
               disabledPrev={previouBtnDisabled}
-              nextText="Next Question"
+              nextText={nextButtonText}
               onNextClick={nextCurrentQuestion}
               disabledNext={nextBtnDisabled}
-              answer={answers[currentQuestionIndex]}
+              answer={answers[questions[currentQuestionIndex].questionId]}
             />
           ) : (
             <ActionButton
@@ -268,29 +290,53 @@ export function Home() {
           data-cy="eligibleBenefitsHeader"
         >
           <div className="flex m-auto items-start relative">
-            <h2 className="text-3xl mb-2">{t("eligibleBenefitsHeader")}</h2>
+            <h2 className="text-3xl mb-2">{t("allEligibleBenefitsHeader")}</h2>
             <section className="flex mb-12 md:absolute md:right-0">
               <BenefitsCounter
                 dataCy={"home-page-benefit-counter"}
                 className="text-center m-auto mr-0 px-6"
-                counter={benefitsCount}
+                counter={
+                  triedFetchElegibility
+                    ? eligibleBenefitsData.length
+                    : benefitsCount
+                }
                 text={t("totalBenefits")}
               />
             </section>
           </div>
-          <BenefitGrid
-            dataCy={"home-page-benefit-grid"}
-            benefitMoreInfoButtonText={t("benefitsMoreInformation")}
-            nextPageButtonAriaLabel={t("benefitsNextPage")}
-            previousPageButtonAriaLabel={t("benefitsPreviousPage")}
-            numberOfPages={
-              benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 6)
-            }
-            numberOfRows={2}
-            onBenefitSelect={onBenefitSelect}
-            onMoreInfoClick={onBenefitMoreInfo}
-            benefits={benefitsData}
-          />
+          {triedFetchElegibility ? (
+            eligibleBenefitsData.length === 0 ? (
+              "No benefits!"
+            ) : (
+              <BenefitGrid
+                dataCy={"home-page-benefit-grid"}
+                benefitMoreInfoButtonText={t("benefitsMoreInformation")}
+                nextPageButtonAriaLabel={t("benefitsNextPage")}
+                previousPageButtonAriaLabel={t("benefitsPreviousPage")}
+                numberOfPages={
+                  benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 6)
+                }
+                numberOfRows={2}
+                onBenefitSelect={onBenefitSelect}
+                onMoreInfoClick={onBenefitMoreInfo}
+                benefits={eligibleBenefitsData}
+              />
+            )
+          ) : (
+            <BenefitGrid
+              dataCy={"home-page-benefit-grid"}
+              benefitMoreInfoButtonText={t("benefitsMoreInformation")}
+              nextPageButtonAriaLabel={t("benefitsNextPage")}
+              previousPageButtonAriaLabel={t("benefitsPreviousPage")}
+              numberOfPages={
+                benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 6)
+              }
+              numberOfRows={2}
+              onBenefitSelect={onBenefitSelect}
+              onMoreInfoClick={onBenefitMoreInfo}
+              benefits={benefitsData}
+            />
+          )}
         </section>
         {showCases()}
       </main>

@@ -46,6 +46,8 @@ export function BenefitPage() {
     (state) => state.benefits.benefitsData.fetchFailedObj
   );
 
+  const answers = useSelector((state) => state.answers);
+
   const benefitSelector = benefitSelectorFactory(id);
   const benefitData = useSelector(benefitSelector);
 
@@ -71,7 +73,8 @@ export function BenefitPage() {
           benefitData.benefitType,
           keycloak,
           // purposely hardcoded GUID, they only accept one value atm
-          "cc6e16b0-db92-459a-91df-f8144befdda9"
+          "cc6e16b0-db92-459a-91df-f8144befdda9",
+          answers
         )
       );
     }

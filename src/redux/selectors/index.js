@@ -1,8 +1,14 @@
 export { languageSelector } from "./language";
-export { benefitsDataSelector, benefitSelectorFactory } from "./benefits";
 export { casesDataSelector, caseSelectorFactory } from "./cases";
+export {
+  benefitsDataSelector,
+  benefitSelectorFactory,
+  eligibleBenefitsSelector,
+} from "./benefits";
 export {
   lifeJourneysDataSelector,
   lifeJourneySelectorFactory,
   benefitForLifeJourney,
 } from "./lifejourneys";
+
+export { questionsSelector } from "./questions";
