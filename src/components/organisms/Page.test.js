@@ -29,6 +29,11 @@ const keycloak = {
 it("renders Page component in its Primary state when language is english", () => {
   let store = mockStore({
     language: "en",
+    user: {
+      userData: {
+        user: {},
+      },
+    },
   });
 
   useTranslation.mockImplementation(() => {
@@ -79,6 +84,11 @@ it("renders Page component in its Primary state when language is english", () =>
 it("renders Page component in its Primary state when language is french", () => {
   let store = mockStore({
     language: "fr",
+    user: {
+      userData: {
+        user: {},
+      },
+    },
   });
 
   useTranslation.mockImplementation(() => {

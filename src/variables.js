@@ -11,10 +11,15 @@ if (!benefitservice_env_url && ENVIRONMENT !== "production") {
 }
 
 if (!caseservice_env_url && ENVIRONMENT !== "production") {
-  //  benefitservice_env_url = "http://localhost:1337";
-  // this uses the published version of strapi until we get the benefit service working.
   caseservice_env_url =
     "https://api.us-east.apiconnect.appdomain.cloud/hmakhijadeloitteca-api/dev/hfp-client-apis/v1";
+}
+// User Service URL
+let user_service_env_url = process.env.REACT_APP_USER_SERVICE_BASE_URL;
+
+if (!user_service_env_url && ENVIRONMENT !== "production") {
+  user_service_env_url =
+    "http://client-service.355ff83590384b89bcbf.canadacentral.aksapp.io";
 }
 
 // KEYCLOAK
@@ -30,4 +35,5 @@ export const CASESERVICE_URL = caseservice_env_url;
 export const KEYCLOAK_URL = keycloak_env_url;
 export const KEYCLOAK_REALM = keycloak_env_realm;
 export const KEYCLOAK_CLIENT_ID = keycloak_env_clientId;
+export const USER_SERVICE_URL = user_service_env_url;
 export const CURAM_PRESCREEN_LINK = curam_prescreen_link;
