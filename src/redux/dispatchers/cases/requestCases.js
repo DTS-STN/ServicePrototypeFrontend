@@ -26,7 +26,7 @@ async function fetchCases(dispatch, start, limit, sort, keycloak) {
         "Content-Type": "application/json",
         Accept: "application/json",
         Authorization: "Bearer " + keycloak.token,
-        guid: "cc6e16b0-db92-459a-91df-f8144befdda9",
+        guid: keycloak.idTokenParsed.guid,
       },
     });
   } catch (e) {

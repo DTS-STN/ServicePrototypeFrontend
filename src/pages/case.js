@@ -50,7 +50,7 @@ export function CasesPage() {
   const messageListener = (event) => {
     if (event.data === "ready") {
       iframe.contentWindow.postMessage(
-        { jwt: keycloak.token, guid: "cc6e16b0-db92-459a-91df-f8144befdda9" },
+        { jwt: keycloak.token, guid: keycloak.idTokenParsed.guid },
         "*"
       );
     }
