@@ -33,6 +33,7 @@ async function getEligibility(dispatch, answers) {
         incomeDetails: answers["incomeDetails"],
         outOfWork: answers["outOfWork"],
         reasonForSeparation: answers["reasonForSeparation"],
+        province: answers["province"],
       }),
     });
   } catch (e) {
