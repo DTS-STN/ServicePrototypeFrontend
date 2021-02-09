@@ -30,6 +30,7 @@ import { ErrorPage } from "../components/organisms/ErrorPage";
 import { Title } from "../components/atoms/Title";
 import { Questions } from "../components/molecules/Questions";
 import { ActionButton } from "../components/atoms/ActionButton";
+import { DropDown } from "../components/atoms/DropDown";
 
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
@@ -44,6 +45,8 @@ export function Home() {
   const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [displayQuestions, setDisplayQuestions] = useState(false);
+  const [displayPronvinces, setDisplayProvinces] = useState(false);
+  const [displayMatchButton, setDisplayMatchButton] = useState(true);
   const [previouBtnDisabled, setPreviousBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
   const [nextButtonText, setNextButtonText] = useState("Next Question");
@@ -154,11 +157,23 @@ export function Home() {
   };
 
   const matchMeToBenefitsButtonClickHandler = () => {
+    console.log("im clicked");
     // if not logged in log in first
     if (!keycloak.authenticated) {
       keycloak.login();
     }
+
     setDisplayQuestions(true);
+    setDisplayProvinces(false);
+  };
+
+  const matchMeToPronvices = () => {
+    // if not logged in log in first
+    if (!keycloak.authenticated) {
+      keycloak.login();
+    }
+    setDisplayProvinces(true);
+    setDisplayMatchButton(false);
   };
 
   const seeMyCasesButtonClickHandler = () => {
@@ -245,6 +260,21 @@ export function Home() {
     }
   };
 
+  const userOptions = [
+    {
+      label: "On",
+      value: "4e4cf51f-b406-413a-ae46-2cf06c7aabff",
+    },
+    {
+      label: "AL",
+      value: "edad97c7-f2dc-4198-91a9-8f20c7bc67b2",
+    },
+    {
+      label: "BC",
+      value: "57d3578a-3583-4290-8bae-596a4da81a8d",
+    },
+  ];
+
   return (
     <Page>
       <main className="font-sans">
@@ -253,9 +283,26 @@ export function Home() {
           {t("pageDescription")}
         </PageDescription>
 
-        {/* Display the questions or button  */}
+        {/* Display the questions , provinces or button  */}
 
         <section>
+          {displayMatchButton ? (
+            <ActionButton
+              id="MatchMeToBenefits"
+              text={t("matchMeToBenefits")}
+              className={"bg-bg-gray-dk text-white hover:bg-black"}
+              onClick={matchMeToPronvices}
+            />
+          ) : undefined}
+          {displayPronvinces ? (
+            <DropDown
+              Title="Please select your province of residence"
+              options={userOptions}
+              buttonBoolean={true}
+              buttonText="Next"
+              handleClick={matchMeToBenefitsButtonClickHandler}
+            />
+          ) : undefined}
           {displayQuestions ? (
             <Questions
               id={questions[currentQuestionIndex].questionId}
@@ -273,15 +320,9 @@ export function Home() {
               disabledNext={nextBtnDisabled}
               answer={answers[questions[currentQuestionIndex].questionId]}
             />
-          ) : (
-            <ActionButton
-              id="MatchMeToBenefits"
-              text={t("matchMeToBenefits")}
-              className={"bg-bg-gray-dk text-white hover:bg-black"}
-              onClick={matchMeToBenefitsButtonClickHandler}
-            />
-          )}
+          ) : undefined}
         </section>
+
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"
