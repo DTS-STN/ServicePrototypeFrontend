@@ -37,7 +37,6 @@ export function CasesPage() {
   );
 
   const casesData = useSelector(casesDataSelector);
-  console.log(casesData);
 
   const { t } = useTranslation();
 
