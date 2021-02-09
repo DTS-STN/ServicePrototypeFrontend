@@ -21,6 +21,7 @@ import { Spinner } from "../components/atoms/Spinner";
 
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
+import { userDataSelector } from "../redux/selectors";
 
 export function BenefitPage() {
   const [triedFetch, setTriedFetch] = useState(false);
@@ -45,6 +46,8 @@ export function BenefitPage() {
   const fetchBenefitsFailedObj = useSelector(
     (state) => state.benefits.benefitsData.fetchFailedObj
   );
+
+  const userProfileData = useSelector(userDataSelector);
 
   const answers = useSelector((state) => state.answers);
 
@@ -73,7 +76,8 @@ export function BenefitPage() {
           benefitData.benefitType,
           keycloak,
           keycloak.authenticated ? keycloak.idTokenParsed.guid : "",
-          answers
+          answers,
+          userProfileData
         )
       );
     }
