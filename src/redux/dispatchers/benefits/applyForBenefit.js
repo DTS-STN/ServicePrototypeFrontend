@@ -29,7 +29,7 @@ async function postApplyForBenefit(
           incomeDetails: answers["incomeDetails"],
           outOfWork: answers["outOfWork"],
           person: {
-            sin: userProfile.personSin,
+            sin: userProfile.personSin.toString(),
             firstName: userProfile.personFirstName,
             lastName: userProfile.personLastName,
             dateOfBirth: userProfile.personDateOfBirth,

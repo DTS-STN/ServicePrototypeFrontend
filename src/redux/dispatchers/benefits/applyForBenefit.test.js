@@ -76,7 +76,7 @@ describe("applyForBenefit", () => {
         {
           benefitType: "HFP111",
           person: {
-            sin: 802435215,
+            sin: "802435215",
             firstName: "Elizabeth",
             lastName: "Andrew",
             dateOfBirth: "06/12/1976",
@@ -143,7 +143,7 @@ describe("applyForBenefit", () => {
         {
           benefitType: "HFP111",
           person: {
-            sin: 802435215,
+            sin: "802435215",
             firstName: "Elizabeth",
             lastName: "Andrew",
             dateOfBirth: "06/12/1976",
@@ -222,7 +222,7 @@ describe("applyForBenefit", () => {
         {
           benefitType: "HFP111",
           person: {
-            sin: 802435215,
+            sin: "802435215",
             firstName: "Elizabeth",
             lastName: "Andrew",
             dateOfBirth: "06/12/1976",

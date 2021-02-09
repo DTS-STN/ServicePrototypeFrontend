@@ -19,7 +19,7 @@ let user_service_env_url = process.env.REACT_APP_USER_SERVICE_BASE_URL;
 
 if (!user_service_env_url && ENVIRONMENT !== "production") {
   user_service_env_url =
-    "http://client-service.355ff83590384b89bcbf.canadacentral.aksapp.io";
+    "https://client-service.355ff83590384b89bcbf.canadacentral.aksapp.io";
 }
 
 // KEYCLOAK
