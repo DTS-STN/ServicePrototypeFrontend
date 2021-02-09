@@ -297,6 +297,7 @@ export function Home() {
           {displayPronvinces ? (
             <DropDown
               Title="Please select your province of residence"
+              autoFillProv={2}
               options={userOptions}
               buttonBoolean={true}
               buttonText="Next"
