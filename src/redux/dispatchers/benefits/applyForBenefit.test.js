@@ -92,9 +92,9 @@ describe("applyForBenefit", () => {
             },
           },
           bankingInfo: {
-            directDepositTransitNumber: 99999,
-            directDepositFiNumber: 999,
-            directDepositAccountNumber: 9999999,
+            directDepositTransitNumber: "99999",
+            directDepositFiNumber: "999",
+            directDepositAccountNumber: "9999999",
           },
         }
       ),
@@ -159,9 +159,9 @@ describe("applyForBenefit", () => {
             },
           },
           bankingInfo: {
-            directDepositTransitNumber: 99999,
-            directDepositFiNumber: 999,
-            directDepositAccountNumber: 9999999,
+            directDepositTransitNumber: "99999",
+            directDepositFiNumber: "999",
+            directDepositAccountNumber: "9999999",
           },
         }
       ),
@@ -238,9 +238,9 @@ describe("applyForBenefit", () => {
             },
           },
           bankingInfo: {
-            directDepositTransitNumber: 99999,
-            directDepositFiNumber: 999,
-            directDepositAccountNumber: 9999999,
+            directDepositTransitNumber: "99999",
+            directDepositFiNumber: "999",
+            directDepositAccountNumber: "9999999",
           },
         }
       ),
