@@ -9,16 +9,19 @@ export function DropDown(props) {
   return (
     <div>
       <p className="font-semibold mb-8">{title}</p>
-      <Select className="w-2/4" options={options} />
-      {buttonBoolean ? (
-        <div className="mt-4">
-          <ActionButton
-            text={buttonText}
-            className={"bg-bg-gray-dk text-white hover:bg-black"}
-            onClick={handleClick}
-          />
-        </div>
-      ) : undefined}
+
+      <div className="flex flex-col">
+        <Select className="w-2/4" options={options} />
+        {buttonBoolean ? (
+          <div className=" w-2/4 mt-4 flex justify-end ">
+            <ActionButton
+              text={buttonText}
+              className={"bg-bg-gray-dk text-white hover:bg-black"}
+              onClick={handleClick}
+            />
+          </div>
+        ) : undefined}
+      </div>
     </div>
   );
 }
