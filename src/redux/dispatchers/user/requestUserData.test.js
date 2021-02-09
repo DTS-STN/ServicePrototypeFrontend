@@ -7,6 +7,7 @@ import {
   networkRequestFailedActionCreator,
   networkReceivedActionCreator,
   networkRequestActionCreator,
+  setAnswerActionCreator,
 } from "../../actions";
 import { RESOURCE_TYPES } from "../resourceTypes";
 import thunk from "redux-thunk";
@@ -43,7 +44,7 @@ describe("requestUserData", () => {
         personAddressLineItem1: "218 BIGGS ST",
         personEmailAddress: "Elizabeth.Andrew@fakemail.ca",
         personAddressCity: "Fredericton",
-        personGender: "Female",
+        personGender: "SX2",
         directDepositAccountNumber: 9999999,
         directDepositTransitNumber: 99999,
         personAddressPostalcode: "E3B6J6",
@@ -78,7 +79,7 @@ describe("requestUserData", () => {
           personAddressLineItem1: "218 BIGGS ST",
           personEmailAddress: "Elizabeth.Andrew@fakemail.ca",
           personAddressCity: "Fredericton",
-          personGender: "Female",
+          personGender: "SX2",
           directDepositAccountNumber: 9999999,
           directDepositTransitNumber: 99999,
           personAddressPostalcode: "E3B6J6",
@@ -91,6 +92,8 @@ describe("requestUserData", () => {
           personFirstName: "Elizabeth",
         }
       ),
+      setAnswerActionCreator("province", "NB"),
+      setAnswerActionCreator("gender", "female"),
     ];
 
     expect(store.getActions()).toEqual(expectedActions);
