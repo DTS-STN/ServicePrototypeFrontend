@@ -93,7 +93,7 @@ describe("requestUserData", () => {
         }
       ),
       setAnswerActionCreator("province", "NB"),
-      setAnswerActionCreator("gender", "sx2"),
+      setAnswerActionCreator("gender", "female"),
     ];
 
     expect(store.getActions()).toEqual(expectedActions);
