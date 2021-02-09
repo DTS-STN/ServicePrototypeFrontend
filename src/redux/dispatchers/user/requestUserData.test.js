@@ -7,6 +7,7 @@ import {
   networkRequestFailedActionCreator,
   networkReceivedActionCreator,
   networkRequestActionCreator,
+  setAnswerActionCreator,
 } from "../../actions";
 import { RESOURCE_TYPES } from "../resourceTypes";
 import thunk from "redux-thunk";
@@ -91,6 +92,8 @@ describe("requestUserData", () => {
           personFirstName: "Elizabeth",
         }
       ),
+      setAnswerActionCreator("province", "NB"),
+      setAnswerActionCreator("gender", "female"),
     ];
 
     expect(store.getActions()).toEqual(expectedActions);
