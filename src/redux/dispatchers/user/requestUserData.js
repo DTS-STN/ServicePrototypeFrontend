@@ -6,6 +6,7 @@ import {
   networkRequestFailedActionCreator,
   NETWORK_REQUEST_TYPES,
   NETWORK_FAILED_REASONS,
+  setAnswerActionCreator,
 } from "../../actions";
 import { RESOURCE_TYPES } from "../resourceTypes";
 
@@ -53,13 +54,15 @@ async function fetchUserData(dispatch, keycloak) {
   }
 
   if (response.ok) {
-    return dispatch(
+    dispatch(
       networkReceivedActionCreator(
         RESOURCE_TYPES.USER_DATA,
         NETWORK_REQUEST_TYPES.GET,
         data
       )
     );
+    dispatch(setAnswerActionCreator("province", data.personAddressProvince));
+    dispatch(setAnswerActionCreator("gender", data.personGender.toLowerCase()));
   } else {
     return dispatch(
       networkRequestFailedActionCreator(
