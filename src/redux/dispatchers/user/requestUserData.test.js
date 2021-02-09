@@ -44,7 +44,7 @@ describe("requestUserData", () => {
         personAddressLineItem1: "218 BIGGS ST",
         personEmailAddress: "Elizabeth.Andrew@fakemail.ca",
         personAddressCity: "Fredericton",
-        personGender: "Female",
+        personGender: "SX2",
         directDepositAccountNumber: 9999999,
         directDepositTransitNumber: 99999,
         personAddressPostalcode: "E3B6J6",
@@ -79,7 +79,7 @@ describe("requestUserData", () => {
           personAddressLineItem1: "218 BIGGS ST",
           personEmailAddress: "Elizabeth.Andrew@fakemail.ca",
           personAddressCity: "Fredericton",
-          personGender: "Female",
+          personGender: "SX2",
           directDepositAccountNumber: 9999999,
           directDepositTransitNumber: 99999,
           personAddressPostalcode: "E3B6J6",
@@ -93,7 +93,7 @@ describe("requestUserData", () => {
         }
       ),
       setAnswerActionCreator("province", "NB"),
-      setAnswerActionCreator("gender", "female"),
+      setAnswerActionCreator("gender", "sx2"),
     ];
 
     expect(store.getActions()).toEqual(expectedActions);
