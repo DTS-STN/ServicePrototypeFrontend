@@ -28,6 +28,27 @@ async function postApplyForBenefit(
           reasonForSeparation: answers["reasonForSeparation"],
           incomeDetails: answers["incomeDetails"],
           outOfWork: answers["outOfWork"],
+          person: {
+            sin: userProfile.personSin,
+            firstName: userProfile.personFirstName,
+            lastName: userProfile.personLastName,
+            dateOfBirth: userProfile.personDateOfBirth,
+            gender: userProfile.personGender,
+            emailAddress: userProfile.personEmailAddress,
+            phoneNumber: userProfile.personPhoneNumber,
+            address: {
+              lineItem1: userProfile.personAddressLineItem1,
+              lineItem2: userProfile.personAddressLineItem2,
+              city: userProfile.personAddressCity,
+              province: userProfile.personAddressProvince,
+              postalCode: userProfile.personAddressPostalcode,
+            },
+          },
+          bankingInfo: {
+            directDepositTransitNumber: userProfile.directDepositTransitNumber,
+            directDepositFiNumber: userProfile.directDepositFiNumber,
+            directDepositAccountNumber: userProfile.directDepositAccountNumber,
+          },
         }
       )
     );
@@ -60,7 +81,7 @@ async function postApplyForBenefit(
               lineItem2: userProfile.personAddressLineItem2,
               city: userProfile.personAddressCity,
               province: userProfile.personAddressProvince,
-              postalCode: userProfile.personAddressPostalCode,
+              postalCode: userProfile.personAddressPostalcode,
             },
           },
           bankingInfo: {
