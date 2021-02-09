@@ -62,7 +62,9 @@ async function fetchUserData(dispatch, keycloak) {
       )
     );
     dispatch(setAnswerActionCreator("province", data.personAddressProvince));
-    dispatch(setAnswerActionCreator("gender", data.personGender.toLowerCase()));
+    data.personGender === "SX1"
+      ? dispatch(setAnswerActionCreator("gender", "male"))
+      : dispatch(setAnswerActionCreator("gender", "female"));
   } else {
     return dispatch(
       networkRequestFailedActionCreator(
