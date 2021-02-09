@@ -43,7 +43,6 @@ export function Home() {
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
   const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [displayQuestions, setDisplayQuestions] = useState(false);
   const [previouBtnDisabled, setPreviousBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
   const [nextButtonText, setNextButtonText] = useState("Next Question");
@@ -158,7 +157,6 @@ export function Home() {
     if (!keycloak.authenticated) {
       keycloak.login();
     }
-    setDisplayQuestions(true);
   };
 
   const seeMyCasesButtonClickHandler = () => {
@@ -256,7 +254,7 @@ export function Home() {
         {/* Display the questions or button  */}
 
         <section>
-          {displayQuestions ? (
+          {keycloak.authenticated && questions[currentQuestionIndex] ? (
             <Questions
               id={questions[currentQuestionIndex].questionId}
               required={true}
