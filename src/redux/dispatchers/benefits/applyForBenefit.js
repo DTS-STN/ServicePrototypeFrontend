@@ -45,9 +45,9 @@ async function postApplyForBenefit(
             },
           },
           bankingInfo: {
-            directDepositTransitNumber: userProfile.directDepositTransitNumber,
-            directDepositFiNumber: userProfile.directDepositFiNumber,
-            directDepositAccountNumber: userProfile.directDepositAccountNumber,
+            directDepositTransitNumber: userProfile.directDepositTransitNumber.toString(),
+            directDepositFiNumber: userProfile.directDepositFiNumber.toString(),
+            directDepositAccountNumber: userProfile.directDepositAccountNumber.toString(),
           },
         }
       )
@@ -85,9 +85,9 @@ async function postApplyForBenefit(
             },
           },
           bankingInfo: {
-            directDepositTransitNumber: userProfile.directDepositTransitNumber,
-            directDepositFiNumber: userProfile.directDepositFiNumber,
-            directDepositAccountNumber: userProfile.directDepositAccountNumber,
+            directDepositTransitNumber: userProfile.directDepositTransitNumber.toString(),
+            directDepositFiNumber: userProfile.directDepositFiNumber.toString(),
+            directDepositAccountNumber: userProfile.directDepositAccountNumber.toString(),
           },
         }),
       }
