@@ -53,6 +53,8 @@ async function fetchCases(dispatch, start, limit, sort, keycloak) {
     data = textData || "";
   }
 
+  console.log(data);
+
   if (response.ok) {
     dispatch(
       networkReceivedActionCreator(

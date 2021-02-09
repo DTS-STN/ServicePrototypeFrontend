@@ -6,10 +6,10 @@ export const casesMapSelector = (state) => state.cases.casesData.casesMap;
 
 export const caseTransformer = (data, lang) => {
   return {
-    id: data.id,
-    caseReferenceNumber: data.referenceNumber,
+    id: data.reference,
+    caseReferenceNumber: data.reference,
     caseStatus: data[`status`],
-    caseBenefitType: data[`benefitType`],
+    caseBenefitType: data[`type`],
   };
 };
 

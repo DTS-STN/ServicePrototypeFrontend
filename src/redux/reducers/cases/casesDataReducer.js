@@ -36,12 +36,12 @@ export const casesData = function (
         if (action.resourceType === RESOURCE_TYPES.CASE) {
           data = [data];
         }
-        if (Array.isArray(data) && data.length > 0) {
+        if (Array.isArray(data.cases) && data.cases.length > 0) {
           let newCasesMap = { ...state.casesMap };
           let newCasesKeyToIdMap = { ...state.casesKeyToIdMap };
-          data.forEach((value) => {
-            newCasesMap[value.id] = {
-              ...newCasesMap[value.id],
+          data.cases.forEach((value, index) => {
+            newCasesMap[value.reference] = {
+              ...newCasesMap[value.reference],
               ...value,
             };
             newCasesKeyToIdMap[value.id] = value.id;
