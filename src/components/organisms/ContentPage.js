@@ -82,7 +82,7 @@ export function ContentPage(props) {
       </main>
       <div className="container inline-flex justify-between">
         {props.GoBackButtonText ? (
-          <div className="mt-6" data-cy={"goBack-button"}>
+          <div className="mt-6 justify-start" data-cy={"goBack-button"}>
             <ActionButton
               text={props.GoBackButtonText}
               className={
@@ -94,7 +94,7 @@ export function ContentPage(props) {
         ) : null}
 
         {props.ApplyButtonText ? (
-          <div className="mt-6" data-cy={props.dataCy}>
+          <div className="mt-6 justify-end" data-cy={props.dataCy}>
             <ActionButton
               text={props.ApplyButtonText}
               className={
