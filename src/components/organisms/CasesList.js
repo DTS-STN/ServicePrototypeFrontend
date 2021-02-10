@@ -26,7 +26,7 @@ export function CasesList(props) {
       const caseItem = props.cases[i];
       casesCards.push(
         <CaseCard
-          key={caseItem.caseReferenceNumber}
+          key={`${caseItem.caseReferenceNumber}${i}`}
           caseReferenceNumberLabel={props.caseReferenceNumberLabel}
           caseBenefitTypeLabel={props.caseBenefitTypeLabel}
           caseReferenceNumber={caseItem.caseReferenceNumber}

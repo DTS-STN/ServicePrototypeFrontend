@@ -46,7 +46,25 @@ describe("applyForBenefit", () => {
         "HFP111",
         mockKeycloakFunc,
         "cc6e16b0-db92-459a-91df-f8144befdda9",
-        {}
+        {},
+        {
+          guid: "31360512-2d79-4baa-8696-b612de6cbff5",
+          personAddressLineItem2: "NULL",
+          personPhoneNumber: 4259012345,
+          personAddressLineItem1: "218 BIGGS ST",
+          personEmailAddress: "Elizabeth.Andrew@fakemail.ca",
+          personAddressCity: "Fredericton",
+          personGender: "SX2",
+          directDepositAccountNumber: 9999999,
+          directDepositTransitNumber: 99999,
+          personAddressPostalcode: "E3B6J6",
+          personAddressProvince: "NB",
+          personDateOfBirth: "06/12/1976",
+          directDepositFiNumber: 999,
+          personSin: 802435215,
+          personLastName: "Andrew",
+          personFirstName: "Elizabeth",
+        }
       )
     );
 
@@ -57,6 +75,27 @@ describe("applyForBenefit", () => {
         undefined,
         {
           benefitType: "HFP111",
+          person: {
+            sin: "802435215",
+            firstName: "Elizabeth",
+            lastName: "Andrew",
+            dateOfBirth: "06/12/1976",
+            gender: "SX2",
+            emailAddress: "Elizabeth.Andrew@fakemail.ca",
+            phoneNumber: 4259012345,
+            address: {
+              lineItem1: "218 BIGGS ST",
+              lineItem2: "",
+              city: "Fredericton",
+              province: "NB",
+              postalcode: "E3B6J6",
+            },
+          },
+          bankingInfo: {
+            directDepositTransitNumber: "99999",
+            directDepositFiNumber: "999",
+            directDepositAccountNumber: "9999999",
+          },
         }
       ),
     ]);
@@ -74,7 +113,25 @@ describe("applyForBenefit", () => {
         "HFP111",
         mockKeycloakFunc,
         "cc6e16b0-db92-459a-91df-f8144befdda9",
-        {}
+        {},
+        {
+          guid: "31360512-2d79-4baa-8696-b612de6cbff5",
+          personAddressLineItem2: "NULL",
+          personPhoneNumber: 4259012345,
+          personAddressLineItem1: "218 BIGGS ST",
+          personEmailAddress: "Elizabeth.Andrew@fakemail.ca",
+          personAddressCity: "Fredericton",
+          personGender: "SX2",
+          directDepositAccountNumber: 9999999,
+          directDepositTransitNumber: 99999,
+          personAddressPostalcode: "E3B6J6",
+          personAddressProvince: "NB",
+          personDateOfBirth: "06/12/1976",
+          directDepositFiNumber: 999,
+          personSin: 802435215,
+          personLastName: "Andrew",
+          personFirstName: "Elizabeth",
+        }
       )
     );
 
@@ -85,6 +142,27 @@ describe("applyForBenefit", () => {
         undefined,
         {
           benefitType: "HFP111",
+          person: {
+            sin: "802435215",
+            firstName: "Elizabeth",
+            lastName: "Andrew",
+            dateOfBirth: "06/12/1976",
+            gender: "SX2",
+            emailAddress: "Elizabeth.Andrew@fakemail.ca",
+            phoneNumber: 4259012345,
+            address: {
+              lineItem1: "218 BIGGS ST",
+              lineItem2: "",
+              city: "Fredericton",
+              province: "NB",
+              postalcode: "E3B6J6",
+            },
+          },
+          bankingInfo: {
+            directDepositTransitNumber: "99999",
+            directDepositFiNumber: "999",
+            directDepositAccountNumber: "9999999",
+          },
         }
       ),
       networkRequestFailedActionCreator(
@@ -114,7 +192,25 @@ describe("applyForBenefit", () => {
         "HFP111",
         mockKeycloakFunc,
         "cc6e16b0-db92-459a-91df-f8144befdda9",
-        {}
+        {},
+        {
+          guid: "31360512-2d79-4baa-8696-b612de6cbff5",
+          personAddressLineItem2: "NULL",
+          personPhoneNumber: 4259012345,
+          personAddressLineItem1: "218 BIGGS ST",
+          personEmailAddress: "Elizabeth.Andrew@fakemail.ca",
+          personAddressCity: "Fredericton",
+          personGender: "SX2",
+          directDepositAccountNumber: 9999999,
+          directDepositTransitNumber: 99999,
+          personAddressPostalcode: "E3B6J6",
+          personAddressProvince: "NB",
+          personDateOfBirth: "06/12/1976",
+          directDepositFiNumber: 999,
+          personSin: 802435215,
+          personLastName: "Andrew",
+          personFirstName: "Elizabeth",
+        }
       )
     );
 
@@ -125,6 +221,27 @@ describe("applyForBenefit", () => {
         undefined,
         {
           benefitType: "HFP111",
+          person: {
+            sin: "802435215",
+            firstName: "Elizabeth",
+            lastName: "Andrew",
+            dateOfBirth: "06/12/1976",
+            gender: "SX2",
+            emailAddress: "Elizabeth.Andrew@fakemail.ca",
+            phoneNumber: 4259012345,
+            address: {
+              lineItem1: "218 BIGGS ST",
+              lineItem2: "",
+              city: "Fredericton",
+              province: "NB",
+              postalcode: "E3B6J6",
+            },
+          },
+          bankingInfo: {
+            directDepositTransitNumber: "99999",
+            directDepositFiNumber: "999",
+            directDepositAccountNumber: "9999999",
+          },
         }
       ),
       networkRequestFailedActionCreator(

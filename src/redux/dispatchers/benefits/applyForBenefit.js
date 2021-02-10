@@ -13,7 +13,8 @@ async function postApplyForBenefit(
   benefitType,
   keycloak,
   guid,
-  answers
+  answers,
+  userProfile
 ) {
   let response;
   try {
@@ -27,6 +28,30 @@ async function postApplyForBenefit(
           reasonForSeparation: answers["reasonForSeparation"],
           incomeDetails: answers["incomeDetails"],
           outOfWork: answers["outOfWork"],
+          person: {
+            sin: userProfile.personSin.toString(),
+            firstName: userProfile.personFirstName,
+            lastName: userProfile.personLastName,
+            dateOfBirth: userProfile.personDateOfBirth,
+            gender: userProfile.personGender,
+            emailAddress: userProfile.personEmailAddress,
+            phoneNumber: userProfile.personPhoneNumber,
+            address: {
+              lineItem1: userProfile.personAddressLineItem1,
+              lineItem2:
+                userProfile.personAddressLineItem2 === "NULL"
+                  ? ""
+                  : userProfile.personAddressLineItem2,
+              city: userProfile.personAddressCity,
+              province: userProfile.personAddressProvince,
+              postalcode: userProfile.personAddressPostalcode,
+            },
+          },
+          bankingInfo: {
+            directDepositTransitNumber: userProfile.directDepositTransitNumber.toString(),
+            directDepositFiNumber: userProfile.directDepositFiNumber.toString(),
+            directDepositAccountNumber: userProfile.directDepositAccountNumber.toString(),
+          },
         }
       )
     );
@@ -46,6 +71,30 @@ async function postApplyForBenefit(
           reasonForSeparation: answers["reasonForSeparation"],
           incomeDetails: answers["incomeDetails"],
           outOfWork: answers["outOfWork"],
+          person: {
+            sin: userProfile.personSin.toString(),
+            firstName: userProfile.personFirstName,
+            lastName: userProfile.personLastName,
+            dateOfBirth: userProfile.personDateOfBirth,
+            gender: userProfile.personGender,
+            emailAddress: userProfile.personEmailAddress,
+            phoneNumber: userProfile.personPhoneNumber,
+            address: {
+              lineItem1: userProfile.personAddressLineItem1,
+              lineItem2:
+                userProfile.personAddressLineItem2 === "NULL"
+                  ? ""
+                  : userProfile.personAddressLineItem2,
+              city: userProfile.personAddressCity,
+              province: userProfile.personAddressProvince,
+              postalcode: userProfile.personAddressPostalcode,
+            },
+          },
+          bankingInfo: {
+            directDepositTransitNumber: userProfile.directDepositTransitNumber.toString(),
+            directDepositFiNumber: userProfile.directDepositFiNumber.toString(),
+            directDepositAccountNumber: userProfile.directDepositAccountNumber.toString(),
+          },
         }),
       }
     );
@@ -64,6 +113,7 @@ async function postApplyForBenefit(
   if (response.status === 200) {
     window.location = response.url;
   } else {
+    console.log(response);
     let textData;
     let data;
     try {
@@ -90,8 +140,22 @@ async function postApplyForBenefit(
  * @param keycloak
  * @param guid
  * @param answers
+ * @param userProfile
  */
-export function applyForBenefit(benefitType, keycloak, guid, answers) {
+export function applyForBenefit(
+  benefitType,
+  keycloak,
+  guid,
+  answers,
+  userProfile
+) {
   return (dispatch) =>
-    postApplyForBenefit(dispatch, benefitType, keycloak, guid, answers);
+    postApplyForBenefit(
+      dispatch,
+      benefitType,
+      keycloak,
+      guid,
+      answers,
+      userProfile
+    );
 }

@@ -19,14 +19,15 @@ async function fetchCases(dispatch, start, limit, sort, keycloak) {
         { start, limit, sort }
       )
     );
-    let url = "/casedetails";
-    response = await fetch(CASESERVICE_URL + url, {
+    let url =
+      "https://api.us-east.apiconnect.appdomain.cloud/hmakhijadeloitteca-api/dev/hfp-client-apis/v1/casedetails";
+    response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
         Authorization: "Bearer " + keycloak.token,
-        guid: "cc6e16b0-db92-459a-91df-f8144befdda9",
+        guid: keycloak.idTokenParsed.guid,
       },
     });
   } catch (e) {
