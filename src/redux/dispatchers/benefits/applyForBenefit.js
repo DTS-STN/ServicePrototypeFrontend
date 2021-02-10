@@ -41,7 +41,7 @@ async function postApplyForBenefit(
               lineItem2: userProfile.personAddressLineItem2,
               city: userProfile.personAddressCity,
               province: userProfile.personAddressProvince,
-              postalCode: userProfile.personAddressPostalcode,
+              postalcode: userProfile.personAddressPostalcode,
             },
           },
           bankingInfo: {
@@ -81,7 +81,7 @@ async function postApplyForBenefit(
               lineItem2: userProfile.personAddressLineItem2,
               city: userProfile.personAddressCity,
               province: userProfile.personAddressProvince,
-              postalCode: userProfile.personAddressPostalcode,
+              postalcode: userProfile.personAddressPostalcode,
             },
           },
           bankingInfo: {
