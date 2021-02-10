@@ -88,7 +88,7 @@ describe("applyForBenefit", () => {
               lineItem2: "NULL",
               city: "Fredericton",
               province: "NB",
-              postalCode: "E3B6J6",
+              postalcode: "E3B6J6",
             },
           },
           bankingInfo: {
@@ -155,7 +155,7 @@ describe("applyForBenefit", () => {
               lineItem2: "NULL",
               city: "Fredericton",
               province: "NB",
-              postalCode: "E3B6J6",
+              postalcode: "E3B6J6",
             },
           },
           bankingInfo: {
@@ -234,7 +234,7 @@ describe("applyForBenefit", () => {
               lineItem2: "NULL",
               city: "Fredericton",
               province: "NB",
-              postalCode: "E3B6J6",
+              postalcode: "E3B6J6",
             },
           },
           bankingInfo: {
