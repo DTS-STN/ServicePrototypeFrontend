@@ -85,7 +85,7 @@ describe("applyForBenefit", () => {
             phoneNumber: 4259012345,
             address: {
               lineItem1: "218 BIGGS ST",
-              lineItem2: "NULL",
+              lineItem2: "",
               city: "Fredericton",
               province: "NB",
               postalcode: "E3B6J6",
@@ -152,7 +152,7 @@ describe("applyForBenefit", () => {
             phoneNumber: 4259012345,
             address: {
               lineItem1: "218 BIGGS ST",
-              lineItem2: "NULL",
+              lineItem2: "",
               city: "Fredericton",
               province: "NB",
               postalcode: "E3B6J6",
@@ -231,7 +231,7 @@ describe("applyForBenefit", () => {
             phoneNumber: 4259012345,
             address: {
               lineItem1: "218 BIGGS ST",
-              lineItem2: "NULL",
+              lineItem2: "",
               city: "Fredericton",
               province: "NB",
               postalcode: "E3B6J6",

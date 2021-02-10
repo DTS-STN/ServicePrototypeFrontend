@@ -30,3 +30,4 @@ debug.log
 
 **/.idea
 .vscode/settings.json
+launch.json
