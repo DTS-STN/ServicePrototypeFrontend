@@ -32,7 +32,7 @@ export function BenefitPage() {
 
   // react router
   const { id } = useParams();
-  const historyBenefit = useHistory();
+  const history = useHistory();
 
   // redux
   const isFetchingBenefits = useSelector(
@@ -89,7 +89,7 @@ export function BenefitPage() {
 
   //Handler for going to home
   const goBackHomeClickHandler = () => {
-    historyBenefit.push(`/`);
+    history.push(`/`);
   };
 
   if (fetchBenefitsFailed) {
