@@ -19,9 +19,8 @@ async function fetchCases(dispatch, start, limit, sort, keycloak) {
         { start, limit, sort }
       )
     );
-    let url =
-      "https://api.us-east.apiconnect.appdomain.cloud/hmakhijadeloitteca-api/dev/hfp-client-apis/v1/casedetails";
-    response = await fetch(url, {
+    let url = "/casedetails";
+    response = await fetch(CASESERVICE_URL + url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -96,7 +95,6 @@ const tokenDecoder = (token) => {
     var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
-
     return JSON.parse(jsonPayload);
 }; 
 */
