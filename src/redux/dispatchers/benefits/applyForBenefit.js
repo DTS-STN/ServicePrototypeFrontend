@@ -113,7 +113,6 @@ async function postApplyForBenefit(
   if (response.status === 200) {
     window.location = response.url;
   } else {
-    console.log(response);
     let textData;
     let data;
     try {
