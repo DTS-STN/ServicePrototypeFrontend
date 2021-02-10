@@ -4,22 +4,22 @@ image:
   pullPolicy: Always
 
 extraEnv:
-  -name: REACT_APP_BENEFITSERVICE_BASE_URL
-   value: {{ requiredEnv "REACT_APP_BENEFITSERVICE_BASE_URL" }}
-  -name: REACT_APP_CASESERVICE_BASE_URL
-   value: {{ requiredEnv "REACT_APP_CASESERVICE_BASE_URL" }}
-  -name: REACT_APP_CURAM_PRESCREEN_LINK
-   value: {{ requiredEnv "REACT_APP_CURAM_PRESCREEN_LINK" }}
-  -name: REACT_APP_CURAM_UA_LINK
-   value: {{ requiredEnv "REACT_APP_CURAM_UA_LINK" }}
-  -name: REACT_APP_KEYCLOAK_CLIENT_ID
-   value: {{ requiredEnv "REACT_APP_KEYCLOAK_CLIENT_ID" }}
-  -name: REACT_APP_KEYCLOAK_REALM	
-   value: {{ requiredEnv "REACT_APP_KEYCLOAK_REALM" }}
-  -name: REACT_APP_KEYCLOAK_URL
-   value: {{ requiredEnv "REACT_APP_KEYCLOAK_URL" }}
-  -name: REACT_APP_USER_SERVICE_BASE_URL
-   value: {{ requiredEnv "REACT_APP_USER_SERVICE_BASE_URL" }}
+  - name: REACT_APP_BENEFITSERVICE_BASE_URL
+    value: {{ requiredEnv "REACT_APP_BENEFITSERVICE_BASE_URL" }}
+  - name: REACT_APP_CASESERVICE_BASE_URL
+    value: {{ requiredEnv "REACT_APP_CASESERVICE_BASE_URL" }}
+  - name: REACT_APP_CURAM_PRESCREEN_LINK
+    value: {{ requiredEnv "REACT_APP_CURAM_PRESCREEN_LINK" }}
+  - name: REACT_APP_CURAM_UA_LINK
+    value: {{ requiredEnv "REACT_APP_CURAM_UA_LINK" }}
+  - name: REACT_APP_KEYCLOAK_CLIENT_ID
+    value: {{ requiredEnv "REACT_APP_KEYCLOAK_CLIENT_ID" }}
+  - name: REACT_APP_KEYCLOAK_REALM	
+    value: {{ requiredEnv "REACT_APP_KEYCLOAK_REALM" }}
+  - name: REACT_APP_KEYCLOAK_URL
+    value: {{ requiredEnv "REACT_APP_KEYCLOAK_URL" }}
+  - name: REACT_APP_USER_SERVICE_BASE_URL
+    value: {{ requiredEnv "REACT_APP_USER_SERVICE_BASE_URL" }}
 
 ingress:
       enabled: true
