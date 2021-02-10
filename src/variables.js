@@ -7,7 +7,6 @@ let caseservice_env_url = process.env.REACT_APP_CASESERVICE_BASE_URL;
 console.log("ENV VARS");
 console.log(process.env.REACT_APP_BENEFITSERVICE_BASE_URL);
 console.log(process.env.REACT_APP_CASESERVICE_BASE_URL);
-console.log(process.env.REACT_APP_POND_TEST);
 
 if (!benefitservice_env_url && ENVIRONMENT !== "production") {
   //  benefitservice_env_url = "http://localhost:1337";
