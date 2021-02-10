@@ -31,7 +31,9 @@ let keycloak_env_clientId = process.env.REACT_APP_KEYCLOAK_CLIENT_ID;
 let curam_prescreen_link = process.env.REACT_APP_CURAM_PRESCREEN_LINK;
 
 export const BENEFITSERVICE_URL = benefitservice_env_url;
+console.log(BENEFITSERVICE_URL);
 export const CASESERVICE_URL = caseservice_env_url;
+console.log(CASESERVICE_URL);
 export const KEYCLOAK_URL = keycloak_env_url;
 export const KEYCLOAK_REALM = keycloak_env_realm;
 export const KEYCLOAK_CLIENT_ID = keycloak_env_clientId;
