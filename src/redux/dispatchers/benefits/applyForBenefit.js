@@ -38,10 +38,13 @@ async function postApplyForBenefit(
             phoneNumber: userProfile.personPhoneNumber,
             address: {
               lineItem1: userProfile.personAddressLineItem1,
-              lineItem2: userProfile.personAddressLineItem2,
+              lineItem2:
+                userProfile.personAddressLineItem2 === "NULL"
+                  ? ""
+                  : userProfile.personAddressLineItem2,
               city: userProfile.personAddressCity,
               province: userProfile.personAddressProvince,
-              postalCode: userProfile.personAddressPostalcode,
+              postalcode: userProfile.personAddressPostalcode,
             },
           },
           bankingInfo: {
@@ -78,10 +81,13 @@ async function postApplyForBenefit(
             phoneNumber: userProfile.personPhoneNumber,
             address: {
               lineItem1: userProfile.personAddressLineItem1,
-              lineItem2: userProfile.personAddressLineItem2,
+              lineItem2:
+                userProfile.personAddressLineItem2 === "NULL"
+                  ? ""
+                  : userProfile.personAddressLineItem2,
               city: userProfile.personAddressCity,
               province: userProfile.personAddressProvince,
-              postalCode: userProfile.personAddressPostalcode,
+              postalcode: userProfile.personAddressPostalcode,
             },
           },
           bankingInfo: {
@@ -107,6 +113,7 @@ async function postApplyForBenefit(
   if (response.status === 200) {
     window.location = response.url;
   } else {
+    console.log(response);
     let textData;
     let data;
     try {
