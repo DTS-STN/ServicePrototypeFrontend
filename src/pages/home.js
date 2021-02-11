@@ -44,7 +44,7 @@ export function Home() {
   const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [previouBtnDisabled, setPreviousBtnDisabled] = useState(true);
-  const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
+  const [nextBtnDisabled, setNextBtnDisabled] = useState(false);
   const [nextButtonText, setNextButtonText] = useState("Next Question");
   const [triedFetchElegibility, setTriedFetchElegibility] = useState(false);
 
@@ -186,20 +186,27 @@ export function Home() {
   };
 
   const nextCurrentQuestion = () => {
-    if (currentQuestionIndex === questions.length - 2) {
-      setNextButtonText("Submit");
-    }
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
+    const currentQuestion = questions[currentQuestionIndex];
+    const answerForQuestion = answers[currentQuestion.questionId];
+    if (!answerForQuestion) {
       setNextBtnDisabled(true);
-    }
+      alert("Answer required for question");
+    } else {
+      if (currentQuestionIndex === questions.length - 2) {
+        setNextButtonText("Submit");
+      }
+      if (currentQuestionIndex < questions.length - 1) {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+      } else {
+        setNextBtnDisabled(true);
+      }
 
-    if (previouBtnDisabled) {
-      setPreviousBtnDisabled(false);
-    } else if (currentQuestionIndex === questions.length - 1) {
-      dispatch(requestEligibility(answers));
-      setTriedFetchElegibility(true);
+      if (previouBtnDisabled) {
+        setPreviousBtnDisabled(false);
+      } else if (currentQuestionIndex === questions.length - 1) {
+        dispatch(requestEligibility(answers));
+        setTriedFetchElegibility(true);
+      }
     }
   };
 
