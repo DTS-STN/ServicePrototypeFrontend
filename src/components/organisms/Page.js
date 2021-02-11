@@ -47,10 +47,10 @@ export function Page(props) {
     );
   };
 
-  const onLogout = () => {
-    history.push(`/`);
-    keycloak.logout();
-  };
+  // const onLogout = () => {
+  //   history.push(`/`);
+  //   keycloak.logout();
+  // };
 
   return (
     <div className="w-screen h-screen flex flex-col">
@@ -68,7 +68,10 @@ export function Page(props) {
         userName={`${
           keycloak.authenticated ? keycloak.idTokenParsed.name : ""
         }`}
-        onLogout={onLogout}
+        onLogout={() => {
+          history.push(`/`);
+          keycloak.logout();
+        }}
         onUsernameClick={userNameClickHandler}
       />
 
