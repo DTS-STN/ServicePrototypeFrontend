@@ -72,7 +72,7 @@ export const fr = {
   seeCasesButton: "FR See My Cases",
 
   //Back button
-  goBackButton: "Retourner aux résultats",
+  goBackButton: "Retourner",
 
   login: "S'identifier",
   logout: "Se déconnecter",

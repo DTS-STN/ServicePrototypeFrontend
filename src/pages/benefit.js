@@ -23,16 +23,12 @@ import { Spinner } from "../components/atoms/Spinner";
 import { useKeycloak } from "@react-keycloak/web";
 import { userDataSelector } from "../redux/selectors";
 
-//react router
-import { useHistory } from "react-router-dom";
-
 export function BenefitPage() {
   const [triedFetch, setTriedFetch] = useState(false);
   const { keycloak } = useKeycloak();
 
   // react router
   const { id } = useParams();
-  const history = useHistory();
 
   // redux
   const isFetchingBenefits = useSelector(
@@ -87,11 +83,6 @@ export function BenefitPage() {
     }
   };
 
-  //Handler for going to home
-  const goBackHomeClickHandler = () => {
-    history.push(`/`);
-  };
-
   if (fetchBenefitsFailed) {
     if (fetchBenefitsFailedReason === NETWORK_FAILED_REASONS.NOT_FOUND) {
       return <NotFoundPage />;
@@ -119,7 +110,6 @@ export function BenefitPage() {
           : "Looks like there is no content yet"
       }
       GoBackButtonText={t("goBackButton")}
-      onGoBackButtonClick={goBackHomeClickHandler}
       ApplyButtonText={t("ApplyButtonText")}
       dataCy={"apply-button"}
       onApplyButtonClick={applyButtonClickHandler}

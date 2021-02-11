@@ -6,6 +6,8 @@ import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import PropTypes from "prop-types";
 import gfm from "remark-gfm";
 import { ActionButton } from "../atoms/ActionButton";
+//react router
+import { useHistory } from "react-router-dom";
 
 function getCoreProps(props) {
   const source = props["data-sourcepos"];
@@ -67,6 +69,14 @@ const renders = {
  * Component to render content pages in which content comes of the form of markdown
  */
 export function ContentPage(props) {
+  //Browser history
+  const history = useHistory();
+
+  //Handler for going to home
+  const goBackHomeClickHandler = () => {
+    history.goBack();
+  };
+
   return (
     <Page dataCy={"benefit-details"}>
       <main className="font-sans">
@@ -88,7 +98,7 @@ export function ContentPage(props) {
               className={
                 "bg-bg-white-dk text-black hover:bg-bg-gray-dk hover:text-white mb-4 py-2 px-16 border-solid border-2 border-black"
               }
-              onClick={props.onGoBackButtonClick}
+              onClick={goBackHomeClickHandler}
             />
           </div>
         ) : null}
@@ -114,11 +124,6 @@ ContentPage.propTypes = {
    * Go back button text
    */
   GoBackButtonText: PropTypes.string.isRequired,
-
-  /**
-   * Go back button handler
-   */
-  onGoBackButtonClick: PropTypes.func,
 
   /**
    * Apply button text
