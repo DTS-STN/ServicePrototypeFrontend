@@ -75,13 +75,15 @@ async function postApplyForBenefit(
           incomeDetails: answers["incomeDetails"],
           outOfWork: answers["outOfWork"],
           person: {
-            sin: userProfile.personSin.toString(),
+            sin: `${userProfile.personSin ? userProfile.personSin : ""}`,
             firstName: userProfile.personFirstName,
             lastName: userProfile.personLastName,
             dateOfBirth: userProfile.personDateOfBirth,
             gender: userProfile.personGender,
             emailAddress: userProfile.personEmailAddress,
-            phoneNumber: userProfile.personPhoneNumber,
+            phoneNumber: `${
+              userProfile.personPhoneNumber ? userProfile.personPhoneNumber : ""
+            }`,
             address: {
               lineItem1: userProfile.personAddressLineItem1,
               lineItem2:
