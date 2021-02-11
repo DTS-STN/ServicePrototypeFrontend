@@ -47,11 +47,6 @@ export function Page(props) {
     );
   };
 
-  // const onLogout = () => {
-  //   history.push(`/`);
-  //   keycloak.logout();
-  // };
-
   return (
     <div className="w-screen h-screen flex flex-col">
       <Header
