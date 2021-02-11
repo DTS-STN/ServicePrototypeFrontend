@@ -24,6 +24,7 @@ export const benefitTransformer = (data, lang) => {
         : `select ${data["title"]}`,
     isSelected: data.isSelected,
     isEligible: data.isEligible,
+    serviceType: data["service_type"],
   };
 };
 
@@ -80,6 +81,30 @@ export const eligibleBenefitsSelector = createSelector(
       return benefitsEligibility.map((value) =>
         benefitTransformer(benefitsData[value])
       );
+    }
+  }
+);
+
+export const externalBenefitsDataSelector = createSelector(
+  languageSelector,
+  benefitsMapSelector,
+  benefitsMapSelectorFr,
+  benefitsEligibilitySelector,
+  (lang, benefitsData, benefitsDataFr, eligibleBenefits) => {
+    if (!eligibleBenefits) return [];
+    var externalBenefits = [];
+    if (lang === "fr") {
+      eligibleBenefits.forEach(function (item) {
+        if (benefitsData[item]["service_type"] === "External")
+          externalBenefits.push(benefitTransformer(benefitsDataFr[item]));
+      });
+      return externalBenefits;
+    } else {
+      eligibleBenefits.forEach(function (item) {
+        if (benefitsData[item]["service_type"] === "External")
+          externalBenefits.push(benefitTransformer(benefitsData[item]));
+      });
+      return externalBenefits;
     }
   }
 );

@@ -8,6 +8,7 @@ import {
   benefitsDataSelector,
   questionsSelector,
   eligibleBenefitsSelector,
+  externalBenefitsDataSelector,
 } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
@@ -75,7 +76,7 @@ export function Home() {
   );
   const benefitsData = useSelector(benefitsDataSelector);
   const eligibleBenefitsData = useSelector(eligibleBenefitsSelector);
-  const externalBenefitsData = useSelector(benefitsDataSelector);
+  const externalBenefitsData = useSelector(externalBenefitsDataSelector);
 
   const benefitKeyToId = useSelector(
     (state) => state.benefits.benefitsData.benefitsKeyToIdMap
@@ -335,7 +336,7 @@ export function Home() {
           )}
         </section>
 
-        {externalBenefitsData.length !== 0 ? (
+        {triedFetchElegibility ? (
           <section
             className="border-t border-b pt-2 pb-2 mt-8"
             data-cy="eligibleBenefitsHeader"
@@ -353,22 +354,25 @@ export function Home() {
                 />
               </section>
             </div>
-
-            <BenefitGrid
-              dataCy={"home-page-benefit-grid"}
-              benefitMoreInfoButtonText={t("benefitsMoreInformation")}
-              nextPageButtonAriaLabel={t("benefitsNextPage")}
-              previousPageButtonAriaLabel={t("benefitsPreviousPage")}
-              numberOfPages={
-                benefitsCount === 0
-                  ? 1
-                  : Math.ceil(externalBenefitsData.length / 6)
-              }
-              numberOfRows={2}
-              onBenefitSelect={onBenefitSelect}
-              onMoreInfoClick={onBenefitMoreInfo}
-              benefits={externalBenefitsData}
-            />
+            {externalBenefitsData.length === 0 ? (
+              "No benefits!"
+            ) : (
+              <BenefitGrid
+                dataCy={"home-page-benefit-grid"}
+                benefitMoreInfoButtonText={t("benefitsMoreInformation")}
+                nextPageButtonAriaLabel={t("benefitsNextPage")}
+                previousPageButtonAriaLabel={t("benefitsPreviousPage")}
+                numberOfPages={
+                  benefitsCount === 0
+                    ? 1
+                    : Math.ceil(externalBenefitsData.length / 6)
+                }
+                numberOfRows={2}
+                onBenefitSelect={onBenefitSelect}
+                onMoreInfoClick={onBenefitMoreInfo}
+                benefits={externalBenefitsData}
+              />
+            )}
           </section>
         ) : null}
         {showCases()}
