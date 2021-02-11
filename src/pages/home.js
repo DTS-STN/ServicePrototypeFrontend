@@ -333,6 +333,44 @@ export function Home() {
             />
           )}
         </section>
+
+        <section
+          className="border-t border-b pt-2 pb-2 mt-8"
+          data-cy="eligibleBenefitsHeader"
+        >
+          <div className="flex m-auto items-start relative">
+            <h2 className="text-3xl mb-2">
+              {t("otherProviderBenefitsHeader")}
+            </h2>
+            <section className="flex mb-12 md:absolute md:right-0">
+              <BenefitsCounter
+                dataCy={"home-page-benefit-counter"}
+                className="text-center m-auto mr-0 px-6"
+                counter={
+                  triedFetchElegibility
+                    ? eligibleBenefitsData.length
+                    : benefitsCount
+                }
+                text={t("totalBenefits")}
+              />
+            </section>
+          </div>
+          {
+            <BenefitGrid
+              dataCy={"home-page-benefit-grid"}
+              benefitMoreInfoButtonText={t("benefitsMoreInformation")}
+              nextPageButtonAriaLabel={t("benefitsNextPage")}
+              previousPageButtonAriaLabel={t("benefitsPreviousPage")}
+              numberOfPages={
+                benefitsCount === 0 ? 1 : Math.ceil(benefitsCount / 6)
+              }
+              numberOfRows={2}
+              onBenefitSelect={onBenefitSelect}
+              onMoreInfoClick={onBenefitMoreInfo}
+              benefits={eligibleBenefitsData}
+            />
+          }
+        </section>
         {showCases()}
       </main>
     </Page>
