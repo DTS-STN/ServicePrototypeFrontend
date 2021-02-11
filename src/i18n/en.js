@@ -6,6 +6,7 @@ export const en = {
   matchMeToBenefits: "Match me to Benefits",
   allEligibleBenefitsHeader: "All Benefits",
   eligibleBenefitsHeader: "Benefits that apply to you",
+  otherProviderBenefitsHeader: "Matched benefits from other providers",
   totalBenefits: "Total benefits",
   benefitsMoreInformation: "More Information",
   benefitsNextPage: "next benefits page",

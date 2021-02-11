@@ -5,6 +5,7 @@ export const fr = {
   matchMeToBenefits: "FR: Match me to Benefits",
   allEligibleBenefitsHeader: "FR: All Benefits",
   eligibleBenefitsHeader: "Avantages qui s'appliquent à vous",
+  otherProviderBenefitsHeader: "Matched benefits from other providers",
   totalBenefits: "Avantages totaux",
   benefitsMoreInformation: "Plus d'information",
   benefitsNextPage: "page suivante des avantages",
