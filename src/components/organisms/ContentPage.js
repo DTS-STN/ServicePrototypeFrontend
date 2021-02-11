@@ -6,6 +6,8 @@ import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import PropTypes from "prop-types";
 import gfm from "remark-gfm";
 import { ActionButton } from "../atoms/ActionButton";
+//react router
+import { useHistory } from "react-router-dom";
 
 function getCoreProps(props) {
   const source = props["data-sourcepos"];
@@ -67,6 +69,14 @@ const renders = {
  * Component to render content pages in which content comes of the form of markdown
  */
 export function ContentPage(props) {
+  //Browser history
+  const history = useHistory();
+
+  //Handler for going to home
+  const goBackHomeClickHandler = () => {
+    history.goBack();
+  };
+
   return (
     <Page dataCy={"benefit-details"}>
       <main className="font-sans">
@@ -80,22 +90,41 @@ export function ContentPage(props) {
         </ReactMarkdownWithHTML>
         {props.afterContent}
       </main>
-      {props.ApplyButtonText ? (
-        <div className="mt-6 flex justify-end" data-cy={props.dataCy}>
-          <ActionButton
-            text={props.ApplyButtonText}
-            className={
-              "bg-bg-gray-dk text-white hover:bg-black mb-4 py-2 px-16"
-            }
-            onClick={props.onApplyButtonClick}
-          />
-        </div>
-      ) : null}
+      <div className="container inline-flex justify-between">
+        {props.GoBackButtonText ? (
+          <div className="mt-6 justify-start" data-cy={"goBack-button"}>
+            <ActionButton
+              text={props.GoBackButtonText}
+              className={
+                "bg-bg-white-dk text-black hover:bg-bg-gray-dk hover:text-white mb-4 py-2 px-16 border-solid border-2 border-black"
+              }
+              onClick={goBackHomeClickHandler}
+            />
+          </div>
+        ) : null}
+
+        {props.ApplyButtonText ? (
+          <div className="mt-6 justify-end" data-cy={props.dataCy}>
+            <ActionButton
+              text={props.ApplyButtonText}
+              className={
+                "bg-bg-gray-dk text-white hover:bg-black mb-4 py-2 px-16"
+              }
+              onClick={props.onApplyButtonClick}
+            />
+          </div>
+        ) : null}
+      </div>
     </Page>
   );
 }
 
 ContentPage.propTypes = {
+  /**
+   * Go back button text
+   */
+  GoBackButtonText: PropTypes.string.isRequired,
+
   /**
    * Apply button text
    */
