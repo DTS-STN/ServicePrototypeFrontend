@@ -287,7 +287,11 @@ export function Home() {
           data-cy="eligibleBenefitsHeader"
         >
           <div className="flex m-auto items-start relative">
-            <h2 className="text-3xl mb-2">{t("allEligibleBenefitsHeader")}</h2>
+            <h2 className="text-3xl mb-2">
+              {triedFetchElegibility
+                ? t("eligibleBenefitsHeader")
+                : t("allEligibleBenefitsHeader")}
+            </h2>
             <section className="flex mb-12 md:absolute md:right-0">
               <BenefitsCounter
                 dataCy={"home-page-benefit-counter"}

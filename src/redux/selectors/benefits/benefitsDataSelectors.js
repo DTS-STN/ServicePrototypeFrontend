@@ -25,6 +25,7 @@ export const benefitTransformer = (data, lang) => {
     isSelected: data.isSelected,
     isEligible: data.isEligible,
     serviceType: data["service_type"],
+    benefitTag: data["service_type"],
   };
 };
 
