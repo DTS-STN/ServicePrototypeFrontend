@@ -51,9 +51,21 @@ async function postApplyForBenefit(
             },
           },
           bankingInfo: {
-            directDepositTransitNumber: userProfile.directDepositTransitNumber.toString(),
-            directDepositFiNumber: userProfile.directDepositFiNumber.toString(),
-            directDepositAccountNumber: userProfile.directDepositAccountNumber.toString(),
+            directDepositTransitNumber: `${
+              userProfile.directDepositTransitNumber
+                ? userProfile.directDepositTransitNumber
+                : ""
+            }`,
+            directDepositFiNumber: `${
+              userProfile.directDepositFiNumber
+                ? userProfile.directDepositFiNumber
+                : ""
+            }`,
+            directDepositAccountNumber: `${
+              userProfile.directDepositAccountNumber
+                ? userProfile.directDepositAccountNumber
+                : ""
+            }`,
           },
         }
       )
@@ -96,9 +108,21 @@ async function postApplyForBenefit(
             },
           },
           bankingInfo: {
-            directDepositTransitNumber: userProfile.directDepositTransitNumber.toString(),
-            directDepositFiNumber: userProfile.directDepositFiNumber.toString(),
-            directDepositAccountNumber: userProfile.directDepositAccountNumber.toString(),
+            directDepositTransitNumber: `${
+              userProfile.directDepositTransitNumber
+                ? userProfile.directDepositTransitNumber
+                : ""
+            }`,
+            directDepositFiNumber: `${
+              userProfile.directDepositFiNumber
+                ? userProfile.directDepositFiNumber
+                : ""
+            }`,
+            directDepositAccountNumber: `${
+              userProfile.directDepositAccountNumber
+                ? userProfile.directDepositAccountNumber
+                : ""
+            }`,
           },
         }),
       }
@@ -118,7 +142,6 @@ async function postApplyForBenefit(
   if (response.status === 200) {
     window.location = response.url;
   } else {
-    console.log(response);
     let textData;
     let data;
     try {
