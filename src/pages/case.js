@@ -9,12 +9,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { getCases } from "../redux/dispatchers/cases";
 
 //react router
+import { useHistory } from "react-router-dom";
 
 // component imports
 import { Page } from "../components/organisms/Page";
 import { ErrorPage } from "../components/organisms/ErrorPage";
 import { Title } from "../components/atoms/Title";
 import { CasesList } from "../components/organisms/CasesList";
+import { ActionButton } from "../components/atoms/ActionButton";
 
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
@@ -23,6 +25,13 @@ export function CasesPage() {
   const [triedFetchedCases, setTriedFetchedCases] = useState(false);
 
   const { keycloak } = useKeycloak();
+
+  const history = useHistory();
+
+  //Handler for going to home
+  const goBackHomeClickHandler = () => {
+    history.goBack();
+  };
 
   // case redux subscriptions
   const isFetchingCases = useSelector(
@@ -100,6 +109,15 @@ export function CasesPage() {
             caseBenefitTypeLabel={t("caseBenefitTypeLabel")}
             noCasesFoundLabel={t("noCasesFound")}
           />
+          <div className="mt-6 justify-start" data-cy={"goBack-button"}>
+            <ActionButton
+              text={t("goBackButton")}
+              className={
+                "bg-bg-white-dk text-black hover:bg-bg-gray-dk hover:text-white mb-4 py-2 px-16 border-solid border-2 border-black"
+              }
+              onClick={goBackHomeClickHandler}
+            />
+          </div>
           <iframe
             ref={(webview) => {
               iframe = webview;
