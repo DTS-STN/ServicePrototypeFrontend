@@ -75,6 +75,8 @@ export const fr = {
   //Back button
   goBackButton: "Retourner",
 
+  LearnMore: "En savoir plus",
+
   login: "S'identifier",
   logout: "Se déconnecter",
 };

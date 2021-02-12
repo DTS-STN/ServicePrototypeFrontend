@@ -109,8 +109,13 @@ export function BenefitPage() {
           ? benefitData.benefitContent
           : "Looks like there is no content yet"
       }
+      benefitId={benefitData}
       GoBackButtonText={t("goBackButton")}
-      ApplyButtonText={t("ApplyButtonText")}
+      ApplyButtonText={
+        benefitData.benefitTag === "Internal"
+          ? t("ApplyButtonText")
+          : t("LearnMore")
+      }
       dataCy={"apply-button"}
       onApplyButtonClick={applyButtonClickHandler}
     />
