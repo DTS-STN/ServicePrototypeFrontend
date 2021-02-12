@@ -109,6 +109,7 @@ export function BenefitPage() {
           ? benefitData.benefitContent
           : "Looks like there is no content yet"
       }
+      GoBackButtonText={t("goBackButton")}
       ApplyButtonText={t("ApplyButtonText")}
       dataCy={"apply-button"}
       onApplyButtonClick={applyButtonClickHandler}

@@ -15,6 +15,7 @@ export function ThankYouPage() {
     <ContentPage
       beforeContent={<Title>{t("thankYouTitle")}</Title>}
       content={t("thankYouContent")}
+      GoBackButtonText={t("goBackButton")}
     />
   );
 }
