@@ -73,6 +73,9 @@ export const en = {
   yourCases: "Your Cases",
   seeCasesButton: "See My Cases",
 
+  //Back button
+  goBackButton: "Go back",
+
   login: "Login",
   logout: "Logout",
 };
