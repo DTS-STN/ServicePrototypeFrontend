@@ -74,14 +74,19 @@ export const eligibleBenefitsSelector = createSelector(
   benefitsEligibilitySelector,
   (lang, benefitsData, benefitsDataFr, benefitsEligibility) => {
     if (!benefitsEligibility) return [];
+    var internalBenefits = [];
     if (lang === "fr") {
-      return benefitsEligibility.map((value) =>
-        benefitTransformer(benefitsDataFr[value])
-      );
+      benefitsEligibility.forEach(function (item) {
+        if (benefitsData[item]["service_type"] === "Internal")
+          internalBenefits.push(benefitTransformer(benefitsDataFr[item]));
+      });
+      return internalBenefits;
     } else {
-      return benefitsEligibility.map((value) =>
-        benefitTransformer(benefitsData[value])
-      );
+      benefitsEligibility.forEach(function (item) {
+        if (benefitsData[item]["service_type"] === "Internal")
+          internalBenefits.push(benefitTransformer(benefitsData[item]));
+      });
+      return internalBenefits;
     }
   }
 );
