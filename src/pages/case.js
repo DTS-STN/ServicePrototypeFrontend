@@ -30,7 +30,7 @@ export function CasesPage() {
 
   //Handler for going to home
   const goBackHomeClickHandler = () => {
-    history.goBack();
+    history.push(`/`);
   };
 
   // case redux subscriptions
