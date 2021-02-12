@@ -8,6 +8,7 @@ import {
   benefitsDataSelector,
   questionsSelector,
   eligibleBenefitsSelector,
+  externalBenefitsDataSelector,
 } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
@@ -75,6 +76,7 @@ export function Home() {
   );
   const benefitsData = useSelector(benefitsDataSelector);
   const eligibleBenefitsData = useSelector(eligibleBenefitsSelector);
+  const externalBenefitsData = useSelector(externalBenefitsDataSelector);
 
   const benefitKeyToId = useSelector(
     (state) => state.benefits.benefitsData.benefitsKeyToIdMap
@@ -292,7 +294,11 @@ export function Home() {
           data-cy="eligibleBenefitsHeader"
         >
           <div className="flex m-auto items-start relative">
-            <h2 className="text-3xl mb-2">{t("allEligibleBenefitsHeader")}</h2>
+            <h2 className="text-3xl mb-2">
+              {triedFetchElegibility
+                ? t("eligibleBenefitsHeader")
+                : t("allEligibleBenefitsHeader")}
+            </h2>
             <section className="flex mb-12 md:absolute md:right-0">
               <BenefitsCounter
                 dataCy={"home-page-benefit-counter"}
@@ -340,6 +346,46 @@ export function Home() {
             />
           )}
         </section>
+
+        {triedFetchElegibility ? (
+          <section
+            className="border-t border-b pt-2 pb-2 mt-8"
+            data-cy="eligibleBenefitsHeader"
+          >
+            <div className="flex m-auto items-start relative">
+              <h2 className="text-3xl mb-2">
+                {t("otherProviderBenefitsHeader")}
+              </h2>
+              <section className="flex mb-12 md:absolute md:right-0">
+                <BenefitsCounter
+                  dataCy={"home-page-benefit-counter"}
+                  className="text-center m-auto mr-0 px-6"
+                  counter={externalBenefitsData.length}
+                  text={t("totalBenefits")}
+                />
+              </section>
+            </div>
+            {externalBenefitsData.length === 0 ? (
+              "No benefits!"
+            ) : (
+              <BenefitGrid
+                dataCy={"home-page-benefit-grid"}
+                benefitMoreInfoButtonText={t("benefitsMoreInformation")}
+                nextPageButtonAriaLabel={t("benefitsNextPage")}
+                previousPageButtonAriaLabel={t("benefitsPreviousPage")}
+                numberOfPages={
+                  benefitsCount === 0
+                    ? 1
+                    : Math.ceil(externalBenefitsData.length / 6)
+                }
+                numberOfRows={2}
+                onBenefitSelect={onBenefitSelect}
+                onMoreInfoClick={onBenefitMoreInfo}
+                benefits={externalBenefitsData}
+              />
+            )}
+          </section>
+        ) : null}
         {showCases()}
       </main>
     </Page>

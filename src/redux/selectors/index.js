@@ -5,6 +5,7 @@ export {
   benefitsDataSelector,
   benefitSelectorFactory,
   eligibleBenefitsSelector,
+  externalBenefitsDataSelector,
 } from "./benefits";
 export {
   lifeJourneysDataSelector,
