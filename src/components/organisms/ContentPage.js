@@ -121,11 +121,6 @@ export function ContentPage(props) {
 
 ContentPage.propTypes = {
   /**
-   * Benefit id
-   */
-  benefitId: PropTypes.string.isRequired,
-
-  /**
    * Go back button text
    */
   GoBackButtonText: PropTypes.string.isRequired,

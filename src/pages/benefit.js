@@ -70,6 +70,13 @@ export function BenefitPage() {
     // if not logged in log in first
     if (!keycloak.authenticated) {
       keycloak.login();
+    } else if (benefitData.benefitId === "olic") {
+      window.open(
+        "https://www.ontario.ca/page/low-income-workers-tax-credit",
+        "_blank"
+      );
+    } else if (benefitData.benefitId === "occs") {
+      window.open("https://www.ontario.ca/page/child-care-subsidies", "_blank");
     } else {
       dispatch(
         applyForBenefit(
