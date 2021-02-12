@@ -74,7 +74,7 @@ export const eligibleBenefitsSelector = createSelector(
   benefitsEligibilitySelector,
   (lang, benefitsData, benefitsDataFr, benefitsEligibility) => {
     if (!benefitsEligibility) return [];
-    var internalBenefits = [];
+    let internalBenefits = [];
     if (lang === "fr") {
       benefitsEligibility.forEach(function (item) {
         if (benefitsData[item]["service_type"] === "Internal")
@@ -98,7 +98,7 @@ export const externalBenefitsDataSelector = createSelector(
   benefitsEligibilitySelector,
   (lang, benefitsData, benefitsDataFr, eligibleBenefits) => {
     if (!eligibleBenefits) return [];
-    var externalBenefits = [];
+    let externalBenefits = [];
     if (lang === "fr") {
       eligibleBenefits.forEach(function (item) {
         if (benefitsData[item]["service_type"] === "External")
