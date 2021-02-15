@@ -112,7 +112,9 @@ export function BenefitPage() {
           : "Looks like there is no content yet"
       }
       EstimateBenefitText={
-        benefitData.benefitTag.includes("Internal") ? t("getEstimate") : null
+        benefitData.benefitTag.includes("Internal") & keycloak.authenticated
+          ? t("getEstimate")
+          : null
       }
       EstimateBenefitButtonText={t("estimateButton")}
       GoBackButtonText={t("goBackButton")}
