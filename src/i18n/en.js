@@ -80,6 +80,8 @@ export const en = {
   getEstimate: "Get an estimate of your benefit amount",
   estimateButton: "Estimate my benefit",
 
+  LearnMore: "Learn more",
+
   login: "Login",
   logout: "Logout",
 };
