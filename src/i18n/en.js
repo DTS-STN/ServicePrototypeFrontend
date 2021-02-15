@@ -76,6 +76,8 @@ export const en = {
   //Back button
   goBackButton: "Go back",
 
+  LearnMore: "Learn more",
+
   login: "Login",
   logout: "Logout",
 };
