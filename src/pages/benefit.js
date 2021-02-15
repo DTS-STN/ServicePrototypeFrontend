@@ -109,6 +109,8 @@ export function BenefitPage() {
           ? benefitData.benefitContent
           : "Looks like there is no content yet"
       }
+      EstimateBenefitText={t("getEstimate")}
+      EstimateBenefitButtonText={t("estimateButton")}
       GoBackButtonText={t("goBackButton")}
       ApplyButtonText={t("ApplyButtonText")}
       dataCy={"apply-button"}

@@ -75,6 +75,10 @@ export const fr = {
   //Back button
   goBackButton: "Retourner",
 
+  //Benefit button
+  getEstimate: "Obtenez une estimation du montant de votre prestation",
+  estimateButton: "Estimer mon bénéfice",
+
   login: "S'identifier",
   logout: "Se déconnecter",
 };

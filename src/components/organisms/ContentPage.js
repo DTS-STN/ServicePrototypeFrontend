@@ -90,6 +90,22 @@ export function ContentPage(props) {
         </ReactMarkdownWithHTML>
         {props.afterContent}
       </main>
+
+      {props.EstimateBenefitText ? (
+        <div
+          className="mt-6 container inline-flex justify-between border-b border-t items-center"
+          data-cy={"EstimateBenefit-button"}
+        >
+          <p className="font-bold">{props.EstimateBenefitText}</p>
+          <ActionButton
+            text={props.EstimateBenefitButtonText}
+            className={
+              "bg-bg-gray-dk text-white hover:bg-black mt-4 mb-4 py-2 px-16k"
+            }
+          />
+        </div>
+      ) : null}
+
       <div className="container inline-flex justify-between">
         {props.GoBackButtonText ? (
           <div className="mt-6 justify-start" data-cy={"goBack-button"}>
@@ -120,6 +136,16 @@ export function ContentPage(props) {
 }
 
 ContentPage.propTypes = {
+  /**
+   * Text for benefit amount
+   */
+  EstimateBenefitText: PropTypes.string.isRequired,
+
+  /**
+   * Text for benefit amount button
+   */
+  EstimateBenefitButtonText: PropTypes.string.isRequired,
+
   /**
    * Go back button text
    */

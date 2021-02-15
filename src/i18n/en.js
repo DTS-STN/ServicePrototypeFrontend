@@ -76,6 +76,10 @@ export const en = {
   //Back button
   goBackButton: "Go back",
 
+  //Benefit button
+  getEstimate: "Get an estimate of your benefit amount",
+  estimateButton: "Estimate my benefit",
+
   login: "Login",
   logout: "Logout",
 };
