@@ -18,6 +18,7 @@ export const benefitTransformer = (data, lang) => {
     benefitDescription: data[`description`],
     benefitContent: data[`long_description`],
     benefitType: data["benefit_type"],
+    redirectUrl: data["redirect_url"],
     checkBoxAriaLabelBy:
       lang === "fr"
         ? `sélectionner ${data["title"]}`
