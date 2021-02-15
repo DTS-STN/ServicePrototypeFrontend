@@ -111,7 +111,9 @@ export function BenefitPage() {
           ? benefitData.benefitContent
           : "Looks like there is no content yet"
       }
-      EstimateBenefitText={t("getEstimate")}
+      EstimateBenefitText={
+        benefitData.benefitTag.includes("Internal") ? t("getEstimate") : null
+      }
       EstimateBenefitButtonText={t("estimateButton")}
       GoBackButtonText={t("goBackButton")}
       ApplyButtonText={
