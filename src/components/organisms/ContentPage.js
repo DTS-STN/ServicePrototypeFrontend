@@ -100,7 +100,7 @@ export function ContentPage(props) {
           <ActionButton
             text={props.EstimateBenefitButtonText}
             className={
-              "bg-bg-gray-dk text-white hover:bg-black mt-4 mb-4 py-2 px-16k"
+              "bg-bg-gray-dk text-white hover:bg-black mt-4 mb-4 py-2 px-9"
             }
           />
         </div>
@@ -120,7 +120,7 @@ export function ContentPage(props) {
         ) : null}
 
         {props.ApplyButtonText ? (
-          <div className="mt-6 justify-end" data-cy={props.dataCy}>
+          <div className="mt-6" data-cy={props.dataCy}>
             <ActionButton
               text={props.ApplyButtonText}
               className={
@@ -139,7 +139,7 @@ ContentPage.propTypes = {
   /**
    * Text for benefit amount
    */
-  EstimateBenefitText: PropTypes.string.isRequired,
+  EstimateBenefitText: PropTypes.string,
 
   /**
    * Text for benefit amount button
