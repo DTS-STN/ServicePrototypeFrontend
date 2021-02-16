@@ -8,4 +8,5 @@ export {
 export { getLifeJourneys, getLifeJourney } from "./lifejourneys";
 export { getQuestions } from "./questions";
 export { getCases } from "./cases";
+export { getEntitlementAmount } from "./entitlement";
 export { RESOURCE_TYPES } from "./resourceTypes";
