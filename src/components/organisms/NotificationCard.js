@@ -15,7 +15,7 @@ export function NotificationCard(props) {
             medical records in your profile.
           </p>
           <ActionButton
-            className=" w-1/3 mt-4 bg-transparent border-white border-2 text-white"
+            className=" w-1/3 mt-4 bg-transparent border-white border-2 text-white hover:bg-black"
             id="ViewMedicalRecords"
             text="View Medical Records"
           ></ActionButton>

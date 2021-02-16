@@ -5,10 +5,14 @@ import { AppointmentTable } from "../molecules/AppointmentTable";
 
 export function AppointmentCard(props) {
   return (
-    <div className="flex flex-col">
+    <div className="mt-4 flex flex-col">
       <div className="flex flex-row justify-between">
-        <p>Appointments</p>
-        <ActionButton></ActionButton>
+        <p className="text-xl font-bold">Appointments</p>
+        <ActionButton
+          className="bg-bg-gray-dk text-white hover:bg-black"
+          id="AddAppointment"
+          text="Add Appointment"
+        ></ActionButton>
       </div>
       <div>
         <AppointmentTable></AppointmentTable>
