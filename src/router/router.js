@@ -9,6 +9,7 @@ import { LifeJourneyPage } from "../pages/lifejourneys";
 import { ThankYouPage } from "../pages/thankyou";
 import { Page } from "../components/organisms/Page";
 import { Spinner } from "../components/atoms/Spinner";
+import { Dashboard } from "../pages/dashboard";
 
 function Routes() {
   const { initialized } = useKeycloak();
@@ -27,6 +28,7 @@ function Routes() {
     <Router>
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/dashboard" exact component={Dashboard} />
         <Route path="/cases" exact component={CasesPage} />
         <Route path="/benefit/:id" component={BenefitPage} />
         <Route path="/lifejourney/:id" component={LifeJourneyPage} />
