@@ -44,7 +44,7 @@ describe("Benefit details Page", () => {
   });
 
 
-  it.skip("Mocked FR benefit details show on page in the UI", () => {
+  it("Mocked FR benefit details show on page in the UI", () => {
   
     // The number of the benefit details are being mocked
   cy.intercept("/benefits/1?lang=fr", { fixture: "descriptionFR.json" }).as("getFRdetails");

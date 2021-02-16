@@ -9,7 +9,7 @@ describe("Apply to benefits", () => {
   });
 
   // This might be a hacky way to test this. Suggestions are welcome.
-  it.skip("prompts the user to login when clicking apply", () => {
+  it("prompts the user to login when clicking apply", () => {
     // intercept to the benefit details info
     cy.intercept({
       method: "GET",
@@ -35,24 +35,27 @@ describe("Apply to benefits", () => {
     // The user is not yet logged in so there should be no username shown.
    // cy.get("[data-cy=login-user-name]").should("contain.text", "");
     // clicking the apply button prompts the user to log in
-     cy.get("[data-cy=apply-button] > .flex").click({ force: true });
+    cy.kcLogin("user");
+    cy.visit("/benefit/1");
+   //  cy.get("[data-cy=apply-button] > .flex").click({ force: true });
 
-    //  cy.wait("@details");
+    cy.wait("@details");
+  // cy.get('[data-cy=apply-button] > .flex').click()
 
     // intercept the POST request after the button is clicked and the user is logged in.
-   cy.intercept ("**/auth/realms/benefit-service-dev/*", (req) =>  {
+   cy.intercept ("**/hmakhijadeloitteca-api/*", (req) =>  {
     //  if the response was cached
      delete req.headers["if-none-match"];
   
  //   clicking the Apply button after the login goes to the ua page as expected
- //  cy.get("[data-cy=apply-button] > .flex").click({ force: true });
+   
   }).as("ua");
-  
-   cy.wait("@key").its("response").should("deep.include", {
-     statusCode: 200,
-     statusMessage: "OK",
-     url: "https://keycloak.dev.dts-stn.com/auth/realms/benefit-service-dev/protocol/openid-connect/auth?*",
-   });
+  cy.get("[data-cy=apply-button] > .flex").click({ force: true });
+   cy.wait("@ua").its("response").should("deep.include", {
+    statusCode: 200,
+    statusMessage: "OK",
+    url: "https://gateway.dev.dts-stn.com/hmakhijadeloitteca-api/dev/hfp-client-apis/v1/redirect/prescreen/intake",
+  });
     
   });
 

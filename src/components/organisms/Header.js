@@ -23,7 +23,10 @@ export function Header(props) {
         </div>
       </div>
       <div className="w-full flex justify-center items-center h-10 bg-header-blue">
-        <div className="w-full md:w-2/3 flex justify-between items-center">
+        <div
+          className="w-full md:w-2/3 flex justify-between items-center"
+          data-cy={"site-title"}
+        >
           <h1
             className="font-medium text-white ml-2 md:m-0 text-3xl"
             style={{
