@@ -74,7 +74,7 @@ export function ContentPage(props) {
 
   //Handler for going to home
   const goBackHomeClickHandler = () => {
-    history.goBack();
+    history.push(`/`);
   };
 
   return (
