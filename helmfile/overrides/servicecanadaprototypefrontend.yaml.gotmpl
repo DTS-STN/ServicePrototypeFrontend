@@ -18,6 +18,7 @@ ingress:
       {{ else }}
           - servicecanadaprototypefrontend-{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN_DEV" }}
           - servicecanadaprototypefrontend-{{ requiredEnv "BASE_DOMAIN_DEV" }}
+          - servicecanadaprototypefrontend-{{ .Environment.Name }}.dtbdmhfp.com
       {{ end }} 
       annotations: {}
       # kubernetes.io/ingress.class: traefik
