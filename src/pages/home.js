@@ -32,6 +32,8 @@ import { Title } from "../components/atoms/Title";
 import { Questions } from "../components/molecules/Questions";
 import { ActionButton } from "../components/atoms/ActionButton";
 
+import { TableComponents } from "../components/atoms/TableComponent";
+
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
 import { requestEligibility } from "../redux/dispatchers/benefits/requestEligibility";
@@ -261,6 +263,16 @@ export function Home() {
         </PageDescription>
 
         {/* Display the questions or button  */}
+
+        <TableComponents
+          title="Estimated dollar Amount per week"
+          children1="Less Than $30,000"
+          children2="$200"
+          children3="Between $30,000"
+          children4="$500"
+          children5="More Than $60,000"
+          children6="$500"
+        ></TableComponents>
 
         <section>
           {keycloak.authenticated && questions[currentQuestionIndex] ? (
