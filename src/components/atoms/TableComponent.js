@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 /**
  * Box for benefit card which contains the benefit card items
  */
-export function TableComponents(props) {
+export function TableComponent(props) {
   return (
     <div className="grid grid-cols-2 mb-4">
       <div className="border-t py-2 ">
@@ -27,7 +27,7 @@ export function TableComponents(props) {
   );
 }
 
-TableComponents.propTypes = {
+TableComponent.propTypes = {
   //Title in the column
   title: PropTypes.string,
   // data for each column

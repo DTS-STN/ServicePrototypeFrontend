@@ -264,16 +264,6 @@ export function Home() {
 
         {/* Display the questions or button  */}
 
-        <TableComponents
-          title="Estimated dollar Amount per week"
-          children1="Less Than $30,000"
-          children2="$200"
-          children3="Between $30,000"
-          children4="$500"
-          children5="More Than $60,000"
-          children6="$500"
-        ></TableComponents>
-
         <section>
           {keycloak.authenticated && questions[currentQuestionIndex] ? (
             <Questions
