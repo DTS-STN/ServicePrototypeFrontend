@@ -11,7 +11,7 @@ export function ResourceCardArticle(props) {
   return (
     <div classname="flex flex-col">
       <div>
-        <img src={articleImage}></img>
+        <img alt="" src={articleImage}></img>
       </div>
       <div className="flex flex-col">
         <p>{title}</p>

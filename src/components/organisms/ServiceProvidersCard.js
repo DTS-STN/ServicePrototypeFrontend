@@ -1,12 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
 import GoogleMapReact from "google-map-react";
 
-export function ServiceProvidersCard(props) {
+export function ServiceProvidersCard() {
   const lat = 43.6532;
   const lng = -79.3832;
   return (
-    <div className=" mt-4 flex- flex-col">
+    <div className=" mt-8 flex- flex-col">
       <p className="text-xl font-bold">Service providers and Support</p>
       <div className="mt-4 mb-4 w-full h-64">
         <GoogleMapReact

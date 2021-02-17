@@ -1,13 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-export function AppointmentTable(props) {
+export function AppointmentTable() {
   return (
     <table className="w-full mt-4 tabel-fixed">
       <tr>
-        <th className="bg-bg-gray-dk text-white text-left">Date</th>
-        <th className="bg-bg-gray-dk text-white text-left">Location</th>
-        <th className="bg-bg-gray-dk text-white text-left">Appointment Type</th>
+        <th className="bg-header-blue text-white text-left">Date</th>
+        <th className="bg-header-blue text-white text-left">Location</th>
+        <th className="bg-header-blue text-white text-left">
+          Appointment Type
+        </th>
       </tr>
       <tr>
         <td>12/07/2020</td>

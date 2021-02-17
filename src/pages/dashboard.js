@@ -6,6 +6,8 @@ import { NotificationCard } from "../components/organisms/NotificationCard";
 import { AppointmentCard } from "../components/organisms/AppointmentCard";
 import { ServiceProvidersCard } from "../components/organisms/ServiceProvidersCard";
 import { useKeycloak } from "@react-keycloak/web";
+import { JourneyCard } from "../components/organisms/JourneyCard";
+import { ApplicationStatusCard } from "../components/organisms/ApplicationStatusCard";
 
 export function Dashboard() {
   const { keycloak } = useKeycloak();
@@ -24,6 +26,8 @@ export function Dashboard() {
       {keycloak.authenticated ? (
         <div>
           <NotificationCard></NotificationCard>
+          <JourneyCard></JourneyCard>
+          <ApplicationStatusCard></ApplicationStatusCard>
           <AppointmentCard></AppointmentCard>
           {/* <ResourceGrid header = "Recommended Resource" resources=/> */}
           <ServiceProvidersCard></ServiceProvidersCard>

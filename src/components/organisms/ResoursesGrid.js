@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ResourceCardArticle } from "../molecules/ResourceCardArticle";
+import imagePlaceHolder from "../../assets/images/imagePlaceholder.svg";
 
 /**
  * Resource Grid
@@ -15,7 +16,7 @@ export function ResourceGrid(props) {
       <div className="flex flex-row">
         {resources.map((resource) => (
           <ResourceCardArticle
-            image={resource.image}
+            image={imagePlaceHolder}
             title={resource.title}
             content={resource.content}
             buttonText={resource.buttonText}
