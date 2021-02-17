@@ -31,7 +31,7 @@ export const entitlementData = function (
           fetchFailed: false,
           fetchFailedReason: "",
           fetchFailedObj: {},
-          entitlement: action.body.entitlement,
+          entitlement: [...state.entitlement, action.body.entitlement],
         };
       }
       break;

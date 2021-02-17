@@ -1,4 +1,4 @@
-import React, { createElement } from "react";
+import React, { createElement, useState } from "react";
 import { Page } from "./Page";
 import ReactMarkdownWithHTML from "react-markdown/with-html";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -6,6 +6,7 @@ import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import PropTypes from "prop-types";
 import gfm from "remark-gfm";
 import { ActionButton } from "../atoms/ActionButton";
+import { TableComponent } from "../atoms/TableComponent";
 //react router
 import { useHistory } from "react-router-dom";
 
@@ -72,9 +73,14 @@ export function ContentPage(props) {
   //Browser history
   const history = useHistory();
 
+  const [entitlementVisible, setEntitlmentVisible] = useState(false);
+
   //Handler for going to home
   const goBackHomeClickHandler = () => {
     history.push(`/`);
+  };
+  const displayEntitlementTable = () => {
+    setEntitlmentVisible(true);
   };
 
   return (
@@ -90,6 +96,32 @@ export function ContentPage(props) {
         </ReactMarkdownWithHTML>
         {props.afterContent}
       </main>
+
+      {entitlementVisible ? (
+        <TableComponent
+          title="Estimated dollar amount per week"
+          title1="Less than $30,000"
+          value1={props.TableContent[0].entitlementGrant}
+          title2="Between  $30,000 & $60,000"
+          value2={props.TableContent[1].entitlementGrant}
+          title3="More than $60,000"
+          value3={props.TableContent[2].entitlementGrant}
+        />
+      ) : (
+        <div className="mt-6 justify-between" data-cy={props.dataCy}>
+          <span className="font-bold">
+            Get an estimate of your benefit amount
+          </span>
+          <ActionButton
+            text={props.DisplayEntitlementButtonText}
+            className={
+              "bg-bg-gray-dk text-white hover:bg-black mb-4 py-2 px-16 float-right"
+            }
+            onClick={displayEntitlementTable}
+          />
+        </div>
+      )}
+
       <div className="container inline-flex justify-between">
         {props.GoBackButtonText ? (
           <div className="mt-6 justify-start" data-cy={"goBack-button"}>

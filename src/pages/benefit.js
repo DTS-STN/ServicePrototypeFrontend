@@ -10,7 +10,12 @@ import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { benefitSelectorFactory } from "../redux/selectors/benefits";
 import { NETWORK_FAILED_REASONS } from "../redux/actions";
-import { getBenefit, applyForBenefit } from "../redux/dispatchers";
+import {
+  getBenefit,
+  applyForBenefit,
+  getEntitlementAmount,
+} from "../redux/dispatchers";
+import { entitlementSelector } from "../redux/selectors";
 
 //component imports
 import { ContentPage } from "../components/organisms/ContentPage";
@@ -25,6 +30,8 @@ import { userDataSelector } from "../redux/selectors";
 
 export function BenefitPage() {
   const [triedFetch, setTriedFetch] = useState(false);
+  const [triedFetchedEntitlement, setTriedFetchedEntitlement] = useState(false);
+  const [entitlementReponse, setEntitlementResponse] = useState({});
   const { keycloak } = useKeycloak();
 
   // react router
@@ -54,6 +61,15 @@ export function BenefitPage() {
   const benefitSelector = benefitSelectorFactory(id);
   const benefitData = useSelector(benefitSelector);
 
+  // entitlement
+  const isFetchingEntitlement = useSelector(
+    (state) => state.entitlement.isFetching
+  );
+  const fetchEntitlementFailed = useSelector(
+    (state) => state.entitlement.fetchFailed
+  );
+  const entitlement = useSelector(entitlementSelector);
+
   const { t } = useTranslation();
 
   //redux dispatch
@@ -65,6 +81,66 @@ export function BenefitPage() {
       setTriedFetch(true);
     }
   }, [triedFetch, isFetchingBenefits, fetchBenefitsFailed, id, dispatch]);
+
+  useEffect(() => {
+    if (
+      !triedFetchedEntitlement &&
+      !isFetchingEntitlement &&
+      !fetchEntitlementFailed
+    ) {
+      dispatch(
+        getEntitlementAmount(
+          "ON",
+          "HFPIR1",
+          keycloak.authenticated ? keycloak.token : "",
+          keycloak.authenticated ? keycloak.idTokenParsed.guid : ""
+        )
+      );
+      dispatch(
+        getEntitlementAmount(
+          "ON",
+          "HFPIR2",
+          keycloak.authenticated ? keycloak.token : "",
+          keycloak.authenticated ? keycloak.idTokenParsed.guid : ""
+        )
+      );
+      dispatch(
+        getEntitlementAmount(
+          "ON",
+          "HFPIR3",
+          keycloak.authenticated ? keycloak.token : "",
+          keycloak.authenticated ? keycloak.idTokenParsed.guid : ""
+        )
+      );
+      setTriedFetchedEntitlement(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    triedFetchedEntitlement,
+    isFetchingEntitlement,
+    fetchEntitlementFailed,
+    dispatch,
+  ]);
+
+  useEffect(() => {
+    setEntitlementResponse(entitlement);
+  }, [
+    triedFetchedEntitlement,
+    isFetchingEntitlement,
+    fetchEntitlementFailed,
+    dispatch,
+  ]);
+
+  // const showEntitlementClickHandler = () => {
+  //   // This is for testing ONLY
+  //   if (keycloak.authenticated) {
+  //     let entitlementData = `  Entitlement. BaseRate = ${entitlement["baseRate"]},
+  //       Prov. Rate = , ${entitlement["provincialRate"]},
+  //       Grant = , ${entitlement["entitlementGrant"]}`;
+  //     setEntitlementData(entitlementData);
+  //     console.log(entitlementData);
+  //   }
+  // };
 
   const applyButtonClickHandler = () => {
     // if not logged in log in first
@@ -111,6 +187,8 @@ export function BenefitPage() {
           ? benefitData.benefitContent
           : "Looks like there is no content yet"
       }
+      DisplayEntitlementButtonText={t("displayEntitlementButton")}
+      TableContent={entitlement}
       GoBackButtonText={t("goBackButton")}
       ApplyButtonText={
         benefitData.benefitTag.includes("Internal")

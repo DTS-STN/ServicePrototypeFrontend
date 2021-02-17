@@ -12,6 +12,9 @@ export const fr = {
   benefitsPreviousPage: "page des avantages précédente",
   ApplyButtonText: "appliquer maintenant",
 
+  //Benefit Detail Page
+  displayEntitlementButton: "FR: Estimate my benefit",
+
   //links
   departmentAndAgenciesLink: "https://www.canada.ca/fr/gouvernement/min.html",
   departmentAndAgenciesText: "Ministères et organismes",
