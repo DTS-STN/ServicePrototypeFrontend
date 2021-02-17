@@ -14,3 +14,5 @@ export {
 } from "./lifejourneys";
 
 export { questionsSelector } from "./questions";
+
+export { entitlementSelector } from "./entitlement";
