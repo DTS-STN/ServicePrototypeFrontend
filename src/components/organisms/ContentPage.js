@@ -98,10 +98,12 @@ export function ContentPage(props) {
         >
           <p className="font-bold">{props.EstimateBenefitText}</p>
           <ActionButton
+            id="showEntitlement"
             text={props.EstimateBenefitButtonText}
             className={
               "bg-bg-gray-dk text-white hover:bg-black mt-4 mb-4 py-2 px-9"
             }
+            onClick={props.onBenefitAmountButtonClick}
           />
         </div>
       ) : null}
@@ -145,6 +147,11 @@ ContentPage.propTypes = {
    * Text for benefit amount button
    */
   EstimateBenefitButtonText: PropTypes.string.isRequired,
+
+  /**
+   * Benefit amount button handler
+   */
+  onBenefitAmountButtonClick: PropTypes.func,
 
   /**
    * Go back button text

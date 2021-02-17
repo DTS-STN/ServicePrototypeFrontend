@@ -11,6 +11,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { benefitSelectorFactory } from "../redux/selectors/benefits";
 import { NETWORK_FAILED_REASONS } from "../redux/actions";
 import { getBenefit, applyForBenefit } from "../redux/dispatchers";
+import { entitlementSelector } from "../redux/selectors";
+import { getEntitlementAmount } from "../redux/dispatchers";
 
 //component imports
 import { ContentPage } from "../components/organisms/ContentPage";
@@ -26,9 +28,19 @@ import { userDataSelector } from "../redux/selectors";
 export function BenefitPage() {
   const [triedFetch, setTriedFetch] = useState(false);
   const { keycloak } = useKeycloak();
+  const [triedFetchedEntitlement, setTriedFetchedEntitlement] = useState(false);
+  const [entitlementData, setEntitlementData] = useState("");
 
   // react router
   const { id } = useParams();
+
+  // entitlement
+  const isFetchingEntitlement = useSelector(
+    (state) => state.entitlement.isFetching
+  );
+  const fetchEntitlementFailed = useSelector(
+    (state) => state.entitlement.fetchFailed
+  );
 
   // redux
   const isFetchingBenefits = useSelector(
@@ -54,6 +66,8 @@ export function BenefitPage() {
   const benefitSelector = benefitSelectorFactory(id);
   const benefitData = useSelector(benefitSelector);
 
+  const entitlement = useSelector(entitlementSelector);
+
   const { t } = useTranslation();
 
   //redux dispatch
@@ -65,6 +79,41 @@ export function BenefitPage() {
       setTriedFetch(true);
     }
   }, [triedFetch, isFetchingBenefits, fetchBenefitsFailed, id, dispatch]);
+
+  useEffect(() => {
+    if (
+      !triedFetchedEntitlement &&
+      !isFetchingEntitlement &&
+      !fetchEntitlementFailed
+    ) {
+      dispatch(
+        getEntitlementAmount(
+          "ON",
+          "HFPIR2",
+          keycloak.authenticated ? keycloak.token : "",
+          keycloak.authenticated ? keycloak.idTokenParsed.guid : ""
+        )
+      );
+      setTriedFetchedEntitlement(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    triedFetchedEntitlement,
+    isFetchingEntitlement,
+    fetchEntitlementFailed,
+    dispatch,
+  ]);
+
+  const showEntitlementClickHandler = () => {
+    // This is for testing ONLY
+    if (keycloak.authenticated) {
+      let entitlementData = `  Entitlement. BaseRate = ${entitlement["baseRate"]}, 
+        Prov. Rate = , ${entitlement["provincialRate"]},
+        Grant = , ${entitlement["entitlementGrant"]}`;
+      setEntitlementData(entitlementData);
+      console.log(entitlementData);
+    }
+  };
 
   const applyButtonClickHandler = () => {
     // if not logged in log in first
@@ -117,6 +166,7 @@ export function BenefitPage() {
           : null
       }
       EstimateBenefitButtonText={t("estimateButton")}
+      onBenefitAmountButtonClick={showEntitlementClickHandler}
       GoBackButtonText={t("goBackButton")}
       ApplyButtonText={
         benefitData.benefitTag.includes("Internal")
