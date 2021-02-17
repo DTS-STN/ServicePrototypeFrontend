@@ -97,7 +97,7 @@ export function ContentPage(props) {
         {props.afterContent}
       </main>
 
-      {entitlementVisible ? (
+      {entitlementVisible && props.TableContent != null ? (
         <TableComponent
           title="Estimated dollar amount per week"
           title1="Less than $30,000"
