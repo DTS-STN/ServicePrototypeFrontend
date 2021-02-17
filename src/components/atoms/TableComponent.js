@@ -11,8 +11,8 @@ export function TableComponent(props) {
         <p className="pt-2">{props.children1}</p>
       </div>
       <div className="border-t py-2 bg-blue-100 bg-opacity-75">
-        <h1>{props.title}</h1>
-        {props.children2}
+        <h3 className="font-semibold">{props.title}</h3>
+        <p>{props.children2}</p>
       </div>
       <div className="border-t py-2">{props.children3}</div>
       <div className="border-t py-2 bg-blue-100 bg-opacity-75">
