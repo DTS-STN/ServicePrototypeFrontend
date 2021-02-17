@@ -32,8 +32,6 @@ import { Title } from "../components/atoms/Title";
 import { Questions } from "../components/molecules/Questions";
 import { ActionButton } from "../components/atoms/ActionButton";
 
-import { TableComponents } from "../components/atoms/TableComponent";
-
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
 import { requestEligibility } from "../redux/dispatchers/benefits/requestEligibility";
