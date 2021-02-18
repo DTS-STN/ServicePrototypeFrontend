@@ -98,14 +98,15 @@ export function ContentPage(props) {
           value3={props.TableContent[2].entitlementGrant}
         />
       ) : props.DisplayEntitlementButtonText ? (
-        <div className="mt-6 justify-between" data-cy={props.dataCy}>
-          <span className="font-bold">
-            Get an estimate of your benefit amount
-          </span>
+        <div
+          className="mt-6 container inline-flex justify-between border-b border-t items-center"
+          data-cy={props.dataCy}
+        >
+          <span className="font-bold">{props.estimateText}</span>
           <ActionButton
             text={props.DisplayEntitlementButtonText}
             className={
-              "bg-bg-gray-dk text-white hover:bg-black mb-4 py-2 px-16 float-right"
+              "bg-bg-gray-dk text-white hover:bg-black mt-6 mb-4 py-2 px-16 float-right"
             }
             onClick={props.displayEntitlementTable}
           />
@@ -146,6 +147,11 @@ ContentPage.propTypes = {
    * Bool if entitlement is visible
    */
   entitlementVisible: PropTypes.bool,
+
+  /**
+   * Entitlement buttom handler
+   */
+  estimateText: PropTypes.string,
 
   /**
    * Entitlement buttom handler

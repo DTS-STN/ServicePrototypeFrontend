@@ -208,6 +208,7 @@ export function BenefitPage() {
       TableContent={entitlement}
       entitlementVisible={entitlementVisible}
       displayEntitlementTable={displayEntitlementTable}
+      estimateText={t("estimateText")}
       GoBackButtonText={t("goBackButton")}
       goBackHomeClickHandler={goBackHomeClickHandler}
       ApplyButtonText={

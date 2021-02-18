@@ -15,6 +15,7 @@ export const en = {
 
   //Benefit Detail Page
   displayEntitlementButton: "Estimate my benefit",
+  estimateText: "Get an estimate of your benefit amount",
   estimatedDollar: "Estimated dollar amount per week",
   lessThan30000: "Less than $30,000",
   between30000and60000: "Between  $30,000 & $60,000",
