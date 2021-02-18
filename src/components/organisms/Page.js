@@ -9,6 +9,8 @@ import { useKeycloak } from "@react-keycloak/web";
 import { changeLanguageCreator, LANGUAGES } from "../../redux/actions";
 import { getUserData } from "../../redux/dispatchers/user/requestUserData";
 import { getClientDash } from "../../redux/dispatchers/benefits";
+import { loadAnswers, saveAnswers, clearAnswers } from "../../localStorage";
+import { setAllAnswersActionCreator } from "../../redux/actions/answers";
 
 //react router
 import { useHistory } from "react-router-dom";
@@ -23,6 +25,7 @@ export function Page(props) {
   const { t } = useTranslation();
   const userProfileData = useSelector(userDataSelector);
   const history = useHistory();
+  const answers = useSelector((state) => state.answers);
 
   let languageButtonHandler = () => {
     if (language === "en") {
@@ -33,10 +36,20 @@ export function Page(props) {
   };
 
   useEffect(() => {
-    if (keycloak.authenticated && Object.keys(userProfileData).length === 0) {
-      dispatch(getUserData(keycloak));
+    if (
+      keycloak.authenticated &&
+      Object.keys(userProfileData).length === 0 &&
+      Object.keys(answers).length === 0
+    ) {
+      let localAnswers = loadAnswers();
+      if (localAnswers && Object.keys(localAnswers).length > 0) {
+        dispatch(setAllAnswersActionCreator(localAnswers));
+        clearAnswers();
+      } else {
+        dispatch(getUserData(keycloak));
+      }
     }
-  }, [keycloak, dispatch, userProfileData]);
+  }, [keycloak, dispatch, userProfileData, answers]);
 
   let userNameClickHandler = () => {
     dispatch(
@@ -58,6 +71,7 @@ export function Page(props) {
         logoutText={t("logout")}
         isAuthenticated={keycloak.authenticated}
         onLogin={() => {
+          saveAnswers(answers);
           keycloak.login();
         }}
         userName={`${
