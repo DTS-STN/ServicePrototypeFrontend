@@ -15,7 +15,7 @@ export function JourneyCard() {
       </div>
       <div className="p-4 mt-4 flex flex-col">
         <p className="text-2xl">
-          You are in the prepare phase of the pregnancy journey
+          You are in the Prepare phase of the pregnancy journey
         </p>
         <p className="py-4">
           Congratulations on your upcoming baby! View the Journey page to get

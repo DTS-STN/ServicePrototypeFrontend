@@ -4,7 +4,7 @@ import { ActionButton } from "../atoms/ActionButton";
 
 export function ProfileCard({ isAuthenticated, userName, loginButtonClick }) {
   return (
-    <div className="flex flex-col">
+    <div className="mt-8 flex flex-col">
       {isAuthenticated ? (
         <div>
           <h1 className="text-3xl text-center"> Welcome Back, {userName} </h1>

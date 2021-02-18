@@ -6,19 +6,21 @@ import { ActionButton } from "../atoms/ActionButton";
  * Resource Article Card
  */
 export function ResourceCardArticle(props) {
-  const { articleImage, title, content, buttonText } = props;
+  const { articleImage, title, content } = props;
 
   return (
-    <div classname="flex flex-col">
+    <div className="mt-4 mr-8 rounded-lg shadow flex flex-col">
       <div>
         <img alt="" src={articleImage}></img>
       </div>
-      <div className="flex flex-col">
-        <p>{title}</p>
+      <div className="flex flex-col mt-4 px-4">
+        <p className="text-lg font-bold">{title}</p>
         <p>{content}</p>
-      </div>
-      <div>
-        <ActionButton invert text={buttonText} />
+        <ActionButton
+          className="w-1/2 my-4 bg-bg-gray-dk text-white hover:bg-black"
+          id="ReadMore"
+          text="Read More"
+        />
       </div>
     </div>
   );
@@ -36,8 +38,4 @@ ResourceCardArticle.propTypes = {
    * Content of Article
    */
   content: PropTypes.string.isRequired,
-  /**
-   * Button Text
-   */
-  buttonText: PropTypes.string.isRequired,
 };

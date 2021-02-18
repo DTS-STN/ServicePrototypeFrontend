@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { ResourceCardArticle } from "../molecules/ResourceCardArticle";
 import imagePlaceHolder from "../../assets/images/imagePlaceholder.svg";
 
@@ -7,51 +6,27 @@ import imagePlaceHolder from "../../assets/images/imagePlaceholder.svg";
  * Resource Grid
  */
 
-export function ResourceGrid(props) {
-  const { header, resources } = props;
-
+export function ResourceGrid() {
+  const resourceList = [
+    { title: "first title", content: "my content" },
+    { title: " second title", content: "my content 2" },
+  ];
+  const resourceArticles = [];
+  for (let i = 0; i < resourceList.length; i++) {
+    const item = resourceList[i];
+    resourceArticles.push(
+      <ResourceCardArticle
+        articleImage={imagePlaceHolder}
+        title={item.title}
+        content={item.content}
+        key={item.title}
+      />
+    );
+  }
   return (
-    <div className="flex flex-col">
-      <h3>{header}</h3>
-      <div className="flex flex-row">
-        {resources.map((resource) => (
-          <ResourceCardArticle
-            image={imagePlaceHolder}
-            title={resource.title}
-            content={resource.content}
-            buttonText={resource.buttonText}
-          />
-        ))}
-      </div>
+    <div className="w-full mt-8 flex flex-col">
+      <p className="text-xl font-bold">Recommended Resources</p>
+      <div className="flex flex-row">{resourceArticles}</div>
     </div>
   );
 }
-ResourceGrid.propTypes = {
-  /**
-   * Header of Component
-   */
-  header: PropTypes.string.isRequired,
-  /**
-   * Array of Resources Available
-   */
-  resources: PropTypes.arrayOf(
-    PropTypes.shape({
-      /**
-       * Image associated with Article
-       */
-      image: PropTypes.string.isRequired,
-      /**
-       * Title of Article
-       */
-      title: PropTypes.string.isRequired,
-      /**
-       * Content of Article
-       */
-      content: PropTypes.string.isRequired,
-      /**
-       * Button Text
-       */
-      buttonText: PropTypes.string.isRequired,
-    })
-  ),
-};
