@@ -82,7 +82,7 @@ describe("applyForBenefit", () => {
             dateOfBirth: "06/12/1976",
             gender: "SX2",
             emailAddress: "Elizabeth.Andrew@fakemail.ca",
-            phoneNumber: 4259012345,
+            phoneNumber: "4259012345",
             address: {
               lineItem1: "218 BIGGS ST",
               lineItem2: "",
@@ -117,7 +117,7 @@ describe("applyForBenefit", () => {
         {
           guid: "31360512-2d79-4baa-8696-b612de6cbff5",
           personAddressLineItem2: "NULL",
-          personPhoneNumber: 4259012345,
+          personPhoneNumber: "4259012345",
           personAddressLineItem1: "218 BIGGS ST",
           personEmailAddress: "Elizabeth.Andrew@fakemail.ca",
           personAddressCity: "Fredericton",
@@ -149,7 +149,7 @@ describe("applyForBenefit", () => {
             dateOfBirth: "06/12/1976",
             gender: "SX2",
             emailAddress: "Elizabeth.Andrew@fakemail.ca",
-            phoneNumber: 4259012345,
+            phoneNumber: "4259012345",
             address: {
               lineItem1: "218 BIGGS ST",
               lineItem2: "",
@@ -196,7 +196,7 @@ describe("applyForBenefit", () => {
         {
           guid: "31360512-2d79-4baa-8696-b612de6cbff5",
           personAddressLineItem2: "NULL",
-          personPhoneNumber: 4259012345,
+          personPhoneNumber: "4259012345",
           personAddressLineItem1: "218 BIGGS ST",
           personEmailAddress: "Elizabeth.Andrew@fakemail.ca",
           personAddressCity: "Fredericton",
@@ -228,7 +228,7 @@ describe("applyForBenefit", () => {
             dateOfBirth: "06/12/1976",
             gender: "SX2",
             emailAddress: "Elizabeth.Andrew@fakemail.ca",
-            phoneNumber: 4259012345,
+            phoneNumber: "4259012345",
             address: {
               lineItem1: "218 BIGGS ST",
               lineItem2: "",

@@ -29,13 +29,16 @@ async function postApplyForBenefit(
           incomeDetails: answers["incomeDetails"],
           outOfWork: answers["outOfWork"],
           person: {
-            sin: userProfile.personSin.toString(),
+            //NOTE: do not use toString, if the value is undefined this will produce an error
+            sin: `${userProfile.personSin ? userProfile.personSin : ""}`,
             firstName: userProfile.personFirstName,
             lastName: userProfile.personLastName,
             dateOfBirth: userProfile.personDateOfBirth,
             gender: userProfile.personGender,
             emailAddress: userProfile.personEmailAddress,
-            phoneNumber: userProfile.personPhoneNumber,
+            phoneNumber: `${
+              userProfile.personPhoneNumber ? userProfile.personPhoneNumber : ""
+            }`,
             address: {
               lineItem1: userProfile.personAddressLineItem1,
               lineItem2:
@@ -48,9 +51,21 @@ async function postApplyForBenefit(
             },
           },
           bankingInfo: {
-            directDepositTransitNumber: userProfile.directDepositTransitNumber.toString(),
-            directDepositFiNumber: userProfile.directDepositFiNumber.toString(),
-            directDepositAccountNumber: userProfile.directDepositAccountNumber.toString(),
+            directDepositTransitNumber: `${
+              userProfile.directDepositTransitNumber
+                ? userProfile.directDepositTransitNumber
+                : ""
+            }`,
+            directDepositFiNumber: `${
+              userProfile.directDepositFiNumber
+                ? userProfile.directDepositFiNumber
+                : ""
+            }`,
+            directDepositAccountNumber: `${
+              userProfile.directDepositAccountNumber
+                ? userProfile.directDepositAccountNumber
+                : ""
+            }`,
           },
         }
       )
@@ -72,13 +87,15 @@ async function postApplyForBenefit(
           incomeDetails: answers["incomeDetails"],
           outOfWork: answers["outOfWork"],
           person: {
-            sin: userProfile.personSin.toString(),
+            sin: `${userProfile.personSin ? userProfile.personSin : ""}`,
             firstName: userProfile.personFirstName,
             lastName: userProfile.personLastName,
             dateOfBirth: userProfile.personDateOfBirth,
             gender: userProfile.personGender,
             emailAddress: userProfile.personEmailAddress,
-            phoneNumber: userProfile.personPhoneNumber,
+            phoneNumber: `${
+              userProfile.personPhoneNumber ? userProfile.personPhoneNumber : ""
+            }`,
             address: {
               lineItem1: userProfile.personAddressLineItem1,
               lineItem2:
@@ -91,9 +108,21 @@ async function postApplyForBenefit(
             },
           },
           bankingInfo: {
-            directDepositTransitNumber: userProfile.directDepositTransitNumber.toString(),
-            directDepositFiNumber: userProfile.directDepositFiNumber.toString(),
-            directDepositAccountNumber: userProfile.directDepositAccountNumber.toString(),
+            directDepositTransitNumber: `${
+              userProfile.directDepositTransitNumber
+                ? userProfile.directDepositTransitNumber
+                : ""
+            }`,
+            directDepositFiNumber: `${
+              userProfile.directDepositFiNumber
+                ? userProfile.directDepositFiNumber
+                : ""
+            }`,
+            directDepositAccountNumber: `${
+              userProfile.directDepositAccountNumber
+                ? userProfile.directDepositAccountNumber
+                : ""
+            }`,
           },
         }),
       }
@@ -113,7 +142,6 @@ async function postApplyForBenefit(
   if (response.status === 200) {
     window.location = response.url;
   } else {
-    console.log(response);
     let textData;
     let data;
     try {

@@ -70,6 +70,8 @@ export function BenefitPage() {
     // if not logged in log in first
     if (!keycloak.authenticated) {
       keycloak.login();
+    } else if (benefitData.benefitTag.includes("External")) {
+      window.open("https://".concat(benefitData.redirectUrl), "_blank");
     } else {
       dispatch(
         applyForBenefit(
@@ -109,7 +111,12 @@ export function BenefitPage() {
           ? benefitData.benefitContent
           : "Looks like there is no content yet"
       }
-      ApplyButtonText={t("ApplyButtonText")}
+      GoBackButtonText={t("goBackButton")}
+      ApplyButtonText={
+        benefitData.benefitTag.includes("Internal")
+          ? t("ApplyButtonText")
+          : t("LearnMore")
+      }
       dataCy={"apply-button"}
       onApplyButtonClick={applyButtonClickHandler}
     />

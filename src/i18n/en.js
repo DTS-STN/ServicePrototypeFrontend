@@ -5,7 +5,8 @@ export const en = {
   homePageTitle: "Welcome to Service Canada",
   matchMeToBenefits: "Match me to Benefits",
   allEligibleBenefitsHeader: "All Benefits",
-  eligibleBenefitsHeader: "Benefits that apply to you",
+  eligibleBenefitsHeader: "Service Canada benefits that apply to you",
+  otherProviderBenefitsHeader: "Matched benefits from other providers",
   totalBenefits: "Total benefits",
   benefitsMoreInformation: "More Information",
   benefitsNextPage: "next benefits page",
@@ -71,6 +72,11 @@ export const en = {
   noCasesFound: "No Cases Found",
   yourCases: "Your Cases",
   seeCasesButton: "See My Cases",
+
+  //Back button
+  goBackButton: "Go back",
+
+  LearnMore: "Learn more",
 
   login: "Login",
   logout: "Logout",

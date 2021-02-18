@@ -18,12 +18,15 @@ export const benefitTransformer = (data, lang) => {
     benefitDescription: data[`description`],
     benefitContent: data[`long_description`],
     benefitType: data["benefit_type"],
+    redirectUrl: data["redirect_url"],
     checkBoxAriaLabelBy:
       lang === "fr"
         ? `sélectionner ${data["title"]}`
         : `select ${data["title"]}`,
     isSelected: data.isSelected,
     isEligible: data.isEligible,
+    serviceType: data["service_type"],
+    benefitTag: data["service_type"],
   };
 };
 
@@ -72,14 +75,43 @@ export const eligibleBenefitsSelector = createSelector(
   benefitsEligibilitySelector,
   (lang, benefitsData, benefitsDataFr, benefitsEligibility) => {
     if (!benefitsEligibility) return [];
+    let internalBenefits = [];
     if (lang === "fr") {
-      return benefitsEligibility.map((value) =>
-        benefitTransformer(benefitsDataFr[value])
-      );
+      benefitsEligibility.forEach(function (item) {
+        if (benefitsData[item]["service_type"] === "Internal")
+          internalBenefits.push(benefitTransformer(benefitsDataFr[item]));
+      });
+      return internalBenefits;
     } else {
-      return benefitsEligibility.map((value) =>
-        benefitTransformer(benefitsData[value])
-      );
+      benefitsEligibility.forEach(function (item) {
+        if (benefitsData[item]["service_type"] === "Internal")
+          internalBenefits.push(benefitTransformer(benefitsData[item]));
+      });
+      return internalBenefits;
+    }
+  }
+);
+
+export const externalBenefitsDataSelector = createSelector(
+  languageSelector,
+  benefitsMapSelector,
+  benefitsMapSelectorFr,
+  benefitsEligibilitySelector,
+  (lang, benefitsData, benefitsDataFr, eligibleBenefits) => {
+    if (!eligibleBenefits) return [];
+    let externalBenefits = [];
+    if (lang === "fr") {
+      eligibleBenefits.forEach(function (item) {
+        if (benefitsData[item]["service_type"] === "External")
+          externalBenefits.push(benefitTransformer(benefitsDataFr[item]));
+      });
+      return externalBenefits;
+    } else {
+      eligibleBenefits.forEach(function (item) {
+        if (benefitsData[item]["service_type"] === "External")
+          externalBenefits.push(benefitTransformer(benefitsData[item]));
+      });
+      return externalBenefits;
     }
   }
 );

@@ -5,6 +5,7 @@ export {
   benefitsDataSelector,
   benefitSelectorFactory,
   eligibleBenefitsSelector,
+  externalBenefitsDataSelector,
 } from "./benefits";
 export {
   lifeJourneysDataSelector,
@@ -13,3 +14,5 @@ export {
 } from "./lifejourneys";
 
 export { questionsSelector } from "./questions";
+
+export { entitlementSelector } from "./entitlement";

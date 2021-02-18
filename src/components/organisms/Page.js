@@ -10,6 +10,9 @@ import { changeLanguageCreator, LANGUAGES } from "../../redux/actions";
 import { getUserData } from "../../redux/dispatchers/user/requestUserData";
 import { getClientDash } from "../../redux/dispatchers/benefits";
 
+//react router
+import { useHistory } from "react-router-dom";
+
 /**
  * page component complete with canada.ca header and footer
  */
@@ -19,6 +22,7 @@ export function Page(props) {
   const { keycloak } = useKeycloak();
   const { t } = useTranslation();
   const userProfileData = useSelector(userDataSelector);
+  const history = useHistory();
 
   let languageButtonHandler = () => {
     if (language === "en") {
@@ -59,7 +63,10 @@ export function Page(props) {
         userName={`${
           keycloak.authenticated ? keycloak.idTokenParsed.name : ""
         }`}
-        onLogout={() => keycloak.logout()}
+        onLogout={() => {
+          history.push(`/`);
+          keycloak.logout();
+        }}
         onUsernameClick={userNameClickHandler}
       />
 

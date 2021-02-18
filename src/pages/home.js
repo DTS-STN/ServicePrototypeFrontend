@@ -8,10 +8,13 @@ import {
   benefitsDataSelector,
   questionsSelector,
   eligibleBenefitsSelector,
+  externalBenefitsDataSelector,
+  entitlementSelector,
 } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
 import { getQuestions } from "../redux/dispatchers/questions";
+import { getEntitlementAmount } from "../redux/dispatchers";
 import {
   deselectBenefitActionCreator,
   selectBenefitActionCreator,
@@ -44,9 +47,11 @@ export function Home() {
   const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [previouBtnDisabled, setPreviousBtnDisabled] = useState(true);
-  const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
+  const [nextBtnDisabled, setNextBtnDisabled] = useState(false);
   const [nextButtonText, setNextButtonText] = useState("Next Question");
   const [triedFetchElegibility, setTriedFetchElegibility] = useState(false);
+  const [triedFetchedEntitlement, setTriedFetchedEntitlement] = useState(false);
+  const [entitlementData, setEntitlementData] = useState("");
 
   const { keycloak } = useKeycloak();
 
@@ -75,6 +80,7 @@ export function Home() {
   );
   const benefitsData = useSelector(benefitsDataSelector);
   const eligibleBenefitsData = useSelector(eligibleBenefitsSelector);
+  const externalBenefitsData = useSelector(externalBenefitsDataSelector);
 
   const benefitKeyToId = useSelector(
     (state) => state.benefits.benefitsData.benefitsKeyToIdMap
@@ -95,6 +101,15 @@ export function Home() {
 
   const questions = useSelector(questionsSelector);
   const answers = useSelector((state) => state.answers);
+
+  // entitlement
+  const isFetchingEntitlement = useSelector(
+    (state) => state.entitlement.isFetching
+  );
+  const fetchEntitlementFailed = useSelector(
+    (state) => state.entitlement.fetchFailed
+  );
+  const entitlement = useSelector(entitlementSelector);
 
   //redux dispatch
   const dispatch = useDispatch();
@@ -141,6 +156,41 @@ export function Home() {
     dispatch,
   ]);
 
+  useEffect(() => {
+    if (
+      !triedFetchedEntitlement &&
+      !isFetchingEntitlement &&
+      !fetchEntitlementFailed
+    ) {
+      dispatch(
+        getEntitlementAmount(
+          "ON",
+          "HFPIR2",
+          keycloak.authenticated ? keycloak.token : "",
+          keycloak.authenticated ? keycloak.idTokenParsed.guid : ""
+        )
+      );
+      setTriedFetchedEntitlement(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    triedFetchedEntitlement,
+    isFetchingEntitlement,
+    fetchEntitlementFailed,
+    dispatch,
+  ]);
+
+  const showEntitlementClickHandler = () => {
+    // This is for testing ONLY
+    if (keycloak.authenticated) {
+      let entitlementData = `  Entitlement. BaseRate = ${entitlement["baseRate"]}, 
+        Prov. Rate = , ${entitlement["provincialRate"]},
+        Grant = , ${entitlement["entitlementGrant"]}`;
+      setEntitlementData(entitlementData);
+      console.log(entitlementData);
+    }
+  };
+
   // handler for when benefit is selected
   const onBenefitSelect = (benefitId, selected) => {
     selected
@@ -186,20 +236,27 @@ export function Home() {
   };
 
   const nextCurrentQuestion = () => {
-    if (currentQuestionIndex === questions.length - 2) {
-      setNextButtonText("Submit");
-    }
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
+    const currentQuestion = questions[currentQuestionIndex];
+    const answerForQuestion = answers[currentQuestion.questionId];
+    if (!answerForQuestion) {
       setNextBtnDisabled(true);
-    }
+      alert("Answer required for question");
+    } else {
+      if (currentQuestionIndex === questions.length - 2) {
+        setNextButtonText("Submit");
+      }
+      if (currentQuestionIndex < questions.length - 1) {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+      } else {
+        setNextBtnDisabled(true);
+      }
 
-    if (previouBtnDisabled) {
-      setPreviousBtnDisabled(false);
-    } else if (currentQuestionIndex === questions.length - 1) {
-      dispatch(requestEligibility(answers));
-      setTriedFetchElegibility(true);
+      if (previouBtnDisabled) {
+        setPreviousBtnDisabled(false);
+      } else if (currentQuestionIndex === questions.length - 1) {
+        dispatch(requestEligibility(answers));
+        setTriedFetchElegibility(true);
+      }
     }
   };
 
@@ -280,12 +337,17 @@ export function Home() {
             />
           )}
         </section>
+
         <section
           className="border-t border-b pt-2 pb-2 mt-8"
           data-cy="eligibleBenefitsHeader"
         >
           <div className="flex m-auto items-start relative">
-            <h2 className="text-3xl mb-2">{t("allEligibleBenefitsHeader")}</h2>
+            <h2 className="text-3xl mb-2">
+              {triedFetchElegibility
+                ? t("eligibleBenefitsHeader")
+                : t("allEligibleBenefitsHeader")}
+            </h2>
             <section className="flex mb-12 md:absolute md:right-0">
               <BenefitsCounter
                 dataCy={"home-page-benefit-counter"}
@@ -333,7 +395,62 @@ export function Home() {
             />
           )}
         </section>
+
+        {triedFetchElegibility ? (
+          <section
+            className="border-t border-b pt-2 pb-2 mt-8"
+            data-cy="eligibleBenefitsHeader"
+          >
+            <div className="flex m-auto items-start relative">
+              <h2 className="text-3xl mb-2">
+                {t("otherProviderBenefitsHeader")}
+              </h2>
+              <section className="flex mb-12 md:absolute md:right-0">
+                <BenefitsCounter
+                  dataCy={"home-page-benefit-counter"}
+                  className="text-center m-auto mr-0 px-6"
+                  counter={externalBenefitsData.length}
+                  text={t("totalBenefits")}
+                />
+              </section>
+            </div>
+            {externalBenefitsData.length === 0 ? (
+              "No benefits!"
+            ) : (
+              <BenefitGrid
+                dataCy={"home-page-benefit-grid"}
+                benefitMoreInfoButtonText={t("benefitsMoreInformation")}
+                nextPageButtonAriaLabel={t("benefitsNextPage")}
+                previousPageButtonAriaLabel={t("benefitsPreviousPage")}
+                numberOfPages={
+                  benefitsCount === 0
+                    ? 1
+                    : Math.ceil(externalBenefitsData.length / 6)
+                }
+                numberOfRows={2}
+                onBenefitSelect={onBenefitSelect}
+                onMoreInfoClick={onBenefitMoreInfo}
+                benefits={externalBenefitsData}
+              />
+            )}
+          </section>
+        ) : null}
         {showCases()}
+
+        <section>
+          <div className="bg-blue-800 my-12 p-8 text-white">
+            <h1 className="py-4">
+              This is for testing it will be replaced by a component
+            </h1>
+            <ActionButton
+              id="showEntitlement"
+              text={"Testing button for Entitlement Amount"}
+              className={"bg-bg-gray-dk text-white hover:bg-black"}
+              onClick={showEntitlementClickHandler}
+            />
+            <h3 className="py-4">{entitlementData}</h3>
+          </div>
+        </section>
       </main>
     </Page>
   );

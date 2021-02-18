@@ -5,6 +5,7 @@ export const fr = {
   matchMeToBenefits: "FR: Match me to Benefits",
   allEligibleBenefitsHeader: "FR: All Benefits",
   eligibleBenefitsHeader: "Avantages qui s'appliquent à vous",
+  otherProviderBenefitsHeader: "Matched benefits from other providers",
   totalBenefits: "Avantages totaux",
   benefitsMoreInformation: "Plus d'information",
   benefitsNextPage: "page suivante des avantages",
@@ -70,6 +71,11 @@ export const fr = {
   noCasesFound: "FR: No Cases Found",
   yourCases: "FR Your Cases",
   seeCasesButton: "FR See My Cases",
+
+  //Back button
+  goBackButton: "Retourner",
+
+  LearnMore: "En savoir plus",
 
   login: "S'identifier",
   logout: "Se déconnecter",
