@@ -15,5 +15,10 @@ export const answers = function (state = {}, action) {
       return data;
     default:
       return state;
+    case ACTION_TYPES.SET_ALL_ANSWERS:
+      return {
+        ...state,
+        ...action.answers,
+      };
   }
 };

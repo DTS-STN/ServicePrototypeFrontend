@@ -13,6 +13,7 @@ export const ACTION_TYPES = {
 
   SET_ANSWER: "SET_ANSWER",
   REMOVE_ANSWER: "REMOVE_ANSWER",
+  SET_ALL_ANSWERS: "SET_ALL_ANSWERS",
 };
 
 // network action constants
