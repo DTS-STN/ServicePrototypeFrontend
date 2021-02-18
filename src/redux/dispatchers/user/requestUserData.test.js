@@ -92,8 +92,6 @@ describe("requestUserData", () => {
           personFirstName: "Elizabeth",
         }
       ),
-      setAnswerActionCreator("province", "NB"),
-      setAnswerActionCreator("gender", "female"),
     ];
 
     expect(store.getActions()).toEqual(expectedActions);
