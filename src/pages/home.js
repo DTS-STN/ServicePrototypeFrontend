@@ -188,7 +188,6 @@ export function Home() {
         Prov. Rate = , ${entitlement["provincialRate"]},
         Grant = , ${entitlement["entitlementGrant"]}`;
       setEntitlementData(entitlementData);
-      console.log(entitlementData);
     }
   };
 
