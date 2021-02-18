@@ -10,6 +10,9 @@ import { TableComponent } from "../atoms/TableComponent";
 //react router
 import { useHistory } from "react-router-dom";
 
+// i18n imports
+import { useTranslation } from "react-i18next";
+
 function getCoreProps(props) {
   const source = props["data-sourcepos"];
   /* istanbul ignore next - nodes from plugins w/o position */
@@ -73,6 +76,8 @@ export function ContentPage(props) {
   //Browser history
   const history = useHistory();
 
+  const { t } = useTranslation();
+
   const [entitlementVisible, setEntitlmentVisible] = useState(false);
 
   //Handler for going to home
@@ -97,14 +102,14 @@ export function ContentPage(props) {
         {props.afterContent}
       </main>
 
-      {entitlementVisible && props.TableContent != null ? (
+      {entitlementVisible && props.TableContent.length != 0 ? (
         <TableComponent
-          title="Estimated dollar amount per week"
-          title1="Less than $30,000"
+          title={t("estimatedDollar")}
+          title1={t("lessThan30000")}
           value1={props.TableContent[0].entitlementGrant}
-          title2="Between  $30,000 & $60,000"
+          title2={t("between30000and60000")}
           value2={props.TableContent[1].entitlementGrant}
-          title3="More than $60,000"
+          title3={t("moreThan60000")}
           value3={props.TableContent[2].entitlementGrant}
         />
       ) : (
