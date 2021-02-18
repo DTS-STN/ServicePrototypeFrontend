@@ -7,8 +7,6 @@ import PropTypes from "prop-types";
 import gfm from "remark-gfm";
 import { ActionButton } from "../atoms/ActionButton";
 import { TableComponent } from "../atoms/TableComponent";
-//react router
-import { useHistory } from "react-router-dom";
 
 // i18n imports
 import { useTranslation } from "react-i18next";
@@ -73,17 +71,10 @@ const renders = {
  * Component to render content pages in which content comes of the form of markdown
  */
 export function ContentPage(props) {
-  //Browser history
-  const history = useHistory();
-
   const { t } = useTranslation();
 
   const [entitlementVisible, setEntitlmentVisible] = useState(false);
 
-  //Handler for going to home
-  const goBackHomeClickHandler = () => {
-    history.push(`/`);
-  };
   const displayEntitlementTable = () => {
     setEntitlmentVisible(true);
   };
@@ -135,7 +126,7 @@ export function ContentPage(props) {
               className={
                 "bg-bg-white-dk text-black hover:bg-bg-gray-dk hover:text-white mb-4 py-2 px-16 border-solid border-2 border-black"
               }
-              onClick={goBackHomeClickHandler}
+              onClick={props.goBackHomeClickHandler}
             />
           </div>
         ) : null}
@@ -161,6 +152,11 @@ ContentPage.propTypes = {
    * Go back button text
    */
   GoBackButtonText: PropTypes.string.isRequired,
+
+  /**
+   * Go back button handler
+   */
+  goBackHomeClickHandler: PropTypes.func,
 
   /**
    * Apply button text

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 // react router imports
 import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 // i18n imports
 import { useTranslation } from "react-i18next";
@@ -36,6 +37,7 @@ export function BenefitPage() {
 
   // react router
   const { id } = useParams();
+  const history = useHistory();
 
   // redux
   const isFetchingBenefits = useSelector(
@@ -142,6 +144,11 @@ export function BenefitPage() {
   //   }
   // };
 
+  //Handler for going to home
+  const goBackHomeClickHandler = () => {
+    history.push(`/`);
+  };
+
   const applyButtonClickHandler = () => {
     // if not logged in log in first
     if (!keycloak.authenticated) {
@@ -194,6 +201,7 @@ export function BenefitPage() {
       }
       TableContent={entitlement}
       GoBackButtonText={t("goBackButton")}
+      goBackHomeClickHandler={goBackHomeClickHandler}
       ApplyButtonText={
         benefitData.benefitTag.includes("Internal")
           ? t("ApplyButtonText")
