@@ -70,7 +70,8 @@ export function Page(props) {
 
   useEffect(() => {
     if (
-      Object.keys(userProfileData).length !== 0 &&
+      triedFetchUserData &&
+      !fetchUserDataFailed &&
       triedAnswersFromLocalStorageFailed
     ) {
       dispatch(
@@ -83,7 +84,13 @@ export function Page(props) {
         ? dispatch(setAnswerActionCreator("gender", "male"))
         : dispatch(setAnswerActionCreator("gender", "female"));
     }
-  }, [userProfileData, dispatch, triedAnswersFromLocalStorageFailed]);
+  }, [
+    userProfileData,
+    dispatch,
+    triedFetchUserData,
+    fetchUserDataFailed,
+    triedAnswersFromLocalStorageFailed,
+  ]);
 
   useEffect(() => {
     let localAnswers = loadAnswers();
