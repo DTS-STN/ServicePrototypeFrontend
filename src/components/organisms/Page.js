@@ -36,7 +36,11 @@ export function Page(props) {
   };
 
   useEffect(() => {
-    if (keycloak.authenticated && Object.keys(userProfileData).length === 0) {
+    if (
+      keycloak.authenticated &&
+      Object.keys(userProfileData).length === 0 &&
+      Object.keys(answers).length === 0
+    ) {
       let localAnswers = loadAnswers();
       if (localAnswers && Object.keys(localAnswers).length > 0) {
         dispatch(setAllAnswersActionCreator(localAnswers));
@@ -45,7 +49,7 @@ export function Page(props) {
         dispatch(getUserData(keycloak));
       }
     }
-  }, [keycloak, dispatch, userProfileData]);
+  }, [keycloak, dispatch, userProfileData, answers]);
 
   let userNameClickHandler = () => {
     dispatch(
