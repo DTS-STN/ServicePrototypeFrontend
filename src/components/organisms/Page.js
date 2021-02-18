@@ -38,7 +38,7 @@ export function Page(props) {
   useEffect(() => {
     if (keycloak.authenticated && Object.keys(userProfileData).length === 0) {
       let localAnswers = loadAnswers();
-      if (localAnswers && Object.keys(localAnswers).length) {
+      if (localAnswers && Object.keys(localAnswers).length > 0) {
         dispatch(setAllAnswersActionCreator(localAnswers));
         clearAnswers();
       } else {
