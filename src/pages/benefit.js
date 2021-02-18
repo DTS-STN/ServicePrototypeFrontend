@@ -187,7 +187,11 @@ export function BenefitPage() {
           ? benefitData.benefitContent
           : "Looks like there is no content yet"
       }
-      DisplayEntitlementButtonText={t("displayEntitlementButton")}
+      DisplayEntitlementButtonText={
+        benefitData.benefitTag.includes("Internal")
+          ? t("displayEntitlementButton")
+          : null
+      }
       TableContent={entitlement}
       GoBackButtonText={t("goBackButton")}
       ApplyButtonText={

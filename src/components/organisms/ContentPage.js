@@ -112,7 +112,7 @@ export function ContentPage(props) {
           title3={t("moreThan60000")}
           value3={props.TableContent[2].entitlementGrant}
         />
-      ) : (
+      ) : props.DisplayEntitlementButtonText ? (
         <div className="mt-6 justify-between" data-cy={props.dataCy}>
           <span className="font-bold">
             Get an estimate of your benefit amount
@@ -125,7 +125,7 @@ export function ContentPage(props) {
             onClick={displayEntitlementTable}
           />
         </div>
-      )}
+      ) : null}
 
       <div className="container inline-flex justify-between">
         {props.GoBackButtonText ? (
