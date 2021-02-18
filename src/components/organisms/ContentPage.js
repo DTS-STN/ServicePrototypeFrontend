@@ -73,12 +73,6 @@ const renders = {
 export function ContentPage(props) {
   const { t } = useTranslation();
 
-  const [entitlementVisible, setEntitlmentVisible] = useState(false);
-
-  const displayEntitlementTable = () => {
-    setEntitlmentVisible(true);
-  };
-
   return (
     <Page dataCy={"benefit-details"}>
       <main className="font-sans">
@@ -93,7 +87,7 @@ export function ContentPage(props) {
         {props.afterContent}
       </main>
 
-      {entitlementVisible && props.TableContent.length != 0 ? (
+      {props.entitlementVisible && props.TableContent.length != 0 ? (
         <TableComponent
           title={t("estimatedDollar")}
           title1={t("lessThan30000")}
@@ -113,7 +107,7 @@ export function ContentPage(props) {
             className={
               "bg-bg-gray-dk text-white hover:bg-black mb-4 py-2 px-16 float-right"
             }
-            onClick={displayEntitlementTable}
+            onClick={props.displayEntitlementTable}
           />
         </div>
       ) : null}
@@ -148,6 +142,16 @@ export function ContentPage(props) {
 }
 
 ContentPage.propTypes = {
+  /**
+   * Bool if entitlement is visible
+   */
+  entitlementVisible: PropTypes.bool,
+
+  /**
+   * Entitlement buttom handler
+   */
+  displayEntitlementTable: PropTypes.func,
+
   /**
    * Go back button text
    */

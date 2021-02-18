@@ -39,6 +39,8 @@ export function BenefitPage() {
   const { id } = useParams();
   const history = useHistory();
 
+  const [entitlementVisible, setEntitlmentVisible] = useState(false);
+
   // redux
   const isFetchingBenefits = useSelector(
     (state) => state.benefits.benefitsData.isFetching
@@ -149,6 +151,10 @@ export function BenefitPage() {
     history.push(`/`);
   };
 
+  const displayEntitlementTable = () => {
+    setEntitlmentVisible(true);
+  };
+
   const applyButtonClickHandler = () => {
     // if not logged in log in first
     if (!keycloak.authenticated) {
@@ -200,6 +206,8 @@ export function BenefitPage() {
           : null
       }
       TableContent={entitlement}
+      entitlementVisible={entitlementVisible}
+      displayEntitlementTable={displayEntitlementTable}
       GoBackButtonText={t("goBackButton")}
       goBackHomeClickHandler={goBackHomeClickHandler}
       ApplyButtonText={
