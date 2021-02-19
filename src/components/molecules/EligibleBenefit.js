@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { ActionButton } from "../atoms/ActionButton";
 import maternityBenefitImage from "../../assets/images/maternityBenefitImage.svg";
 
-export function EligibleBenefit({ benefitId, benefitName, benefitOnCLick }) {
+export function EligibleBenefit({ benefitId, benefitName, benefitOnClick }) {
   const getMoreInfo = () => {
-    benefitOnCLick(benefitId);
+    benefitOnClick(benefitId);
   };
   return (
     <div className="mt-4 w-1/3 flex flex-row bg-gray-light">
@@ -36,5 +36,5 @@ EligibleBenefit.propTypes = {
   /**
    * Show more information function
    */
-  benefitOnCLick: PropTypes.func.isRequired,
+  benefitOnClick: PropTypes.func.isRequired,
 };
