@@ -35,10 +35,8 @@ export function QuestionCard(props) {
           </div>
           <Select
             id={id}
-            inputId={id}
             options={selectOptions}
             onChange={onChange}
-            value={answer}
             isSearchable={false}
             className="w-2/3 mt-4"
           ></Select>

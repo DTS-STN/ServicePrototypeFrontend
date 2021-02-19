@@ -7,7 +7,10 @@ export function ProfileCard({ isAuthenticated, userName, loginButtonClick }) {
     <div className="mt-8 flex flex-col">
       {isAuthenticated ? (
         <div>
-          <h1 className="text-3xl text-center"> Welcome Back, {userName} </h1>
+          <div className="flex flex-row justify-center">
+            <p className="text-3xl"> Welcome Back,</p>
+            <p className="pl-2 text-red-800 text-3xl font-bold">{userName}</p>
+          </div>
           <p className="text-center">Your Last Login was 02/13/2021</p>
         </div>
       ) : (

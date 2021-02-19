@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 //redux imports
-import { questionsSelector } from "../redux/selectors";
+import {
+  questionsSelector,
+  eligibleBenefitsSelector,
+} from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getQuestions } from "../redux/dispatchers/questions";
+import { getBenefits } from "../redux/dispatchers/benefits";
 
 //keycloack
 import { useKeycloak } from "@react-keycloak/web";
@@ -20,20 +24,35 @@ import { ServiceProvidersCard } from "../components/organisms/ServiceProvidersCa
 import { JourneyCard } from "../components/organisms/JourneyCard";
 import { ApplicationStatusCard } from "../components/organisms/ApplicationStatusCard";
 import { QuestionCard } from "../components/organisms/QuestionCard";
+import { BenefitsCard } from "../components/organisms/BenefitsCard";
 
 export function Dashboard() {
   const { keycloak } = useKeycloak();
 
   const dispatch = useDispatch();
+
   const questions = useSelector(questionsSelector);
   const answers = useSelector((state) => state.answers);
+  const eligibleBenefitsData = useSelector(eligibleBenefitsSelector);
+
+  //redux subcriptions
+  const isFetchingBenefits = useSelector(
+    (state) => state.benefits.benefitsData.isFetching
+  );
+  const fetchBenefitsFailed = useSelector(
+    (state) => state.benefits.benefitsData.fetchFailed
+  );
   const isFetchingQuestions = useSelector(
     (state) => state.questions.isFetching
   );
   const fetchQuestionsFailed = useSelector(
     (state) => state.questions.fetchFailed
   );
+  const fetchBenefitsEligibilityFailed = useSelector(
+    (state) => state.benefits.benefitsEligibility.fetchFailed
+  );
 
+  const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
   const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [previouBtnDisabled, setPreviousBtnDisabled] = useState(true);
@@ -44,6 +63,13 @@ export function Dashboard() {
   const loginButtonClick = () => {
     keycloak.login();
   };
+
+  useEffect(() => {
+    if (!triedFetchedBenefits && !isFetchingBenefits && !fetchBenefitsFailed) {
+      dispatch(getBenefits(undefined, undefined, "created_at:asc"));
+      setTriedFetchedBenefits(true);
+    }
+  }, [triedFetchedBenefits, isFetchingBenefits, fetchBenefitsFailed, dispatch]);
 
   useEffect(() => {
     if (
@@ -113,6 +139,11 @@ export function Dashboard() {
         <div>
           <NotificationCard></NotificationCard>
           <JourneyCard></JourneyCard>
+          <BenefitsCard
+            questionnaireCompleted={triedFetchElegibility}
+            foundBenefits={eligibleBenefitsData}
+            failedFetch={fetchBenefitsEligibilityFailed}
+          ></BenefitsCard>
           {questions[currentQuestionIndex] ? (
             <QuestionCard
               id={questions[currentQuestionIndex].questionId}
