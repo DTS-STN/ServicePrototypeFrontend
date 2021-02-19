@@ -82,12 +82,6 @@ export function ContentPage(props) {
         {props.afterContent}
       </main>
 
-      {props.TableContent.length === 0 && props.entitlementVisible ? (
-        <p>{props.servermessage}</p>
-      ) : (
-        ""
-      )}
-
       {props.entitlementVisible && props.TableContent.length !== 0 ? (
         <TableComponent
           title={props.title}
@@ -113,6 +107,11 @@ export function ContentPage(props) {
           data-cy={props.dataCy}
         >
           <span className="font-bold">{props.estimateText}</span>
+          {props.entitlementVisible ? (
+            <p className="text-red-800 font-bold">Service is down</p>
+          ) : (
+            ""
+          )}
           <ActionButton
             text={props.DisplayEntitlementButtonText}
             className={

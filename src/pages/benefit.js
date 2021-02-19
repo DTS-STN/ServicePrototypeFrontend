@@ -31,7 +31,7 @@ import { userDataSelector } from "../redux/selectors";
 
 export function BenefitPage() {
   const [triedFetch, setTriedFetch] = useState(false);
-  const [triedFetchEntitlement, setTriedFetchEntitlement] = useState(false);
+  const [triedFetchedEntitlement, setTriedFetchedEntitlement] = useState(false);
   const [entitlementReponse, setEntitlementResponse] = useState({});
   const { keycloak } = useKeycloak();
 
@@ -67,10 +67,10 @@ export function BenefitPage() {
 
   // entitlement
   const isFetchingEntitlement = useSelector(
-    (state) => state.entitlement.entitlementData.isFetching
+    (state) => state.entitlement.isFetching
   );
   const fetchEntitlementFailed = useSelector(
-    (state) => state.entitlement.entitlementData.fetchFailed
+    (state) => state.entitlement.fetchFailed
   );
   const entitlement = useSelector(entitlementSelector);
 
@@ -88,7 +88,7 @@ export function BenefitPage() {
 
   useEffect(() => {
     if (
-      !triedFetchEntitlement &&
+      !triedFetchedEntitlement &&
       !isFetchingEntitlement &&
       !fetchEntitlementFailed
     ) {
@@ -116,20 +116,20 @@ export function BenefitPage() {
           keycloak.authenticated ? keycloak.idTokenParsed.guid : ""
         )
       );
-      setTriedFetchEntitlement(true);
+      setTriedFetchedEntitlement(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    triedFetchEntitlement,
+    triedFetchedEntitlement,
     isFetchingEntitlement,
     fetchEntitlementFailed,
     dispatch,
   ]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   useEffect(() => {
     setEntitlementResponse(entitlement);
   }, [
-    triedFetchEntitlement,
+    triedFetchedEntitlement,
     isFetchingEntitlement,
     fetchEntitlementFailed,
     dispatch,
@@ -144,6 +144,7 @@ export function BenefitPage() {
     if (!keycloak.authenticated) {
       keycloak.login();
     }
+    console.log(entitlement);
     setEntitlmentVisible(true);
   };
 
@@ -197,7 +198,6 @@ export function BenefitPage() {
           ? t("displayEntitlementButton")
           : null
       }
-      servermessage={t("ServiceIsDown")}
       TableContent={entitlement}
       entitlementVisible={entitlementVisible}
       valueTitle1={t("BaseRate")}
