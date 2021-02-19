@@ -4,10 +4,12 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   questionsSelector,
   eligibleBenefitsSelector,
+  notificationsDataSelector,
 } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getQuestions } from "../redux/dispatchers/questions";
 import { getBenefits } from "../redux/dispatchers/benefits";
+import { getNotifications } from "../redux/dispatchers/notifications";
 
 // react router
 import { useHistory } from "react-router-dom";
@@ -61,6 +63,22 @@ export function Dashboard() {
     (state) => state.benefits.benefitsEligibility.fetchFailed
   );
 
+  // case redux subscriptions
+  const isFetchingNotifications = useSelector(
+    (state) => state.notifications.notificationsData.isFetching
+  );
+  const fetchNotificationsFailed = useSelector(
+    (state) => state.notifications.notificationsData.fetchFailed
+  );
+
+  const fetchNotificationsFailedObj = useSelector(
+    (state) => state.notifications.notificationsData.fetchFailedObj
+  );
+
+  const notificationsData = useSelector(notificationsDataSelector);
+
+  console.log(notificationsData);
+
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
   const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -68,6 +86,9 @@ export function Dashboard() {
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
   const [nextButtonText, setNextButtonText] = useState("Next");
   const [triedFetchElegibility, setTriedFetchElegibility] = useState(false);
+  const [triedFetchedNotifications, setTriedFetchedNotifications] = useState(
+    false
+  );
 
   const onBenefitMoreInfo = (benefitKey) => {
     history.replace(`/benefit/${benefitKeyToId[benefitKey]}`);
@@ -117,6 +138,23 @@ export function Dashboard() {
     isFetchingQuestions,
     fetchQuestionsFailed,
     dispatch,
+  ]);
+
+  useEffect(() => {
+    if (
+      !triedFetchedNotifications &&
+      !isFetchingNotifications &&
+      !fetchNotificationsFailed
+    ) {
+      dispatch(getNotifications(keycloak));
+      setTriedFetchedNotifications(true);
+    }
+  }, [
+    triedFetchedNotifications,
+    isFetchingNotifications,
+    fetchNotificationsFailed,
+    dispatch,
+    keycloak,
   ]);
 
   const questionOnChangeHandler = ({ key, value }) => {

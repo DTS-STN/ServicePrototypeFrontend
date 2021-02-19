@@ -1,0 +1,1 @@
+export { notificationsDataSelector } from "./notificationsDataSelectors";
