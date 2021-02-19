@@ -52,6 +52,7 @@ export function Home() {
   const [triedFetchElegibility, setTriedFetchElegibility] = useState(false);
   const [triedFetchedEntitlement, setTriedFetchedEntitlement] = useState(false);
   const [entitlementData, setEntitlementData] = useState("");
+  const [displayQuestions, setDisplayQuestions] = useState(false);
 
   const { keycloak } = useKeycloak();
 
@@ -187,7 +188,6 @@ export function Home() {
         Prov. Rate = , ${entitlement["provincialRate"]},
         Grant = , ${entitlement["entitlementGrant"]}`;
       setEntitlementData(entitlementData);
-      console.log(entitlementData);
     }
   };
 
@@ -203,10 +203,7 @@ export function Home() {
   };
 
   const matchMeToBenefitsButtonClickHandler = () => {
-    // if not logged in log in first
-    if (!keycloak.authenticated) {
-      keycloak.login();
-    }
+    setDisplayQuestions(true);
   };
 
   const seeMyCasesButtonClickHandler = () => {
@@ -311,7 +308,7 @@ export function Home() {
         {/* Display the questions or button  */}
 
         <section>
-          {keycloak.authenticated && questions[currentQuestionIndex] ? (
+          {displayQuestions ? (
             <Questions
               id={questions[currentQuestionIndex].questionId}
               required={true}

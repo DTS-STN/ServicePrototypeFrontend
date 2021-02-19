@@ -15,6 +15,10 @@ export {
 } from "./benefits";
 
 //answer actions
-export { removeAnswerActionCreator, setAnswerActionCreator } from "./answers";
+export {
+  removeAnswerActionCreator,
+  setAnswerActionCreator,
+  setAllAnswersActionCreator,
+} from "./answers";
 
 export * from "./actionTypes";
