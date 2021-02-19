@@ -51,7 +51,6 @@ export function Home() {
 
   const [displayQuestions, setDisplayQuestions] = useState(false);
 
-
   const { keycloak } = useKeycloak();
 
   // benefit redux subscriptions
@@ -145,7 +144,6 @@ export function Home() {
     fetchQuestionsFailed,
     dispatch,
   ]);
-
 
   // handler for when benefit is selected
   const onBenefitSelect = (benefitId, selected) => {
