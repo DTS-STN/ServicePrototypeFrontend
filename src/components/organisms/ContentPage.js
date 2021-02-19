@@ -1,4 +1,4 @@
-import React, { createElement, useState } from "react";
+import React, { createElement } from "react";
 import { Page } from "./Page";
 import ReactMarkdownWithHTML from "react-markdown/with-html";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -7,9 +7,6 @@ import PropTypes from "prop-types";
 import gfm from "remark-gfm";
 import { ActionButton } from "../atoms/ActionButton";
 import { TableComponent } from "../atoms/TableComponent";
-
-// i18n imports
-import { useTranslation } from "react-i18next";
 
 function getCoreProps(props) {
   const source = props["data-sourcepos"];
@@ -71,8 +68,6 @@ const renders = {
  * Component to render content pages in which content comes of the form of markdown
  */
 export function ContentPage(props) {
-  const { t } = useTranslation();
-
   return (
     <Page dataCy={"benefit-details"}>
       <main className="font-sans">
@@ -87,7 +82,7 @@ export function ContentPage(props) {
         {props.afterContent}
       </main>
 
-      {props.entitlementVisible && props.TableContent.length != 0 ? (
+      {props.entitlementVisible && props.TableContent.length !== 0 ? (
         <TableComponent
           title={props.title}
           title1={props.title1}
