@@ -20,6 +20,9 @@ export const en = {
   lessThan30000: "Less than $30,000",
   between30000and60000: "Between  $30,000 & $60,000",
   moreThan60000: "More than $60,000",
+  BaseRate: "Base Rate",
+  ProvincialAmount: "Provincial Amount",
+  GrantTotal: "Total",
 
   //links
   departmentAndAgenciesLink: "https://www.canada.ca/en/government/dept.html",

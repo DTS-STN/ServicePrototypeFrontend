@@ -135,23 +135,15 @@ export function BenefitPage() {
     dispatch,
   ]);
 
-  // const showEntitlementClickHandler = () => {
-  //   // This is for testing ONLY
-  //   if (keycloak.authenticated) {
-  //     let entitlementData = `  Entitlement. BaseRate = ${entitlement["baseRate"]},
-  //       Prov. Rate = , ${entitlement["provincialRate"]},
-  //       Grant = , ${entitlement["entitlementGrant"]}`;
-  //     setEntitlementData(entitlementData);
-  //     console.log(entitlementData);
-  //   }
-  // };
-
   //Handler for going to home
   const goBackHomeClickHandler = () => {
     history.push(`/`);
   };
 
   const displayEntitlementTable = () => {
+    if (!keycloak.authenticated) {
+      keycloak.login();
+    }
     setEntitlmentVisible(true);
   };
 
@@ -207,6 +199,13 @@ export function BenefitPage() {
       }
       TableContent={entitlement}
       entitlementVisible={entitlementVisible}
+      valueTitle1={t("BaseRate")}
+      valueTitle2={t("ProvincialAmount")}
+      valueTitle3={t("GrantTotal")}
+      title={t("estimatedDollar")}
+      title1={t("lessThan30000")}
+      title2={t("between30000and60000")}
+      title3={t("moreThan60000")}
       displayEntitlementTable={displayEntitlementTable}
       estimateText={t("estimateText")}
       GoBackButtonText={t("goBackButton")}

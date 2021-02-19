@@ -89,13 +89,22 @@ export function ContentPage(props) {
 
       {props.entitlementVisible && props.TableContent.length != 0 ? (
         <TableComponent
-          title={t("estimatedDollar")}
-          title1={t("lessThan30000")}
-          value1={props.TableContent[0].entitlementGrant}
-          title2={t("between30000and60000")}
-          value2={props.TableContent[1].entitlementGrant}
-          title3={t("moreThan60000")}
-          value3={props.TableContent[2].entitlementGrant}
+          title={props.title}
+          title1={props.title1}
+          title2={props.title2}
+          title3={props.title3}
+          valueTitle1={props.valueTitle1}
+          valueTitle2={props.valueTitle2}
+          valueTitle3={props.valueTitle3}
+          value1={props.TableContent[0].baseRate}
+          value2={props.TableContent[0].provincialRate}
+          value3={props.TableContent[0].entitlementGrant}
+          value4={props.TableContent[1].baseRate}
+          value5={props.TableContent[1].provincialRate}
+          value6={props.TableContent[1].entitlementGrant}
+          value7={props.TableContent[2].baseRate}
+          value8={props.TableContent[2].provincialRate}
+          value9={props.TableContent[2].entitlementGrant}
         />
       ) : props.DisplayEntitlementButtonText ? (
         <div

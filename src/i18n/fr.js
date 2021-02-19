@@ -19,6 +19,9 @@ export const fr = {
   estimatedDollar: "Montant estimé en dollars par semaine",
   lessThan30000: "Moins de $30,000",
   between30000and60000: "Entre $30,000 et $60,000",
+  BaseRate: "Taux de base",
+  ProvincialAmount: "Montant provincial",
+  GrantTotal: "Totale",
 
   //links
   departmentAndAgenciesLink: "https://www.canada.ca/fr/gouvernement/min.html",
