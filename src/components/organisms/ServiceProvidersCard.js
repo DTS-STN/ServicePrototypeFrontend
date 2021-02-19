@@ -1,8 +1,9 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
+import { Marker } from "../atoms/Marker";
 
 export function ServiceProvidersCard() {
-  const lat = 43.6532;
+  const lat = 43.655;
   const lng = -79.3832;
   return (
     <div className=" mt-8 flex- flex-col">
@@ -11,9 +12,14 @@ export function ServiceProvidersCard() {
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyBp2t0NW5w03snnIggKU4KQsaXZyWG94BY" }}
           defaultCenter={{ lat, lng }}
-          defaultZoom={12}
+          defaultZoom={11}
           yesIWantToUseGoogleMapApiInternals
-        ></GoogleMapReact>
+        >
+          <Marker lat={43.6551} lng={-79.4122} />
+          <Marker lat={43.67067} lng={-79.33911} />
+          <Marker lat={43.6374} lng={-79.53903} />
+          <Marker lat={43.71855} lng={-79.45015} />
+        </GoogleMapReact>
       </div>
     </div>
   );
