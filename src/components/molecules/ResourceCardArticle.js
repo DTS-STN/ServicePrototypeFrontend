@@ -5,9 +5,7 @@ import { ActionButton } from "../atoms/ActionButton";
 /**
  * Resource Article Card
  */
-export function ResourceCardArticle(props) {
-  const { articleImage, title, content } = props;
-
+export function ResourceCardArticle({ articleImage, title, content }) {
   return (
     <div className="mt-4 mr-8 rounded-lg shadow flex flex-col">
       <div>

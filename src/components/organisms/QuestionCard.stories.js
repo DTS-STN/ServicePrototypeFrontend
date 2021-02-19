@@ -34,5 +34,4 @@ Primary.args = {
   nextText: "Click next",
   disabledNext: false,
   onNextClick: () => {},
-  answer: "option-id-3",
 };
