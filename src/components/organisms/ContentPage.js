@@ -6,8 +6,7 @@ import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import PropTypes from "prop-types";
 import gfm from "remark-gfm";
 import { ActionButton } from "../atoms/ActionButton";
-//react router
-import { useHistory } from "react-router-dom";
+import { TableComponent } from "../atoms/TableComponent";
 
 function getCoreProps(props) {
   const source = props["data-sourcepos"];
@@ -69,14 +68,6 @@ const renders = {
  * Component to render content pages in which content comes of the form of markdown
  */
 export function ContentPage(props) {
-  //Browser history
-  const history = useHistory();
-
-  //Handler for going to home
-  const goBackHomeClickHandler = () => {
-    history.push(`/`);
-  };
-
   return (
     <Page dataCy={"benefit-details"}>
       <main className="font-sans">
@@ -90,6 +81,47 @@ export function ContentPage(props) {
         </ReactMarkdownWithHTML>
         {props.afterContent}
       </main>
+
+      {props.entitlementVisible && props.TableContent.length !== 0 ? (
+        <TableComponent
+          title={props.title}
+          title1={props.title1}
+          title2={props.title2}
+          title3={props.title3}
+          valueTitle1={props.valueTitle1}
+          valueTitle2={props.valueTitle2}
+          valueTitle3={props.valueTitle3}
+          value1={props.TableContent[0].baseRate}
+          value2={props.TableContent[0].provincialRate}
+          value3={props.TableContent[0].entitlementGrant}
+          value4={props.TableContent[1].baseRate}
+          value5={props.TableContent[1].provincialRate}
+          value6={props.TableContent[1].entitlementGrant}
+          value7={props.TableContent[2].baseRate}
+          value8={props.TableContent[2].provincialRate}
+          value9={props.TableContent[2].entitlementGrant}
+        />
+      ) : props.DisplayEntitlementButtonText ? (
+        <div
+          className="mt-6 container inline-flex justify-between border-b border-t items-center"
+          data-cy={props.dataCy}
+        >
+          <span className="font-bold">{props.estimateText}</span>
+          {props.entitlementVisible ? (
+            <p className="text-red-800 font-bold">Service is down</p>
+          ) : (
+            ""
+          )}
+          <ActionButton
+            text={props.DisplayEntitlementButtonText}
+            className={
+              "bg-bg-gray-dk text-white hover:bg-black mt-6 mb-4 py-2 px-16 float-right"
+            }
+            onClick={props.displayEntitlementTable}
+          />
+        </div>
+      ) : null}
+
       <div className="container inline-flex justify-between">
         {props.GoBackButtonText ? (
           <div className="mt-6 justify-start" data-cy={"goBack-button"}>
@@ -98,7 +130,7 @@ export function ContentPage(props) {
               className={
                 "bg-bg-white-dk text-black hover:bg-bg-gray-dk hover:text-white mb-4 py-2 px-16 border-solid border-2 border-black"
               }
-              onClick={goBackHomeClickHandler}
+              onClick={props.goBackHomeClickHandler}
             />
           </div>
         ) : null}
@@ -121,9 +153,29 @@ export function ContentPage(props) {
 
 ContentPage.propTypes = {
   /**
+   * Bool if entitlement is visible
+   */
+  entitlementVisible: PropTypes.bool,
+
+  /**
+   * Entitlement buttom handler
+   */
+  estimateText: PropTypes.string,
+
+  /**
+   * Entitlement buttom handler
+   */
+  displayEntitlementTable: PropTypes.func,
+
+  /**
    * Go back button text
    */
   GoBackButtonText: PropTypes.string.isRequired,
+
+  /**
+   * Go back button handler
+   */
+  goBackHomeClickHandler: PropTypes.func,
 
   /**
    * Apply button text

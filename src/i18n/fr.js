@@ -11,6 +11,18 @@ export const fr = {
   benefitsNextPage: "page suivante des avantages",
   benefitsPreviousPage: "page des avantages précédente",
   ApplyButtonText: "appliquer maintenant",
+  moreThan60000: "Plus de $60,000",
+
+  //Benefit Detail Page
+  displayEntitlementButton: "Estimer mon bénéfice",
+  estimateText: "Obtenez une estimation du montant de votre prestation",
+  estimatedDollar: "Montant estimé en dollars par semaine",
+  lessThan30000: "Moins de $30,000",
+  between30000and60000: "Entre $30,000 et $60,000",
+  BaseRate: "Taux de base",
+  ProvincialAmount: "Montant provincial",
+  GrantTotal: "Totale",
+  ServiceIsDown: "Le service est en panne",
 
   //links
   departmentAndAgenciesLink: "https://www.canada.ca/fr/gouvernement/min.html",
