@@ -12,7 +12,7 @@ if (!benefitservice_env_url && ENVIRONMENT !== "production") {
 
 if (!caseservice_env_url && ENVIRONMENT !== "production") {
   caseservice_env_url =
-    "https://api.us-east.apiconnect.appdomain.cloud/hmakhijadeloitteca-api/dev/hfp-client-apis/v1";
+    "https://api.us-east.apiconnect.appdomain.cloud/hmakhijadeloitteca-api/test/hfp-client-apis/v1";
 }
 // User Service URL
 let user_service_env_url = process.env.REACT_APP_USER_SERVICE_BASE_URL;
