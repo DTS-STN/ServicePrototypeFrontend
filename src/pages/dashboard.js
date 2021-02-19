@@ -209,7 +209,10 @@ export function Dashboard() {
       ></ProfileCard>
       {keycloak.authenticated ? (
         <div>
-          <NotificationCard></NotificationCard>
+          <NotificationCard
+            notificationsData={notificationsData}
+            gotNotifications={triedFetchedNotifications}
+          ></NotificationCard>
           <JourneyCard></JourneyCard>
           <BenefitsDashboardCard
             questionnaireCompleted={triedFetchElegibility}
