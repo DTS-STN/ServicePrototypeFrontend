@@ -82,6 +82,12 @@ export function ContentPage(props) {
         {props.afterContent}
       </main>
 
+      {props.TableContent.length === 0 && props.entitlementVisible ? (
+        <p>{props.servermessage}</p>
+      ) : (
+        ""
+      )}
+
       {props.entitlementVisible && props.TableContent.length !== 0 ? (
         <TableComponent
           title={props.title}

@@ -31,7 +31,7 @@ import { userDataSelector } from "../redux/selectors";
 
 export function BenefitPage() {
   const [triedFetch, setTriedFetch] = useState(false);
-  const [triedFetchedEntitlement, setTriedFetchedEntitlement] = useState(false);
+  const [triedFetchEntitlement, setTriedFetchEntitlement] = useState(false);
   const [entitlementReponse, setEntitlementResponse] = useState({});
   const { keycloak } = useKeycloak();
 
@@ -67,10 +67,10 @@ export function BenefitPage() {
 
   // entitlement
   const isFetchingEntitlement = useSelector(
-    (state) => state.entitlement.isFetching
+    (state) => state.entitlement.entitlementData.isFetching
   );
   const fetchEntitlementFailed = useSelector(
-    (state) => state.entitlement.fetchFailed
+    (state) => state.entitlement.entitlementData.fetchFailed
   );
   const entitlement = useSelector(entitlementSelector);
 
@@ -88,7 +88,7 @@ export function BenefitPage() {
 
   useEffect(() => {
     if (
-      !triedFetchedEntitlement &&
+      !triedFetchEntitlement &&
       !isFetchingEntitlement &&
       !fetchEntitlementFailed
     ) {
@@ -116,20 +116,20 @@ export function BenefitPage() {
           keycloak.authenticated ? keycloak.idTokenParsed.guid : ""
         )
       );
-      setTriedFetchedEntitlement(true);
+      setTriedFetchEntitlement(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    triedFetchedEntitlement,
+    triedFetchEntitlement,
     isFetchingEntitlement,
     fetchEntitlementFailed,
     dispatch,
   ]);
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setEntitlementResponse(entitlement);
   }, [
-    triedFetchedEntitlement,
+    triedFetchEntitlement,
     isFetchingEntitlement,
     fetchEntitlementFailed,
     dispatch,
@@ -197,6 +197,7 @@ export function BenefitPage() {
           ? t("displayEntitlementButton")
           : null
       }
+      servermessage={t("ServiceIsDown")}
       TableContent={entitlement}
       entitlementVisible={entitlementVisible}
       valueTitle1={t("BaseRate")}

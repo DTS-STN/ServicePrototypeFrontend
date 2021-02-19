@@ -22,6 +22,7 @@ export const fr = {
   BaseRate: "Taux de base",
   ProvincialAmount: "Montant provincial",
   GrantTotal: "Totale",
+  ServiceIsDown: "Le service est en panne",
 
   //links
   departmentAndAgenciesLink: "https://www.canada.ca/fr/gouvernement/min.html",

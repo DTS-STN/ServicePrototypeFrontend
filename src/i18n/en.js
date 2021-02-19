@@ -23,6 +23,7 @@ export const en = {
   BaseRate: "Base Rate",
   ProvincialAmount: "Provincial Amount",
   GrantTotal: "Total",
+  ServiceIsDown: "Service is down",
 
   //links
   departmentAndAgenciesLink: "https://www.canada.ca/en/government/dept.html",
