@@ -28,6 +28,7 @@ import { Spinner } from "../components/atoms/Spinner";
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
 import { userDataSelector } from "../redux/selectors";
+import { saveAnswers } from "../localStorage";
 
 export function BenefitPage() {
   const [triedFetch, setTriedFetch] = useState(false);
@@ -151,6 +152,7 @@ export function BenefitPage() {
   const applyButtonClickHandler = () => {
     // if not logged in log in first
     if (!keycloak.authenticated) {
+      saveAnswers(answers);
       keycloak.login();
     } else if (benefitData.benefitTag.includes("External")) {
       window.open("https://".concat(benefitData.redirectUrl), "_blank");

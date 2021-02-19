@@ -49,6 +49,9 @@ export function Home() {
   const [nextButtonText, setNextButtonText] = useState("Next Question");
   const [triedFetchElegibility, setTriedFetchElegibility] = useState(false);
 
+  const [displayQuestions, setDisplayQuestions] = useState(false);
+
+
   const { keycloak } = useKeycloak();
 
   // benefit redux subscriptions
@@ -143,6 +146,7 @@ export function Home() {
     dispatch,
   ]);
 
+
   // handler for when benefit is selected
   const onBenefitSelect = (benefitId, selected) => {
     selected
@@ -155,10 +159,7 @@ export function Home() {
   };
 
   const matchMeToBenefitsButtonClickHandler = () => {
-    // if not logged in log in first
-    if (!keycloak.authenticated) {
-      keycloak.login();
-    }
+    setDisplayQuestions(true);
   };
 
   const seeMyCasesButtonClickHandler = () => {
@@ -263,7 +264,7 @@ export function Home() {
         {/* Display the questions or button  */}
 
         <section>
-          {keycloak.authenticated && questions[currentQuestionIndex] ? (
+          {displayQuestions ? (
             <Questions
               id={questions[currentQuestionIndex].questionId}
               required={true}

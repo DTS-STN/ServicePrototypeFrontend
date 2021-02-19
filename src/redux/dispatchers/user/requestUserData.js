@@ -6,7 +6,6 @@ import {
   networkRequestFailedActionCreator,
   NETWORK_REQUEST_TYPES,
   NETWORK_FAILED_REASONS,
-  setAnswerActionCreator,
 } from "../../actions";
 import { RESOURCE_TYPES } from "../resourceTypes";
 
@@ -54,17 +53,13 @@ async function fetchUserData(dispatch, keycloak) {
   }
 
   if (response.ok) {
-    dispatch(
+    return dispatch(
       networkReceivedActionCreator(
         RESOURCE_TYPES.USER_DATA,
         NETWORK_REQUEST_TYPES.GET,
         data
       )
     );
-    dispatch(setAnswerActionCreator("province", data.personAddressProvince));
-    data.personGender === "SX1"
-      ? dispatch(setAnswerActionCreator("gender", "male"))
-      : dispatch(setAnswerActionCreator("gender", "female"));
   } else {
     return dispatch(
       networkRequestFailedActionCreator(
@@ -79,7 +74,7 @@ async function fetchUserData(dispatch, keycloak) {
 }
 
 /**
- * dispatch function which gets a list of benefits from the strapi api.
+ * dispatch function which gets user profile data from the user service.
  * see strapi documentation on parameters
  * https://strapi.io/documentation/v3.x/content-api/parameters.html
  * @param start - the start index

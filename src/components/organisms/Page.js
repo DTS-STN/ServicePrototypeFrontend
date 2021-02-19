@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
@@ -9,6 +9,11 @@ import { useKeycloak } from "@react-keycloak/web";
 import { changeLanguageCreator, LANGUAGES } from "../../redux/actions";
 import { getUserData } from "../../redux/dispatchers/user/requestUserData";
 import { getClientDash } from "../../redux/dispatchers/benefits";
+import { loadAnswers, saveAnswers, clearAnswers } from "../../localStorage";
+import {
+  setAllAnswersActionCreator,
+  setAnswerActionCreator,
+} from "../../redux/actions/answers";
 
 //react router
 import { useHistory } from "react-router-dom";
@@ -22,7 +27,19 @@ export function Page(props) {
   const { keycloak } = useKeycloak();
   const { t } = useTranslation();
   const userProfileData = useSelector(userDataSelector);
+  const isFetchingUserData = useSelector(
+    (state) => state.user.userData.isFetching
+  );
+  const fetchUserDataFailed = useSelector(
+    (state) => state.user.userData.fetchFailed
+  );
+  const [triedFetchUserData, setTriedFetchUserData] = useState(false);
+  const [
+    triedAnswersFromLocalStorageFailed,
+    setTriedAnswersFromLocalStorageFailed,
+  ] = useState(false);
   const history = useHistory();
+  const answers = useSelector((state) => state.answers);
 
   let languageButtonHandler = () => {
     if (language === "en") {
@@ -33,10 +50,57 @@ export function Page(props) {
   };
 
   useEffect(() => {
-    if (keycloak.authenticated && Object.keys(userProfileData).length === 0) {
+    if (
+      keycloak.authenticated &&
+      !triedFetchUserData &&
+      !isFetchingUserData &&
+      !fetchUserDataFailed
+    ) {
       dispatch(getUserData(keycloak));
+      setTriedFetchUserData(true);
     }
-  }, [keycloak, dispatch, userProfileData]);
+  }, [
+    keycloak,
+    dispatch,
+    fetchUserDataFailed,
+    isFetchingUserData,
+    triedFetchUserData,
+    setTriedFetchUserData,
+  ]);
+
+  useEffect(() => {
+    if (
+      triedFetchUserData &&
+      !fetchUserDataFailed &&
+      triedAnswersFromLocalStorageFailed
+    ) {
+      dispatch(
+        setAnswerActionCreator(
+          "province",
+          userProfileData.personAddressProvince
+        )
+      );
+      userProfileData.personGender === "SX1"
+        ? dispatch(setAnswerActionCreator("gender", "male"))
+        : dispatch(setAnswerActionCreator("gender", "female"));
+    }
+  }, [
+    userProfileData,
+    dispatch,
+    triedFetchUserData,
+    fetchUserDataFailed,
+    triedAnswersFromLocalStorageFailed,
+  ]);
+
+  useEffect(() => {
+    let localAnswers = loadAnswers();
+    if (localAnswers && Object.keys(localAnswers).length > 0) {
+      dispatch(setAllAnswersActionCreator(localAnswers));
+      setTriedAnswersFromLocalStorageFailed(false);
+    } else {
+      setTriedAnswersFromLocalStorageFailed(true);
+    }
+  }, [dispatch]);
 
   let userNameClickHandler = () => {
     dispatch(
@@ -58,12 +122,14 @@ export function Page(props) {
         logoutText={t("logout")}
         isAuthenticated={keycloak.authenticated}
         onLogin={() => {
+          saveAnswers(answers);
           keycloak.login();
         }}
         userName={`${
           keycloak.authenticated ? keycloak.idTokenParsed.name : ""
         }`}
         onLogout={() => {
+          clearAnswers();
           history.push(`/`);
           keycloak.logout();
         }}
