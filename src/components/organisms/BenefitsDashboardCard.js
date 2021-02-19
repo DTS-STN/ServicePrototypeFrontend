@@ -8,7 +8,6 @@ export function BenefitsDashboardCard({
   failedFetch,
   benefitOnClick,
 }) {
-  console.log(benefitOnClick);
   const eligibleBenefits = [];
   for (let i = 0; i < foundBenefits.length; i++) {
     const benefit = foundBenefits[i];
