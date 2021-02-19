@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 //redux imports
 import {
@@ -63,6 +63,25 @@ export function Dashboard() {
   const loginButtonClick = () => {
     keycloak.login();
   };
+
+  // iframe Ref
+  const iframe = useRef(null);
+
+  //message listener
+  const messageListener = (event) => {
+    if (event.data === "ready" && iframe && iframe.current) {
+      iframe.current.contentWindow.postMessage(
+        { jwt: keycloak.token, guid: keycloak.idTokenParsed.guid },
+        "*"
+      );
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("message", messageListener);
+
+    return () => window.removeEventListener("message", messageListener);
+  }, []);
 
   useEffect(() => {
     if (!triedFetchedBenefits && !isFetchingBenefits && !fetchBenefitsFailed) {
@@ -166,6 +185,19 @@ export function Dashboard() {
           <AppointmentCard></AppointmentCard>
           <ResourceGrid />
           <ServiceProvidersCard></ServiceProvidersCard>
+          <iframe
+            ref={iframe}
+            style={{
+              position: "fixed",
+              height: "500px",
+              width: "400px",
+              bottom: "0",
+              right: "0",
+            }}
+            src="https://vigilant-mayer-92de00.netlify.app/"
+            // src="http://localhost:3001"
+            title="Chatbot"
+          ></iframe>
         </div>
       ) : (
         ""
