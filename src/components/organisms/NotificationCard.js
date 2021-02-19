@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { ActionButton } from "../atoms/ActionButton";
 
 export function NotificationCard(props) {

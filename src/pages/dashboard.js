@@ -9,6 +9,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { getQuestions } from "../redux/dispatchers/questions";
 import { getBenefits } from "../redux/dispatchers/benefits";
 
+// react router
+import { useHistory } from "react-router-dom";
+
 //keycloack
 import { useKeycloak } from "@react-keycloak/web";
 import { requestEligibility } from "../redux/dispatchers/benefits/requestEligibility";
@@ -24,18 +27,24 @@ import { ServiceProvidersCard } from "../components/organisms/ServiceProvidersCa
 import { JourneyCard } from "../components/organisms/JourneyCard";
 import { ApplicationStatusCard } from "../components/organisms/ApplicationStatusCard";
 import { QuestionCard } from "../components/organisms/QuestionCard";
-import { BenefitsCard } from "../components/organisms/BenefitsCard";
+import { BenefitsDashboardCard } from "../components/organisms/BenefitsDashboardCard";
 
 export function Dashboard() {
   const { keycloak } = useKeycloak();
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const questions = useSelector(questionsSelector);
   const answers = useSelector((state) => state.answers);
   const eligibleBenefitsData = useSelector(eligibleBenefitsSelector);
 
   //redux subcriptions
+
+  const benefitKeyToId = useSelector(
+    (state) => state.benefits.benefitsData.benefitsKeyToIdMap
+  );
+
   const isFetchingBenefits = useSelector(
     (state) => state.benefits.benefitsData.isFetching
   );
@@ -59,6 +68,10 @@ export function Dashboard() {
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
   const [nextButtonText, setNextButtonText] = useState("Next");
   const [triedFetchElegibility, setTriedFetchElegibility] = useState(false);
+
+  const onBenefitMoreInfo = (benefitKey) => {
+    history.replace(`/benefit/${benefitKeyToId[benefitKey]}`);
+  };
 
   const loginButtonClick = () => {
     keycloak.login();
@@ -107,7 +120,9 @@ export function Dashboard() {
   ]);
 
   const questionOnChangeHandler = ({ key, value }) => {
-    dispatch(setAnswerActionCreator(key, value));
+    dispatch(
+      setAnswerActionCreator(questions[currentQuestionIndex].questionId, value)
+    );
     setNextBtnDisabled(false);
   };
 
@@ -158,18 +173,19 @@ export function Dashboard() {
         <div>
           <NotificationCard></NotificationCard>
           <JourneyCard></JourneyCard>
-          <BenefitsCard
+          <BenefitsDashboardCard
             questionnaireCompleted={triedFetchElegibility}
             foundBenefits={eligibleBenefitsData}
             failedFetch={fetchBenefitsEligibilityFailed}
-          ></BenefitsCard>
+            benefitOnClick={onBenefitMoreInfo}
+          ></BenefitsDashboardCard>
           {questions[currentQuestionIndex] ? (
             <QuestionCard
               id={questions[currentQuestionIndex].questionId}
               textRequired="Required"
               questionTitle={questions[currentQuestionIndex].questionText}
               options={questions[currentQuestionIndex].questionOptions}
-              onChange={questionOnChangeHandler}
+              questionOnChange={questionOnChangeHandler}
               prevText="Previous"
               onPrevClick={prevCurrentQuestion}
               disabledPrev={previouBtnDisabled}

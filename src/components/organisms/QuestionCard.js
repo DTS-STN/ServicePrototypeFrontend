@@ -9,14 +9,13 @@ export function QuestionCard(props) {
     questionTitle,
     textRequired,
     options,
-    onChange,
+    questionOnChange,
     prevText,
     onPrevClick,
     disabledPrev,
     nextText,
     onNextClick,
     disabledNext,
-    answer,
   } = props;
   const selectOptions = options.map((option) => ({
     value: option.id,
@@ -36,7 +35,7 @@ export function QuestionCard(props) {
           <Select
             id={id}
             options={selectOptions}
-            onChange={onChange}
+            onChange={questionOnChange}
             isSearchable={false}
             className="w-2/3 mt-4"
           ></Select>
@@ -84,7 +83,7 @@ QuestionCard.propTypes = {
   /**
    * Function this could update the state with the user selection, or something else.
    */
-  onChange: PropTypes.func,
+  questionOnChange: PropTypes.func,
 
   /**
    * Text for Back link
@@ -115,9 +114,4 @@ QuestionCard.propTypes = {
    * Flag disables the Next button
    */
   disabledNext: PropTypes.bool,
-
-  /**
-   * Sets the checked attrib when answer == id of one of the radio options
-   */
-  answer: PropTypes.string,
 };
