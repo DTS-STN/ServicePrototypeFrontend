@@ -69,21 +69,18 @@ export function TableComponent(props) {
           <div className="flex justify-between">
             <p className="order-1">{props.valueTitle1}</p>
             <p className="order-last pr-8">
-              {" "}
               {parseFloat(props.value7).toFixed(2)}
             </p>
           </div>
           <div className="flex justify-between">
             <p className="order-1">{props.valueTitle2}</p>
             <p className="order-last pr-8">
-              {" "}
               {parseFloat(props.value8).toFixed(2)}
             </p>
           </div>
           <div className="flex justify-between">
             <p className="order-1">{props.valueTitle3}</p>
             <p className="order-last pr-8">
-              {" "}
               {parseFloat(props.value9).toFixed(2)}
             </p>
           </div>
