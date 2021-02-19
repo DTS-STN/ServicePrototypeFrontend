@@ -77,8 +77,6 @@ export function Dashboard() {
 
   const notificationsData = useSelector(notificationsDataSelector);
 
-  console.log(notificationsData);
-
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
   const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);

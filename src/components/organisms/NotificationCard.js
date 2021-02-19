@@ -2,10 +2,11 @@ import React from "react";
 import { ActionButton } from "../atoms/ActionButton";
 
 export function NotificationCard({ gotNotification, notificationsData }) {
+  console.log(notificationsData);
   return (
     <div className=" mt-8 bg-header-blue flex flex-row">
       <img alt=""></img>
-      {!gotNotification || notificationsData.data.length == 0 ? (
+      {!gotNotification || notificationsData.length == 0 ? (
         <div className="mx-4 py-8">
           <div className="flex flex-col">
             <p className=" mx-auto text-xl text-white">No New Notifications</p>
