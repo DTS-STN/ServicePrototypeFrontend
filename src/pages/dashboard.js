@@ -3,13 +3,15 @@ import React, { useState, useEffect, useRef } from "react";
 //redux imports
 import {
   questionsSelector,
-  eligibleBenefitsSelector,
   notificationsDataSelector,
+  casesDataSelector,
+  benefitsDataSelector,
 } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getQuestions } from "../redux/dispatchers/questions";
 import { getBenefits } from "../redux/dispatchers/benefits";
 import { getNotifications } from "../redux/dispatchers/notifications";
+import { getCases } from "../redux/dispatchers/cases";
 
 // react router
 import { useHistory } from "react-router-dom";
@@ -37,10 +39,6 @@ export function Dashboard() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const questions = useSelector(questionsSelector);
-  const answers = useSelector((state) => state.answers);
-  const eligibleBenefitsData = useSelector(eligibleBenefitsSelector);
-
   //redux subcriptions
 
   const benefitKeyToId = useSelector(
@@ -59,34 +57,37 @@ export function Dashboard() {
   const fetchQuestionsFailed = useSelector(
     (state) => state.questions.fetchFailed
   );
-  const fetchBenefitsEligibilityFailed = useSelector(
-    (state) => state.benefits.benefitsEligibility.fetchFailed
-  );
 
-  // case redux subscriptions
   const isFetchingNotifications = useSelector(
     (state) => state.notifications.notificationsData.isFetching
   );
   const fetchNotificationsFailed = useSelector(
     (state) => state.notifications.notificationsData.fetchFailed
   );
-
-  const fetchNotificationsFailedObj = useSelector(
-    (state) => state.notifications.notificationsData.fetchFailedObj
+  const isFetchingCases = useSelector(
+    (state) => state.cases.casesData.isFetching
+  );
+  const fetchCasesFailed = useSelector(
+    (state) => state.cases.casesData.fetchFailed
   );
 
+  const questions = useSelector(questionsSelector);
+  const answers = useSelector((state) => state.answers);
   const notificationsData = useSelector(notificationsDataSelector);
+  const casesData = useSelector(casesDataSelector);
+  const benefitsData = useSelector(benefitsDataSelector);
 
+  //  React States
   const [triedFetchedBenefits, setTriedFetchedBenefits] = useState(false);
+  const [triedFetchedCases, setTriedFetchedCases] = useState(false);
   const [triedFetchedQuestions, setTriedFetchedQuestions] = useState(false);
+  const [triedFetchedNotifications, setTriedFetchedNotifications] = useState(
+    false
+  );
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [previouBtnDisabled, setPreviousBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
   const [nextButtonText, setNextButtonText] = useState("Next");
-  const [triedFetchElegibility, setTriedFetchElegibility] = useState(false);
-  const [triedFetchedNotifications, setTriedFetchedNotifications] = useState(
-    false
-  );
 
   const onBenefitMoreInfo = (benefitKey) => {
     history.replace(`/benefit/${benefitKeyToId[benefitKey]}`);
@@ -115,6 +116,7 @@ export function Dashboard() {
     return () => window.removeEventListener("message", messageListener);
   }, []);
 
+  // benefits use effect
   useEffect(() => {
     if (!triedFetchedBenefits && !isFetchingBenefits && !fetchBenefitsFailed) {
       dispatch(getBenefits(undefined, undefined, "created_at:asc"));
@@ -122,6 +124,7 @@ export function Dashboard() {
     }
   }, [triedFetchedBenefits, isFetchingBenefits, fetchBenefitsFailed, dispatch]);
 
+  // questions use effect
   useEffect(() => {
     if (
       !triedFetchedQuestions &&
@@ -138,6 +141,7 @@ export function Dashboard() {
     dispatch,
   ]);
 
+  // notifications use effect
   useEffect(() => {
     if (
       !triedFetchedNotifications &&
@@ -151,6 +155,19 @@ export function Dashboard() {
     triedFetchedNotifications,
     isFetchingNotifications,
     fetchNotificationsFailed,
+    dispatch,
+    keycloak,
+  ]);
+
+  useEffect(() => {
+    if (!triedFetchedCases && !isFetchingCases && !fetchCasesFailed) {
+      dispatch(getCases(undefined, undefined, "created_at:asc", keycloak));
+      setTriedFetchedCases(true);
+    }
+  }, [
+    triedFetchedCases,
+    isFetchingCases,
+    fetchCasesFailed,
     dispatch,
     keycloak,
   ]);
@@ -176,7 +193,6 @@ export function Dashboard() {
       setPreviousBtnDisabled(false);
     } else if (currentQuestionIndex === questions.length - 1) {
       dispatch(requestEligibility(answers));
-      setTriedFetchElegibility(true);
     }
   };
 
@@ -195,7 +211,6 @@ export function Dashboard() {
       setNextBtnDisabled(false);
     }
   };
-
   return (
     <Page>
       <ProfileCard
@@ -213,9 +228,10 @@ export function Dashboard() {
           ></NotificationCard>
           <JourneyCard></JourneyCard>
           <BenefitsDashboardCard
-            questionnaireCompleted={triedFetchElegibility}
-            foundBenefits={eligibleBenefitsData}
-            failedFetch={fetchBenefitsEligibilityFailed}
+            fetchedCases={triedFetchedCases}
+            foundCases={casesData}
+            failedFetch={fetchCasesFailed}
+            benefitsData={benefitsData}
             benefitOnClick={onBenefitMoreInfo}
           ></BenefitsDashboardCard>
           {questions[currentQuestionIndex] ? (

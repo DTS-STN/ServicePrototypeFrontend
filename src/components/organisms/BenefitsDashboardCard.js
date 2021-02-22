@@ -3,28 +3,35 @@ import PropTypes from "prop-types";
 import { EligibleBenefit } from "../molecules/EligibleBenefit";
 
 export function BenefitsDashboardCard({
-  questionnaireCompleted,
-  foundBenefits,
+  fetchedCases,
+  foundCases,
   failedFetch,
+  benefitsData,
   benefitOnClick,
 }) {
   const eligibleBenefits = [];
-  for (let i = 0; i < foundBenefits.length; i++) {
-    const benefit = foundBenefits[i];
-    eligibleBenefits.push(
-      <EligibleBenefit
-        benefitName={benefit.benefitTitle}
-        key={benefit.benefitTitle}
-        benefitId={benefit.benefitId}
-        benefitOnClick={benefitOnClick}
-      />
-    );
+  for (let i = 0; i < foundCases.length; i++) {
+    for (let j = 0; j < benefitsData.length; j++) {
+      const usercase = foundCases[i];
+      const benefit = benefitsData[j];
+      const title = benefit.benefitTitle.replace(" EI Benefit", "");
+      if (title === usercase.caseBenefitType) {
+        eligibleBenefits.push(
+          <EligibleBenefit
+            benefitName={benefit.benefitTitle}
+            key={benefit.benefitTitle}
+            benefitId={benefit.benefitId}
+            benefitOnClick={benefitOnClick}
+          />
+        );
+      }
+    }
   }
   return (
     <div className="mt-8 flex flex-col">
       <p className="text-xl font-bold">Your Benefits</p>
-      {questionnaireCompleted ? (
-        foundBenefits.length === 0 ? (
+      {fetchedCases ? (
+        foundCases.length === 0 || eligibleBenefits.length === 0 ? (
           <p className="mt-4 text-red-800 font-bold text-lg">No benefits</p>
         ) : (
           <div>{eligibleBenefits}</div>
@@ -34,9 +41,7 @@ export function BenefitsDashboardCard({
           Something went wrong
         </p>
       ) : (
-        <p className="mt-4 text-red-800 font-bold text-lg">
-          Customize your profile below to find your eligible benefits
-        </p>
+        <p className="mt-4 text-red-800 font-bold text-lg">Fetching Cases</p>
       )}
     </div>
   );
@@ -45,15 +50,20 @@ BenefitsDashboardCard.propTypes = {
   /**
    * Bool to check questions are complete
    */
-  questionnaireCompleted: PropTypes.bool.isRequired,
+  fetchedCases: PropTypes.bool.isRequired,
   /**
-   * Array of found eligible benefits
+   * Array of cases
    */
-  foundBenefits: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  foundCases: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+
   /**
    * Bool if returning the results fails
    */
   failedFetch: PropTypes.bool.isRequired,
+  /**
+   * Array of benefits
+   */
+  benefitsData: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   /**
    * Show more information function
    */

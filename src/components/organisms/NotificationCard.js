@@ -1,31 +1,47 @@
 import React from "react";
-import { ActionButton } from "../atoms/ActionButton";
 
-export function NotificationCard({ gotNotification, notificationsData }) {
-  console.log(notificationsData);
+export function NotificationCard({ gotNotifications, notificationsData }) {
   return (
     <div className=" mt-8 bg-header-blue flex flex-row">
-      <img alt=""></img>
-      {!gotNotification || notificationsData.length == 0 ? (
-        <div className="mx-4 py-8">
-          <div className="flex flex-col">
-            <p className=" mx-auto text-xl text-white">No New Notifications</p>
+      {gotNotifications ? (
+        notificationsData.length === 0 ? (
+          <div className="mx-4 py-8">
+            <div className="flex flex-col">
+              <p className=" mx-auto text-xl text-white">
+                No New Notifications
+              </p>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="mx-4 py-8">
+            <div className="flex flex-col">
+              <p className=" text-xl text-white">
+                You have{" "}
+                <span className="font-bold">{notificationsData.length}</span>{" "}
+                new notification
+              </p>
+              {notificationsData.map((notification) => (
+                <>
+                  <p className="mt-4 font-bold text-white">
+                    {notification.title}
+                  </p>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: notification.messageText,
+                    }}
+                    className="mt-4 text-white"
+                  ></p>
+                </>
+              ))}
+            </div>
+          </div>
+        )
       ) : (
         <div className="mx-4 py-8">
           <div className="flex flex-col">
-            <p className=" text-xl text-white">You have 1 new Notification</p>
-            <p className="text-white">
-              An update was recently made to your medical records by "health
-              care provider X". To accept, edit or reject the update please view
-              your medical records in your profile.
+            <p className=" mx-auto text-xl text-white">
+              No Notifications Available
             </p>
-            <ActionButton
-              className=" w-1/3 mt-4 bg-transparent border-white border-2 text-white hover:bg-black"
-              id="ViewMedicalRecords"
-              text="View Medical Records"
-            ></ActionButton>
           </div>
         </div>
       )}
