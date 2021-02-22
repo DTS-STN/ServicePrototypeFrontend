@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 // react router imports
 import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 // i18n imports
 import { useTranslation } from "react-i18next";
@@ -10,7 +11,12 @@ import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { benefitSelectorFactory } from "../redux/selectors/benefits";
 import { NETWORK_FAILED_REASONS } from "../redux/actions";
-import { getBenefit, applyForBenefit } from "../redux/dispatchers";
+import {
+  getBenefit,
+  applyForBenefit,
+  getEntitlementAmount,
+} from "../redux/dispatchers";
+import { entitlementSelector } from "../redux/selectors";
 
 //component imports
 import { ContentPage } from "../components/organisms/ContentPage";
@@ -22,13 +28,19 @@ import { Spinner } from "../components/atoms/Spinner";
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
 import { userDataSelector } from "../redux/selectors";
+import { saveAnswers } from "../localStorage";
 
 export function BenefitPage() {
   const [triedFetch, setTriedFetch] = useState(false);
+  const [triedFetchedEntitlement, setTriedFetchedEntitlement] = useState(false);
+  const [entitlementReponse, setEntitlementResponse] = useState({});
   const { keycloak } = useKeycloak();
 
   // react router
   const { id } = useParams();
+  const history = useHistory();
+
+  const [entitlementVisible, setEntitlmentVisible] = useState(false);
 
   // redux
   const isFetchingBenefits = useSelector(
@@ -54,6 +66,15 @@ export function BenefitPage() {
   const benefitSelector = benefitSelectorFactory(id);
   const benefitData = useSelector(benefitSelector);
 
+  // entitlement
+  const isFetchingEntitlement = useSelector(
+    (state) => state.entitlement.isFetching
+  );
+  const fetchEntitlementFailed = useSelector(
+    (state) => state.entitlement.fetchFailed
+  );
+  const entitlement = useSelector(entitlementSelector);
+
   const { t } = useTranslation();
 
   //redux dispatch
@@ -66,9 +87,72 @@ export function BenefitPage() {
     }
   }, [triedFetch, isFetchingBenefits, fetchBenefitsFailed, id, dispatch]);
 
+  useEffect(() => {
+    if (
+      !triedFetchedEntitlement &&
+      !isFetchingEntitlement &&
+      !fetchEntitlementFailed
+    ) {
+      dispatch(
+        getEntitlementAmount(
+          "ON",
+          "HFPIR1",
+          keycloak.authenticated ? keycloak.token : "",
+          keycloak.authenticated ? keycloak.idTokenParsed.guid : ""
+        )
+      );
+      dispatch(
+        getEntitlementAmount(
+          "ON",
+          "HFPIR2",
+          keycloak.authenticated ? keycloak.token : "",
+          keycloak.authenticated ? keycloak.idTokenParsed.guid : ""
+        )
+      );
+      dispatch(
+        getEntitlementAmount(
+          "ON",
+          "HFPIR3",
+          keycloak.authenticated ? keycloak.token : "",
+          keycloak.authenticated ? keycloak.idTokenParsed.guid : ""
+        )
+      );
+      setTriedFetchedEntitlement(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    triedFetchedEntitlement,
+    isFetchingEntitlement,
+    fetchEntitlementFailed,
+    dispatch,
+  ]);
+
+  useEffect(() => {
+    setEntitlementResponse(entitlement);
+  }, [
+    triedFetchedEntitlement,
+    isFetchingEntitlement,
+    fetchEntitlementFailed,
+    dispatch,
+  ]);
+
+  //Handler for going to home
+  const goBackHomeClickHandler = () => {
+    history.push(`/`);
+  };
+
+  const displayEntitlementTable = () => {
+    if (!keycloak.authenticated) {
+      keycloak.login();
+    }
+    console.log(entitlement);
+    setEntitlmentVisible(true);
+  };
+
   const applyButtonClickHandler = () => {
     // if not logged in log in first
     if (!keycloak.authenticated) {
+      saveAnswers(answers);
       keycloak.login();
     } else if (benefitData.benefitTag.includes("External")) {
       window.open("https://".concat(benefitData.redirectUrl), "_blank");
@@ -111,7 +195,24 @@ export function BenefitPage() {
           ? benefitData.benefitContent
           : "Looks like there is no content yet"
       }
+      DisplayEntitlementButtonText={
+        benefitData.benefitTag.includes("Internal")
+          ? t("displayEntitlementButton")
+          : null
+      }
+      TableContent={entitlement}
+      entitlementVisible={entitlementVisible}
+      valueTitle1={t("BaseRate")}
+      valueTitle2={t("ProvincialAmount")}
+      valueTitle3={t("GrantTotal")}
+      title={t("estimatedDollar")}
+      title1={t("lessThan30000")}
+      title2={t("between30000and60000")}
+      title3={t("moreThan60000")}
+      displayEntitlementTable={displayEntitlementTable}
+      estimateText={t("estimateText")}
       GoBackButtonText={t("goBackButton")}
+      goBackHomeClickHandler={goBackHomeClickHandler}
       ApplyButtonText={
         benefitData.benefitTag.includes("Internal")
           ? t("ApplyButtonText")

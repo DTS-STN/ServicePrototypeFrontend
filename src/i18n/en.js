@@ -13,6 +13,18 @@ export const en = {
   benefitsPreviousPage: "previous benefits page",
   ApplyButtonText: "Apply Now",
 
+  //Benefit Detail Page
+  displayEntitlementButton: "Estimate my benefit",
+  estimateText: "Get an estimate of your benefit amount",
+  estimatedDollar: "Estimated dollar amount per week",
+  lessThan30000: "Less than $30,000",
+  between30000and60000: "Between  $30,000 & $60,000",
+  moreThan60000: "More than $60,000",
+  BaseRate: "Base Rate",
+  ProvincialAmount: "Provincial Amount",
+  GrantTotal: "Total",
+  ServiceIsDown: "Service is down",
+
   //links
   departmentAndAgenciesLink: "https://www.canada.ca/en/government/dept.html",
   departmentAndAgenciesText: "Department and agencies",

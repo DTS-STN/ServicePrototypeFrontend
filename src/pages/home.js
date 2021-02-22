@@ -9,12 +9,10 @@ import {
   questionsSelector,
   eligibleBenefitsSelector,
   externalBenefitsDataSelector,
-  entitlementSelector,
 } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { getBenefits, getBenefitsCount } from "../redux/dispatchers/benefits";
 import { getQuestions } from "../redux/dispatchers/questions";
-import { getEntitlementAmount } from "../redux/dispatchers";
 import {
   deselectBenefitActionCreator,
   selectBenefitActionCreator,
@@ -50,8 +48,8 @@ export function Home() {
   const [nextBtnDisabled, setNextBtnDisabled] = useState(false);
   const [nextButtonText, setNextButtonText] = useState("Next Question");
   const [triedFetchElegibility, setTriedFetchElegibility] = useState(false);
-  const [triedFetchedEntitlement, setTriedFetchedEntitlement] = useState(false);
-  const [entitlementData, setEntitlementData] = useState("");
+
+  const [displayQuestions, setDisplayQuestions] = useState(false);
 
   const { keycloak } = useKeycloak();
 
@@ -102,15 +100,6 @@ export function Home() {
   const questions = useSelector(questionsSelector);
   const answers = useSelector((state) => state.answers);
 
-  // entitlement
-  const isFetchingEntitlement = useSelector(
-    (state) => state.entitlement.isFetching
-  );
-  const fetchEntitlementFailed = useSelector(
-    (state) => state.entitlement.fetchFailed
-  );
-  const entitlement = useSelector(entitlementSelector);
-
   //redux dispatch
   const dispatch = useDispatch();
 
@@ -156,41 +145,6 @@ export function Home() {
     dispatch,
   ]);
 
-  useEffect(() => {
-    if (
-      !triedFetchedEntitlement &&
-      !isFetchingEntitlement &&
-      !fetchEntitlementFailed
-    ) {
-      dispatch(
-        getEntitlementAmount(
-          "ON",
-          "HFPIR2",
-          keycloak.authenticated ? keycloak.token : "",
-          keycloak.authenticated ? keycloak.idTokenParsed.guid : ""
-        )
-      );
-      setTriedFetchedEntitlement(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    triedFetchedEntitlement,
-    isFetchingEntitlement,
-    fetchEntitlementFailed,
-    dispatch,
-  ]);
-
-  const showEntitlementClickHandler = () => {
-    // This is for testing ONLY
-    if (keycloak.authenticated) {
-      let entitlementData = `  Entitlement. BaseRate = ${entitlement["baseRate"]}, 
-        Prov. Rate = , ${entitlement["provincialRate"]},
-        Grant = , ${entitlement["entitlementGrant"]}`;
-      setEntitlementData(entitlementData);
-      console.log(entitlementData);
-    }
-  };
-
   // handler for when benefit is selected
   const onBenefitSelect = (benefitId, selected) => {
     selected
@@ -203,10 +157,7 @@ export function Home() {
   };
 
   const matchMeToBenefitsButtonClickHandler = () => {
-    // if not logged in log in first
-    if (!keycloak.authenticated) {
-      keycloak.login();
-    }
+    setDisplayQuestions(true);
   };
 
   const seeMyCasesButtonClickHandler = () => {
@@ -311,7 +262,7 @@ export function Home() {
         {/* Display the questions or button  */}
 
         <section>
-          {keycloak.authenticated && questions[currentQuestionIndex] ? (
+          {displayQuestions ? (
             <Questions
               id={questions[currentQuestionIndex].questionId}
               required={true}
@@ -436,21 +387,6 @@ export function Home() {
           </section>
         ) : null}
         {showCases()}
-
-        <section>
-          <div className="bg-blue-800 my-12 p-8 text-white">
-            <h1 className="py-4">
-              This is for testing it will be replaced by a component
-            </h1>
-            <ActionButton
-              id="showEntitlement"
-              text={"Testing button for Entitlement Amount"}
-              className={"bg-bg-gray-dk text-white hover:bg-black"}
-              onClick={showEntitlementClickHandler}
-            />
-            <h3 className="py-4">{entitlementData}</h3>
-          </div>
-        </section>
       </main>
     </Page>
   );
