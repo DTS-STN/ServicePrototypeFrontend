@@ -2,6 +2,7 @@ import { language } from "./language";
 import { benefits } from "./benefits";
 import { questions } from "./questions";
 import { cases } from "./cases";
+import { notifications } from "./notifications";
 import { lifejourneys } from "./lifejourneys";
 import { user } from "./user";
 import { combineReducers } from "redux";
@@ -17,4 +18,5 @@ export const rootReducer = combineReducers({
   answers,
   lifejourneys,
   user,
+  notifications,
 });

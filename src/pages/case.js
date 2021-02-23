@@ -124,7 +124,7 @@ export function CasesPage() {
             }}
             style={{
               position: "absolute",
-              height: "400px",
+              height: "500px",
               width: "400px",
               bottom: "0",
               right: "0",
