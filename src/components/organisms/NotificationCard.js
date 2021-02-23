@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export function NotificationCard({ gotNotifications, notificationsData }) {
   return (
@@ -18,7 +19,7 @@ export function NotificationCard({ gotNotifications, notificationsData }) {
               <p className=" text-xl text-white">
                 You have{" "}
                 <span className="font-bold">{notificationsData.length}</span>{" "}
-                new notification
+                new notification{notificationsData.length > 1 ? "s" : ""}
               </p>
               {notificationsData.map((notification) => (
                 <>
@@ -48,3 +49,13 @@ export function NotificationCard({ gotNotifications, notificationsData }) {
     </div>
   );
 }
+NotificationCard.propTypes = {
+  /**
+   * Bool to check if notifications are fetched
+   */
+  gotNotifications: PropTypes.bool.isRequired,
+  /**
+   * Array of notifications
+   */
+  notificationsData: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+};
