@@ -1,5 +1,5 @@
 import React from "react";
-import { ResourceGrid } from "./ResoursesGrid";
+import { ResourceGrid } from "./ResourseGrid";
 
 export default {
   title: "Components/Organisms/ResourceGrid",

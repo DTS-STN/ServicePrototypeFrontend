@@ -23,7 +23,7 @@ import { setAnswerActionCreator } from "../redux/actions/answers";
 
 //component imports
 import { Page } from "../components/organisms/Page";
-import { ResourceGrid } from "../components/organisms/ResoursesGrid";
+import { ResourceGrid } from "../components/organisms/ResourseGrid";
 import { ProfileCard } from "../components/organisms/ProfileCard";
 import { NotificationCard } from "../components/organisms/NotificationCard";
 import { AppointmentCard } from "../components/organisms/AppointmentCard";
