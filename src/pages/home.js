@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 // i18n imports
 import { useTranslation } from "react-i18next";
@@ -104,6 +104,37 @@ export function Home() {
   const dispatch = useDispatch();
 
   const history = useHistory();
+
+  // iframe Ref
+  const iframe = useRef(null);
+
+  //message listener
+  const messageListener = (event) => {
+    if (event.data === "ready" && iframe && iframe.current) {
+      if (keycloak.token) {
+        iframe.current.contentWindow.postMessage(
+          { jwt: keycloak.token, guid: keycloak.idTokenParsed.guid },
+          "*"
+        );
+      } else {
+        iframe.current.contentWindow.postMessage("unauthenticated", "*");
+      }
+    } else if (event.data) {
+      const {
+        data: { type, value },
+      } = event;
+      if (type === "benefits") {
+        dispatch(requestEligibility(value));
+        setTriedFetchElegibility(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("message", messageListener);
+
+    return () => window.removeEventListener("message", messageListener);
+  }, []);
 
   // effect to initially fetch count when component mounts
   useEffect(() => {
@@ -388,6 +419,18 @@ export function Home() {
         ) : null}
         {showCases()}
       </main>
+      <iframe
+        ref={iframe}
+        style={{
+          position: "fixed",
+          height: "500px",
+          width: "400px",
+          bottom: "0",
+          right: "0",
+        }}
+        src="https://vigilant-mayer-92de00.netlify.app/"
+        title="Chatbot"
+      ></iframe>
     </Page>
   );
 }
