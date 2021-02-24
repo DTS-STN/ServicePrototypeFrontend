@@ -11,6 +11,7 @@ const Template = (args) => <NotificationCard {...args} />;
 export const Primary = Template.bind({});
 export const NoNotifications = Template.bind({});
 export const NoFetch = Template.bind({});
+export const FailedFetch = Template.bind({});
 Primary.args = {
   gotNotifications: true,
   notificationsData: [
@@ -31,12 +32,20 @@ Primary.args = {
       title: "some-title",
     },
   ],
+  failedFetch: false,
 };
 NoNotifications.args = {
   gotNotifications: true,
   notificationsData: [],
+  failedFetch: false,
 };
 NoFetch.args = {
   gotNotifications: false,
   notificationsData: [],
+  failedFetch: false,
+};
+FailedFetch.args = {
+  gotNotifications: true,
+  notificationsData: [],
+  failedFetch: true,
 };

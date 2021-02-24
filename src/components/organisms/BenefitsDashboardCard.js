@@ -31,17 +31,24 @@ export function BenefitsDashboardCard({
     <div className="mt-8 flex flex-col">
       <p className="text-xl font-bold">Your Benefits</p>
       {fetchedCases ? (
-        foundCases.length === 0 || eligibleBenefits.length === 0 ? (
-          <p className="mt-4 text-red-800 font-bold text-lg">No benefits</p>
+        failedFetch ? (
+          <p id="failed-fetch" className="mt-4 text-red-800 font-bold text-lg">
+            Something went wrong
+          </p>
+        ) : foundCases.length === 0 || eligibleBenefits.length === 0 ? (
+          <p id="length-zero" className="mt-4 text-red-800 font-bold text-lg">
+            No benefits
+          </p>
         ) : (
           <div>{eligibleBenefits}</div>
         )
-      ) : failedFetch ? (
-        <p className="mt-4 text-red-800 font-bold text-lg">
-          Something went wrong
-        </p>
       ) : (
-        <p className="mt-4 text-red-800 font-bold text-lg">Fetching Cases</p>
+        <p
+          id="currently-fetching"
+          className="mt-4 text-red-800 font-bold text-lg"
+        >
+          Fetching Cases
+        </p>
       )}
     </div>
   );

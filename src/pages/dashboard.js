@@ -225,6 +225,7 @@ export function Dashboard() {
           <NotificationCard
             notificationsData={notificationsData}
             gotNotifications={triedFetchedNotifications}
+            failedFetch={fetchNotificationsFailed}
           ></NotificationCard>
           <JourneyCard></JourneyCard>
           <BenefitsDashboardCard
