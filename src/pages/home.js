@@ -195,6 +195,10 @@ export function Home() {
     history.push(`/cases/`);
   };
 
+  const seeDashboardClickHandler = () => {
+    history.push(`/dashboard`);
+  };
+
   if (
     fetchBenefitsFailed ||
     fetchBenefitsCountFailed ||
@@ -280,6 +284,26 @@ export function Home() {
     } else {
       return;
     }
+  };
+
+  const showDashboard = () => {
+    //redirects to dashboard
+    return (
+      <section
+        className="border-t border-b pt-2 pb-2 mt-8"
+        data-cy="showDashboardHeader"
+      >
+        <div className="flex m-auto items-start relative">
+          <h2 className="text-3xl mb-2">View Dashboard</h2>
+        </div>
+        <ActionButton
+          id="GoToDashboard"
+          text="View Dashboard"
+          className={"bg-bg-gray-dk text-white hover:bg-black"}
+          onClick={seeDashboardClickHandler}
+        />
+      </section>
+    );
   };
 
   return (
@@ -418,6 +442,7 @@ export function Home() {
           </section>
         ) : null}
         {showCases()}
+        {showDashboard()}
       </main>
       <iframe
         ref={iframe}
