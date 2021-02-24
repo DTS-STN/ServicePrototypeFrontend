@@ -1,16 +1,16 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6357c4c45451ae2270858e229378c132",
+    "revision": "b8dc3e8f17e739440787e008f3ed423f",
     "url": "iframe.html"
   },
   {
-    "url": "main.595c79e9913aaa908889.bundle.js"
+    "url": "main.dc57547969fb3b69585d.bundle.js"
   },
   {
-    "url": "runtime~main.595c79e9913aaa908889.bundle.js"
+    "url": "runtime~main.dc57547969fb3b69585d.bundle.js"
   },
   {
-    "revision": "e318162506699154110d",
+    "revision": "08cbe58827fcfb941807",
     "url": "static/css/main.1a9ece00.chunk.css"
   },
   {
@@ -54,6 +54,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "static/media/icomoon.c97b9c99.ttf"
   },
   {
+    "revision": "0d93fe542f95d1c446a77e52f4e90491",
+    "url": "static/media/imagePlaceholder.0d93fe54.svg"
+  },
+  {
     "revision": "8c14dcc1581b3620aede49482db01712",
     "url": "static/media/maternityBenefitImage.8c14dcc1.svg"
   },
@@ -78,9 +82,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "static/media/wmms-blk.c4cb91c9.svg"
   },
   {
-    "url": "vendors~main.595c79e9913aaa908889.bundle.js"
+    "url": "vendors~main.dc57547969fb3b69585d.bundle.js"
   },
   {
-    "url": "vendors~main.595c79e9913aaa908889.bundle.js.LICENSE.txt"
+    "url": "vendors~main.dc57547969fb3b69585d.bundle.js.LICENSE.txt"
   }
 ]);
