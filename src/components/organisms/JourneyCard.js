@@ -14,10 +14,10 @@ export function JourneyCard() {
         <img alt="" src={imagePlaceHolder}></img>
       </div>
       <div className="p-4 mt-4 flex flex-col">
-        <p className="text-2xl">
+        <p id="journey-status" className="text-2xl">
           You are in the Prepare phase of the pregnancy journey
         </p>
-        <p className="py-4">
+        <p id="journey-description" className="py-4">
           Congratulations on your upcoming baby! View the Journey page to get
           resources and information to help you in this stage
         </p>

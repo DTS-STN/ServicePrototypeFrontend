@@ -46,12 +46,18 @@ export function ApplicationStatusCard() {
   }
   return (
     <div className="mt-8 px-4 rounded-lg shadow flex flex-col">
-      <p className="py-4 text-xl font-bold">Status of "X" Application</p>
+      <p id="title" className="py-4 text-xl font-bold">
+        Status of "X" Application
+      </p>
       <div className="flex-flex-col"></div>
       <div className="flex flex-row justify-end">
-        <p className="w-1/6 text-lg">Time (approx) </p>
+        <p id="time" className="w-1/6 text-lg">
+          Time (approx){" "}
+        </p>
       </div>
-      <div className="w-full">{applicationSteps}</div>
+      <div id="step-container" className="w-full">
+        {applicationSteps}
+      </div>
       <p className="mt-8">
         This information represents the most up to date status of your
         application. The estimated processing time of your application could

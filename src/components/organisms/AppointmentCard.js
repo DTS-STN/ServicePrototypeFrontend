@@ -13,7 +13,7 @@ export function AppointmentCard() {
           text="Add Appointment"
         ></ActionButton>
       </div>
-      <div>
+      <div id="table-container">
         <AppointmentTable></AppointmentTable>
       </div>
     </div>
