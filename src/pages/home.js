@@ -35,7 +35,10 @@ import { ActionButton } from "../components/atoms/ActionButton";
 //keycloak
 import { useKeycloak } from "@react-keycloak/web";
 import { requestEligibility } from "../redux/dispatchers/benefits/requestEligibility";
-import { setAnswerActionCreator } from "../redux/actions/answers";
+import {
+  setAnswerActionCreator,
+  setAllAnswersActionCreator,
+} from "../redux/actions/answers";
 
 export function Home() {
   const [triedFetchedBenefitsCount, setTriedFetchBenefitsCount] = useState(
@@ -125,6 +128,7 @@ export function Home() {
       } = event;
       if (type === "benefits") {
         dispatch(requestEligibility(value));
+        dispatch(setAllAnswersActionCreator(value));
         setTriedFetchElegibility(true);
       }
     }
