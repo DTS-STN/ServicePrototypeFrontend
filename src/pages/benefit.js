@@ -143,6 +143,7 @@ export function BenefitPage() {
 
   const displayEntitlementTable = () => {
     if (!keycloak.authenticated) {
+      saveAnswers(answers);
       keycloak.login();
     }
     console.log(entitlement);
